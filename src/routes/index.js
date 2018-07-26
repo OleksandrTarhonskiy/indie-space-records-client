@@ -5,8 +5,8 @@ import {
   Switch,
 }                           from 'react-router-dom';
 
-import HomePage             from '../home_page';
-import NotFound             from '../not_found';
+import HomePage             from '../modules/landing-page/pages/home_page';
+import NotFound             from '../layouts/not_found';
 
 export default (
   <Router>
