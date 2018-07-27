@@ -1,7 +1,7 @@
 import React   from 'react';
 
-import Head    from '../components/head'
-import Artists from '../components/artists'
+import Head    from '../components/head';
+import Artists from '../components/artists';
 
 const HomePage = () => (
   <div>

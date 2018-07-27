@@ -5,30 +5,40 @@ import GridListTile from '@material-ui/core/GridListTile';
 import List         from '@material-ui/core/List';
 import ListItem     from '@material-ui/core/ListItem';
 
-import { BANDS } from '../fake-db'
+import { BANDS }     from '../fake-db';
+import ArtistFilters from './artist_filters_panel';
 
 const Artists = () => (
-  <Artists.GridList cellHeight={400} cols={3}>
+  <Artists.SectionWrapper>
+    <ArtistFilters />
+    <Artists.GridList cellHeight={400} cols={3}>
       { BANDS.map(band => (
-        <GridListTile key={band.image.url} cols={band.cols || 1}>
+        <GridListTile key={band.id} cols={band.cols || 1}>
           <img src={band.image.url} alt="Some description here" />
           <Artists.Name>
             <p>{band.name}</p>
           </Artists.Name>
           { band.tags.map(tag => (
-              <Artists.Tags>
-                <List>
-                  <ListItem>
-                    {tag}
-                  </ListItem>
-                </List>
-              </Artists.Tags>
-            ))
+            <Artists.Tags key={tag}>
+              <List>
+                <ListItem>
+                  {tag}
+                </ListItem>
+              </List>
+            </Artists.Tags>
+          ))
           }
         </GridListTile>
       ))}
     </Artists.GridList>
+  </Artists.SectionWrapper>
 );
+
+Artists.SectionWrapper = styled.div`
+  width   : 100%;
+  margin  : 0;
+  padding : 0;
+`;
 
 Artists.ArtistsWrapper = styled.div`
   display: flex;
