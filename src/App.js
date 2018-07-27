@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import styled               from 'styled-components';
 import routes               from './routes';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <App.AppWrapper>
         {routes}
-      </div>
+      </App.AppWrapper>
     );
   }
 }
+
+App.AppWrapper = styled.div`
+  margin  : 0;
+  padding : 0;
+`;
 
 export default App;
