@@ -11,7 +11,7 @@ import ArtistFilters from './artist_filters_panel';
 const Artists = () => (
   <Artists.SectionWrapper>
     <ArtistFilters />
-    <Artists.GridList cellHeight={400} cols={3}>
+    <Artists.GridList cellHeight={400} cols={3} spacing={0}>
       { BANDS.map(band => (
         <GridListTile key={band.id} cols={band.cols || 1}>
           <img src={band.image.url} alt="Some description here" />
@@ -38,10 +38,6 @@ Artists.SectionWrapper = styled.div`
   width   : 100%;
   margin  : 0;
   padding : 0;
-`;
-
-Artists.ArtistsWrapper = styled.div`
-  display: flex;
 `;
 
 Artists.Name = styled.div`
