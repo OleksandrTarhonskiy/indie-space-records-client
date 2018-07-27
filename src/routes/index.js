@@ -8,6 +8,7 @@ import {
 import HomePage             from '../modules/landing-page/pages/home_page';
 import Header               from '../layouts/header';
 import NotFound             from '../layouts/not_found';
+import Footer               from '../layouts/footer';
 
 export default (
   <div>
@@ -18,5 +19,6 @@ export default (
         <Route component={NotFound} />
       </Switch>
     </Router>
+    <Footer />
   </div>
 );
