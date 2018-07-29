@@ -48,6 +48,7 @@ LastNews.Wrapper = styled.div`
   overflow        : 'hidden';
   backgroundColor : theme.palette.background.paper;
   padding         : 2%;
+  position        : relative;
 `;
 
 LastNews.Heading = styled.h1`
