@@ -8,12 +8,17 @@ import InfoIcon        from '@material-ui/icons/Info';
 import Button          from '@material-ui/core/Button';
 
 import { NEWS }        from '../fake-db';
+import SubscribeForm   from '../forms/subscribe';
 
 const LastNews = () => (
   <LastNews.Wrapper>
     <LastNews.Heading>
       Last News
     </LastNews.Heading>
+    <LastNews.SubHeading>
+     You can also get all latest news:
+    </LastNews.SubHeading>
+    <SubscribeForm />
     <LastNews.GridList cellHeight={300}>
       {NEWS.map(post => (
         <GridListTile key={post.id}>
@@ -49,6 +54,12 @@ LastNews.Heading = styled.h1`
   color       : #565656;
   font-family : 'Roboto', sans-serif;
   font-size   : 35px;
+`;
+
+LastNews.SubHeading = styled.p`
+  color       : #565656;
+  font-family : 'Roboto', sans-serif;
+  font-size   : 20px;
 `;
 
 LastNews.GridList = styled(GridList)`
