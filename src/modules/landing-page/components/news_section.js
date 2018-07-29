@@ -6,9 +6,9 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton      from '@material-ui/core/IconButton';
 import InfoIcon        from '@material-ui/icons/Info';
 import Button          from '@material-ui/core/Button';
-import TextField       from '@material-ui/core/TextField';
 
 import { NEWS }        from '../fake-db';
+import SubscribeForm   from '../forms/subscribe';
 
 const LastNews = () => (
   <LastNews.Wrapper>
@@ -18,14 +18,7 @@ const LastNews = () => (
     <LastNews.SubHeading>
      You can also get all latest news:
     </LastNews.SubHeading>
-    <LastNews.SubscribeForm>
-      <LastNews.EmailInput
-        label="Email"
-      />
-      <LastNews.Button>
-        Subscribe
-      </LastNews.Button>
-    </LastNews.SubscribeForm>
+    <SubscribeForm />
     <LastNews.GridList cellHeight={300}>
       {NEWS.map(post => (
         <GridListTile key={post.id}>
@@ -82,13 +75,6 @@ LastNews.Button = styled(Button)`
   background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
   color      : #fff !important;
   margin-top : 1% !important;
-`;
-
-LastNews.EmailInput = styled(TextField)`
-  margin-right : 10px !important;
-`;
-LastNews.SubscribeForm = styled.form`
-  padding : 1% 0;
 `;
 
 export default LastNews;
