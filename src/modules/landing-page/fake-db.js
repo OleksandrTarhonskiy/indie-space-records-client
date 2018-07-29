@@ -55,3 +55,26 @@ export const BANDS =
       tags : ['#Trip Hop']
     },
   ];
+
+export const NEWS = [
+  {
+    id : 1,
+    title : 'Lorem Ipsum is simply dummy text',
+    photo : 'https://stmed.net/sites/default/files/abstract-wallpapers-25162-4853075.jpg',
+  },
+  {
+    id : 2,
+    title : 'Lorem Ipsum is simply dummy text',
+    photo : 'https://wallpaperwire.com/wp-content/uploads/2018/05/Abstract-Music-Wallpapers-HD-1.jpg',
+  },
+  {
+    id : 3,
+    title : 'Lorem Ipsum is simply dummy text',
+    photo : 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/keyboard-debra-hurd.jpg',
+  },
+  {
+    id : 4,
+    title : 'Lorem Ipsum is simply dummy text',
+    photo : 'https://cdn.dribbble.com/users/241518/screenshots/1661586/06_les-paul_1x.png',
+  },
+];

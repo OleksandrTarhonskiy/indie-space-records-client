@@ -35,9 +35,10 @@ const Artists = () => (
 );
 
 Artists.SectionWrapper = styled.div`
-  width   : 100%;
-  margin  : 0;
-  padding : 0;
+  width    : 100%;
+  margin   : 0;
+  padding  : 0;
+  position : rekative;
 `;
 
 Artists.Name = styled.div`
