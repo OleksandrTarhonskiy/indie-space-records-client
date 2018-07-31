@@ -1,7 +1,7 @@
 import React        from 'react';
 import * as R       from 'ramda';
-import PropTypes    from 'prop-types';
 import styled       from 'styled-components';
+import PropTypes    from 'prop-types';
 import IconButton   from '@material-ui/core/IconButton';
 import Headset      from '@material-ui/icons/Headset';
 import LocationIcon from '@material-ui/icons/LocationOn';
@@ -11,6 +11,9 @@ import {
   compose,
   withStateHandlers,
 }                   from 'recompose';
+
+import Genres       from './genres';
+import Locations    from './locations';
 
 const ArtistFilters = ({
   filters: {
@@ -52,23 +55,8 @@ const ArtistFilters = ({
       </ArtistFilters.IconButton >
       <p>Most popular tags</p>
     </ArtistFilters.Toolbar>
-    {/* TODO: replace to separate components */}
-    {
-      genre ?
-        <ArtistFilters.GenreList>
-          <p>indie-rock, dream-pop, trip-hop, alternative</p>
-        </ArtistFilters.GenreList>
-        :
-        null
-    }
-    {
-      location ?
-        <ArtistFilters.LocationList>
-          <p>Ontario, Toronto, London</p>
-        </ArtistFilters.LocationList>
-        :
-        null
-    }
+    { genre ? <Genres /> : null }
+    { location ? <Locations /> :null }
   </ArtistFilters.SubSectionWrapper>
 );
 
@@ -96,17 +84,10 @@ ArtistFilters.IconButton = styled(IconButton)`
   }
 `;
 
-ArtistFilters.GenreList = styled.div`
-  position : relative;
-`;
-
-ArtistFilters.LocationList = styled.div`
-  position : relative;
-`;
-
 ArtistFilters.propTypes = {
-  filters     : PropTypes.object.isRequired,
-  openFilters : PropTypes.func.isRequired,
+  filters      : PropTypes.object.isRequired,
+  openFilters  : PropTypes.func.isRequired,
+  closeFilters : PropTypes.func.isRequired,
 };
 
 const withState = compose(
