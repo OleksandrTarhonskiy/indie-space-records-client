@@ -51,22 +51,22 @@ const ArtistFilters = ({
       </ArtistFilters.IconButton >
       <p>Most popular tags</p>
     </ArtistFilters.Toolbar>
-    {/* TODO: replace to separate components, add close handlers, add hover for buttons*/}
+    {/* TODO: replace to separate components, add close handlers */}
     {
       genre ?
-      <ArtistFilters.GenreList>
-        <p>indie-rock, dream-pop, trip-hop, alternative</p>
-      </ArtistFilters.GenreList>
-      :
-      null
+        <ArtistFilters.GenreList>
+          <p>indie-rock, dream-pop, trip-hop, alternative</p>
+        </ArtistFilters.GenreList>
+        :
+        null
     }
     {
       location ?
-      <ArtistFilters.LocationList>
-       <p>Ontario, Toronto, London</p>
-      </ArtistFilters.LocationList>
-      :
-      null
+        <ArtistFilters.LocationList>
+          <p>Ontario, Toronto, London</p>
+        </ArtistFilters.LocationList>
+        :
+        null
     }
   </ArtistFilters.SubSectionWrapper>
 );
@@ -85,8 +85,14 @@ ArtistFilters.Toolbar = styled(Toolbar)`
 `;
 
 ArtistFilters.IconButton = styled(IconButton)`
-  margin : 0 2% !important;
-  background : ${props => (props.active ? '#EAEDF5 !important' : 'transparent !important')};
+  && {
+    margin     : 0 2% !important;
+    background : ${props => (props.active ? '#EAEDF5 !important' : 'transparent !important')};
+
+    &:hover {
+      background : #EAEDF5 !important;
+    }
+  }
 `;
 
 ArtistFilters.GenreList = styled.div`
@@ -106,14 +112,14 @@ const withState = compose(
   withStateHandlers(
     ({
       filters = {
-       location : false,
-       genre    : false,
-     }
+        location : false,
+        genre    : false,
+      }
     }) => ({ filters }),
     {
       openFilters : state => ({ target }) => {
         const filters = R.assoc(target.name, true, state.filters);
-        return ({ filters })
+        return ({ filters });
       }
     },
   ),
