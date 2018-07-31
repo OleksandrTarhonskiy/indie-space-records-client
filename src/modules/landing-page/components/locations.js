@@ -8,7 +8,10 @@ const Locations = () => (
 );
 
 Locations.GenreListWprapper = styled.div`
-  position : relative;
+  position   : relative;
+  padding    : 3%;
+  background : #EAEDF5;
+  font-size  : 18px;
 `;
 
 export default Locations;
