@@ -37,28 +37,28 @@ const Footer = () => (
 );
 
 Footer.Wrapper = styled.div`
-  background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
-  width      : 100%;
+  background  : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
+  width       : 100%;
   font-family : 'Roboto', sans-serif;
   font-size   : 16px;
   color       : #e9ecf5;
 `;
 
 Footer.Container = styled.div`
-  padding : 1% 7%;
-  flex-direction: row;
-  display: flex;
+  padding        : 1% 7%;
+  flex-direction : row;
+  display        : flex;
 `;
 
 Footer.Copirated = styled.div `
-  width: 50%;
+  width : 50%;
 `;
 
 Footer.SocialIcons = styled.div`
-  flex-direction: row;
-  display: flex;
+  flex-direction  : row;
+  display         : flex;
   justify-content : flex-end;
-  width: 50%;
+  width           : 50%;
 `;
 
 export default Footer;
