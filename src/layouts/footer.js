@@ -16,7 +16,6 @@ const Footer = () => (
           <FaFacebook
             color="#e9ecf5"
             size="1.3em"
-
           />
         </IconButton>
         <IconButton>
