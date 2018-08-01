@@ -8,9 +8,9 @@ import IconButton      from '@material-ui/core/IconButton';
 const Footer = () => (
   <Footer.Wrapper>
     <Footer.Container>
-      <Footer.Copirated>
+      <Footer.Copyright>
         <p>© 2018 Indie space records</p>
-      </Footer.Copirated>
+      </Footer.Copyright>
       <Footer.SocialIcons>
         <IconButton>
           <FaFacebook
@@ -49,7 +49,7 @@ Footer.Container = styled.div`
   display        : flex;
 `;
 
-Footer.Copirated = styled.div `
+Footer.Copyright = styled.div `
   width : 50%;
 `;
 
