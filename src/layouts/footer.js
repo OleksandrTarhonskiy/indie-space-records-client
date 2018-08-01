@@ -9,7 +9,7 @@ const Footer = () => (
   <Footer.Wrapper>
     <Footer.Container>
       <Footer.Copirated>
-        <p>© 2018 Indie space records </p>
+        <p>© 2018 Indie space records</p>
       </Footer.Copirated>
       <Footer.SocialIcons>
         <IconButton>
