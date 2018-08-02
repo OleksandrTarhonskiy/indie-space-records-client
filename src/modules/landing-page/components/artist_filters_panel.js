@@ -82,9 +82,8 @@ ArtistFilters.IconButton = styled(IconButton)`
 `;
 
 ArtistFilters.propTypes = {
-  filters      : PropTypes.object.isRequired,
-  openFilters  : PropTypes.func.isRequired,
-  closeFilters : PropTypes.func.isRequired,
+  filters       : PropTypes.object.isRequired,
+  toggleFilters : PropTypes.func.isRequired,
 };
 
 const withState = compose(

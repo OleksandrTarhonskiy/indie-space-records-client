@@ -1,4 +1,5 @@
 import React            from 'react';
+import PropTypes        from 'prop-types';
 import styled           from 'styled-components';
 import Card             from '@material-ui/core/Card';
 import CardContent      from '@material-ui/core/CardContent';
@@ -46,8 +47,8 @@ const Player = ({
       title={song.name}
     />
     <audio id={song.id}>
-			<source src={song.url} />
-		</audio>
+      <source src={song.url} />
+    </audio>
   </Player.Card>
 
 );
@@ -78,6 +79,16 @@ Player.Controls = styled.div`
   align-items  : center;
 `;
 
+Player.propTypes = {
+  play       : PropTypes.bool.isRequired,
+  songId     : PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  togglePlay : PropTypes.func.isRequired,
+  song       : PropTypes.object.isRequired,
+};
+
 const withState = compose(
   withStateHandlers(
     ({
@@ -88,9 +99,9 @@ const withState = compose(
       togglePlay : () => (play, songId) => {
         const audio = document.getElementById(songId);
         if (play) {
-          audio.play()
+          audio.play();
         } else {
-          audio.pause()
+          audio.pause();
         }
         return ({ play });
       },

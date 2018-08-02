@@ -6,14 +6,14 @@ import { SONGS } from '../fake-db'
 
 const TopSongs = () => (
   <TopSongs.Wrapper>
-  {
-    SONGS.map(song => (
-      <Player
-        key={song.id}
-        song={song}
-      />
-   ))
-  }
+    {
+      SONGS.map(song => (
+        <Player
+          key={song.id}
+          song={song}
+        />
+     ))
+    }
   </TopSongs.Wrapper>
 );
 

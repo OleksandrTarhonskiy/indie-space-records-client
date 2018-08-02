@@ -93,5 +93,5 @@ export const SONGS = [
     name   : 'Sight Unseen ',
     url    : 'https://blogstop.city/srhj67rbsexual/cloud%20nothings%20-%20life%20without%20sound%20(2017)/07.%20sight%20unseen.mp3',
     image  : 'https://f4.bcbits.com/img/a1716199816_10.jpg',
-  }
-]
+  },
+];
