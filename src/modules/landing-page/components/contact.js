@@ -1,7 +1,6 @@
-import React           from 'react';
-import ContactForm     from '../forms/contact';
-import styled          from 'styled-components';
-
+import React        from 'react';
+import ContactForm  from '../forms/contact';
+import styled       from 'styled-components';
 
 const Contact = () => ( 
   <Contact.Wrapper>
@@ -10,7 +9,7 @@ const Contact = () => (
 );
 
 Contact.Wrapper = styled.div`
-  width :100%;
+  width : 100%;
 `;
 
 export default Contact;

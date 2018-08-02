@@ -8,13 +8,13 @@ const ContactForm = () => (
     <ContactForm.HeadLine>
       Contact Form
     </ContactForm.HeadLine>
-    <ContactForm.EmailInput
+    <TextField
       label="Email"
     />
-    <ContactForm.NameInput
+    <TextField
       label="Name"
     />
-    <ContactForm.TextField
+    <TextField
       label="Enter your message"
       multiline="true"
     />
@@ -40,28 +40,17 @@ ContactForm.Button = styled(Button)`
   width      : 30%;
 `;
 
-ContactForm.EmailInput = styled(TextField)`
-
-`;
-
-ContactForm.NameInput = styled(TextField)`
-
-`;
-
-ContactForm.TextField = styled(TextField)`
-
-`;
 ContactForm.Wrapper = styled.div`
-    display        : flex;
-    align-items    : center;
-    justify-content: center;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
 `;
 
 ContactForm.ContactForm = styled.form`
-  padding       : 3%;
-  display       : flex;
-  flex-direction: column;
-  width         : 30%
+  padding        : 3%;
+  display        : flex;
+  flex-direction : column;
+  width          : 30%
 `;
 
 export default ContactForm;
