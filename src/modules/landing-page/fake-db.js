@@ -78,3 +78,20 @@ export const NEWS = [
     photo : 'https://cdn.dribbble.com/users/241518/screenshots/1661586/06_les-paul_1x.png',
   },
 ];
+
+export const SONGS = [
+  {
+    id     : 1,
+    author : 'Jessica Lea Mayfield',
+    name   : 'Sorry Is Gone',
+    url    : 'http://wfpk.org/wp-content/uploads/01-Sorry-Is-Gone.mp3',
+    image  : 'https://t2.genius.com/unsafe/440x440/https%3A%2F%2Fimages.genius.com%2F17252b261f51b1c547377504a37db95e.600x600x1.jpg',
+  },
+  {
+    id     : 2,
+    author : 'Cloud Nothings',
+    name   : 'Sight Unseen ',
+    url    : 'https://blogstop.city/srhj67rbsexual/cloud%20nothings%20-%20life%20without%20sound%20(2017)/07.%20sight%20unseen.mp3',
+    image  : 'https://f4.bcbits.com/img/a1716199816_10.jpg',
+  }
+]
