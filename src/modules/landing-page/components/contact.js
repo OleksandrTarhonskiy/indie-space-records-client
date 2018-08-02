@@ -1,13 +1,16 @@
 import React           from 'react';
-import ContactForm from '../forms/contact';
+import ContactForm     from '../forms/contact';
+import styled          from 'styled-components';
 
 
 const Contact = () => ( 
-  <div>
-   Contact Form
-   <ContactForm />
-  </div>
-
+  <Contact.Wrapper>
+    <ContactForm />
+  </Contact.Wrapper>
 );
+
+Contact.Wrapper = styled.div`
+  width :100%;
+`;
 
 export default Contact;
