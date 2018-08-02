@@ -20,8 +20,7 @@ const ArtistFilters = ({
     genre,
     location,
   },
-  openFilters,
-  closeFilters,
+  toggleFilters,
 }) => (
   <ArtistFilters.SubSectionWrapper>
     <ArtistFilters.Toolbar>
@@ -34,8 +33,7 @@ const ArtistFilters = ({
       <p>listenings</p>
       <ArtistFilters.IconButton
         color="inherit"
-        onClick={location ? closeFilters : openFilters}
-        name="location"
+        onClick={location ? toggleFilters.bind(null, 'location', false) : toggleFilters.bind(null, 'location', true)}
         active={location}
       >
         <LocationIcon />
@@ -43,8 +41,7 @@ const ArtistFilters = ({
       <p>Location</p>
       <ArtistFilters.IconButton
         color="inherit"
-        onClick={genre ? closeFilters : openFilters}
-        name="genre"
+        onClick={genre ? toggleFilters.bind(null, 'genre', false) : toggleFilters.bind(null, 'genre', true)}
         active={genre}
       >
         <MusicNote />
@@ -99,12 +96,8 @@ const withState = compose(
       }
     }) => ({ filters }),
     {
-      openFilters : state => ({ target }) => {
-        const filters = R.assoc(target.name, true, state.filters);
-        return ({ filters });
-      },
-      closeFilters : state => ({ target }) => {
-        const filters = R.assoc(target.name, false, state.filters);
+      toggleFilters : state => (name, value) => {
+        const filters = R.assoc(name, value, state.filters);
         return ({ filters });
       },
     },
