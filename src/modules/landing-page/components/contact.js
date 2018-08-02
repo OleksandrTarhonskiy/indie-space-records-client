@@ -1,6 +1,7 @@
 import React        from 'react';
-import ContactForm  from '../forms/contact';
 import styled       from 'styled-components';
+
+import ContactForm  from '../forms/contact_form';
 
 const Contact = () => ( 
   <Contact.Wrapper>
