@@ -7,6 +7,8 @@ import Headset      from '@material-ui/icons/Headset';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import MusicNote    from '@material-ui/icons/MusicNote';
 import Toolbar      from '@material-ui/core/Toolbar';
+import breakpoint   from 'styled-components-breakpoint';
+
 import {
   compose,
   withStateHandlers,
@@ -67,7 +69,14 @@ ArtistFilters.Heading = styled.h2`
 `;
 
 ArtistFilters.Toolbar = styled(Toolbar)`
-  display : flex;
+  && {
+    display        : flex;
+    flex-direction : column;
+
+    ${breakpoint('md')`
+      flex-direction : row;
+    `}
+  }
 `;
 
 ArtistFilters.IconButton = styled(IconButton)`

@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import routes               from './routes';
 import { injectGlobal }     from 'styled-components';
+import { ThemeProvider }    from 'styled-components';
+import theme, { muiTheme }  from './layouts/theme';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
 
 class App extends Component {
   render() {
     return (
-      <div>
-        {routes}
-      </div>
+      <ThemeProvider theme={theme}>
+        <MuiThemeProvider theme={muiTheme}>
+          <div>
+            {routes}
+          </div>
+        </MuiThemeProvider>
+      </ThemeProvider>
     );
   }
 }

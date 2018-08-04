@@ -2,6 +2,7 @@ import React      from 'react';
 import Button     from '@material-ui/core/Button';
 import TextField  from '@material-ui/core/TextField';
 import styled     from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
 
 const ContactForm = () => (
   <ContactForm.ContactForm>
@@ -47,10 +48,16 @@ ContactForm.Wrapper = styled.div`
 `;
 
 ContactForm.ContactForm = styled.form`
-  padding        : 3%;
-  display        : flex;
-  flex-direction : column;
-  width          : 30%
+  && {
+    padding        : 3%;
+    display        : flex;
+    flex-direction : column;
+    width          : 94%;
+
+    ${breakpoint('md')`
+      width : 30%
+    `}
+  }
 `;
 
 export default ContactForm;
