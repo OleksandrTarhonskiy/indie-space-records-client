@@ -28,7 +28,8 @@ TopSongs.Wrapper = styled.div`
     ${breakpoint('md')`
       padding               : 4% 8%;
       display               : grid;
-      grid-template-columns : 35% 35% 35%;
+      grid-template-columns : 30% 30% 30%;
+      justify-content       : space-between;
     `}
   }
 `;

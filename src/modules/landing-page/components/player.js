@@ -1,4 +1,5 @@
 import React            from 'react';
+import breakpoint       from 'styled-components-breakpoint';
 import PropTypes        from 'prop-types';
 import styled           from 'styled-components';
 import Card             from '@material-ui/core/Card';
@@ -54,9 +55,16 @@ const Player = ({
 );
 
 Player.Card = styled(Card)`
-  display : flex;
-  width   : 376px;
-  margin  : 1%;
+  && {
+    display        : flex;
+    width          : 100%;
+    margin         : 1%;
+    flex-direction : column-reverse
+
+    ${breakpoint('md')`
+      flex-direction : row;
+    `}
+  }
 `;
 
 Player.Details = styled.div`
@@ -70,8 +78,14 @@ Player.CardContent = styled(CardContent)`
 `;
 
 Player.CardMedia = styled(CardMedia)`
-  width  : 151px;
-  height : 151px;
+  && {
+    width  : 100%;
+    height : 151px;
+
+    ${breakpoint('md')`
+      width : 40%;
+    `}
+  }
 `;
 
 Player.Controls = styled.div`
