@@ -1,8 +1,9 @@
-import React     from 'react';
-import styled    from 'styled-components';
+import React      from 'react';
+import styled     from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
 
-import Player    from './player';
-import { SONGS } from '../fake-db';
+import Player     from './player';
+import { SONGS }  from '../fake-db';
 
 const TopSongs = () => (
   <TopSongs.Wrapper>
@@ -18,8 +19,16 @@ const TopSongs = () => (
 );
 
 TopSongs.Wrapper = styled.div`
-  padding    : 4%;
-  background : #EAEDF5;
+  && {
+    padding        : 4%;
+    background     : #EAEDF5;
+    display        : flex;
+    flex-direction : row;
+
+    ${breakpoint('md')`
+      flex-direction : row;
+    `}
+  }
 `;
 
 export default TopSongs;
