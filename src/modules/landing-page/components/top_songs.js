@@ -21,11 +21,12 @@ const TopSongs = () => (
 TopSongs.Wrapper = styled.div`
   && {
     display        : flex;
-    padding        : 4% 8%;
+    padding        : 4%;
     background     : #EAEDF5;
     flex-direction : column;
 
     ${breakpoint('md')`
+      padding               : 4% 8%;
       display               : grid;
       grid-template-columns : 35% 35% 35%;
     `}
