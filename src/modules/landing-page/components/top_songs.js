@@ -2,7 +2,7 @@ import React     from 'react';
 import styled    from 'styled-components';
 
 import Player    from './player';
-import { SONGS } from '../fake-db'
+import { SONGS } from '../fake-db';
 
 const TopSongs = () => (
   <TopSongs.Wrapper>
@@ -12,7 +12,7 @@ const TopSongs = () => (
           key={song.id}
           song={song}
         />
-     ))
+      ))
     }
   </TopSongs.Wrapper>
 );
