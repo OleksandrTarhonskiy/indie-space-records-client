@@ -1,6 +1,7 @@
-import React  from 'react';
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import React      from 'react';
+import styled     from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
+import Button     from '@material-ui/core/Button';
 
 const About = () => (
   <About.Wrapper>
@@ -61,10 +62,16 @@ About.Description = styled.p`
 `;
 
 About.Button = styled(Button)`
-  background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
-  color      : #fff !important;
-  margin-top : 1% !important;
-  width      : 20%;
+  && {
+    background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
+    color      : #fff !important;
+    margin-top : 1% !important;
+    width      : 100%;
+
+    ${breakpoint('md')`
+      width : 20%;
+    `}
+  }
 `;
 
 export default About;
