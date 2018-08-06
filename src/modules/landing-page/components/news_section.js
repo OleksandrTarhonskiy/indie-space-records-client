@@ -5,8 +5,8 @@ import GridListTile    from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton      from '@material-ui/core/IconButton';
 import InfoIcon        from '@material-ui/icons/Info';
-import Button          from '@material-ui/core/Button';
 
+import CustomButton    from './custom_button';
 import { NEWS }        from '../fake-db';
 import SubscribeForm   from '../forms/subscribe';
 
@@ -35,9 +35,7 @@ const LastNews = () => (
         </GridListTile>
       ))}
     </LastNews.GridList>
-    <LastNews.Button>
-      Read more
-    </LastNews.Button>
+    <CustomButton text="Read more" />
   </LastNews.Wrapper>
 );
 
@@ -70,12 +68,6 @@ LastNews.GridList = styled(GridList)`
 
 LastNews.IconButton = styled(IconButton)`
   color : #939393 !important;
-`;
-
-LastNews.Button = styled(Button)`
-  background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
-  color      : #fff !important;
-  margin-top : 1% !important;
 `;
 
 export default LastNews;

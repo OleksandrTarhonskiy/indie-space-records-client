@@ -1,7 +1,7 @@
-import React      from 'react';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
-import Button     from '@material-ui/core/Button';
+import React        from 'react';
+import styled       from 'styled-components';
+
+import CustomButton from './custom_button';
 
 const About = () => (
   <About.Wrapper>
@@ -17,9 +17,7 @@ const About = () => (
       unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
       and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </About.Description>
-    <About.Button>
-      Sign up as Fan
-    </About.Button>
+    <CustomButton text="Sign up as Fan" />
     <About.HeadingWrapper>
       <About.Heading>
         for Musicians
@@ -32,9 +30,7 @@ const About = () => (
      unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </About.Description>
-    <About.Button>
-      Sign up as Musician
-    </About.Button>
+    <CustomButton text="Sign up as Musician" />
   </About.Wrapper>
 );
 
@@ -59,19 +55,6 @@ About.Description = styled.p`
   font-size   : 18px;
   font-weight : 600;
   color       : #3c3c3e;
-`;
-
-About.Button = styled(Button)`
-  && {
-    background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
-    color      : #fff !important;
-    margin-top : 1% !important;
-    width      : 100%;
-
-    ${breakpoint('md')`
-      width : 20%;
-    `}
-  }
 `;
 
 export default About;

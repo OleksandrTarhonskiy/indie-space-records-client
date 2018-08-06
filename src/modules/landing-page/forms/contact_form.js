@@ -1,8 +1,9 @@
 import React      from 'react';
-import Button     from '@material-ui/core/Button';
 import TextField  from '@material-ui/core/TextField';
 import styled     from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
+
+import CustomButton from '../components/custom_button';
 
 const ContactForm = () => (
   <ContactForm.ContactForm>
@@ -20,9 +21,7 @@ const ContactForm = () => (
       multiline="true"
     />
     <ContactForm.Wrapper>
-      <ContactForm.Button>
-        Submit
-      </ContactForm.Button>
+      <CustomButton text="Submit" />
     </ContactForm.Wrapper>
   </ContactForm.ContactForm>
 );
@@ -32,13 +31,6 @@ ContactForm.HeadLine = styled.h1`
   font-family : 'Roboto', sans-serif;
   font-size   : 33px;
   text-align  : center;
-`;
-
-ContactForm.Button = styled(Button)`
-  background : linear-gradient(135deg, #4923b2 2%,#284dd3 58%,#207cca 100%,#7db9e8 100%);
-  color      : #fff !important;
-  margin-top : 4% !important;
-  width      : 30%;
 `;
 
 ContactForm.Wrapper = styled.div`
