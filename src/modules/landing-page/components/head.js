@@ -14,7 +14,7 @@ const Head = () => (
     <Head.CursiveHeading>
       Lorem Ipsum is simply dummy text
     </Head.CursiveHeading>
-    <CustomButton text="Get started" />
+    <CustomButton text="Get started" size="large" />
   </Head.HeadWrapper>
 );
 

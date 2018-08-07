@@ -17,7 +17,7 @@ const About = () => (
       unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
       and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </About.Description>
-    <CustomButton text="Sign up as Fan" />
+    <CustomButton text="Sign up as Fan" size="small" />
     <About.HeadingWrapper>
       <About.Heading>
         for Musicians
@@ -30,7 +30,7 @@ const About = () => (
      unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     </About.Description>
-    <CustomButton text="Sign up as Musician" />
+    <CustomButton text="Sign up as Musician" size="small" />
   </About.Wrapper>
 );
 

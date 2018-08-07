@@ -9,7 +9,7 @@ const SubscribeForm = () => (
     <SubscribeForm.EmailInput
       label="Email"
     />
-    <CustomButton text="Subscribe" />
+    <CustomButton text="Subscribe" size="small" />
   </SubscribeForm.SubscribeForm>
 );
 
