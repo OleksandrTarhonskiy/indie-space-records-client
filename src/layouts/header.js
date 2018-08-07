@@ -1,10 +1,12 @@
-import React   from 'react';
-import styled  from 'styled-components';
-import AppBar  from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import React      from 'react';
+import styled     from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
+import AppBar     from '@material-ui/core/AppBar';
+import Toolbar    from '@material-ui/core/Toolbar';
 
-import MenuBar from './menu';
-import Logo    from './theme/logo.png';
+import MenuBar    from './menu';
+import Logo       from './theme/logo.png';
+import Mobile     from './theme/mobile-logo.png';
 
 const Header = () => (
   <Header.MenuBar>
@@ -19,10 +21,19 @@ const Header = () => (
 );
 
 Header.LogoWrapper = styled.div`
-  background      : url(${Logo}) no-repeat;
-  background-size : 270px 90px;
-  height          : 100px;
-  width           : 40%;
+  && {
+    background      : url(${Mobile}) no-repeat;
+    background-size : 80px 80px;
+    height          : 100px;
+    width           : 40%;
+    margin-top      : 3px;
+
+    ${breakpoint('md')`
+      background      : url(${Logo}) no-repeat;
+      background-size : 270px 90px;
+      width           : 40%;
+    `}
+  }
 `;
 
 Header.MenuBar = styled(AppBar)`
