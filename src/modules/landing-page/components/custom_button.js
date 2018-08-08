@@ -28,7 +28,8 @@ CustomButton.Button = styled(Button)`
 CustomButton.propTypes = {
   text   : PropTypes.string.isRequired,
   size   : PropTypes.string.isRequired,
-  border : PropTypes.bool.isRequired,
+  border : PropTypes.bool,
+  color  : PropTypes.string,
 };
 
 export default CustomButton;
