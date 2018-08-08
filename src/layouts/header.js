@@ -1,19 +1,19 @@
-import React                 from 'react';
-import PropTypes             from 'prop-types';
-import styled, { keyframes } from 'styled-components';
-import * as R                from 'ramda';
-import breakpoint            from 'styled-components-breakpoint';
-import AppBar                from '@material-ui/core/AppBar';
-import Toolbar               from '@material-ui/core/Toolbar';
+import React         from 'react';
+import PropTypes     from 'prop-types';
+import styled        from 'styled-components';
+import * as R        from 'ramda';
+import breakpoint    from 'styled-components-breakpoint';
+import AppBar        from '@material-ui/core/AppBar';
+import Toolbar       from '@material-ui/core/Toolbar';
 import {
   compose,
   withStateHandlers,
   lifecycle
-}                            from 'recompose';
+}                    from 'recompose';
 
-import MenuBar               from './menu';
-import Logo                  from './theme/logo.png';
-import Mobile                from './theme/mobile-logo.png';
+import MenuBar       from './menu';
+import Logo          from './theme/logo.png';
+import Mobile        from './theme/mobile-logo.png';
 
 const Header = ({
   style: {
@@ -31,21 +31,6 @@ const Header = ({
   </Header.MenuBar>
 );
 
-const keyFrameExampleOne = keyframes`
-  0% {
-    opacity : 0.7;
-  }
-  50% {
-    opacity : 0.8;
-  }
-  75% {
-    opacity : 0.9;
-  }
-  100% {
-    opacity : 1;
-  }
-`;
-
 Header.LogoWrapper = styled.div`
   && {
     background         : url(${Mobile}) no-repeat;
@@ -53,8 +38,6 @@ Header.LogoWrapper = styled.div`
     height             : 100px;
     width              : 40%;
     margin-top         : 3px;
-    animation-name     : ${keyFrameExampleOne};
-    animation-duration : 1s;
 
     ${breakpoint('md')`
       background      : url(${Logo}) no-repeat;
