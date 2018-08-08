@@ -1,4 +1,5 @@
 import React                 from 'react';
+import PropTypes             from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import * as R                from 'ramda';
 import breakpoint            from 'styled-components-breakpoint';
@@ -15,7 +16,6 @@ import Logo                  from './theme/logo.png';
 import Mobile                from './theme/mobile-logo.png';
 
 const Header = ({
-  onScroll,
   style: {
     position,
   }
@@ -44,7 +44,7 @@ const keyFrameExampleOne = keyframes`
   100% {
     opacity : 1;
   }
-`
+`;
 
 Header.LogoWrapper = styled.div`
   && {
@@ -83,6 +83,10 @@ Header.ToolbarItem = styled.h2`
   font-family : 'Pacifico', cursive;
 `;
 
+Header.propTypes = {
+  style : PropTypes.object.isRequired,
+};
+
 const withState = compose(
   withStateHandlers(
     ({
@@ -95,21 +99,21 @@ const withState = compose(
         let style = null;
         if (window.scrollY > 650) {
           style = R.assoc('position', 'fixed', state.position);
-          console.log(style)
         } else {
           style = R.assoc('position', 'relative', state.position);
         }
-        return ({style})
+        return ({style});
       },
     },
   ),
   lifecycle({
     componentDidMount() {
-      console.log('mount')
-      window.addEventListener('scroll', this.props.onScroll);
+      const { onScroll } = this.props;
+      window.addEventListener('scroll', onScroll);
     },
     componentWillUnmount() {
-      return window.removeEventListener('scroll', this.props.onScroll);
+      const { onScroll } = this.props;
+      return window.removeEventListener('scroll', onScroll);
     },
   })
 );
