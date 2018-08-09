@@ -36,7 +36,13 @@ const LastNews = () => (
               {post.desc}
             </Typography>
             <LastNews.ButtonsWrapper>
-              <CustomButton text="Read now" size="small" />
+              <CustomButton
+                text="Read now"
+                background="none"
+                size="small"
+                fontWeight="bold"
+                color="#565656"
+              />
               <IconButton aria-label="Share">
                 <ShareIcon />
               </IconButton>
