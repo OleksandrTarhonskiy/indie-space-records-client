@@ -14,30 +14,36 @@ const Head = () => (
     <Head.CursiveHeading>
       Lorem Ipsum is simply dummy text
     </Head.CursiveHeading>
-    <CustomButton text="Get started" size="large" />
+    <CustomButton
+      text="Get started"
+      size="large"
+      border={true}
+      color="transparent"
+    />
   </Head.HeadWrapper>
 );
 
 Head.HeadWrapper = styled.div`
   padding : 10% 5% 10% 5%;
+  background : linear-gradient(to right,#723af9,#46aafc);
 `;
 
 Head.Heading = styled.h1`
   font-family : 'Roboto', sans-serif;
   font-size   : 45px;
-  color       : #3c3c3e;
+  color       : #EAEDF5;
 `;
 
 Head.Subheading = styled.h2`
   font-family : 'Roboto', sans-serif;
   font-size   : 35px;
-  color       : #3c3c3e;
+  color       : #EAEDF5;
 `;
 
 Head.CursiveHeading = styled.h3`
   font-family : 'Pacifico', cursive;
   font-size   : 30px;
-  color       : #3c3c3e;
+  color       : #EAEDF5;
 `;
 
 export default Head;
