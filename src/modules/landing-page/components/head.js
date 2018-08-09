@@ -24,7 +24,7 @@ const Head = () => (
 );
 
 Head.HeadWrapper = styled.div`
-  padding : 10% 5% 10% 5%;
+  padding    : 10% 5% 10% 5%;
   background : linear-gradient(to right,#723af9,#46aafc);
 `;
 

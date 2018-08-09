@@ -92,9 +92,9 @@ LastNews.CardContent = styled(CardContent)`
 `;
 
 LastNews.ButtonsWrapper = styled.div`
-  padding : 5% 0;
-  display: flex;
-  justify-content: space-between;
+  padding         : 5% 0;
+  display         : flex;
+  justify-content : space-between;
 `;
 
 LastNews.Heading = styled.h1`
