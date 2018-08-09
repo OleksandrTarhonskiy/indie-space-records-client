@@ -18,7 +18,7 @@ const Head = () => (
       text="Get started"
       size="large"
       border={true}
-      color="transparent"
+      background="transparent"
     />
   </Head.HeadWrapper>
 );
