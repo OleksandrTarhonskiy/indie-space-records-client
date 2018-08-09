@@ -7,29 +7,36 @@ const CustomButton = ({
   text,
   size,
   border,
+  background,
+  fontWeight,
   color,
 }) => (
   <CustomButton.Button
     size={size}
-    color={color}
+    background={background}
     border={border}
+    fontWeight={fontWeight}
+    color={color}
   >
     {text}
   </CustomButton.Button>
 );
 
 CustomButton.Button = styled(Button)`
-  background : ${props => props.color? props.color : 'linear-gradient(to right,#723af9,#46aafc)'};
-  color      : #fff !important;
-  margin-top : 1% !important;
-  border     : ${props => props.border? '1px solid #EAEDF5' : 'none'} !important;
+  background  : ${props => props.background? props.background : 'linear-gradient(to right,#723af9,#46aafc)'};
+  color       : ${props => props.color? props.color : '#ffff'} !important;
+  margin-top  : 1% !important;
+  border      : ${props => props.border? '1px solid #EAEDF5' : 'none'} !important;
+  font-weight : ${props => props.fontWeight === 'bold'? 600 : 400} !important;
 `;
 
 CustomButton.propTypes = {
-  text   : PropTypes.string.isRequired,
-  size   : PropTypes.string.isRequired,
-  border : PropTypes.bool,
-  color  : PropTypes.string,
+  background : PropTypes.string,
+  text       : PropTypes.string.isRequired,
+  size       : PropTypes.string.isRequired,
+  border     : PropTypes.bool,
+  color      : PropTypes.string,
+  fontWeight : PropTypes.string,
 };
 
 export default CustomButton;
