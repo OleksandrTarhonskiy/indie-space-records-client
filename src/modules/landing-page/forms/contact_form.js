@@ -34,9 +34,9 @@ ContactForm.HeadLine = styled.h1`
 `;
 
 ContactForm.Wrapper = styled.div`
-    display         : flex;
-    align-items     : center;
-    justify-content : center;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
 `;
 
 ContactForm.ContactForm = styled.form`

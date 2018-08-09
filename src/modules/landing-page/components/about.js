@@ -42,7 +42,7 @@ About.Wrapper = styled.div`
     display        : flex;
     padding        : 2%;
     flex-direction : column;
-    background     : #EAEDF5;
+    background     : #eaedf5;
 
     ${breakpoint('md')`
       flex-direction : row;
@@ -67,7 +67,7 @@ About.HeadingWrapper = styled.div`
 
 About.Heading = styled.h1`
   font-family : 'Pacifico', cursive;
-  color       : #EE3C25;
+  color       : #ee3c25;
   text-align  : center;
 `;
 

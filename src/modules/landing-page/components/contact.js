@@ -3,7 +3,7 @@ import styled       from 'styled-components';
 
 import ContactForm  from '../forms/contact_form';
 
-const Contact = () => ( 
+const Contact = () => (
   <Contact.Wrapper>
     <ContactForm />
   </Contact.Wrapper>

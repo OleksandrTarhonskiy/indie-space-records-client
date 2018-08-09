@@ -85,7 +85,7 @@ ArtistFilters.IconButton = styled(IconButton)`
     background : ${props => (props.active ? '#EAEDF5 !important' : 'transparent !important')};
 
     &:hover {
-      background : #EAEDF5 !important;
+      background : #eaedf5 !important;
     }
   }
 `;

@@ -10,7 +10,7 @@ const Genres = () => (
 Genres.GenreListWprapper = styled.div`
   position   : relative;
   padding    : 3%;
-  background : #EAEDF5;
+  background : #eaedf5;
   font-size  : 18px;
 `;
 

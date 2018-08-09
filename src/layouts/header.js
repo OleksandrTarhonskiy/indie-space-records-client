@@ -51,7 +51,7 @@ Header.MenuBar = styled(AppBar)`
   display        : flex;
   height         : 70px;
   flex-direction : row !important;
-  background     : linear-gradient(to right,#723af9,#46aafc) !important;
+  background     : linear-gradient(to right, #723af9, #46aafc) !important;
   box-shadow     : none !important;
   padding        : 0 25px 0 25px;
   position       : ${props => props.position};

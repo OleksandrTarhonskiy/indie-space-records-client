@@ -22,7 +22,7 @@ TopSongs.Wrapper = styled.div`
   && {
     display        : flex;
     padding        : 4%;
-    background     : #EAEDF5;
+    background     : #eaedf5;
     flex-direction : column;
 
     ${breakpoint('md')`

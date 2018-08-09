@@ -88,7 +88,7 @@ LastNews.PostPhotoWrapper = styled(CardMedia)`
 `;
 
 LastNews.CardContent = styled(CardContent)`
-  background : #EAEDF5;
+  background : #eaedf5;
 `;
 
 LastNews.ButtonsWrapper = styled.div`

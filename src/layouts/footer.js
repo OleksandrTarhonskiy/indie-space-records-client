@@ -36,7 +36,7 @@ const Footer = () => (
 );
 
 Footer.Wrapper = styled.div`
-  background  : linear-gradient(to right,#723af9,#46aafc);
+  background  : linear-gradient(to right, #723af9, #46aafc);
   width       : 100%;
   font-family : 'Roboto', sans-serif;
   font-size   : 16px;

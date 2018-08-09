@@ -59,7 +59,7 @@ Player.Card = styled(Card)`
     display        : flex;
     width          : 100%;
     margin         : 1%;
-    flex-direction : column-reverse
+    flex-direction : column-reverse;
 
     ${breakpoint('md')`
       flex-direction : row;

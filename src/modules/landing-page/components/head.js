@@ -25,25 +25,25 @@ const Head = () => (
 
 Head.HeadWrapper = styled.div`
   padding    : 10% 5% 10% 5%;
-  background : linear-gradient(to right,#723af9,#46aafc);
+  background : linear-gradient(to right, #723af9, #46aafc);
 `;
 
 Head.Heading = styled.h1`
   font-family : 'Roboto', sans-serif;
   font-size   : 45px;
-  color       : #EAEDF5;
+  color       : #eaedf5;
 `;
 
 Head.Subheading = styled.h2`
   font-family : 'Roboto', sans-serif;
   font-size   : 35px;
-  color       : #EAEDF5;
+  color       : #eaedf5;
 `;
 
 Head.CursiveHeading = styled.h3`
   font-family : 'Pacifico', cursive;
   font-size   : 30px;
-  color       : #EAEDF5;
+  color       : #eaedf5;
 `;
 
 export default Head;
