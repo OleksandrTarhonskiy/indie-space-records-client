@@ -1,15 +1,15 @@
-import React        from 'react';
-import TextField    from '@material-ui/core/TextField';
-import styled       from 'styled-components';
+import React          from 'react';
+import TextField      from '@material-ui/core/TextField';
+import styled         from 'styled-components';
 
-import CustomButton from '../components/custom_button';
+import GradientButton from '../../../layouts/gradient_button';
 
 const SubscribeForm = () => (
   <SubscribeForm.SubscribeForm>
     <SubscribeForm.EmailInput
       label="Email"
     />
-    <CustomButton text="Subscribe" size="small" />
+    <GradientButton text="Subscribe" size="small" />
   </SubscribeForm.SubscribeForm>
 );
 

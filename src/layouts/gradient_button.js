@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import Button    from '@material-ui/core/Button';
 import styled    from 'styled-components';
 
-const CustomButton = ({
+const GradientButton = ({
   text,
   size,
 }) => (
-  <CustomButton.Button size={size}>
+  <GradientButton.Button size={size}>
     {text}
-  </CustomButton.Button>
+  </GradientButton.Button>
 );
 
-CustomButton.Button = styled(Button)`
+GradientButton.Button = styled(Button)`
   background : linear-gradient(to right, #723af9, #46aafc);
   color      : #ffff !important;
   margin-top : 1% !important;
 `;
 
-CustomButton.propTypes = {
+GradientButton.propTypes = {
   text : PropTypes.string.isRequired,
   size : PropTypes.string.isRequired,
 };
 
-export default CustomButton;
+export default GradientButton;

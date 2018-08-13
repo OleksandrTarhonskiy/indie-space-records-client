@@ -1,9 +1,9 @@
-import React      from 'react';
-import TextField  from '@material-ui/core/TextField';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
+import React          from 'react';
+import TextField      from '@material-ui/core/TextField';
+import styled         from 'styled-components';
+import breakpoint     from 'styled-components-breakpoint';
 
-import CustomButton from '../components/custom_button';
+import GradientButton from '../../../layouts/gradient_button';
 
 const ContactForm = () => (
   <ContactForm.ContactForm>
@@ -21,7 +21,7 @@ const ContactForm = () => (
       multiline="true"
     />
     <ContactForm.Wrapper>
-      <CustomButton text="Submit" />
+      <GradientButton text="Submit" />
     </ContactForm.Wrapper>
   </ContactForm.ContactForm>
 );

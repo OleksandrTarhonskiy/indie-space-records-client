@@ -1,17 +1,17 @@
-import React         from 'react';
-import styled        from 'styled-components';
-import IconButton    from '@material-ui/core/IconButton';
-import breakpoint    from 'styled-components-breakpoint';
-import Card          from '@material-ui/core/Card';
-import CardMedia     from '@material-ui/core/CardMedia';
-import Typography    from '@material-ui/core/Typography';
-import CardContent   from '@material-ui/core/CardContent';
-import ShareIcon     from '@material-ui/icons/Share';
-import Button        from '@material-ui/core/Button';
+import React          from 'react';
+import styled         from 'styled-components';
+import IconButton     from '@material-ui/core/IconButton';
+import breakpoint     from 'styled-components-breakpoint';
+import Card           from '@material-ui/core/Card';
+import CardMedia      from '@material-ui/core/CardMedia';
+import Typography     from '@material-ui/core/Typography';
+import CardContent    from '@material-ui/core/CardContent';
+import ShareIcon      from '@material-ui/icons/Share';
+import Button         from '@material-ui/core/Button';
 
-import { NEWS }      from '../fake-db';
-import SubscribeForm from '../forms/subscribe';
-import CustomButton  from './custom_button';
+import { NEWS }       from '../fake-db';
+import SubscribeForm  from '../forms/subscribe';
+import GradientButton from '../../../layouts/gradient_button';
 
 const LastNews = () => (
   <LastNews.Wrapper>
@@ -48,7 +48,7 @@ const LastNews = () => (
         </LastNews.Card>
       ))}
     </LastNews.PostsWrapper>
-    <CustomButton text="Read More" size="small" />
+    <GradientButton text="Read More" size="small" />
   </LastNews.Wrapper>
 );
 

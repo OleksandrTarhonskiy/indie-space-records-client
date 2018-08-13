@@ -1,8 +1,8 @@
-import React        from 'react';
-import styled       from 'styled-components';
-import breakpoint   from 'styled-components-breakpoint';
+import React          from 'react';
+import styled         from 'styled-components';
+import breakpoint     from 'styled-components-breakpoint';
 
-import CustomButton from './custom_button';
+import GradientButton from '../../../layouts/gradient_button';
 
 const About = () => (
   <About.Wrapper>
@@ -17,7 +17,7 @@ const About = () => (
         since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </About.Description>
       <About.ButtonWrapper>
-        <CustomButton text="Sign up as Fan" size="large" />
+        <GradientButton text="Sign up as Fan" size="large" />
       </About.ButtonWrapper>
     </About.SubSectionWrapper>
     <About.SubSectionWrapper>
@@ -31,7 +31,7 @@ const About = () => (
        since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </About.Description>
       <About.ButtonWrapper>
-        <CustomButton text="Sign up as Musician" size="large" />
+        <GradientButton text="Sign up as Musician" size="large" />
       </About.ButtonWrapper>
     </About.SubSectionWrapper>
   </About.Wrapper>
