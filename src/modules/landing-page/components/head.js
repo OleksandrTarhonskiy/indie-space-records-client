@@ -1,7 +1,6 @@
 import React        from 'react';
 import styled       from 'styled-components';
-
-import CustomButton from './custom_button';
+import Button       from '@material-ui/core/Button';
 
 const Head = () => (
   <Head.HeadWrapper>
@@ -14,12 +13,9 @@ const Head = () => (
     <Head.CursiveHeading>
       Lorem Ipsum is simply dummy text
     </Head.CursiveHeading>
-    <CustomButton
-      text="Get started"
-      size="large"
-      border={true}
-      background="transparent"
-    />
+    <Head.Button>
+      Get started
+    </Head.Button>
   </Head.HeadWrapper>
 );
 
@@ -44,6 +40,13 @@ Head.CursiveHeading = styled.h3`
   font-family : 'Pacifico', cursive;
   font-size   : 30px;
   color       : #eaedf5;
+`;
+
+Head.Button = styled(Button)`
+  background : transparent;
+  color      : #ffff !important;
+  margin-top : 1% !important;
+  border     : 1px solid #eaedf5 !important;
 `;
 
 export default Head;

@@ -7,10 +7,11 @@ import CardMedia     from '@material-ui/core/CardMedia';
 import Typography    from '@material-ui/core/Typography';
 import CardContent   from '@material-ui/core/CardContent';
 import ShareIcon     from '@material-ui/icons/Share';
+import Button        from '@material-ui/core/Button';
 
 import { NEWS }      from '../fake-db';
 import SubscribeForm from '../forms/subscribe';
-import CustomButton  from '../components/custom_button';
+import CustomButton  from './custom_button';
 
 const LastNews = () => (
   <LastNews.Wrapper>
@@ -36,13 +37,9 @@ const LastNews = () => (
               {post.desc}
             </Typography>
             <LastNews.ButtonsWrapper>
-              <CustomButton
-                text="Read now"
-                background="none"
-                size="small"
-                fontWeight="bold"
-                color="#565656"
-              />
+              <LastNews.Button>
+                Read now
+              </LastNews.Button>
               <IconButton aria-label="Share">
                 <ShareIcon />
               </IconButton>
@@ -95,6 +92,13 @@ LastNews.ButtonsWrapper = styled.div`
   padding         : 5% 0;
   display         : flex;
   justify-content : space-between;
+`;
+
+LastNews.Button = styled(Button)`
+  background  : transparent;
+  color       : #3c3c3e !important;
+  margin-top  : 1% !important;
+  font-weight : 600 !important;
 `;
 
 LastNews.Heading = styled.h1`
