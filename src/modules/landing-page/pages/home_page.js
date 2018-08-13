@@ -5,7 +5,7 @@ import Artists  from '../components/artists';
 import TopSongs from '../components/top_songs';
 import LastNews from '../components/news_section';
 import About    from '../components/about';
-import Contact  from '../components/contact';
+import Contact  from '../../help-contact/forms/contact';
 
 const HomePage = () => (
   <div>
@@ -14,7 +14,7 @@ const HomePage = () => (
     <TopSongs />
     <LastNews />
     <About />
-    <Contact/>
+    <Contact />
   </div>
 );
 

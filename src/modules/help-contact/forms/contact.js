@@ -5,11 +5,11 @@ import breakpoint     from 'styled-components-breakpoint';
 
 import GradientButton from '../../../layouts/gradient_button';
 
-const ContactForm = () => (
-  <ContactForm.ContactForm>
-    <ContactForm.HeadLine>
-      Contact Form
-    </ContactForm.HeadLine>
+const Contact = () => (
+  <Contact.Contact>
+    <Contact.HeadLine>
+      Have any qestions?
+    </Contact.HeadLine>
     <TextField
       label="Email"
     />
@@ -20,26 +20,26 @@ const ContactForm = () => (
       label="Enter your message"
       multiline="true"
     />
-    <ContactForm.Wrapper>
+    <Contact.Wrapper>
       <GradientButton text="Submit" />
-    </ContactForm.Wrapper>
-  </ContactForm.ContactForm>
+    </Contact.Wrapper>
+  </Contact.Contact>
 );
 
-ContactForm.HeadLine = styled.h1`
+Contact.HeadLine = styled.h1`
   color       : #565656;
   font-family : 'Roboto', sans-serif;
   font-size   : 33px;
   text-align  : center;
 `;
 
-ContactForm.Wrapper = styled.div`
+Contact.Wrapper = styled.div`
   display         : flex;
   align-items     : center;
   justify-content : center;
 `;
 
-ContactForm.ContactForm = styled.form`
+Contact.Contact = styled.form`
   && {
     padding        : 3%;
     display        : flex;
@@ -52,4 +52,4 @@ ContactForm.ContactForm = styled.form`
   }
 `;
 
-export default ContactForm;
+export default Contact;
