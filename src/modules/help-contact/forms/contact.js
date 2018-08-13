@@ -6,7 +6,7 @@ import breakpoint     from 'styled-components-breakpoint';
 import GradientButton from '../../../layouts/gradient_button';
 
 const Contact = () => (
-  <Contact.Contact>
+  <Contact.FormWrapper>
     <Contact.HeadLine>
       Have any qestions?
     </Contact.HeadLine>
@@ -23,7 +23,7 @@ const Contact = () => (
     <Contact.Wrapper>
       <GradientButton text="Submit" />
     </Contact.Wrapper>
-  </Contact.Contact>
+  </Contact.FormWrapper>
 );
 
 Contact.HeadLine = styled.h1`
@@ -39,7 +39,7 @@ Contact.Wrapper = styled.div`
   justify-content : center;
 `;
 
-Contact.Contact = styled.form`
+Contact.FormWrapper = styled.form`
   && {
     padding        : 3%;
     display        : flex;
