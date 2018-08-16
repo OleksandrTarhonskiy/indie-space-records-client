@@ -14,8 +14,8 @@ const HelpContactPage = () => (
 
 HelpContactPage.Wrapper = styled.div`
   && {
-    display          : flex;
-    flex-direction   : column;
+    display        : flex;
+    flex-direction : column;
 
     ${breakpoint('md')`
       flex-direction : row;

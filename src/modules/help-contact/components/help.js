@@ -80,8 +80,8 @@ Help.Wrapper = styled.div`
 
 Help.Link = styled(Link)`
   && {
-    color             : inherit;
-    text-decoration   : none;
+    color           : inherit;
+    text-decoration : none;
 
     &:hover {
       text-decoration : underline;
