@@ -15,11 +15,11 @@ export default (
   <Router>
     <div>
       <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/help_contact" component={HelpContactPage}/>
-          <Route component={NotFound} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/help_contact" component={HelpContactPage}/>
+        <Route component={NotFound} />
+      </Switch>
       <Footer />
     </div>
   </Router>

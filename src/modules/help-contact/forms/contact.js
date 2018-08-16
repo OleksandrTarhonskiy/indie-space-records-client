@@ -20,9 +20,9 @@ const Contact = () => (
       label="Enter your message"
       multiline="true"
     />
-    <Contact.Wrapper>
+    <Contact.ButtonWrapper>
       <GradientButton text="Submit" />
-    </Contact.Wrapper>
+    </Contact.ButtonWrapper>
   </Contact.FormWrapper>
 );
 
@@ -33,21 +33,22 @@ Contact.HeadLine = styled.h1`
   text-align  : center;
 `;
 
-Contact.Wrapper = styled.div`
+Contact.ButtonWrapper = styled.div`
   display         : flex;
   align-items     : center;
   justify-content : center;
+  padding-top     : 1%;
 `;
 
 Contact.FormWrapper = styled.form`
   && {
-    padding        : 3%;
+    padding        : 8%;
     display        : flex;
     flex-direction : column;
-    width          : 94%;
+    width          : 80%;
 
     ${breakpoint('md')`
-      width : 30%
+      width : 50%
     `}
   }
 `;
