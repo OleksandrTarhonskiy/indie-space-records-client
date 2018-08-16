@@ -73,9 +73,6 @@ Menu.Item = styled.h2`
   color       : #374142;
 `;
 
-Menu.Link = styled(Link)`
-  text-decoration: none;
-`;
 const withState = compose(
   withStateHandlers(
     ({
