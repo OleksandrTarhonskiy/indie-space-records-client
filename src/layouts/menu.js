@@ -8,10 +8,12 @@ import List       from '@material-ui/core/List';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon  from '@material-ui/icons/Close';
 import MenuIcon   from '@material-ui/icons/Menu';
+import { Link }   from 'react-router-dom';
 import {
   compose,
   withStateHandlers,
-}                    from 'recompose';
+}                 from 'recompose';
+
 
 const Menu = ({
   isOpen,
@@ -29,24 +31,27 @@ const Menu = ({
         <CloseIcon />
       </IconButton>
       <List>
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <Menu.Item>About</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <Menu.Item>Contact</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <Menu.Item>Donate</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <Menu.Item>Sign up</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button>
+        <ListItem button component={Link} to="/">
           <Menu.Item>Login</Menu.Item>
+        </ListItem>
+        <ListItem button  component={Link} to="/help_contact">
+          <Menu.Item>Help</Menu.Item>
         </ListItem>
       </List>
     </Menu.MenuWindow>
