@@ -10,11 +10,9 @@ const Help = () => (
     <h1>
       Indie Records Help
     </h1>
-
     <h2>
       You are almost certainly wondering:
     </h2>
-
     <List>
       <ListItem>
         <Help.Link to="/">
@@ -52,11 +50,9 @@ const Help = () => (
         </Help.Link>
       </ListItem>
     </List>
-
     <h2>
       That’s not what you’re wondering?
     </h2>
-
     <List>
       <ListItem>
         <Help.Link to="/">
