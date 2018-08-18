@@ -1,3 +1,6 @@
+import React from 'react';
+import MusicianSignUpForm from '../forms/sign_up_form'
+
 function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 }
@@ -5,9 +8,7 @@ function getSteps() {
 export function getStepContent(step) {
   switch (step) {
     case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+      return (<MusicianSignUpForm />);
     case 1:
       return 'An ad group contains one or more ads which target a shared set of keywords.';
     case 2:
