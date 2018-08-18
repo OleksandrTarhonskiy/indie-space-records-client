@@ -31,26 +31,26 @@ const Menu = ({
         <CloseIcon />
       </IconButton>
       <List>
-        <ListItem button component={Link} to="/">
-          <Menu.Item>About</Menu.Item>
+        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
+          <Menu.Item>Main</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Contact</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Donate</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Sign up</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Login</Menu.Item>
         </ListItem>
-        <ListItem button  component={Link} to="/help_contact">
+        <ListItem button  component={Link} to="/help_contact" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Help</Menu.Item>
         </ListItem>
       </List>
