@@ -1,23 +1,24 @@
-import React         from 'react';
-import PropTypes     from 'prop-types';
-import styled        from 'styled-components';
-import Stepper       from '@material-ui/core/Stepper';
-import Step          from '@material-ui/core/Step';
-import StepLabel     from '@material-ui/core/StepLabel';
-import StepContent   from '@material-ui/core/StepContent';
-import Button        from '@material-ui/core/Button';
-import Paper         from '@material-ui/core/Paper';
-import Typography    from '@material-ui/core/Typography';
-import * as R        from 'ramda';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import styled         from 'styled-components';
+import Stepper        from '@material-ui/core/Stepper';
+import Step           from '@material-ui/core/Step';
+import StepLabel      from '@material-ui/core/StepLabel';
+import StepContent    from '@material-ui/core/StepContent';
+import Button         from '@material-ui/core/Button';
+import Paper          from '@material-ui/core/Paper';
+import Typography     from '@material-ui/core/Typography';
+import * as R         from 'ramda';
 import {
   compose,
   withStateHandlers,
-}                    from 'recompose';
+}                     from 'recompose';
 
 import {
   ALL_STEPS,
   getStepContent,
-}                    from '../models/steps'
+}                     from '../models/steps'
+import GradientButton from '../../../layouts/gradient_button';
 
 const MusicianSignUp = ({
   steps : {
@@ -36,19 +37,16 @@ const MusicianSignUp = ({
               <Typography>{getStepContent(index)}</Typography>
               <div>
                 <div>
-                  <Button
+                  <MusicianSignUp.Button
                     disabled={activeStep === 0}
                     onClick={handleBack}
                   >
                     Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
+                  </MusicianSignUp.Button>
+                  <GradientButton
+                    text={activeStep === ALL_STEPS.length - 1 ? 'Finish' : 'Next'}
                     onClick={handleNext}
-                  >
-                    {activeStep === ALL_STEPS.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
+                  />
                 </div>
               </div>
             </StepContent>
@@ -68,6 +66,10 @@ MusicianSignUp.StepperWrapper = styled.div`
   width : '90%',
 `;
 
+MusicianSignUp.Button = styled(Button)`
+  margin : 1% 2% 0 !important;
+`;
+
 MusicianSignUp.propTypes = {
   steps      : PropTypes.object.isRequired,
   handleNext : PropTypes.func.isRequired,
@@ -84,7 +86,6 @@ const withRecompose = compose(
     {
       handleNext : state => () => {
         const activeStep = R.assoc('activeStep', state.steps.activeStep++, state.steps);
-        console.log(activeStep)
         return ({activeStep});
       },
       handleBack : state => () => {

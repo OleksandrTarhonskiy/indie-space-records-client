@@ -6,8 +6,9 @@ import styled    from 'styled-components';
 const GradientButton = ({
   text,
   size,
+  onClick,
 }) => (
-  <GradientButton.Button size={size}>
+  <GradientButton.Button size={size} onClick={onClick}>
     {text}
   </GradientButton.Button>
 );
@@ -19,8 +20,9 @@ GradientButton.Button = styled(Button)`
 `;
 
 GradientButton.propTypes = {
-  text : PropTypes.string.isRequired,
-  size : PropTypes.string.isRequired,
+  text    : PropTypes.string.isRequired,
+  size    : PropTypes.string,
+  onClick : PropTypes.func.isRequired,
 };
 
 export default GradientButton;
