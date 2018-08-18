@@ -10,6 +10,7 @@ import Header               from '../layouts/header';
 import NotFound             from '../layouts/not_found';
 import Footer               from '../layouts/footer';
 import HelpContactPage      from '../modules/help-contact/pages/help_contact_page';
+import MusicianSignUp       from '../modules/musician/pages/sign_up';
 
 export default (
   <Router>
@@ -17,7 +18,8 @@ export default (
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/help_contact" component={HelpContactPage}/>
+        <Route exact path="/help_contact" component={HelpContactPage} />
+        <Route exact path="/musician/sign_up" component={MusicianSignUp} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
