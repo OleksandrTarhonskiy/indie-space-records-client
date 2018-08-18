@@ -59,8 +59,8 @@ const Menu = ({
 );
 
 Menu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
+  isOpen     : PropTypes.bool.isRequired,
+  toggleMenu : PropTypes.func.isRequired,
 };
 
 Menu.MenuWindow = styled(Dialog)`
