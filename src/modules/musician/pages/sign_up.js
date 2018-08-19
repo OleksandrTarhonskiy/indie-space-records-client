@@ -19,10 +19,15 @@ import {
   getStepContent,
 }                     from '../models/steps'
 import GradientButton from '../../../layouts/gradient_button';
+import MusicianSignUpForm from '../forms/sign_up_form'
+
+const a = <GradientButton />
+console.log(a)
 
 const MusicianSignUp = ({
   steps : {
     activeStep,
+    canMove,
   },
   handleNext,
   handleBack,
@@ -44,6 +49,7 @@ const MusicianSignUp = ({
                     Back
                   </MusicianSignUp.Button>
                   <GradientButton
+                    disabled={!canMove}
                     text={activeStep === ALL_STEPS.length - 1 ? 'Finish' : 'Next'}
                     onClick={handleNext}
                   />
@@ -81,7 +87,6 @@ const withRecompose = compose(
     ({
       steps = {
         activeStep : 0,
-        canMove    : false,
       }
     }) => ({ steps }),
     {

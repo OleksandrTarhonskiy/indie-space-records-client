@@ -5,10 +5,10 @@ function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 }
 
-export function getStepContent(step, cb) {
+export function getStepContent(step) {
   switch (step) {
     case 0:
-      return (<MusicianSignUpForm cb={cb} />);
+      return (<MusicianSignUpForm />);
     case 1:
       return 'An ad group contains one or more ads which target a shared set of keywords.';
     case 2:
