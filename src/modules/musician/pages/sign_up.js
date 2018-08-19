@@ -87,7 +87,6 @@ const withRecompose = compose(
     {
       handleNext : state => () => {
         const activeStep = R.assoc('activeStep', state.steps.activeStep++, state.steps);
-        console.log(state)
         return ({activeStep});
       },
       handleBack : state => () => {
