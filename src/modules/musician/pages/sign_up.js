@@ -19,7 +19,6 @@ import {
   getStepContent,
 }                     from '../models/steps'
 import GradientButton from '../../../layouts/gradient_button';
-import MusicianSignUpForm from '../forms/sign_up_form'
 
 const MusicianSignUp = ({
   steps : {
