@@ -21,9 +21,6 @@ import {
 import GradientButton from '../../../layouts/gradient_button';
 import MusicianSignUpForm from '../forms/sign_up_form'
 
-const a = <GradientButton />
-console.log(a)
-
 const MusicianSignUp = ({
   steps : {
     activeStep,
@@ -49,7 +46,6 @@ const MusicianSignUp = ({
                     Back
                   </MusicianSignUp.Button>
                   <GradientButton
-                    disabled={!canMove}
                     text={activeStep === ALL_STEPS.length - 1 ? 'Finish' : 'Next'}
                     onClick={handleNext}
                   />
