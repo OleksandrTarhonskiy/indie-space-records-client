@@ -1,12 +1,14 @@
-import React         from 'react';
-import TextField     from '@material-ui/core/TextField';
-import styled        from 'styled-components';
-import * as R        from 'ramda';
+import React          from 'react';
+import TextField      from '@material-ui/core/TextField';
+import styled         from 'styled-components';
+import * as R         from 'ramda';
 import {
   compose,
   withStateHandlers,
-}                    from 'recompose';
-import validator     from 'validator';
+}                     from 'recompose';
+import validator      from 'validator';
+
+import GradientButton from '../../../layouts/gradient_button';
 
 const MusicianSignUpForm = ({
   form: {
@@ -60,6 +62,10 @@ const MusicianSignUpForm = ({
         value={confirmPassword}
         onChange={handleChange}
         fullWidth
+      />
+      <GradientButton
+        text={'Sign up'}
+        disabled={!canSubmit}
       />
     </form>
   </div>

@@ -81,11 +81,13 @@ const withRecompose = compose(
     ({
       steps = {
         activeStep : 0,
+        canMove    : false,
       }
     }) => ({ steps }),
     {
       handleNext : state => () => {
         const activeStep = R.assoc('activeStep', state.steps.activeStep++, state.steps);
+        console.log(state)
         return ({activeStep});
       },
       handleBack : state => () => {
