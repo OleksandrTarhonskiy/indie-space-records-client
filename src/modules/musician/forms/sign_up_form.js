@@ -7,24 +7,37 @@ import {
   withStateHandlers,
 }                     from 'recompose';
 import validator      from 'validator';
+import Switch         from '@material-ui/core/Switch';
 
 import GradientButton from '../../../layouts/gradient_button';
 
 const MusicianSignUpForm = ({
   form: {
+    bandName,
     name,
     email,
     password,
     confirmPassword,
+    license,
   },
   handleChange,
   canSubmit,
+  handleSwitchChange,
 }) => (
   <div>
     <MusicianSignUpForm.Headline>
-      Sign up
+      Sign Up for an Artist Account
     </MusicianSignUpForm.Headline>
     <form>
+      <TextField
+        id="bandName"
+        name="bandName"
+        label="Band Name"
+        margin="normal"
+        value={bandName}
+        onChange={handleChange}
+        fullWidth
+      />
       <TextField
         id="name"
         name="name"
@@ -63,7 +76,16 @@ const MusicianSignUpForm = ({
         onChange={handleChange}
         fullWidth
       />
+      <MusicianSignUpForm.LicenseWrapper>
+        <Switch
+          color="primary"
+          onChange={handleSwitchChange}
+        />
+        <p>I have read and agree to the Terms of Use. </p>
+      </MusicianSignUpForm.LicenseWrapper>
       <GradientButton
+        name={license}
+        value={license}
         text={'Sign up'}
         disabled={!canSubmit}
       />
@@ -74,30 +96,50 @@ const MusicianSignUpForm = ({
 MusicianSignUpForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
+  text-align  : center;
 `;
 
-const canSubmitForm = ({ name, email, password, confirmPassword }) => R.all(R.equals(true))([
+MusicianSignUpForm.LicenseWrapper = styled.div`
+  display     : flex;
+  font-family : 'Roboto', sans-serif;
+  color       : #374142;
+  font-weight : 100;
+`;
+
+const canSubmitForm = ({ bandName, name, email, password, confirmPassword, license }) => R.all(R.equals(true))([
+  !R.isEmpty(bandName),
   !R.isEmpty(name),
   validator.isEmail(email),
   validator.isLength(password, { min: 8 }),
   !R.isEmpty(confirmPassword),
   R.equals(password, confirmPassword),
+  R.equals(license, true),
 ]);
 
 const withRecompose = compose(
   withStateHandlers(
     ({
       form      = {
+        bandName        : '',
         name            : '',
         email           : '',
         password        : '',
         confirmPassword : '',
+        license         : false,
       },
       canSubmit = false,
     }) => ({ form, canSubmit }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
+      },
+      handleSwitchChange : state => ({ target }) => {
+        const form = R.assoc('license', !state.form.license, state.form);
+        console.log(form)
         return ({
           form,
           canSubmit : canSubmitForm(form),
