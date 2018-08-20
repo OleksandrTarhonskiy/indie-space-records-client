@@ -8,6 +8,7 @@ import LocationIcon from '@material-ui/icons/LocationOn';
 import MusicNote    from '@material-ui/icons/MusicNote';
 import Toolbar      from '@material-ui/core/Toolbar';
 import breakpoint   from 'styled-components-breakpoint';
+import { Link }     from 'react-router-dom';
 
 import {
   compose,
@@ -49,7 +50,7 @@ const ArtistFilters = ({
         <MusicNote />
       </ArtistFilters.IconButton>
       <p>Genre</p>
-      <ArtistFilters.IconButton  color="inherit">
+      <ArtistFilters.IconButton  color="inherit" component={Link} to="/tags">
         #
       </ArtistFilters.IconButton >
       <p>Most popular tags</p>
