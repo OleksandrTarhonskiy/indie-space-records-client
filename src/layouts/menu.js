@@ -1,23 +1,28 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import styled     from 'styled-components';
-import Dialog     from '@material-ui/core/Dialog';
-import Divider    from '@material-ui/core/Divider';
-import ListItem   from '@material-ui/core/ListItem';
-import List       from '@material-ui/core/List';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon  from '@material-ui/icons/Close';
-import MenuIcon   from '@material-ui/icons/Menu';
-import { Link }   from 'react-router-dom';
+import React             from 'react';
+import PropTypes         from 'prop-types';
+import styled            from 'styled-components';
+import Button            from '@material-ui/core/Button';
+import Dialog            from '@material-ui/core/Dialog';
+import DialogContent     from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle       from '@material-ui/core/DialogTitle';
+import Divider           from '@material-ui/core/Divider';
+import ListItem          from '@material-ui/core/ListItem';
+import List              from '@material-ui/core/List';
+import IconButton        from '@material-ui/core/IconButton';
+import CloseIcon         from '@material-ui/icons/Close';
+import MenuIcon          from '@material-ui/icons/Menu';
+import { Link }          from 'react-router-dom';
 import {
   compose,
   withStateHandlers,
-}                 from 'recompose';
-
+}                        from 'recompose';
 
 const Menu = ({
-  isOpen,
+  isOpenMenu,
+  isOpenDialog,
   toggleMenu,
+  toggleDialog,
 }) => (
   <div>
     <IconButton color="inherit" aria-label="Menu" onClick={toggleMenu.bind(null, true)}>
@@ -25,7 +30,7 @@ const Menu = ({
     </IconButton>
     <Menu.MenuWindow
       fullScreen
-      open={isOpen}
+      open={isOpenMenu}
     >
       <IconButton color="inherit" onClick={toggleMenu.bind(null, false)} aria-label="Close">
         <CloseIcon />
@@ -43,9 +48,11 @@ const Menu = ({
           <Menu.Item>Donate</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/musician/sign_up" onClick={toggleMenu.bind(null, false)}>
-          <Menu.Item>Sign up</Menu.Item>
-        </ListItem>
+        <div onClick={toggleMenu.bind(null, false)}>
+          <ListItem button onClick={toggleDialog.bind(null, true)}>
+            <Menu.Item>Sign up</Menu.Item>
+          </ListItem>
+        </div>
         <Divider />
         <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Login</Menu.Item>
@@ -55,12 +62,44 @@ const Menu = ({
         </ListItem>
       </List>
     </Menu.MenuWindow>
+    <div>
+      <Dialog
+        open={isOpenDialog}
+      >
+        <Menu.Dialogheader>
+          <Menu.CloseDialog color="inherit" aria-label="Menu" onClick={toggleDialog.bind(null, false)}>
+            <CloseIcon />
+          </Menu.CloseDialog>
+          <DialogTitle>
+            Sign up for new account
+          </DialogTitle>
+        </Menu.Dialogheader>
+        <Menu.DialogContent>
+          <DialogContentText>
+            Sale and manage your tracks:
+          </DialogContentText>
+        </Menu.DialogContent>
+        <Menu.Button component={Link} to="/musician/sign_up" onClick={toggleDialog.bind(null, false)}>
+          Sign up as Musician
+        </Menu.Button>
+        <Menu.DialogContent>
+          <DialogContentText>
+            Follow your favorite artists and explore the music:
+          </DialogContentText>
+        </Menu.DialogContent>
+        <Menu.Button component={Link} to="/" onClick={toggleDialog.bind(null, false)}>
+          Sign up as fan
+        </Menu.Button>
+      </Dialog>
+    </div>
   </div>
 );
 
 Menu.propTypes = {
-  isOpen     : PropTypes.bool.isRequired,
-  toggleMenu : PropTypes.func.isRequired,
+  isOpenMenu   : PropTypes.bool.isRequired,
+  isOpenDialog : PropTypes.bool.isRequired,
+  toggleMenu   : PropTypes.func.isRequired,
+  toggleDialog : PropTypes.func.isRequired,
 };
 
 Menu.MenuWindow = styled(Dialog)`
@@ -74,13 +113,36 @@ Menu.Item = styled.h2`
   font-weight : 300;
 `;
 
+Menu.DialogContent = styled(DialogContent)`
+  padding         : 5% !important;
+  display         : flex;
+  justify-content : center;
+  font-weight     : 400;
+`;
+
+Menu.Dialogheader = styled.div`
+  display : flex;
+`;
+
+Menu.CloseDialog = styled(IconButton)`
+  margin: 3% 1% !important;
+`;
+
+Menu.Button = styled(Button)`
+  background : linear-gradient(to right, #723af9, #46aafc);
+  color      : #ffff !important;
+  margin     : 5% !important;
+`;
+
 const withState = compose(
   withStateHandlers(
     ({
-      isOpen = false,
-    }) => ({ isOpen }),
+      isOpenMenu   = false,
+      isOpenDialog = false,
+    }) => ({ isOpenMenu, isOpenDialog }),
     {
-      toggleMenu : () => isOpen => ({ isOpen })
+      toggleMenu   : () => isOpenMenu => ({ isOpenMenu }),
+      toggleDialog : () => isOpenDialog => ({ isOpenDialog })
     },
   ),
 );
