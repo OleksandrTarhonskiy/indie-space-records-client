@@ -1,7 +1,7 @@
-import React      from 'react';
-import styled     from 'styled-components';
+import React  from 'react';
+import styled from 'styled-components';
 
-import Tags       from '../components/tags';
+import Tags   from '../components/tags';
 
 const AllTagsPage = () => (
   <AllTagsPage.Wrapper>
@@ -12,7 +12,6 @@ const AllTagsPage = () => (
 AllTagsPage.Wrapper = styled.div`
     display        : flex;
     flex-direction : column;
-  }
 `;
 
 export default AllTagsPage;

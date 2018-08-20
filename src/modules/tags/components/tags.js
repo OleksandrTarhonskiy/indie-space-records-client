@@ -11,12 +11,12 @@ const Tags = () => (
     </h1>
     <Tags.TagsWrapper>
       { TAGS.map(tag => (
-          <Tags.title key={tag.id}>
-            <Link to={`/search/${tag.name}`}>
+        <Tags.title key={tag.id}>
+          <Link to={`/search/${tag.name}`}>
               #{tag.name}
-            </Link>
-          </Tags.title>
-        )
+          </Link>
+        </Tags.title>
+      )
       )}
     </Tags.TagsWrapper>
   </Tags.Wrapper>

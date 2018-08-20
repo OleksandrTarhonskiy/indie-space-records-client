@@ -122,7 +122,7 @@ export const TAGS = [
     name : 'pop',
 
   },
-    {
+  {
     id   : 3,
     name : 'electronic',
   },
@@ -131,7 +131,7 @@ export const TAGS = [
     name : 'alternative',
 
   },
-    {
+  {
     id   : 5,
     name : 'hip-hop/rap',
   },
@@ -140,7 +140,7 @@ export const TAGS = [
     name : 'punk',
 
   },
-    {
+  {
     id   : 7,
     name : 'metal',
   },
@@ -149,7 +149,7 @@ export const TAGS = [
     name : 'ambiend',
 
   },
-    {
+  {
     id   : 9,
     name : 'indie',
   },
@@ -158,7 +158,7 @@ export const TAGS = [
     name : 'instrumental',
 
   },
-    {
+  {
     id   : 11,
     name : 'acoustic',
   },
