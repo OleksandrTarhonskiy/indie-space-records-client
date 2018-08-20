@@ -98,13 +98,14 @@ LastNews.Button = styled(Button)`
   background  : transparent;
   color       : #3c3c3e !important;
   margin-top  : 1% !important;
-  font-weight : 600 !important;
+  font-weight : 500 !important;
 `;
 
 LastNews.Heading = styled.h1`
   color       : #565656;
   font-family : 'Roboto', sans-serif;
   font-size   : 35px;
+  font-weight : 400;
 `;
 
 LastNews.SubHeading = styled.p`

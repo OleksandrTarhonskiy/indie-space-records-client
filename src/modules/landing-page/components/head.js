@@ -28,12 +28,14 @@ Head.Heading = styled.h1`
   font-family : 'Roboto', sans-serif;
   font-size   : 45px;
   color       : #eaedf5;
+  font-weight : 400;
 `;
 
 Head.Subheading = styled.h2`
   font-family : 'Roboto', sans-serif;
   font-size   : 35px;
   color       : #eaedf5;
+  font-weight : 400;
 `;
 
 Head.CursiveHeading = styled.h3`

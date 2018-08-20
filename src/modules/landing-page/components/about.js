@@ -74,7 +74,7 @@ About.Heading = styled.h1`
 About.Description = styled.p`
   font-family : 'Roboto', sans-serif;
   font-size   : 18px;
-  font-weight : 600;
+  font-weight : 400;
   color       : #3c3c3e;
 `;
 

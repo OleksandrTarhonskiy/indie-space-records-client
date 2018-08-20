@@ -71,6 +71,7 @@ Menu.Item = styled.h2`
   font-family : 'Roboto', sans-serif;
   font-size   : 30px;
   color       : #374142;
+  font-weight : 300;
 `;
 
 const withState = compose(
