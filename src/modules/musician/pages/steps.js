@@ -17,13 +17,12 @@ import {
 import {
   ALL_STEPS,
   getStepContent,
-}                     from '../models/steps'
+}                     from '../models/steps';
 import GradientButton from '../../../layouts/gradient_button';
 
 const MusicianSignUp = ({
   steps : {
     activeStep,
-    canMove,
   },
   handleNext,
   handleBack,
@@ -64,7 +63,7 @@ const MusicianSignUp = ({
 );
 
 MusicianSignUp.StepperWrapper = styled.div`
-  width : '90%',
+  width : '90%';
 `;
 
 MusicianSignUp.Button = styled(Button)`

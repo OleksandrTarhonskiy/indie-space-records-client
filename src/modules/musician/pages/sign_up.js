@@ -1,7 +1,7 @@
 import React              from 'react';
 import styled             from 'styled-components';
 
-import MusicianSignUpForm from '../forms/sign_up_form'
+import MusicianSignUpForm from '../forms/sign_up_form';
 
 const SignUp = () => (
   <SignUp.Wrapper>

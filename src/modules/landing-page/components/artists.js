@@ -60,15 +60,15 @@ Artists.Tags = styled.div`
 `;
 
 Artists.Root = styled.div`
-  display        : 'flex',
-  flexWrap       : 'wrap',
-  justifyContent : 'space-around',
-  overflow       : 'hidden',
+  display         : 'flex';
+  flex-wrap       : 'wrap';
+  justify-content : 'space-around';
+  overflow        : 'hidden';
 `;
 
 Artists.GridList = styled(GridList)`
-  width  : 500,
-  height : 450,
+  width  : 500;
+  height : 450;
 `;
 
 export default Artists;

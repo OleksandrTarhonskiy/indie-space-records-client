@@ -1,4 +1,5 @@
 import React          from 'react';
+import PropTypes      from 'prop-types';
 import TextField      from '@material-ui/core/TextField';
 import styled         from 'styled-components';
 import * as R         from 'ramda';
@@ -79,7 +80,7 @@ const MusicianSignUpForm = ({
       <MusicianSignUpForm.LicenseWrapper>
         <Switch
           color="primary"
-          value={license}
+          active={license.toString()}
           onChange={handleSwitchChange}
         />
         <p>I have read and agree to the Terms of Use. </p>
@@ -105,6 +106,13 @@ MusicianSignUpForm.LicenseWrapper = styled.div`
   color       : #374142;
   font-weight : 100;
 `;
+
+MusicianSignUpForm.propTypes = {
+  form               : PropTypes.object.isRequired,
+  canSubmit          : PropTypes.bool.isRequired,
+  handleChange       : PropTypes.func.isRequired,
+  handleSwitchChange : PropTypes.func.isRequired,
+};
 
 const canSubmitForm = ({ bandName, name, email, password, confirmPassword, license }) => R.all(R.equals(true))([
   !R.isEmpty(bandName),
@@ -137,9 +145,8 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
-      handleSwitchChange : state => ({ target }) => {
+      handleSwitchChange : state => () => {
         const form = R.assoc('license', !state.form.license, state.form);
-        console.log(form)
         return ({
           form,
           canSubmit : canSubmitForm(form),
