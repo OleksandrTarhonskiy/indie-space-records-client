@@ -113,28 +113,93 @@ export const SONGS = [
 ];
 
 export const TAGS = [
-  '#tagamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
-  '#tagamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
-  '#bigamas',
-  '#bigamas',
-  '#tagamas',
+  {
+    id   : 1,
+    name : 'rock',
+  },
+  {
+    id   : 2,
+    name : 'pop',
+
+  },
+    {
+    id   : 3,
+    name : 'electronic',
+  },
+  {
+    id   : 4,
+    name : 'alternative',
+
+  },
+    {
+    id   : 5,
+    name : 'hip-hop/rap',
+  },
+  {
+    id   : 6,
+    name : 'punk',
+
+  },
+    {
+    id   : 7,
+    name : 'metal',
+  },
+  {
+    id   : 8,
+    name : 'ambiend',
+
+  },
+    {
+    id   : 9,
+    name : 'indie',
+  },
+  {
+    id   : 10,
+    name : 'instrumental',
+
+  },
+    {
+    id   : 11,
+    name : 'acoustic',
+  },
+  {
+    id   : 12,
+    name : 'indie rock',
+
+  },
+  {
+    id   : 13,
+    name : 'jazz',
+
+  },
+  {
+    id   : 14,
+    name : 'industrial',
+
+  },
+  {
+    id   : 15,
+    name : 'house',
+
+  },
+  {
+    id   : 16,
+    name : 'techno',
+
+  },
+  {
+    id   : 17,
+    name : 'electronica',
+
+  },
+  {
+    id   : 18,
+    name : 'singer-songwriter',
+
+  },
+  {
+    id   : 19,
+    name : 'alternative rock',
+
+  },
 ];
