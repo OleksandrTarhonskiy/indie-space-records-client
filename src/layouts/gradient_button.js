@@ -6,21 +6,29 @@ import styled    from 'styled-components';
 const GradientButton = ({
   text,
   size,
+  onClick,
+  disabled,
 }) => (
-  <GradientButton.Button size={size}>
+  <GradientButton.Button
+    size={size}
+    onClick={onClick}
+    disabled={disabled}
+  >
     {text}
   </GradientButton.Button>
 );
 
 GradientButton.Button = styled(Button)`
-  background : linear-gradient(to right, #723af9, #46aafc);
-  color      : #ffff !important;
+  background : ${props => props.disabled ? 'gray' : 'linear-gradient(to right, #723af9, #46aafc)'};
+  color      : ${props => props.disabled ? '#cfc7bf' : '#ffff'} !important;
   margin-top : 1% !important;
 `;
 
 GradientButton.propTypes = {
-  text : PropTypes.string.isRequired,
-  size : PropTypes.string.isRequired,
+  text     : PropTypes.string.isRequired,
+  size     : PropTypes.string,
+  onClick  : PropTypes.func,
+  disabled : PropTypes.bool,
 };
 
 export default GradientButton;

@@ -43,7 +43,7 @@ const Menu = ({
           <Menu.Item>Donate</Menu.Item>
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/" onClick={toggleMenu.bind(null, false)}>
+        <ListItem button component={Link} to="/musician/sign_up" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Sign up</Menu.Item>
         </ListItem>
         <Divider />
@@ -59,8 +59,8 @@ const Menu = ({
 );
 
 Menu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  toggleMenu: PropTypes.func.isRequired,
+  isOpen     : PropTypes.bool.isRequired,
+  toggleMenu : PropTypes.func.isRequired,
 };
 
 Menu.MenuWindow = styled(Dialog)`
