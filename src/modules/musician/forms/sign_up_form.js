@@ -97,6 +97,7 @@ MusicianSignUpForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
   text-align  : center;
+  font-weight : 300;
 `;
 
 MusicianSignUpForm.LicenseWrapper = styled.div`
