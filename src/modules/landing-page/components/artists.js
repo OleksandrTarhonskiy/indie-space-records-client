@@ -38,7 +38,7 @@ Artists.SectionWrapper = styled.div`
   width    : 100%;
   margin   : 0;
   padding  : 0;
-  position : rekative;
+  position : relative;
 `;
 
 Artists.Name = styled.div`
