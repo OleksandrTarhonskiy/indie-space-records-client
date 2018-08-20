@@ -79,13 +79,12 @@ const MusicianSignUpForm = ({
       <MusicianSignUpForm.LicenseWrapper>
         <Switch
           color="primary"
+          value={license}
           onChange={handleSwitchChange}
         />
         <p>I have read and agree to the Terms of Use. </p>
       </MusicianSignUpForm.LicenseWrapper>
       <GradientButton
-        name={license}
-        value={license}
         text={'Sign up'}
         disabled={!canSubmit}
       />
