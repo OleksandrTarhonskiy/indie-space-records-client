@@ -65,7 +65,8 @@ ArtistFilters.SubSectionWrapper = styled.div`
 `;
 
 ArtistFilters.Heading = styled.h2`
-  font-size : 20px;
+  font-size   : 20px;
+  font-weight : 400;
 `;
 
 ArtistFilters.Toolbar = styled(Toolbar)`

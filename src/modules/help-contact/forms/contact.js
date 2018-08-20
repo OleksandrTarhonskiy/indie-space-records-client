@@ -31,6 +31,7 @@ Contact.HeadLine = styled.h1`
   font-family : 'Roboto', sans-serif;
   font-size   : 33px;
   text-align  : center;
+  font-weight : 400;
 `;
 
 Contact.ButtonWrapper = styled.div`
