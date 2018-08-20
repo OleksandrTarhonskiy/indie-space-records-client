@@ -11,7 +11,7 @@ import NotFound             from '../layouts/not_found';
 import Footer               from '../layouts/footer';
 import HelpContactPage      from '../modules/help-contact/pages/help_contact_page';
 import MusicianSignUp       from '../modules/musician/pages/sign_up';
-import AllTagsPage          from '../modules/all-tags/pages/all_tags_page';
+import AllTagsPage          from '../modules/tags/pages/all_tags_page';
 
 export default (
   <Router>
