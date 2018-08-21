@@ -12,6 +12,7 @@ import List              from '@material-ui/core/List';
 import IconButton        from '@material-ui/core/IconButton';
 import CloseIcon         from '@material-ui/icons/Close';
 import MenuIcon          from '@material-ui/icons/Menu';
+import withMobileDialog  from '@material-ui/core/withMobileDialog';
 import { Link }          from 'react-router-dom';
 import {
   compose,
@@ -23,6 +24,7 @@ const Menu = ({
   isOpenDialog,
   toggleMenu,
   toggleDialog,
+  fullScreen,
 }) => (
   <div>
     <IconButton color="inherit" aria-label="Menu" onClick={toggleMenu.bind(null, true)}>
@@ -65,6 +67,7 @@ const Menu = ({
     <div>
       <Dialog
         open={isOpenDialog}
+        fullScreen={fullScreen}
       >
         <Menu.Dialogheader>
           <Menu.CloseDialog color="inherit" aria-label="Menu" onClick={toggleDialog.bind(null, false)}>
@@ -100,6 +103,7 @@ Menu.propTypes = {
   isOpenDialog : PropTypes.bool.isRequired,
   toggleMenu   : PropTypes.func.isRequired,
   toggleDialog : PropTypes.func.isRequired,
+  fullScreen   : PropTypes.bool.isRequired,
 };
 
 Menu.MenuWindow = styled(Dialog)`
@@ -147,4 +151,4 @@ const withState = compose(
   ),
 );
 
-export default withState(Menu);
+export default withState(withMobileDialog()(Menu));
