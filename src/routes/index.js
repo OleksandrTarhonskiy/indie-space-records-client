@@ -18,10 +18,10 @@ export default (
     <div>
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/help_contact" component={HelpContactPage} />
+        <Route exact path="/"                 component={HomePage} />
+        <Route exact path="/help_contact"     component={HelpContactPage} />
         <Route exact path="/musician/sign_up" component={MusicianSignUp} />
-        <Route exact path="/tags"         component={AllTagsPage} />
+        <Route exact path="/tags"             component={AllTagsPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

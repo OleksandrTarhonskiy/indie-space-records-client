@@ -10,8 +10,8 @@ const AllTagsPage = () => (
 );
 
 AllTagsPage.Wrapper = styled.div`
-    display        : flex;
-    flex-direction : column;
+  display        : flex;
+  flex-direction : column;
 `;
 
 export default AllTagsPage;
