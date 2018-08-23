@@ -1,16 +1,17 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import TextField      from '@material-ui/core/TextField';
-import styled         from 'styled-components';
-import * as R         from 'ramda';
+import React            from 'react';
+import PropTypes        from 'prop-types';
+import TextField        from '@material-ui/core/TextField';
+import styled           from 'styled-components';
+import * as R           from 'ramda';
 import {
   compose,
   withStateHandlers,
-}                     from 'recompose';
-import validator      from 'validator';
-import Switch         from '@material-ui/core/Switch';
+}                       from 'recompose';
+import validator        from 'validator';
+import Switch           from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import GradientButton from '../../../layouts/gradient_button';
+import GradientButton   from '../../../layouts/gradient_button';
 
 const MusicianSignUpForm = ({
   form: {
@@ -77,14 +78,17 @@ const MusicianSignUpForm = ({
         onChange={handleChange}
         fullWidth
       />
-      <MusicianSignUpForm.LicenseWrapper>
-        <Switch
-          color="primary"
-          active={license.toString()}
-          onChange={handleSwitchChange}
-        />
-        <p>I have read and agree to the Terms of Use. </p>
-      </MusicianSignUpForm.LicenseWrapper>
+      <FormControlLabel
+        control={
+          <Switch
+            color="primary"
+            active={license.toString()}
+            onChange={handleSwitchChange}
+          />
+        }
+        label="I have read and agree to the Terms of Use."
+      />
+      <br />
       <GradientButton
         text={'Sign up'}
         disabled={!canSubmit}
@@ -98,13 +102,6 @@ MusicianSignUpForm.Headline = styled.h1`
   color       : #374142;
   text-align  : center;
   font-weight : 300;
-`;
-
-MusicianSignUpForm.LicenseWrapper = styled.div`
-  display     : flex;
-  font-family : 'Roboto', sans-serif;
-  color       : #374142;
-  font-weight : 100;
 `;
 
 MusicianSignUpForm.propTypes = {
