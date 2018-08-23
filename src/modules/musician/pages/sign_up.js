@@ -3,16 +3,16 @@ import styled             from 'styled-components';
 
 import MusicianSignUpForm from '../forms/sign_up_form';
 
-const SignUp = () => (
-  <SignUp.Wrapper>
+const MusicianSignUp = () => (
+  <MusicianSignUp.Wrapper>
     <MusicianSignUpForm />
-  </SignUp.Wrapper>
+  </MusicianSignUp.Wrapper>
 );
 
-SignUp.Wrapper = styled.div`
+MusicianSignUp.Wrapper = styled.div`
   padding         : 5% 15%;
   display         : flex;
   justify-content : center;
 `;
 
-export default SignUp;
+export default MusicianSignUp;
