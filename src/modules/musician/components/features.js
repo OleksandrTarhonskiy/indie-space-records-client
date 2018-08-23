@@ -1,7 +1,9 @@
-import React      from 'react';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
-import Typography from '@material-ui/core/Typography';
+import React          from 'react';
+import styled         from 'styled-components';
+import breakpoint     from 'styled-components-breakpoint';
+import Typography     from '@material-ui/core/Typography';
+
+import GradientButton from '../../../layouts/gradient_button';
 
 const Features = () => (
   <Features.FeaturesWrapper>
@@ -18,6 +20,7 @@ const Features = () => (
         and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.
       </p>
+      <GradientButton text="learn more" />
     </Features.FeatureInfo>
     <Features.FeatureInfo>
       <Typography variant="display2" gutterBottom>
@@ -32,6 +35,7 @@ const Features = () => (
         and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.
       </p>
+      <GradientButton text="learn more" />
     </Features.FeatureInfo>
     <Features.FeatureInfo>
       <Typography variant="display2" gutterBottom>
@@ -46,6 +50,7 @@ const Features = () => (
         and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.
       </p>
+      <GradientButton text="learn more" />
     </Features.FeatureInfo>
   </Features.FeaturesWrapper>
 );
