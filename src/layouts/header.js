@@ -12,7 +12,6 @@ import {
 }                    from 'recompose';
 import { Link }      from 'react-router-dom';
 
-
 import MenuBar       from './menu';
 import Logo          from './theme/logo.png';
 import Mobile        from './theme/mobile-logo.png';
