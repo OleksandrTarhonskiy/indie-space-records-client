@@ -37,7 +37,7 @@ Header.LogoWrapper = styled(Link)`
   && {
     background         : url(${Mobile}) no-repeat;
     background-size    : 80px 80px;
-    height             : 100px;
+    height             : 91px;
     width              : 60%;
     margin-top         : 3px;
     outline            : 0;
