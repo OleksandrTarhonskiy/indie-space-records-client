@@ -10,6 +10,8 @@ import {
   withStateHandlers,
   lifecycle
 }                    from 'recompose';
+import { Link }      from 'react-router-dom';
+
 
 import MenuBar       from './menu';
 import Logo          from './theme/logo.png';
@@ -18,10 +20,10 @@ import Mobile        from './theme/mobile-logo.png';
 const Header = ({
   style: {
     position,
-  }
+  },
 }) => (
   <Header.MenuBar position={position}>
-    <Header.LogoWrapper />
+    <Header.LogoWrapper to="/" />
     <Header.Toolbar>
       <Header.ToolbarItem>
         Menu
@@ -31,18 +33,19 @@ const Header = ({
   </Header.MenuBar>
 );
 
-Header.LogoWrapper = styled.div`
+Header.LogoWrapper = styled(Link)`
   && {
     background         : url(${Mobile}) no-repeat;
     background-size    : 80px 80px;
     height             : 100px;
-    width              : 40%;
+    width              : 60%;
     margin-top         : 3px;
+    outline            : 0;
 
     ${breakpoint('md')`
       background      : url(${Logo}) no-repeat;
       background-size : 270px 90px;
-      width           : 40%;
+      width           : 20%;
     `}
   }
 `;
@@ -59,7 +62,7 @@ Header.MenuBar = styled(AppBar)`
 
 Header.Toolbar = styled(Toolbar)`
   justify-content : flex-end;
-  width           : 60%;
+  width           : 80%;
 `;
 
 Header.ToolbarItem = styled.h2`
