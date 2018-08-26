@@ -82,7 +82,7 @@ const Menu = ({
             Sale and manage your tracks:
           </DialogContentText>
         </Menu.DialogContent>
-        <Menu.Button component={Link} to="/musician/sign_up" onClick={toggleDialog.bind(null, false)}>
+        <Menu.Button component={Link} to="/musician" onClick={toggleDialog.bind(null, false)}>
           Sign up as Musician
         </Menu.Button>
         <Menu.DialogContent>
