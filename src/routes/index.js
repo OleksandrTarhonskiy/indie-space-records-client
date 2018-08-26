@@ -11,6 +11,7 @@ import NotFound             from '../layouts/not_found';
 import Footer               from '../layouts/footer';
 import HelpContactPage      from '../modules/help-contact/pages/help_contact_page';
 import MusicianSignUp       from '../modules/musician/pages/sign_up';
+import InfoForMusicians     from '../modules/musician/pages/information';
 import AllTagsPage          from '../modules/tags/pages/all_tags_page';
 
 export default (
@@ -20,6 +21,7 @@ export default (
       <Switch>
         <Route exact path="/"                 component={HomePage} />
         <Route exact path="/help_contact"     component={HelpContactPage} />
+        <Route exact path="/musician"         component={InfoForMusicians} />
         <Route exact path="/musician/sign_up" component={MusicianSignUp} />
         <Route exact path="/tags"             component={AllTagsPage} />
         <Route component={NotFound} />
