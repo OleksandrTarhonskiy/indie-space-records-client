@@ -13,6 +13,7 @@ import HelpContactPage      from '../modules/help-contact/pages/help_contact_pag
 import MusicianSignUp       from '../modules/musician/pages/sign_up';
 import InfoForMusicians     from '../modules/musician/pages/information';
 import AllTagsPage          from '../modules/tags/pages/all_tags_page';
+import LoginPage            from '../modules/auth/pages/login_page';
 
 export default (
   <Router>
@@ -24,6 +25,7 @@ export default (
         <Route exact path="/musician"         component={InfoForMusicians} />
         <Route exact path="/musician/sign_up" component={MusicianSignUp} />
         <Route exact path="/tags"             component={AllTagsPage} />
+        <Route exact path="/login"            component={LoginPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
