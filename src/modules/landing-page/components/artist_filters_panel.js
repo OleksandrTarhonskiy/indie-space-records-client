@@ -33,7 +33,9 @@ const ArtistFilters = ({
       <ArtistFilters.IconButton color="inherit">
         <Headset />
       </ArtistFilters.IconButton >
-      <p>listenings</p>
+      <ArtistFilters.Item>
+        listenings
+      </ArtistFilters.Item>
       <ArtistFilters.IconButton
         color="inherit"
         onClick={location ? toggleFilters.bind(null, 'location', false) : toggleFilters.bind(null, 'location', true)}
@@ -41,7 +43,7 @@ const ArtistFilters = ({
       >
         <LocationIcon />
       </ArtistFilters.IconButton >
-      <p>Location</p>
+      <ArtistFilters.Item>Location</ArtistFilters.Item>
       <ArtistFilters.IconButton
         color="inherit"
         onClick={genre ? toggleFilters.bind(null, 'genre', false) : toggleFilters.bind(null, 'genre', true)}
@@ -49,11 +51,15 @@ const ArtistFilters = ({
       >
         <MusicNote />
       </ArtistFilters.IconButton>
-      <p>Genre</p>
+      <ArtistFilters.Item>
+        Genre
+      </ArtistFilters.Item>
       <ArtistFilters.IconButton  color="inherit" component={Link} to="/tags">
         #
       </ArtistFilters.IconButton >
-      <p>Most popular tags</p>
+      <ArtistFilters.Item>
+        Most popular tags
+      </ArtistFilters.Item>
     </ArtistFilters.Toolbar>
     { genre ? <Genres /> : null }
     { location ? <Locations /> :null }
@@ -79,6 +85,10 @@ ArtistFilters.Toolbar = styled(Toolbar)`
       flex-direction : row;
     `}
   }
+`;
+
+ArtistFilters.Item = styled.p`
+  font-weight : 500;
 `;
 
 ArtistFilters.IconButton = styled(IconButton)`
