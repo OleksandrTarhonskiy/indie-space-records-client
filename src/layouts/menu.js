@@ -90,7 +90,7 @@ const Menu = ({
             Follow your favorite artists and explore the music:
           </DialogContentText>
         </Menu.DialogContent>
-        <Menu.Button component={Link} to="/" onClick={toggleDialog.bind(null, false)}>
+        <Menu.Button component={Link} to="/fan/sign_up" onClick={toggleDialog.bind(null, false)}>
           Sign up as fan
         </Menu.Button>
       </Dialog>
