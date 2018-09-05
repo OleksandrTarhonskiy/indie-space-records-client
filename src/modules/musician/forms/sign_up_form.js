@@ -10,6 +10,11 @@ import {
 import validator        from 'validator';
 import Switch           from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { gql, graphql } from 'react-apollo';
+import {
+  withRouter,
+}                       from 'react-router-dom';
+
 
 import GradientButton   from '../../../layouts/gradient_button';
 
@@ -25,6 +30,7 @@ const MusicianSignUpForm = ({
   handleChange,
   canSubmit,
   handleSwitchChange,
+  submit,
 }) => (
   <div>
     <MusicianSignUpForm.Headline>
@@ -92,6 +98,7 @@ const MusicianSignUpForm = ({
       <GradientButton
         text={'Sign up'}
         disabled={!canSubmit}
+        onClick={submit}
       />
     </form>
   </div>
@@ -121,7 +128,23 @@ const canSubmitForm = ({ bandName, name, email, password, confirmPassword, licen
   R.equals(license, true),
 ]);
 
+const signUpMutation = gql`
+  mutation($bandName: String!, $name: String!, $email: String!, $password: String!) {
+    signUp(bandName: $bandName, name: $name, email: $email, password: $password) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
 const withRecompose = compose(
+  withRouter,
+
+  graphql(signUpMutation),
+
   withStateHandlers(
     ({
       form      = {
@@ -131,6 +154,7 @@ const withRecompose = compose(
         password        : '',
         confirmPassword : '',
         license         : false,
+        errors          : [],
       },
       canSubmit = false,
     }) => ({ form, canSubmit }),
@@ -148,6 +172,23 @@ const withRecompose = compose(
           form,
           canSubmit : canSubmitForm(form),
         });
+      },
+      submit : ( state, {history, mutate}) => async () => {
+        const response = await mutate({
+          variables: state.form,
+        });
+
+        const { ok, errors } = response.data.signUp;
+
+        if (ok) {
+          history.push('/');
+        } else {
+          const err = {};
+         errors.map(({ path, message }) => err[`${path}Error`] = message);
+          state.form.errors.push(err);
+        }
+
+        console.log(state.form.errors);
       },
     },
   ),
