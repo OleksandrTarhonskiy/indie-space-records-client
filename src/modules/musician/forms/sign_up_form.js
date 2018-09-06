@@ -4,7 +4,6 @@ import TextField        from '@material-ui/core/TextField';
 import Snackbar         from '@material-ui/core/Snackbar';
 import SnackbarContent  from '@material-ui/core/SnackbarContent';
 import WarningIcon      from '@material-ui/icons/Warning';
-import CheckCircleIcon  from '@material-ui/icons/CheckCircle';
 import styled           from 'styled-components';
 import * as R           from 'ramda';
 import {
@@ -35,8 +34,8 @@ const MusicianSignUpForm = ({
   canSubmit,
   handleSwitchChange,
   submit,
-  hasNotification,
-  hideNotification,
+  hasError,
+  hideError,
   errorsList,
 }) => (
   <div>
@@ -109,20 +108,21 @@ const MusicianSignUpForm = ({
       />
     </form>
     <Snackbar
-      open={hasNotification}
+      open={hasError}
       autoHideDuration={2000}
-      onClose={hideNotification}
+      onClose={hideError}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
     >
       <MusicianSignUpForm.Alert
-        error={errorsList.length}
-        message={errorsList.length > 0 ?
+        message={
+          errorsList.length > 0 ?
           errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
           :
-          <p><CheckCircleIcon /> profile have been successfully created</p>}
+          null
+        }
       />
     </Snackbar>
   </div>
@@ -136,7 +136,7 @@ MusicianSignUpForm.Headline = styled.h1`
 `;
 
 MusicianSignUpForm.Alert = styled(SnackbarContent)`
-  background-color : ${props => props.error > 0 ? '#ee3c25' : '#60b260'} !important;
+  background-color : #ee3c25 !important;
   font-family      : 'Roboto', sans-serif;
 `;
 
@@ -146,9 +146,9 @@ MusicianSignUpForm.propTypes = {
   submit             : PropTypes.func.isRequired,
   handleChange       : PropTypes.func.isRequired,
   handleSwitchChange : PropTypes.func.isRequired,
-  hasNotification    : PropTypes.bool.isRequired,
+  hasError           : PropTypes.bool.isRequired,
   errorsList         : PropTypes.array.isRequired,
-  hideNotification   : PropTypes.func.isRequired,
+  hideError          : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({ bandName, name, email, password, confirmPassword, license }) => R.all(R.equals(true))([
@@ -190,8 +190,9 @@ const withRecompose = compose(
       },
       errorsList = [],
       canSubmit = false,
-      hasNotification = false,
-    }) => ({ form, canSubmit, hasNotification, errorsList }),
+      hasError = false,
+      created = false,
+    }) => ({ form, canSubmit, hasError, errorsList }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -207,12 +208,12 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
-      showNotification : () => () => ({ hasNotification: true }),
-      hideNotification : () => () => ({ hasNotification: false }),
+      showError : () => () => ({ hasError: true }),
+      hideError : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
-    submit : ({form, errorsList, showNotification, history, mutate}) => async () => {
+    submit : ({form, errorsList, showError, history, mutate}) => async () => {
       const response = await mutate({
         variables: form,
       });
@@ -220,11 +221,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.signUp;
 
       if (ok) {
-        if (errorsList.length > 0){
-          errorsList.pop();
-        }
-        showNotification();
-
+        return history.push('/')
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);
@@ -232,7 +229,8 @@ const withRecompose = compose(
         if (!errorsList.includes(messageText)) {
           errorsList.push(messageText);
         }
-        showNotification();
+        showError();
+        errorsList.pop();
       }
     },
   })
