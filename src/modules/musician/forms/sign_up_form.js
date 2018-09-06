@@ -191,7 +191,6 @@ const withRecompose = compose(
       errorsList = [],
       canSubmit = false,
       hasError = false,
-      created = false,
     }) => ({ form, canSubmit, hasError, errorsList }),
     {
       handleChange : state => ({ target }) => {
