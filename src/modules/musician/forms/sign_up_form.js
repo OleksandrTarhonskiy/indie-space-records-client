@@ -1,11 +1,16 @@
 import React            from 'react';
 import PropTypes        from 'prop-types';
 import TextField        from '@material-ui/core/TextField';
+import Snackbar         from '@material-ui/core/Snackbar';
+import SnackbarContent  from '@material-ui/core/SnackbarContent';
+import WarningIcon      from '@material-ui/icons/Warning';
+import CheckCircleIcon  from '@material-ui/icons/CheckCircle';
 import styled           from 'styled-components';
 import * as R           from 'ramda';
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                       from 'recompose';
 import validator        from 'validator';
 import Switch           from '@material-ui/core/Switch';
@@ -14,7 +19,6 @@ import { gql, graphql } from 'react-apollo';
 import {
   withRouter,
 }                       from 'react-router-dom';
-
 
 import GradientButton   from '../../../layouts/gradient_button';
 
@@ -31,6 +35,9 @@ const MusicianSignUpForm = ({
   canSubmit,
   handleSwitchChange,
   submit,
+  hasNotification,
+  hideNotification,
+  errorsList,
 }) => (
   <div>
     <MusicianSignUpForm.Headline>
@@ -101,6 +108,23 @@ const MusicianSignUpForm = ({
         onClick={submit}
       />
     </form>
+    <Snackbar
+      open={hasNotification}
+      autoHideDuration={2000}
+      onClose={hideNotification}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+    >
+      <MusicianSignUpForm.Alert
+        error={errorsList.length}
+        message={errorsList.length > 0 ?
+          errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
+          :
+          <p><CheckCircleIcon /> profile have been successfully created</p>}
+      />
+    </Snackbar>
   </div>
 );
 
@@ -111,11 +135,20 @@ MusicianSignUpForm.Headline = styled.h1`
   font-weight : 300;
 `;
 
+MusicianSignUpForm.Alert = styled(SnackbarContent)`
+  background-color : ${props => props.error > 0 ? '#ee3c25' : '#60b260'} !important;
+  font-family      : 'Roboto', sans-serif;
+`;
+
 MusicianSignUpForm.propTypes = {
   form               : PropTypes.object.isRequired,
   canSubmit          : PropTypes.bool.isRequired,
+  submit             : PropTypes.func.isRequired,
   handleChange       : PropTypes.func.isRequired,
   handleSwitchChange : PropTypes.func.isRequired,
+  hasNotification    : PropTypes.bool.isRequired,
+  errorsList         : PropTypes.array.isRequired,
+  hideNotification   : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({ bandName, name, email, password, confirmPassword, license }) => R.all(R.equals(true))([
@@ -154,10 +187,11 @@ const withRecompose = compose(
         password        : '',
         confirmPassword : '',
         license         : false,
-        errors          : [],
       },
+      errorsList = [],
       canSubmit = false,
-    }) => ({ form, canSubmit }),
+      hasNotification = false,
+    }) => ({ form, canSubmit, hasNotification, errorsList }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -173,25 +207,35 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
-      submit : ( state, {history, mutate}) => async () => {
-        const response = await mutate({
-          variables: state.form,
-        });
-
-        const { ok, errors } = response.data.signUp;
-
-        if (ok) {
-          history.push('/');
-        } else {
-          const err = {};
-         errors.map(({ path, message }) => err[`${path}Error`] = message);
-          state.form.errors.push(err);
-        }
-
-        console.log(state.form.errors);
-      },
+      showNotification : () => () => ({ hasNotification: true }),
+      hideNotification : () => () => ({ hasNotification: false }),
     },
   ),
+  withHandlers({
+    submit : ({form, errorsList, showNotification, history, mutate}) => async () => {
+      const response = await mutate({
+        variables: form,
+      });
+
+      const { ok, errors } = response.data.signUp;
+
+      if (ok) {
+        if (errorsList.length > 0){
+          errorsList.pop();
+        }
+        showNotification();
+
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showNotification();
+      }
+    },
+  })
 );
 
 export default withRecompose(MusicianSignUpForm);
