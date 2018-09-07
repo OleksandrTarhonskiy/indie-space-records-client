@@ -8,11 +8,13 @@ const GradientButton = ({
   size,
   onClick,
   disabled,
+  onSubmit,
 }) => (
   <GradientButton.Button
     size={size}
     onClick={onClick}
     disabled={disabled}
+    onSubmit={onSubmit}
   >
     {text}
   </GradientButton.Button>
@@ -29,6 +31,7 @@ GradientButton.propTypes = {
   size     : PropTypes.string,
   onClick  : PropTypes.func,
   disabled : PropTypes.bool,
+  onSubmit : PropTypes.func,
 };
 
 export default GradientButton;
