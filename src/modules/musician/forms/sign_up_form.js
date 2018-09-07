@@ -119,9 +119,9 @@ const MusicianSignUpForm = ({
       <MusicianSignUpForm.Alert
         message={
           errorsList.length > 0 ?
-          errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-          :
-          null
+            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
+            :
+            null
         }
       />
     </Snackbar>
@@ -220,7 +220,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.signUp;
 
       if (ok) {
-        return history.push('/')
+        return history.push('/');
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);
