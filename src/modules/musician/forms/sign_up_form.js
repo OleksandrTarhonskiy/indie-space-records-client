@@ -220,7 +220,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.signUp;
 
       if (ok) {
-        return history.push('/');
+        return history.push('/login');
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);
