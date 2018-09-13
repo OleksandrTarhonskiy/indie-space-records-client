@@ -53,7 +53,7 @@ const LoginForm = ({
       />
       <br />
       <GradientButton
-        text={'Sign up'}
+        text={'Sign in'}
         disabled={!canSubmit}
         onClick={submit}
       />
