@@ -7,9 +7,14 @@ import * as R         from 'ramda';
 import {
   compose,
   withStateHandlers,
+  withHandlers
 }                     from 'recompose';
 import validator      from 'validator';
 import { Link }       from 'react-router-dom';
+import {
+  gql,
+  graphql
+}                     from 'react-apollo';
 
 import GradientButton from '../../../layouts/gradient_button';
 
@@ -20,6 +25,7 @@ const LoginForm = ({
   },
   handleChange,
   canSubmit,
+  submit,
 }) => (
   <div>
     <LoginForm.Headline>
@@ -49,6 +55,7 @@ const LoginForm = ({
       <GradientButton
         text={'Sign up'}
         disabled={!canSubmit}
+        onClick={submit}
       />
     </form>
     <LoginForm.CaptionWrapper>
@@ -83,7 +90,22 @@ const canSubmitForm = ({ email, password }) => R.all(R.equals(true))([
   !R.isEmpty(password),
 ]);
 
+const loginMutation = gql`
+  mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      ok
+      token
+      refreshToken
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
 const withRecompose = compose(
+  graphql(loginMutation),
   withStateHandlers(
     ({
       form      = {
@@ -102,6 +124,19 @@ const withRecompose = compose(
       },
     },
   ),
+  withHandlers({
+    submit : ({form, mutate}) => async () => {
+      const response = await mutate({
+        variables: form,
+      });
+      console.log(response);
+      const { ok, token, refreshToken } = response.data.login;
+      if (ok) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+    },
+  })
 );
 
 export default withRecompose(LoginForm);
