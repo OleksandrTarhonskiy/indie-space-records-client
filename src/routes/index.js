@@ -15,7 +15,7 @@ import FanSignUp            from '../modules/fan/pages/sign_up';
 import InfoForMusicians     from '../modules/musician/pages/information';
 import AllTagsPage          from '../modules/tags/pages/all_tags_page';
 import LoginPage            from '../modules/auth/pages/login_page';
-import GetStarted           from '../modules/musician/pages/get_started'
+import GetStarted           from '../modules/musician/pages/get_started';
 
 export default (
   <Router>
