@@ -18,6 +18,7 @@ import {
   gql,
   graphql
 }                     from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 import GradientButton from '../../../layouts/gradient_button';
 
@@ -139,6 +140,7 @@ const loginMutation = gql`
 `;
 
 const withRecompose = compose(
+  withRouter,
   graphql(loginMutation),
   withStateHandlers(
     ({
@@ -163,16 +165,17 @@ const withRecompose = compose(
     },
   ),
   withHandlers({
-    submit : ({form, mutate, errorsList, showError}) => async () => {
+    submit : ({form, mutate, errorsList, showError, history}) => async () => {
       const response = await mutate({
         variables: form,
       });
 
       const { ok, token, refreshToken , errors} = response.data.login;
-      
+
       if (ok) {
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
+        return history.push('/musician/profile');
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);

@@ -10,7 +10,7 @@ const GetStarted = () => (
 );
 
 GetStarted.Wrapper = styled.div`
-  padding         : 5% 15%;
+  padding         : 15% 15%;
   display         : flex;
   justify-content : center;
 `;
