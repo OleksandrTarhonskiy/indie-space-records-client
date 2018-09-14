@@ -1,7 +1,7 @@
 import React               from 'react';
 import styled              from 'styled-components';
 
-import MusicianProfileForm from '../forms/musician_profile_form'
+import MusicianProfileForm from '../forms/musician_profile_form';
 
 const GetStarted = () => (
   <GetStarted.Wrapper>
@@ -10,7 +10,7 @@ const GetStarted = () => (
 );
 
 GetStarted.Wrapper = styled.div`
-  padding         : 5% 15%;
+  padding         : 15% 15%;
   display         : flex;
   justify-content : center;
 `;

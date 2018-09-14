@@ -1,5 +1,5 @@
 import React               from 'react';
-import MusicianProfileForm from '../forms/musician_profile_form'
+import MusicianProfileForm from '../forms/musician_profile_form';
 
 function getSteps() {
   return ['Select campaign settings', 'Create an ad group', 'Create an ad'];

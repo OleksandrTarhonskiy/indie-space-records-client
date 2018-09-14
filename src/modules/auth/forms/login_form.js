@@ -1,15 +1,24 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import TextField      from '@material-ui/core/TextField';
-import Typography     from '@material-ui/core/Typography';
-import styled         from 'styled-components';
-import * as R         from 'ramda';
+import React           from 'react';
+import PropTypes       from 'prop-types';
+import TextField       from '@material-ui/core/TextField';
+import Snackbar        from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+import WarningIcon     from '@material-ui/icons/Warning';
+import Typography      from '@material-ui/core/Typography';
+import styled          from 'styled-components';
+import * as R          from 'ramda';
 import {
   compose,
   withStateHandlers,
-}                     from 'recompose';
-import validator      from 'validator';
-import { Link }       from 'react-router-dom';
+  withHandlers
+}                      from 'recompose';
+import validator       from 'validator';
+import { Link }        from 'react-router-dom';
+import {
+  gql,
+  graphql
+}                     from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 import GradientButton from '../../../layouts/gradient_button';
 
@@ -20,6 +29,10 @@ const LoginForm = ({
   },
   handleChange,
   canSubmit,
+  submit,
+  errorsList,
+  hasError,
+  hideError,
 }) => (
   <div>
     <LoginForm.Headline>
@@ -47,8 +60,9 @@ const LoginForm = ({
       />
       <br />
       <GradientButton
-        text={'Sign up'}
+        text={'Sign in'}
         disabled={!canSubmit}
+        onClick={submit}
       />
     </form>
     <LoginForm.CaptionWrapper>
@@ -57,6 +71,24 @@ const LoginForm = ({
         <Link to="/musician/sign_up">musician</Link> or <Link to="/">fan</Link>
       </Typography>
     </LoginForm.CaptionWrapper>
+    <Snackbar
+      open={hasError}
+      autoHideDuration={2000}
+      onClose={hideError}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+    >
+      <LoginForm.Alert
+        message={
+          errorsList.length > 0 ?
+            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
+            :
+            null
+        }
+      />
+    </Snackbar>
   </div>
 );
 
@@ -67,14 +99,24 @@ LoginForm.Headline = styled.h1`
   font-weight : 300;
 `;
 
+LoginForm.Alert = styled(SnackbarContent)`
+  background-color : #ee3c25 !important;
+  font-family      : 'Roboto', sans-serif;
+`;
+
+
 LoginForm.CaptionWrapper = styled.div`
   margin-top : 20%;
 `;
 
 LoginForm.propTypes = {
-  form               : PropTypes.object.isRequired,
-  canSubmit          : PropTypes.bool.isRequired,
-  handleChange       : PropTypes.func.isRequired,
+  form         : PropTypes.object.isRequired,
+  canSubmit    : PropTypes.bool.isRequired,
+  handleChange : PropTypes.func.isRequired,
+  hasError     : PropTypes.bool.isRequired,
+  errorsList   : PropTypes.array.isRequired,
+  hideError    : PropTypes.func.isRequired,
+  submit       : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({ email, password }) => R.all(R.equals(true))([
@@ -83,15 +125,33 @@ const canSubmitForm = ({ email, password }) => R.all(R.equals(true))([
   !R.isEmpty(password),
 ]);
 
+const loginMutation = gql`
+  mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      ok
+      token
+      refreshToken
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
 const withRecompose = compose(
+  withRouter,
+  graphql(loginMutation),
   withStateHandlers(
     ({
-      form      = {
-        email           : '',
-        password        : '',
+      form       = {
+        email    : '',
+        password : '',
       },
-      canSubmit = false,
-    }) => ({ form, canSubmit }),
+      canSubmit  = false,
+      hasError   = false,
+      errorsList = [],
+    }) => ({ form, canSubmit, errorsList, hasError }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -100,8 +160,34 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
+      showError    : () => () => ({ hasError: true }),
+      hideError    : () => () => ({ hasError: false }),
     },
   ),
+  withHandlers({
+    submit : ({form, mutate, errorsList, showError, history}) => async () => {
+      const response = await mutate({
+        variables: form,
+      });
+
+      const { ok, token, refreshToken , errors} = response.data.login;
+
+      if (ok) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('refreshToken', refreshToken);
+        return history.push('/musician/profile');
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showError();
+        errorsList.pop();
+      }
+    },
+  })
 );
 
 export default withRecompose(LoginForm);
