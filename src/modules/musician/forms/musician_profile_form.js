@@ -2,6 +2,7 @@ import React            from 'react';
 import ChipInput        from 'material-ui-chip-input'
 import TextField        from '@material-ui/core/TextField';
 import * as R           from 'ramda';
+import PropTypes        from 'prop-types';
 import {
   compose,
   withStateHandlers,
@@ -21,6 +22,7 @@ const MusicianProfileForm = ({
   deleteChip,
   submit,
   handleChange,
+  canSubmit,
 }) => (
   <form>
     <MusicianProfileForm.Headline>
@@ -47,6 +49,7 @@ const MusicianProfileForm = ({
     <GradientButton
       text={'Create'}
       onClick={submit}
+      disabled={!canSubmit}
     />
   </form>
 );
@@ -57,6 +60,20 @@ MusicianProfileForm.Headline = styled.h1`
   text-align  : center;
   font-weight : 300;
 `;
+
+MusicianProfileForm.propTypes = {
+  form         : PropTypes.object.isRequired,
+  canSubmit    : PropTypes.bool.isRequired,
+  submit       : PropTypes.func.isRequired,
+  addChip      : PropTypes.func.isRequired,
+  deleteChip   : PropTypes.func.isRequired,
+  handleChange : PropTypes.func.isRequired,
+};
+
+const canSubmitForm = ({ name, genres }) => R.all(R.equals(true))([
+  !R.isEmpty(genres),
+  !R.isEmpty(name),
+]);
 
 const createProfileMutation = gql`
   mutation($name: String!, $genres: String!) {
@@ -79,20 +96,30 @@ const withRecompose = compose(
         name   : '',
         genres : [],
       },
-    }) => ({ form }),
+      canSubmit = false,
+    }) => ({ form, canSubmit }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       addChip   : state => (field, value) => {
         const fieldLens = R.lensProp(field);
         const form = R.set(fieldLens, R.compose(R.append(value), R.view(fieldLens))(state.form), state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       deleteChip : state => (field, value, ind) => {
         const form = R.dissocPath([field, ind], (state.form: Object));
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
     },
   ),
