@@ -1,6 +1,9 @@
 import React            from 'react';
 import ChipInput        from 'material-ui-chip-input'
 import TextField        from '@material-ui/core/TextField';
+import Snackbar         from '@material-ui/core/Snackbar';
+import SnackbarContent  from '@material-ui/core/SnackbarContent';
+import WarningIcon      from '@material-ui/icons/Warning';
 import * as R           from 'ramda';
 import PropTypes        from 'prop-types';
 import {
@@ -10,6 +13,7 @@ import {
 }                       from 'recompose';
 import { gql, graphql } from 'react-apollo';
 import styled           from 'styled-components';
+import { withRouter }   from 'react-router-dom';
 
 import GradientButton   from '../../../layouts/gradient_button';
 
@@ -23,6 +27,9 @@ const MusicianProfileForm = ({
   submit,
   handleChange,
   canSubmit,
+  hasError,
+  hideError,
+  errorsList,
 }) => (
   <form>
     <MusicianProfileForm.Headline>
@@ -51,6 +58,24 @@ const MusicianProfileForm = ({
       onClick={submit}
       disabled={!canSubmit}
     />
+    <Snackbar
+      open={hasError}
+      autoHideDuration={2000}
+      onClose={hideError}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+    >
+      <MusicianProfileForm.Alert
+        message={
+          errorsList.length > 0 ?
+            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
+            :
+            null
+        }
+      />
+    </Snackbar>
   </form>
 );
 
@@ -61,6 +86,11 @@ MusicianProfileForm.Headline = styled.h1`
   font-weight : 300;
 `;
 
+MusicianProfileForm.Alert = styled(SnackbarContent)`
+  background-color : #ee3c25 !important;
+  font-family      : 'Roboto', sans-serif;
+`;
+
 MusicianProfileForm.propTypes = {
   form         : PropTypes.object.isRequired,
   canSubmit    : PropTypes.bool.isRequired,
@@ -68,6 +98,9 @@ MusicianProfileForm.propTypes = {
   addChip      : PropTypes.func.isRequired,
   deleteChip   : PropTypes.func.isRequired,
   handleChange : PropTypes.func.isRequired,
+  hasError     : PropTypes.bool.isRequired,
+  errorsList   : PropTypes.array.isRequired,
+  hideError    : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({ name, genres }) => R.all(R.equals(true))([
@@ -89,15 +122,17 @@ const createProfileMutation = gql`
 
 const withRecompose = compose(
   graphql(createProfileMutation),
-
+  withRouter,
   withStateHandlers(
     ({
-      form = {
+      form       = {
         name   : '',
         genres : [],
       },
-      canSubmit = false,
-    }) => ({ form, canSubmit }),
+      canSubmit  = false,
+      errorsList = [],
+      hasError   = false,
+    }) => ({ form, canSubmit, errorsList }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -121,6 +156,8 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
+      showError : () => () => ({ hasError: true }),
+      hideError : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
@@ -130,6 +167,9 @@ const withRecompose = compose(
         genres,
       },
       mutate,
+      errorsList,
+      showError,
+      history,
     }) => async () => {
       const genresString = genres.toString()
       const response = await mutate({
@@ -139,9 +179,16 @@ const withRecompose = compose(
       const { ok, errors } = response.data.profile;
 
       if (ok) {
-        console.log(ok)
+        return history.push('/');
       } else {
-        console.log(errors)
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showError();
+        errorsList.pop();
       }
     },
   })
