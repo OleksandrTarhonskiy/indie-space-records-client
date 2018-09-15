@@ -175,7 +175,7 @@ const withRecompose = compose(
       if (ok) {
         localStorage.setItem('token', token);
         localStorage.setItem('refreshToken', refreshToken);
-        return history.push('/musician/profile');
+        history.push('/musician/profile');
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);

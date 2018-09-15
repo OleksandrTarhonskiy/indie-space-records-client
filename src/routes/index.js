@@ -16,6 +16,7 @@ import InfoForMusicians     from '../modules/musician/pages/information';
 import AllTagsPage          from '../modules/tags/pages/all_tags_page';
 import LoginPage            from '../modules/auth/pages/login_page';
 import GetStarted           from '../modules/musician/pages/get_started';
+import PrivateRoute         from './private_route';
 
 export default (
   <Router>
@@ -29,7 +30,7 @@ export default (
         <Route exact path="/fan/sign_up"      component={FanSignUp} />
         <Route exact path="/tags"             component={AllTagsPage} />
         <Route exact path="/login"            component={LoginPage} />
-        <Route exact path="/musician/profile" component={GetStarted} />
+        <PrivateRoute exact path="/musician/profile" component={GetStarted} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
