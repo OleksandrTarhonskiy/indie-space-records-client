@@ -16,6 +16,8 @@ import MenuBar       from './menu';
 import Logo          from './theme/logo.png';
 import Mobile        from './theme/mobile-logo.png';
 
+const token = localStorage.getItem('token')
+
 const Header = ({
   style: {
     position,
@@ -24,6 +26,14 @@ const Header = ({
   <Header.MenuBar position={position}>
     <Header.LogoWrapper to="/" />
     <Header.Toolbar>
+      {
+        token ?
+        <Header.LogOutLink to="/logout">
+          logout
+        </Header.LogOutLink>
+        :
+        null
+      }
       <Header.ToolbarItem>
         Menu
       </Header.ToolbarItem>
@@ -47,6 +57,14 @@ Header.LogoWrapper = styled(Link)`
       width           : 20%;
     `}
   }
+`;
+
+Header.LogOutLink = styled(Link)`
+  margin-right    : 2%;
+  font-family     : 'Roboto', sans-serif;
+  text-decoration : none;
+  color           : #ffff;
+  outline         : none;
 `;
 
 Header.MenuBar = styled(AppBar)`
