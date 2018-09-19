@@ -15,8 +15,16 @@ import { Link }      from 'react-router-dom';
 import MenuBar       from './menu';
 import Logo          from './theme/logo.png';
 import Mobile        from './theme/mobile-logo.png';
+import decode        from 'jwt-decode';
 
-const token = localStorage.getItem('token')
+let name = '';
+const token = localStorage.getItem('token');
+
+try {
+  const { user } = decode(token);
+  name = user.name;
+  console.log(name)
+} catch (err) {}
 
 const Header = ({
   style: {
@@ -28,9 +36,12 @@ const Header = ({
     <Header.Toolbar>
       {
         token ?
-        <Header.LogOutLink to="/logout">
-          logout
-        </Header.LogOutLink>
+        <div>
+          <Header.LogOutLink to="/logout">
+            logout
+          </Header.LogOutLink>
+          <p>{name}</p>
+        </div>
         :
         null
       }
