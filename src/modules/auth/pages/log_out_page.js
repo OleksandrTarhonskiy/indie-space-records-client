@@ -1,10 +1,6 @@
-import React          from 'react';
-import { withRouter } from 'react-router-dom';
-
-
 const logout = () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('refreshToken')
+  localStorage.removeItem('token');
+  localStorage.removeItem('refreshToken');
 };
 
 const LogoutPage = ({history}) => {

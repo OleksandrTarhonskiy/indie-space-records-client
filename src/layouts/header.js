@@ -23,8 +23,9 @@ const token = localStorage.getItem('token');
 try {
   const { user } = decode(token);
   name = user.name;
-  console.log(name)
-} catch (err) {}
+} catch (err) {
+  null;
+}
 
 const Header = ({
   style: {
@@ -36,14 +37,16 @@ const Header = ({
     <Header.Toolbar>
       {
         token ?
-        <div>
-          <Header.LogOutLink to="/logout">
+          <Header.UserWrapper>
+            <Header.UserLink to="/logout">
             logout
-          </Header.LogOutLink>
-          <p>{name}</p>
-        </div>
-        :
-        null
+            </Header.UserLink>
+            <Header.UserLink to="/musician/profile">
+            Hello, {name}
+            </Header.UserLink>
+          </Header.UserWrapper>
+          :
+          null
       }
       <Header.ToolbarItem>
         Menu
@@ -52,6 +55,11 @@ const Header = ({
     </Header.Toolbar>
   </Header.MenuBar>
 );
+
+Header.UserWrapper = styled.div`
+  display : flex;
+  width   : 30%;
+`;
 
 Header.LogoWrapper = styled(Link)`
   && {
@@ -70,12 +78,13 @@ Header.LogoWrapper = styled(Link)`
   }
 `;
 
-Header.LogOutLink = styled(Link)`
+Header.UserLink = styled(Link)`
   margin-right    : 2%;
   font-family     : 'Roboto', sans-serif;
   text-decoration : none;
   color           : #ffff;
   outline         : none;
+  font-size       : 18px;
 `;
 
 Header.MenuBar = styled(AppBar)`

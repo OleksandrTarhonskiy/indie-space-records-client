@@ -141,7 +141,7 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
-      addChip   : state => (field, value) => {
+      addChip       : state => (field, value) => {
         const fieldLens = R.lensProp(field);
         const form = R.set(fieldLens, R.compose(R.append(value), R.view(fieldLens))(state.form), state.form);
         return ({
@@ -156,8 +156,8 @@ const withRecompose = compose(
           canSubmit : canSubmitForm(form),
         });
       },
-      showError : () => () => ({ hasError: true }),
-      hideError : () => () => ({ hasError: false }),
+      showError     : () => () => ({ hasError: true }),
+      hideError     : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({

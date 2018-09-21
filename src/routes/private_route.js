@@ -5,9 +5,10 @@ import {
 }             from 'react-router-dom';
 import decode from 'jwt-decode';
 
+const token = localStorage.getItem('token');
+const refreshToken = localStorage.getItem('refreshToken');
+
 const isAuthenticated = () => {
-  const token = localStorage.getItem('token');
-  const refreshToken = localStorage.getItem('refreshToken');
   try {
     decode(token);
     decode(refreshToken);
@@ -18,7 +19,9 @@ const isAuthenticated = () => {
   return true;
 };
 
+/* eslint-disable */
 const PrivateRoute = ({ component: Component, ...rest }) => (
+  /* eslint-enable */
   <Route {...rest}
     render={props => (
       isAuthenticated() ?
@@ -27,11 +30,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         <Redirect
           to={{
             pathname : '/login',
-            state    : { from: props.location },
           }}
         />
-      )}
-    />
-  );
+    )}
+  />
+);
 
 export default PrivateRoute;
