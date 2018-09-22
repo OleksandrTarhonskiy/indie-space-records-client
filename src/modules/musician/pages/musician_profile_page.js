@@ -16,17 +16,19 @@ try {
 }
 
 const MusicianProfilePage = () => (
-  <MusicianProfilePage.Wrapper>
+  <div>
     {
       hasProfile ?
         <Profile />
         :
+      <MusicianProfilePage.FormWrapper>
         <MusicianProfileForm />
+      </MusicianProfilePage.FormWrapper>
     }
-  </MusicianProfilePage.Wrapper>
+  </div>
 );
 
-MusicianProfilePage.Wrapper = styled.div`
+MusicianProfilePage.FormWrapper = styled.div`
   padding         : 15% 15%;
   display         : flex;
   justify-content : center;
