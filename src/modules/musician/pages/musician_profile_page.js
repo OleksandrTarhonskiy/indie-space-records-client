@@ -3,7 +3,7 @@ import decode              from 'jwt-decode';
 import styled              from 'styled-components';
 
 import MusicianProfileForm from '../forms/musician_profile_form';
-import Profile             from '../components/profile';
+import ProfileFeatures     from '../components/profile_features';
 
 const token = localStorage.getItem('token');
 let hasProfile = '';
@@ -19,7 +19,10 @@ const MusicianProfilePage = () => (
   <div>
     {
       hasProfile ?
-        <Profile />
+        <MusicianProfilePage.ProfileWrapper>
+          <ProfileFeatures />
+
+        </MusicianProfilePage.ProfileWrapper>
         :
       <MusicianProfilePage.FormWrapper>
         <MusicianProfileForm />
@@ -32,6 +35,12 @@ MusicianProfilePage.FormWrapper = styled.div`
   padding         : 15% 15%;
   display         : flex;
   justify-content : center;
+`;
+
+MusicianProfilePage.ProfileWrapper = styled.div`
+  display        : flex;
+  flex-direction : row;
+  width          : 100%;
 `;
 
 export default MusicianProfilePage;
