@@ -53,7 +53,7 @@ const ProfileFeatures = () => (
 );
 
 ProfileFeatures.SettingsMenu = styled.div`
-  width          : 25%
+  width          : 17%
   display        : flex;
   flex-direction : column;
   background     : #f8f8f8;
@@ -67,7 +67,7 @@ ProfileFeatures.MenuItem = styled(Link)`
   justify-content : center;
   flex-direction  : column;
   font-family     : 'Roboto', sans-serif;
-  font-size       : 25px;
+  font-size       : 18px;
   cursor          : pointer;
   text-decoration : none;
   color           : #374142;
