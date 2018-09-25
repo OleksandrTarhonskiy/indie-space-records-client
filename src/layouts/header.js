@@ -41,7 +41,7 @@ const Header = ({
             <Header.UserLink to="/logout">
             logout
             </Header.UserLink>
-            <Header.UserLink to="/musician/profile">
+            <Header.UserLink to="/musician/home">
             Hello, {name}
             </Header.UserLink>
           </Header.UserWrapper>
