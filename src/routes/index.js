@@ -1,21 +1,26 @@
-import React                from 'react';
+import React                    from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-}                           from 'react-router-dom';
+}                               from 'react-router-dom';
 
-import HomePage             from '../modules/landing-page/pages/home_page';
-import Header               from '../layouts/header';
-import NotFound             from '../layouts/not_found';
-import Footer               from '../layouts/footer';
-import HelpContactPage      from '../modules/help-contact/pages/help_contact_page';
-import MusicianSignUp       from '../modules/musician/pages/sign_up';
-import FanSignUp            from '../modules/fan/pages/sign_up';
-import InfoForMusicians     from '../modules/musician/pages/information';
-import AllTagsPage          from '../modules/tags/pages/all_tags_page';
-import LoginPage            from '../modules/auth/pages/login_page';
-import GetStarted           from '../modules/musician/pages/get_started';
+import HomePage                 from '../modules/landing-page/pages/home_page';
+import Header                   from '../layouts/header';
+import NotFound                 from '../layouts/not_found';
+import Footer                   from '../layouts/footer';
+import HelpContactPage          from '../modules/help-contact/pages/help_contact_page';
+import MusicianSignUp           from '../modules/musician/pages/sign_up';
+import FanSignUp                from '../modules/fan/pages/sign_up';
+import InfoForMusicians         from '../modules/musician/pages/information';
+import AllTagsPage              from '../modules/tags/pages/all_tags_page';
+import LoginPage                from '../modules/auth/pages/login_page';
+import LogoutPage               from '../modules/auth/pages/log_out_page';
+import MusicianProfilePage      from '../modules/musician/pages/musician_profile_page';
+import ProfileEditPage          from '../modules/musician/pages/profile_edit_page';
+import AllThemesPage            from '../modules/themes/pages/all_themes_page';
+import FlatTheme                from '../modules/themes/components/flat_theme';
+import PrivateRoute             from './private_route';
 
 export default (
   <Router>
@@ -29,7 +34,11 @@ export default (
         <Route exact path="/fan/sign_up"      component={FanSignUp} />
         <Route exact path="/tags"             component={AllTagsPage} />
         <Route exact path="/login"            component={LoginPage} />
-        <Route exact path="/musician/profile" component={GetStarted} />
+        <Route exact path="/logout"           component={LogoutPage} />
+        <PrivateRoute exact path="/musician/home" component={MusicianProfilePage} />
+        <PrivateRoute exact path="/musician/profile/edit" component={ProfileEditPage} />
+        <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
+        <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

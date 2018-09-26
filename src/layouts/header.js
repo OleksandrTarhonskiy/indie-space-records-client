@@ -15,6 +15,17 @@ import { Link }      from 'react-router-dom';
 import MenuBar       from './menu';
 import Logo          from './theme/logo.png';
 import Mobile        from './theme/mobile-logo.png';
+import decode        from 'jwt-decode';
+
+let name = '';
+const token = localStorage.getItem('token');
+
+try {
+  const { user } = decode(token);
+  name = user.name;
+} catch (err) {
+  null;
+}
 
 const Header = ({
   style: {
@@ -24,6 +35,19 @@ const Header = ({
   <Header.MenuBar position={position}>
     <Header.LogoWrapper to="/" />
     <Header.Toolbar>
+      {
+        token ?
+          <Header.UserWrapper>
+            <Header.UserLink to="/logout">
+            logout
+            </Header.UserLink>
+            <Header.UserLink to="/musician/home">
+            Hello, {name}
+            </Header.UserLink>
+          </Header.UserWrapper>
+          :
+          null
+      }
       <Header.ToolbarItem>
         Menu
       </Header.ToolbarItem>
@@ -31,6 +55,11 @@ const Header = ({
     </Header.Toolbar>
   </Header.MenuBar>
 );
+
+Header.UserWrapper = styled.div`
+  display : flex;
+  width   : 30%;
+`;
 
 Header.LogoWrapper = styled(Link)`
   && {
@@ -47,6 +76,15 @@ Header.LogoWrapper = styled(Link)`
       width           : 20%;
     `}
   }
+`;
+
+Header.UserLink = styled(Link)`
+  margin-right    : 2%;
+  font-family     : 'Roboto', sans-serif;
+  text-decoration : none;
+  color           : #ffff;
+  outline         : none;
+  font-size       : 18px;
 `;
 
 Header.MenuBar = styled(AppBar)`
