@@ -24,9 +24,9 @@ const MusicianProfilePage = () => (
 
         </MusicianProfilePage.ProfileWrapper>
         :
-      <MusicianProfilePage.FormWrapper>
-        <MusicianProfileForm />
-      </MusicianProfilePage.FormWrapper>
+        <MusicianProfilePage.FormWrapper>
+          <MusicianProfileForm />
+        </MusicianProfilePage.FormWrapper>
     }
   </div>
 );

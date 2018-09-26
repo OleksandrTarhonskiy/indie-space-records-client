@@ -1,6 +1,5 @@
-import React     from 'react';
-import PropTypes from 'prop-types';
-import styled    from 'styled-components';
+import React  from 'react';
+import styled from 'styled-components';
 
 const Template = () => (
   <div>
@@ -38,7 +37,7 @@ const Template = () => (
          the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
          and more recently with desktop publishing software like Aldus PageMaker including
          versions of Lorem Ipsum.
-       </Template.Body>
+      </Template.Body>
     </Template.Band>
   </div>
 );

@@ -53,7 +53,7 @@ const ProfileFeatures = () => (
 );
 
 ProfileFeatures.SettingsMenu = styled.div`
-  width          : 17%
+  width          : 17%;
   display        : flex;
   flex-direction : column;
   background     : #f8f8f8;
