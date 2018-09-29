@@ -25,13 +25,13 @@ const ProfileFeatures = () => (
         Events
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/me">
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/musician/profile/edit">
+    <ProfileFeatures.MenuItem to="/profile/settings">
       <ProfileFeatures.MenuItemText>
         <BuildIcon />
         Customize my profile
