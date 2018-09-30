@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {
   compose,
   withHandlers
-}                      from 'recompose';
+}             from 'recompose';
 import {
   gql,
   graphql
-}                     from 'react-apollo';
+}             from 'react-apollo';
 
 import Bg     from './bg.jpeg';
 

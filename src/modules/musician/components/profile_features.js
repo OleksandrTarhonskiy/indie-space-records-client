@@ -5,6 +5,7 @@ import GradeIcon      from '@material-ui/icons/Grade';
 import BuildIcon      from '@material-ui/icons/Build';
 import PersonIcon     from '@material-ui/icons/Person';
 import StarIcon       from '@material-ui/icons/Star';
+import DoneIcon       from '@material-ui/icons/Done';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link }       from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const ProfileFeatures = () => (
     position="static"
     color="default"
   >
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/musician/home">
       <ProfileFeatures.MenuItemText>
         <HomeIcon />
         Home
@@ -29,6 +30,12 @@ const ProfileFeatures = () => (
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
+      </ProfileFeatures.MenuItemText>
+    </ProfileFeatures.MenuItem>
+    <ProfileFeatures.MenuItem to="/musician/themes">
+      <ProfileFeatures.MenuItemText>
+        <DoneIcon />
+        Choose Theme
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
     <ProfileFeatures.MenuItem to="/profile/settings">
