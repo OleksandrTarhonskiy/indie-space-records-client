@@ -3,6 +3,7 @@ import styled         from 'styled-components';
 import HomeIcon       from '@material-ui/icons/Home';
 import GradeIcon      from '@material-ui/icons/Grade';
 import BuildIcon      from '@material-ui/icons/Build';
+import Paper          from '@material-ui/core/Paper';
 import PersonIcon     from '@material-ui/icons/Person';
 import StarIcon       from '@material-ui/icons/Star';
 import DoneIcon       from '@material-ui/icons/Done';
@@ -59,11 +60,12 @@ const ProfileFeatures = () => (
   </ProfileFeatures.SettingsMenu>
 );
 
-ProfileFeatures.SettingsMenu = styled.div`
+ProfileFeatures.SettingsMenu = styled(Paper)`
   width          : 17%;
   display        : flex;
   flex-direction : column;
   background     : #f8f8f8;
+  margin         : 1%;
 `;
 
 ProfileFeatures.MenuItem = styled(Link)`

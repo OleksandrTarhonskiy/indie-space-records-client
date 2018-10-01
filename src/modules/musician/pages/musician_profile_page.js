@@ -19,11 +19,11 @@ const MusicianProfilePage = () => (
   <div>
     {
       hasProfile ?
-        <MusicianProfilePage.ProfileWrapper>
+        <MusicianProfilePage.ProfileWrapper background={true}>
           <ProfileFeatures />
         </MusicianProfilePage.ProfileWrapper>
         :
-        <MusicianProfilePage.FormWrapper>
+        <MusicianProfilePage.FormWrapper background={false}>
           <MusicianProfileForm />
         </MusicianProfilePage.FormWrapper>
     }
@@ -40,6 +40,7 @@ MusicianProfilePage.ProfileWrapper = styled.div`
   display        : flex;
   flex-direction : row;
   width          : 100%;
+  background     : ${props => props.background ? '#eaedf5' : 'transparent'};
 `;
 
 export default MusicianProfilePage;
