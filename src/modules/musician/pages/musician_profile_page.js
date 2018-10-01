@@ -21,7 +21,6 @@ const MusicianProfilePage = () => (
       hasProfile ?
         <MusicianProfilePage.ProfileWrapper>
           <ProfileFeatures />
-
         </MusicianProfilePage.ProfileWrapper>
         :
         <MusicianProfilePage.FormWrapper>
