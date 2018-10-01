@@ -52,7 +52,7 @@ const ProfileThemeSettings = ({
       margin="normal"
     />
     <ProfileThemeSettings.SliderWrapper>
-      <Typography id="label">Headlines font size</Typography>
+      <Typography id="label">Headlines font size: {h1FontSize} px</Typography>
       <Slider
         value={h1FontSize}
         name="h1FontSize"
