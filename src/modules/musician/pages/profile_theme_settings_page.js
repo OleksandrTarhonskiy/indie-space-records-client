@@ -4,6 +4,7 @@ import {
   graphql
 }                           from 'react-apollo';
 import styled               from 'styled-components';
+import Paper                from '@material-ui/core/Paper';
 
 import ProfileThemeSettings from '../forms/profile_theme_settings';
 import Profile              from '../components/profile';
@@ -27,20 +28,23 @@ const ProfileThemeSettingsPage = ({ data: { allProfiles = []} }) => (
 ProfileThemeSettingsPage.Wrapper = styled.div`
   display        : flex;
   flex-direction : row;
+  background     : #eaedf5;
 `;
 
-ProfileThemeSettingsPage.SideBar = styled.div`
-  width            : 17%;
+ProfileThemeSettingsPage.SideBar = styled(Paper)`
+  width            : 15%;
   background-color : #f8f8f8;
   display          : flex;
   flex-direction   : column;
   justify-content  : center;
   padding-left     : 3%;
+  margin           : 1%;
 `;
 
-ProfileThemeSettingsPage.ProfileWrapper = styled.div`
+ProfileThemeSettingsPage.ProfileWrapper = styled(Paper)`
   width   : 80%;
   padding : 10% 0;
+  margin  : 1%;
 `;
 
 const allProfilesQuery = gql`

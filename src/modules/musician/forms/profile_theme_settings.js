@@ -6,7 +6,7 @@ import Snackbar        from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import styled          from 'styled-components';
 import WarningIcon     from '@material-ui/icons/Warning';
-import DoneIcon       from '@material-ui/icons/Done';
+import DoneIcon        from '@material-ui/icons/Done';
 import {
   compose,
   withStateHandlers,
