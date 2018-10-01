@@ -26,6 +26,8 @@ const ProfileThemeSettings = ({
     color,
     backgroundColor,
     h1FontSize,
+    h2FontSize,
+    RegularFontSize,
   },
   handleChange,
   submit,
@@ -52,7 +54,9 @@ const ProfileThemeSettings = ({
       margin="normal"
     />
     <ProfileThemeSettings.SliderWrapper>
-      <Typography id="label">Headlines font size: {h1FontSize} px</Typography>
+      <ProfileThemeSettings.Label>
+        Headlines font size: {h1FontSize}px
+      </ProfileThemeSettings.Label>
       <Slider
         value={h1FontSize}
         name="h1FontSize"
@@ -60,6 +64,34 @@ const ProfileThemeSettings = ({
         max={80}
         step={1}
         onChange={sliderChange.bind(null, 'h1FontSize')}
+        aria-labelledby="label"
+      />
+    </ProfileThemeSettings.SliderWrapper>
+    <ProfileThemeSettings.SliderWrapper>
+      <ProfileThemeSettings.Label>
+        Sub headline font size: {h2FontSize}px
+      </ProfileThemeSettings.Label>
+      <Slider
+        value={h2FontSize}
+        name="h2FontSize"
+        min={10}
+        max={60}
+        step={1}
+        onChange={sliderChange.bind(null, 'h2FontSize')}
+        aria-labelledby="label"
+      />
+    </ProfileThemeSettings.SliderWrapper>
+    <ProfileThemeSettings.SliderWrapper>
+      <ProfileThemeSettings.Label>
+        Regular text font size: {RegularFontSize}px
+      </ProfileThemeSettings.Label>
+      <Slider
+        value={RegularFontSize}
+        name="RegularFontSize"
+        min={10}
+        max={40}
+        step={1}
+        onChange={sliderChange.bind(null, 'RegularFontSize')}
         aria-labelledby="label"
       />
     </ProfileThemeSettings.SliderWrapper>
@@ -100,6 +132,10 @@ ProfileThemeSettings.SliderWrapper = styled.div`
   margin-top : 20px;
 `;
 
+ProfileThemeSettings.Label = styled(Typography)`
+  color : #494949 !important;
+`;
+
 const updateThemeMutation = gql`
   mutation($style: String!) {
     updateTheme(style: $style) {
@@ -130,6 +166,8 @@ const withRecompose = compose(
         color           : '',
         backgroundColor : '',
         h1FontSize      : '',
+        h2FontSize      : '',
+        RegularFontSize : '',
       },
       hasError   = false,
       errorsList = [],
