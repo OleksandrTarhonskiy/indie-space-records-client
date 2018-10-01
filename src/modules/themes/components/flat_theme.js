@@ -1,5 +1,6 @@
 import React  from 'react';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 import {
   compose,
   withHandlers
@@ -13,7 +14,12 @@ import Bg     from './bg.jpeg';
 
 const FlatTheme = ({setTheme}) => (
   <div>
-    <FlatTheme.Header onClick={setTheme}>
+    <FlatTheme.SettingsHeader>
+      <FlatTheme.Button onClick={setTheme}>
+        Get this theme
+      </FlatTheme.Button>
+    </FlatTheme.SettingsHeader>
+    <FlatTheme.Header>
       theme#1
     </FlatTheme.Header>
     <FlatTheme.Music>
@@ -21,6 +27,21 @@ const FlatTheme = ({setTheme}) => (
     </FlatTheme.Music>
   </div>
 );
+
+FlatTheme.SettingsHeader = styled.div`
+  background      : #515151;
+  display         : flex;
+  flex-direction  : row;
+  justify-content : end;
+  padding         : 1%;
+`;
+
+FlatTheme.Button = styled(Button)`
+  background : transparent;
+  color      : #ffff !important;
+  border     : 1px solid #eaedf5 !important;
+  position   : absolute;
+`;
 
 FlatTheme.Header = styled.div`
   background        : url(${Bg});
