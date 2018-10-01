@@ -36,14 +36,15 @@ ProfileThemeSettingsPage.SideBar = styled(Paper)`
   background-color : #f8f8f8;
   display          : flex;
   flex-direction   : column;
-  justify-content  : center;
+  justify-content  : flex-start;
   padding-left     : 3%;
+  padding-top      : 5%;
   margin           : 1%;
 `;
 
 ProfileThemeSettingsPage.ProfileWrapper = styled(Paper)`
   width   : 80%;
-  padding : 10% 0;
+  padding : 1%;
   margin  : 1%;
 `;
 

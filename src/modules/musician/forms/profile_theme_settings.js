@@ -2,8 +2,10 @@ import React           from 'react';
 import PropTypes       from 'prop-types';
 import ColorPicker     from 'material-ui-color-picker';
 import * as R          from 'ramda';
+import Slider          from '@material-ui/lab/Slider';
 import Snackbar        from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Typography      from '@material-ui/core/Typography';
 import styled          from 'styled-components';
 import WarningIcon     from '@material-ui/icons/Warning';
 import DoneIcon        from '@material-ui/icons/Done';
@@ -23,12 +25,14 @@ const ProfileThemeSettings = ({
   styles: {
     color,
     backgroundColor,
+    h1FontSize,
   },
   handleChange,
   submit,
   errorsList,
   hasError,
   hideAlert,
+  sliderChange,
 }) => (
   <div>
     <ColorPicker
@@ -47,6 +51,18 @@ const ProfileThemeSettings = ({
       onChange={handleChange.bind(null, 'backgroundColor')}
       margin="normal"
     />
+    <ProfileThemeSettings.SliderWrapper>
+      <Typography id="label">Headlines font size</Typography>
+      <Slider
+        value={h1FontSize}
+        name="h1FontSize"
+        min={10}
+        max={80}
+        step={1}
+        onChange={sliderChange.bind(null, 'h1FontSize')}
+        aria-labelledby="label"
+      />
+    </ProfileThemeSettings.SliderWrapper>
     <br />
     <GradientButton
       text={'Update this section'}
@@ -78,6 +94,12 @@ ProfileThemeSettings.Alert = styled(SnackbarContent)`
   font-family      : 'Roboto', sans-serif;
 `;
 
+ProfileThemeSettings.SliderWrapper = styled.div`
+  width      : 80%
+  height     : 15%;
+  margin-top : 20px;
+`;
+
 const updateThemeMutation = gql`
   mutation($style: String!) {
     updateTheme(style: $style) {
@@ -107,12 +129,18 @@ const withRecompose = compose(
       styles     = {
         color           : '',
         backgroundColor : '',
+        h1FontSize      : '',
       },
       hasError   = false,
       errorsList = [],
     }) => ({ styles, errorsList, hasError }),
     {
       handleChange : state => (field, value) => {
+        const styles = R.assoc(field, value, state.styles);
+        return ({ styles });
+      },
+
+      sliderChange : state => (field, event, value) => {
         const styles = R.assoc(field, value, state.styles);
         return ({ styles });
       },

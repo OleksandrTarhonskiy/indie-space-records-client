@@ -58,7 +58,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name  : 'flat theme',
-          style : '{"backgroundColor" : "red", "color": "#ffff"}'
+          style : '{"backgroundColor" : "red", "color": "#ffff", "h1FontSize": "60"}'
         },
       });
     },
