@@ -176,8 +176,8 @@ const withRecompose = compose(
         variables: {name: name, genres: genresString}
       });
 
-      const { ok, errors } = response.data.profile;
-
+      const { ok, errors } = response.data.createProfile;
+      
       if (ok) {
         return history.push('/');
       } else {
