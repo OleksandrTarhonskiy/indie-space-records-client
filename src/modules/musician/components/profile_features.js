@@ -3,8 +3,10 @@ import styled         from 'styled-components';
 import HomeIcon       from '@material-ui/icons/Home';
 import GradeIcon      from '@material-ui/icons/Grade';
 import BuildIcon      from '@material-ui/icons/Build';
+import Paper          from '@material-ui/core/Paper';
 import PersonIcon     from '@material-ui/icons/Person';
 import StarIcon       from '@material-ui/icons/Star';
+import DoneIcon       from '@material-ui/icons/Done';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link }       from 'react-router-dom';
 
@@ -13,7 +15,7 @@ const ProfileFeatures = () => (
     position="static"
     color="default"
   >
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/musician/home">
       <ProfileFeatures.MenuItemText>
         <HomeIcon />
         Home
@@ -25,13 +27,19 @@ const ProfileFeatures = () => (
         Events
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/me">
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/musician/profile/edit">
+    <ProfileFeatures.MenuItem to="/musician/themes">
+      <ProfileFeatures.MenuItemText>
+        <DoneIcon />
+        Choose Theme
+      </ProfileFeatures.MenuItemText>
+    </ProfileFeatures.MenuItem>
+    <ProfileFeatures.MenuItem to="/profile/settings">
       <ProfileFeatures.MenuItemText>
         <BuildIcon />
         Customize my profile
@@ -52,11 +60,12 @@ const ProfileFeatures = () => (
   </ProfileFeatures.SettingsMenu>
 );
 
-ProfileFeatures.SettingsMenu = styled.div`
+ProfileFeatures.SettingsMenu = styled(Paper)`
   width          : 17%;
   display        : flex;
   flex-direction : column;
   background     : #f8f8f8;
+  margin         : 1%;
 `;
 
 ProfileFeatures.MenuItem = styled(Link)`

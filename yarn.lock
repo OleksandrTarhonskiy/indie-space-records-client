@@ -50,6 +50,12 @@
   version "7.0.0-beta.56"
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.0.0-beta.56.tgz#8638aa02e0130cd10b2ba4128e2b804112073ed3"
 
+"@babel/runtime@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/runtime@^7.0.0-beta.42":
   version "7.0.0-beta.54"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.0.0-beta.54.tgz#39ebb42723fe7ca4b3e1b00e967e80138d47cadf"
@@ -127,6 +133,14 @@
   dependencies:
     "@babel/runtime" "^7.0.0-beta.42"
     recompose "^0.27.0"
+
+"@material-ui/lab@^3.0.0-alpha.18":
+  version "3.0.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-3.0.0-alpha.18.tgz#d3c3a77364fefa7be9d759ed080a5c2b6b97b8ac"
+  dependencies:
+    "@babel/runtime" "7.0.0"
+    classnames "^2.2.5"
+    keycode "^2.1.9"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -5094,6 +5108,10 @@ lodash.uniq@^4.5.0:
   version "4.17.10"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
+lodash@^4.0.1:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+
 log-symbols@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
@@ -5178,12 +5196,25 @@ markdown-table@^1.1.0:
   version "1.1.2"
   resolved "https://registry.npmjs.org/markdown-table/-/markdown-table-1.1.2.tgz#c78db948fa879903a41bce522e3b96f801c63786"
 
+material-colors@^1.2.1:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
+
 material-ui-chip-input@^1.0.0-beta.7:
   version "1.0.0-beta.7"
   resolved "https://registry.npmjs.org/material-ui-chip-input/-/material-ui-chip-input-1.0.0-beta.7.tgz#6d9921028f9f1774ab7821ab5a9aa3c44cedb7b6"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
+
+material-ui-color-picker@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/material-ui-color-picker/-/material-ui-color-picker-2.1.1.tgz#028807be1ecccb17c3c4a0af4ed66d1a4fbbcefd"
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.0.0"
+    react-color "^2.11.4"
+    recompose "^0.27.0"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -6619,6 +6650,16 @@ react-apollo@^1.4.16:
     object-assign "^4.0.1"
     prop-types "^15.5.8"
 
+react-color@^2.11.4:
+  version "2.14.1"
+  resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
+  dependencies:
+    lodash "^4.0.1"
+    material-colors "^1.2.1"
+    prop-types "^15.5.10"
+    reactcss "^1.2.0"
+    tinycolor2 "^1.4.1"
+
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"
@@ -6781,6 +6822,15 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react@^16.0.0:
+  version "16.5.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.5.0"
+
 react@^16.4.1:
   version "16.4.1"
   resolved "https://registry.npmjs.org/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
@@ -6789,6 +6839,12 @@ react@^16.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+reactcss@^1.2.0:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/reactcss/-/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
+  dependencies:
+    lodash "^4.0.1"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -7266,6 +7322,12 @@ sane@~1.6.0:
 sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+
+schedule@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
+  dependencies:
+    object-assign "^4.1.1"
 
 schema-utils@^0.3.0:
   version "0.3.0"
@@ -7997,6 +8059,10 @@ timers-browserify@^2.0.4:
   resolved "https://registry.npmjs.org/timers-browserify/-/timers-browserify-2.0.10.tgz#1d28e3d2aadf1d5a5996c4e9f95601cd053480ae"
   dependencies:
     setimmediate "^1.0.4"
+
+tinycolor2@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 tmp@^0.0.33:
   version "0.0.33"

@@ -132,7 +132,7 @@ const withRecompose = compose(
       canSubmit  = false,
       errorsList = [],
       hasError   = false,
-    }) => ({ form, canSubmit, errorsList }),
+    }) => ({ form, canSubmit, errorsList, hasError }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -176,7 +176,7 @@ const withRecompose = compose(
         variables: {name: name, genres: genresString}
       });
 
-      const { ok, errors } = response.data.profile;
+      const { ok, errors } = response.data.createProfile;
 
       if (ok) {
         return history.push('/');
