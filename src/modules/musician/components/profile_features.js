@@ -5,6 +5,7 @@ import GradeIcon      from '@material-ui/icons/Grade';
 import BuildIcon      from '@material-ui/icons/Build';
 import Paper          from '@material-ui/core/Paper';
 import PersonIcon     from '@material-ui/icons/Person';
+import StyleIcon      from '@material-ui/icons/Style';
 import StarIcon       from '@material-ui/icons/Star';
 import DoneIcon       from '@material-ui/icons/Done';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -39,9 +40,15 @@ const ProfileFeatures = () => (
         Choose Theme
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/profile/settings">
+    <ProfileFeatures.MenuItem to="/">
       <ProfileFeatures.MenuItemText>
         <BuildIcon />
+        Profile settings
+      </ProfileFeatures.MenuItemText>
+    </ProfileFeatures.MenuItem>
+    <ProfileFeatures.MenuItem to="/profile/settings">
+      <ProfileFeatures.MenuItemText>
+        <StyleIcon />
         Customize my profile
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
