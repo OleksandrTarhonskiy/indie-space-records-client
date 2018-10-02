@@ -24,7 +24,9 @@ import GradientButton  from '../../../layouts/gradient_button';
 const ProfileThemeSettings = ({
   styles: {
     color,
-    backgroundColor,
+    firstSection,
+    secondSection,
+    thirdSection,
     h1FontSize,
     h2FontSize,
     RegularFontSize,
@@ -46,11 +48,27 @@ const ProfileThemeSettings = ({
       margin="normal"
     />
     <ColorPicker
-      defaultValue={backgroundColor}
-      value={backgroundColor}
-      name="backgroundColor"
-      label="Site Background Color"
-      onChange={handleChange.bind(null, 'backgroundColor')}
+      defaultValue={firstSection}
+      value={firstSection}
+      name="firstSection"
+      onChange={handleChange.bind(null, 'firstSection')}
+      label="first section background"
+      margin="normal"
+    />
+    <ColorPicker
+      defaultValue={secondSection}
+      value={secondSection}
+      name="color"
+      onChange={handleChange.bind(null, 'secondSection')}
+      label="second section background"
+      margin="normal"
+    />
+    <ColorPicker
+      defaultValue={thirdSection}
+      value={thirdSection}
+      name="thirdSection"
+      onChange={handleChange.bind(null, 'thirdSection')}
+      label="third section background"
       margin="normal"
     />
     <ProfileThemeSettings.SliderWrapper>
@@ -164,7 +182,9 @@ const withRecompose = compose(
     ({
       styles     = {
         color           : '',
-        backgroundColor : '',
+        firstSection    : '',
+        secondSection   : '',
+        thirdSection    : '',
         h1FontSize      : '',
         h2FontSize      : '',
         RegularFontSize : '',
