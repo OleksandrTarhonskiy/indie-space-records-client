@@ -4,6 +4,7 @@ import styled              from 'styled-components';
 
 import MusicianProfileForm from '../forms/musician_profile_form';
 import ProfileFeatures     from '../components/profile_features';
+import AboutProfile        from '../components/about_profile';
 
 const token = localStorage.getItem('token');
 let hasProfile = '';
@@ -21,6 +22,7 @@ const MusicianProfilePage = () => (
       hasProfile ?
         <MusicianProfilePage.ProfileWrapper background={true}>
           <ProfileFeatures />
+          <AboutProfile />
         </MusicianProfilePage.ProfileWrapper>
         :
         <MusicianProfilePage.FormWrapper background={false}>
