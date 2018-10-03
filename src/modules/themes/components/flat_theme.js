@@ -22,9 +22,15 @@ const FlatTheme = ({setTheme}) => (
     <FlatTheme.Header>
       theme#1
     </FlatTheme.Header>
+    <FlatTheme.Members>
+      tracks and albums here
+    </FlatTheme.Members>
     <FlatTheme.Music>
       tracks and albums here
     </FlatTheme.Music>
+    <FlatTheme.Merch>
+      tracks and albums here
+    </FlatTheme.Merch>
   </div>
 );
 
@@ -34,6 +40,18 @@ FlatTheme.SettingsHeader = styled.div`
   flex-direction  : row;
   justify-content : end;
   padding         : 1%;
+`;
+
+FlatTheme.Members = styled.div`
+  min-height : 400px;
+  background : #2d292a;
+  padding    : 2%;
+`;
+
+FlatTheme.Merch = styled.div`
+  min-height : 400px;
+  background : #2d292a;
+  padding    : 2%;
 `;
 
 FlatTheme.Button = styled(Button)`
@@ -57,7 +75,9 @@ FlatTheme.Header = styled.div`
 `;
 
 FlatTheme.Music = styled.div`
-
+  min-height : 400px;
+  background : #b63838;
+  padding    : 2%;
 `;
 
 const createThemeMutation = gql`
@@ -79,7 +99,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name  : 'flat theme',
-          style : '{"backgroundColor" : "red", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "40"}'
+          style : '{"firstSection": "#2d292a", "secondSection": "#b63838", "thirdSection": "#2d292a", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20"}'
         },
       });
     },
