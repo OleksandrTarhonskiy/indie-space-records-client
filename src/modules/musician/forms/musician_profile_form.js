@@ -4,6 +4,10 @@ import TextField        from '@material-ui/core/TextField';
 import Snackbar         from '@material-ui/core/Snackbar';
 import SnackbarContent  from '@material-ui/core/SnackbarContent';
 import WarningIcon      from '@material-ui/icons/Warning';
+import {
+  CountryDropdown,
+  RegionDropdown
+}                       from 'react-country-region-selector';
 import * as R           from 'ramda';
 import PropTypes        from 'prop-types';
 import {
@@ -21,6 +25,8 @@ const MusicianProfileForm = ({
   form: {
     name,
     genres,
+    country,
+    region,
   },
   addChip,
   deleteChip,
@@ -30,28 +36,40 @@ const MusicianProfileForm = ({
   hasError,
   hideError,
   errorsList,
+  handleReginChange,
 }) => (
   <form>
-    <MusicianProfileForm.Headline>
-      Tell me some information about your band
-    </MusicianProfileForm.Headline>
-    <TextField
-      id="name"
-      name="name"
-      label="Name"
-      type="text"
-      margin="normal"
-      value={name}
-      onChange={handleChange}
-      fullWidth
-    />
-    <ChipInput
-      label="Genres"
-      placeholder="Type and press enter to add..."
-      value={genres || []}
-      onAdd={addChip.bind(null, 'genres')}
-      onDelete={deleteChip.bind(null, 'genres')}
-    />
+    <MusicianProfileForm.InputsWrapper>
+      <MusicianProfileForm.Headline>
+        Tell me some information about your band
+      </MusicianProfileForm.Headline>
+      <TextField
+        id="name"
+        name="name"
+        label="Name"
+        type="text"
+        margin="normal"
+        value={name}
+        onChange={handleChange}
+        fullWidth
+      />
+      <ChipInput
+        label="Genres"
+        placeholder="Type and press enter to add..."
+        value={genres || []}
+        onAdd={addChip.bind(null, 'genres')}
+        onDelete={deleteChip.bind(null, 'genres')}
+      />
+      <MusicianProfileForm.CountryDropdown
+        value={country}
+        onChange={handleReginChange.bind(null, 'country')}
+      />
+      <MusicianProfileForm.RegionDropdown
+        country={country}
+        value={region}
+        onChange={handleReginChange.bind(null, 'region')}
+      />
+    </MusicianProfileForm.InputsWrapper>
     <br />
     <GradientButton
       text={'Create'}
@@ -79,6 +97,11 @@ const MusicianProfileForm = ({
   </form>
 );
 
+MusicianProfileForm.InputsWrapper = styled.div`
+  display        : flex;
+  flex-direction : column;
+`;
+
 MusicianProfileForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
@@ -91,26 +114,47 @@ MusicianProfileForm.Alert = styled(SnackbarContent)`
   font-family      : 'Roboto', sans-serif;
 `;
 
+MusicianProfileForm.CountryDropdown = styled(CountryDropdown)`
+  background    : #ffff;
+  border        : 1px solid #999;
+  height        : 33px;
+  border-radius : 0;
+  outline       : none;
+  margin-top    : 2%;
+`;
+
+MusicianProfileForm.RegionDropdown = styled(RegionDropdown)`
+  background    : #ffff;
+  border        : 1px solid #999;
+  height        : 33px;
+  border-radius : 0;
+  outline       : none;
+  margin-top    : 2%;
+`;
+
 MusicianProfileForm.propTypes = {
-  form         : PropTypes.object.isRequired,
-  canSubmit    : PropTypes.bool.isRequired,
-  submit       : PropTypes.func.isRequired,
-  addChip      : PropTypes.func.isRequired,
-  deleteChip   : PropTypes.func.isRequired,
-  handleChange : PropTypes.func.isRequired,
-  hasError     : PropTypes.bool.isRequired,
-  errorsList   : PropTypes.array.isRequired,
-  hideError    : PropTypes.func.isRequired,
+  form              : PropTypes.object.isRequired,
+  canSubmit         : PropTypes.bool.isRequired,
+  submit            : PropTypes.func.isRequired,
+  addChip           : PropTypes.func.isRequired,
+  deleteChip        : PropTypes.func.isRequired,
+  handleChange      : PropTypes.func.isRequired,
+  hasError          : PropTypes.bool.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hideError         : PropTypes.func.isRequired,
+  handleReginChange : PropTypes.func.isRequired,
 };
 
-const canSubmitForm = ({ name, genres }) => R.all(R.equals(true))([
+const canSubmitForm = ({ name, genres, country, region }) => R.all(R.equals(true))([
   !R.isEmpty(genres),
   !R.isEmpty(name),
+  !R.isEmpty(country),
+  !R.isEmpty(region),
 ]);
 
 const createProfileMutation = gql`
-  mutation($name: String!, $genres: String!) {
-    createProfile(name: $name, genres: $genres) {
+  mutation($name: String!, $genres: String!, $country: String!, $region: String!) {
+    createProfile(name: $name, genres: $genres, country: $country, region: $region) {
       ok
       errors {
         path
@@ -126,8 +170,10 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       form       = {
-        name   : '',
-        genres : [],
+        name    : '',
+        genres  : [],
+        country : '',
+        region  : '',
       },
       canSubmit  = false,
       errorsList = [],
@@ -136,6 +182,14 @@ const withRecompose = compose(
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
+      },
+      handleReginChange : state => (field, value) => {
+        const form = R.assoc(field, value, state.form);
+        console.log(form)
         return ({
           form,
           canSubmit : canSubmitForm(form),
@@ -165,6 +219,8 @@ const withRecompose = compose(
       form : {
         name,
         genres,
+        country,
+        region,
       },
       mutate,
       errorsList,
@@ -173,7 +229,7 @@ const withRecompose = compose(
     }) => async () => {
       const genresString = genres.toString()
       const response = await mutate({
-        variables: {name: name, genres: genresString}
+        variables: {name: name, genres: genresString, country: country, region: region}
       });
 
       const { ok, errors } = response.data.createProfile;
