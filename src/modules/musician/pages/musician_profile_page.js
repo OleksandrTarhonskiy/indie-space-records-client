@@ -1,6 +1,10 @@
 import React               from 'react';
 import decode              from 'jwt-decode';
 import styled              from 'styled-components';
+import {
+  gql,
+  graphql
+}                          from 'react-apollo';
 
 import MusicianProfileForm from '../forms/musician_profile_form';
 import ProfileFeatures     from '../components/profile_features';
@@ -16,13 +20,18 @@ try {
   null;
 }
 
-const MusicianProfilePage = () => (
+const MusicianProfilePage = ({ data: { allProfiles = []} }) => (
   <div>
     {
       hasProfile ?
         <MusicianProfilePage.ProfileWrapper background={true}>
           <ProfileFeatures />
-          <AboutProfile />
+          {allProfiles.map(profile =>
+            <AboutProfile
+              key={profile.id}
+              profile={profile}
+            />
+          )}
         </MusicianProfilePage.ProfileWrapper>
         :
         <MusicianProfilePage.FormWrapper background={false}>
@@ -45,4 +54,16 @@ MusicianProfilePage.ProfileWrapper = styled.div`
   background     : ${props => props.background ? '#eaedf5' : 'transparent'};
 `;
 
-export default MusicianProfilePage;
+const allProfilesQuery = gql`
+  {
+    allProfiles{
+      id
+      name
+      genres
+      country
+      region
+    }
+  }
+`;
+
+export default graphql(allProfilesQuery)(MusicianProfilePage);

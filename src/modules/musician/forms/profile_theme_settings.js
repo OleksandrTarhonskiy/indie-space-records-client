@@ -173,6 +173,7 @@ ProfileThemeSettings.propTypes = {
   hideAlert    : PropTypes.func.isRequired,
   hasError     : PropTypes.bool.isRequired,
   errorsList   : PropTypes.array.isRequired,
+  sliderChange : PropTypes.func.isRequired,
 };
 
 
