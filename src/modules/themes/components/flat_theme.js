@@ -143,7 +143,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name  : 'flat theme',
-          style : '{"firstSection": "#2d292a", "secondSection": "#b63838", "thirdSection": "#2d292a", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20", "LinksColor" : "#ffff", "LinksHover" : "#ba3341", "MenuLinksPosition" : "center"}'
+          style : '{"firstSection": "#222224", "secondSection": "#ba3341", "thirdSection": "#222224", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20", "LinksColor" : "#ffff", "LinksHover" : "#ba3341", "MenuLinksPosition" : "center"}'
         },
       });
     },
