@@ -56,7 +56,7 @@ FlatTheme.SettingsHeader = styled.div`
 `;
 
 FlatTheme.ThemeWrapper = styled.div`
-  color : #ffff;
+  color       : #ffff;
   font-family : 'Roboto', sans-serif;
 `;
 
