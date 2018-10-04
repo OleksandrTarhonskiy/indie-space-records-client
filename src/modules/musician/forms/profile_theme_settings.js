@@ -30,6 +30,8 @@ const ProfileThemeSettings = ({
     h1FontSize,
     h2FontSize,
     RegularFontSize,
+    LinksColor,
+    LinksHover,
   },
   handleChange,
   submit,
@@ -44,7 +46,31 @@ const ProfileThemeSettings = ({
       value={color}
       name="color"
       onChange={handleChange.bind(null, 'color')}
-      label="Font color"
+      label="Text color"
+      margin="normal"
+    />
+    <ColorPicker
+      defaultValue={LinksColor}
+      value={LinksColor}
+      name="LinksColor"
+      onChange={handleChange.bind(null, 'LinksColor')}
+      label="Links color"
+      margin="normal"
+    />
+    <ColorPicker
+      defaultValue={LinksHover}
+      value={LinksHover}
+      name="LinksHover"
+      onChange={handleChange.bind(null, 'LinksHover')}
+      label="Links hover"
+      margin="normal"
+    />
+    <ColorPicker
+      defaultValue={thirdSection}
+      value={thirdSection}
+      name="thirdSection"
+      onChange={handleChange.bind(null, 'thirdSection')}
+      label="third section background"
       margin="normal"
     />
     <ColorPicker
@@ -189,6 +215,8 @@ const withRecompose = compose(
         h1FontSize      : '',
         h2FontSize      : '',
         RegularFontSize : '',
+        LinksColor      : '',
+        LinksHover      : '',
       },
       hasError   = false,
       errorsList = [],
