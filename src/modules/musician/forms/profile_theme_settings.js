@@ -72,14 +72,6 @@ const ProfileThemeSettings = ({
       margin="normal"
     />
     <ColorPicker
-      defaultValue={thirdSection}
-      value={thirdSection}
-      name="thirdSection"
-      onChange={handleChange.bind(null, 'thirdSection')}
-      label="third section background"
-      margin="normal"
-    />
-    <ColorPicker
       defaultValue={firstSection}
       value={firstSection}
       name="firstSection"
