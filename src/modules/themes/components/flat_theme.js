@@ -10,8 +10,6 @@ import {
   graphql
 }             from 'react-apollo';
 
-import Bg     from './bg.jpeg';
-
 const FlatTheme = ({setTheme}) => (
   <div>
     <FlatTheme.SettingsHeader>
@@ -19,18 +17,33 @@ const FlatTheme = ({setTheme}) => (
         Get this theme
       </FlatTheme.Button>
     </FlatTheme.SettingsHeader>
-    <FlatTheme.Header>
-      theme#1
-    </FlatTheme.Header>
-    <FlatTheme.Members>
-      tracks and albums here
-    </FlatTheme.Members>
-    <FlatTheme.Music>
-      tracks and albums here
-    </FlatTheme.Music>
-    <FlatTheme.Merch>
-      tracks and albums here
-    </FlatTheme.Merch>
+    <FlatTheme.ThemeWrapper>
+      <FlatTheme.Navigation>
+        <FlatTheme.NavItems>
+          <FlatTheme.NavItem>
+            <FlatTheme.Link href="">Music</FlatTheme.Link>
+          </FlatTheme.NavItem>
+          <FlatTheme.NavItem>
+            <FlatTheme.Link href="">Merch</FlatTheme.Link>
+          </FlatTheme.NavItem>
+          <FlatTheme.NavItem>
+            <FlatTheme.Link href="">About</FlatTheme.Link>
+          </FlatTheme.NavItem>
+        </FlatTheme.NavItems>
+      </FlatTheme.Navigation>
+      <FlatTheme.Header>
+        theme#1
+      </FlatTheme.Header>
+      <FlatTheme.FirstSection>
+        tracks and albums here
+      </FlatTheme.FirstSection>
+      <FlatTheme.SecondSection>
+        tracks and albums here
+      </FlatTheme.SecondSection>
+      <FlatTheme.ThirdSection>
+        tracks and albums here
+      </FlatTheme.ThirdSection>
+    </FlatTheme.ThemeWrapper>
   </div>
 );
 
@@ -42,15 +55,48 @@ FlatTheme.SettingsHeader = styled.div`
   padding         : 1%;
 `;
 
-FlatTheme.Members = styled.div`
+FlatTheme.ThemeWrapper = styled.div`
+  color       : #ffff;
+  font-family : 'Roboto', sans-serif;
+`;
+
+FlatTheme.Navigation = styled.div`
+  position   : absolute;
+  width      : 100%;
+  text-align : center;
+`;
+
+FlatTheme.NavItems = styled.ul`
+  margin  : 0;
+  padding : 0;
+`;
+
+FlatTheme.Link = styled.a`
+  && {
+    color           : #ffff;
+    text-decoration : none;
+    font-weight     : 600;
+
+    &:hover {
+      color : #ba3341;
+    }
+  }
+`;
+
+FlatTheme.NavItem = styled.li`
+  display : inline-block;
+  padding : 2%;
+`;
+
+FlatTheme.FirstSection = styled.div`
   min-height : 400px;
-  background : #2d292a;
+  background : #222224;
   padding    : 2%;
 `;
 
-FlatTheme.Merch = styled.div`
+FlatTheme.ThirdSection = styled.div`
   min-height : 400px;
-  background : #2d292a;
+  background : #222224;
   padding    : 2%;
 `;
 
@@ -62,10 +108,8 @@ FlatTheme.Button = styled(Button)`
 `;
 
 FlatTheme.Header = styled.div`
-  background        : url(${Bg});
   width             : 100%;
-  background-repeat : no-repeat;
-  background-size   : cover;
+  background        : linear-gradient(to right,#413b53 0%,#e84d75 100%);
   padding           : 15% 0;
   display           : flex;
   justify-content   : center;
@@ -74,9 +118,9 @@ FlatTheme.Header = styled.div`
   text-shadow       : 4px 3px 0px rgba(1, 1, 1, 1);
 `;
 
-FlatTheme.Music = styled.div`
+FlatTheme.SecondSection = styled.div`
   min-height : 400px;
-  background : #b63838;
+  background : #ba3341;
   padding    : 2%;
 `;
 
@@ -99,7 +143,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name  : 'flat theme',
-          style : '{"firstSection": "#2d292a", "secondSection": "#b63838", "thirdSection": "#2d292a", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20"}'
+          style : '{"firstSection": "#222224", "secondSection": "#ba3341", "thirdSection": "#222224", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20", "LinksColor" : "#ffff", "LinksHover" : "#ba3341", "MenuLinksPosition" : "center"}'
         },
       });
     },

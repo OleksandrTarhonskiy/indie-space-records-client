@@ -6,6 +6,34 @@ const Profile = ({ data: { allProfiles = []} }) => (
   <div>
     {allProfiles.map(profile =>
       <Profile.Body key={profile.id} a={JSON.parse(profile.theme.style)}>
+        <Profile.Navigation a={JSON.parse(profile.theme.style)}>
+          <Profile.NavItems a={JSON.parse(profile.theme.style)}>
+            <Profile.NavItem a={JSON.parse(profile.theme.style)}>
+              <Profile.Link
+                href=""
+                a={JSON.parse(profile.theme.style)}
+              >
+                Music
+              </Profile.Link>
+            </Profile.NavItem>
+            <Profile.NavItem>
+              <Profile.Link
+                href=""
+                a={JSON.parse(profile.theme.style)}
+              >
+              Merch
+              </Profile.Link>
+            </Profile.NavItem>
+            <Profile.NavItem>
+              <Profile.Link
+                href=""
+                a={JSON.parse(profile.theme.style)}
+              >
+                About
+              </Profile.Link>
+            </Profile.NavItem>
+          </Profile.NavItems>
+        </Profile.Navigation>
         <Profile.Header>
           <Profile.Headline a={JSON.parse(profile.theme.style)}>
             {profile.name}
@@ -106,6 +134,35 @@ const Profile = ({ data: { allProfiles = []} }) => (
 Profile.Body = styled.div`
   color            : ${props => props.a.color};
   background-color : ${props => props.a.backgroundColor};
+  position         : relative;
+`;
+
+Profile.Navigation = styled.div`
+  position   : absolute;
+  width      : 100%;
+  text-align : ${props => props.a.MenuLinksPosition};;
+`;
+
+Profile.NavItems = styled.ul`
+  margin  : 0;
+  padding : 0;
+`;
+
+Profile.Link = styled.a`
+  && {
+    color           : ${props => props.a.LinksColor};
+    text-decoration : none;
+    font-weight     : 600;
+
+    &:hover {
+      color : ${props => props.a.LinksHover};
+    }
+  }
+`;
+
+Profile.NavItem = styled.li`
+  display : inline-block;
+  padding : 2%;
 `;
 
 Profile.Members = styled.div`

@@ -45,7 +45,7 @@ ProfileThemeSettingsPage.SideBar = styled(Paper)`
 ProfileThemeSettingsPage.ProfileWrapper = styled(Paper)`
   width   : 80%;
   padding : 1%;
-  margin  : 1%;
+  margin  : 1% 0;
 `;
 
 const allProfilesQuery = gql`
