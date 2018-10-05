@@ -134,6 +134,7 @@ const Profile = ({ data: { allProfiles = []} }) => (
 Profile.Body = styled.div`
   color            : ${props => props.a.color};
   background-color : ${props => props.a.backgroundColor};
+  position         : relative;
 `;
 
 Profile.Navigation = styled.div`
