@@ -125,6 +125,9 @@ const ProfileThemeSettings = ({
       apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
       activeFont={headlineFont}
       name="headlineFont"
+      options={{
+        name : 'headlineFont'
+      }}
       onChange={handleFontChange.bind(null, 'headlineFont')}
       sort="popularity"
     />
@@ -136,6 +139,9 @@ const ProfileThemeSettings = ({
       apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
       activeFont={regularTextFont}
       name="regularTextFont"
+      options={{
+        name : 'regularTextFont'
+      }}
       onChange={handleFontChange.bind(null, 'regularTextFont')}
       sort="popularity"
     />
