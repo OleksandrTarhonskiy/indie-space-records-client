@@ -11,6 +11,7 @@ import Select          from '@material-ui/core/Select';
 import FormControl     from '@material-ui/core/FormControl';
 import Typography      from '@material-ui/core/Typography';
 import styled          from 'styled-components';
+import FontPicker      from 'font-picker-react';
 import WarningIcon     from '@material-ui/icons/Warning';
 import DoneIcon        from '@material-ui/icons/Done';
 import {
