@@ -117,6 +117,9 @@ const ProfileThemeSettings = ({
         <MenuItem value="right">right</MenuItem>
       </Select>
     </ProfileThemeSettings.SelectWrapper>
+    <ProfileThemeSettings.Label>
+      Headings font
+    </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-headlineFont"
       apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
@@ -125,6 +128,9 @@ const ProfileThemeSettings = ({
       onChange={handleFontChange.bind(null, 'headlineFont')}
       sort="popularity"
     />
+    <ProfileThemeSettings.Label>
+      Regular text font
+    </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-regularTextFont"
       apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
@@ -148,6 +154,9 @@ const ProfileThemeSettings = ({
       />
     </ProfileThemeSettings.SliderWrapper>
     <ProfileThemeSettings.SliderWrapper>
+      <ProfileThemeSettings.Label>
+        SubHead font size: {h2FontSize}px
+      </ProfileThemeSettings.Label>
       <Slider
         value={h2FontSize}
         name="h2FontSize"
