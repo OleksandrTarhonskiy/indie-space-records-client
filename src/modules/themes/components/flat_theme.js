@@ -1,14 +1,19 @@
-import React  from 'react';
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import React              from 'react';
+import styled             from 'styled-components';
+import Button             from '@material-ui/core/Button';
 import {
   compose,
   withHandlers
-}             from 'recompose';
+}                          from 'recompose';
 import {
   gql,
   graphql
-}             from 'react-apollo';
+}                          from 'react-apollo';
+
+import {
+  firstThemeStyle,
+  firstThemeFont
+}                          from '../models/themes_styles'
 
 const FlatTheme = ({setTheme}) => (
   <div>
@@ -125,8 +130,8 @@ FlatTheme.SecondSection = styled.div`
 `;
 
 const createThemeMutation = gql`
-  mutation($name: String!, $style: String!) {
-    createTheme(name: $name,  style: $style) {
+  mutation($name: String!, $style: String!, $fonts: String!) {
+    createTheme(name: $name,  style: $style, fonts: $fonts) {
       ok
       errors {
         path
@@ -143,7 +148,8 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name  : 'flat theme',
-          style : '{"firstSection": "#222224", "secondSection": "#ba3341", "thirdSection": "#222224", "color": "#ffff", "h1FontSize": "60", "h2FontSize": "40", "RegularFontSize": "20", "LinksColor" : "#ffff", "LinksHover" : "#ba3341", "MenuLinksPosition" : "center"}'
+          style : firstThemeStyle,
+          fonts : firstThemeFont,
         },
       });
     },

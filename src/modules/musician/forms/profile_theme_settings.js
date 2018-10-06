@@ -11,6 +11,7 @@ import Select          from '@material-ui/core/Select';
 import FormControl     from '@material-ui/core/FormControl';
 import Typography      from '@material-ui/core/Typography';
 import styled          from 'styled-components';
+import FontPicker      from 'font-picker-react';
 import WarningIcon     from '@material-ui/icons/Warning';
 import DoneIcon        from '@material-ui/icons/Done';
 import {
@@ -37,6 +38,11 @@ const ProfileThemeSettings = ({
     LinksColor,
     LinksHover,
     MenuLinksPosition,
+    activeFont,
+  },
+  fonts: {
+    headlineFont,
+    regularTextFont,
   },
   handleChange,
   submit,
@@ -45,6 +51,7 @@ const ProfileThemeSettings = ({
   hideAlert,
   sliderChange,
   handleSelectChange,
+  handleFontChange,
 }) => (
   <div>
     <ColorPicker
@@ -69,14 +76,6 @@ const ProfileThemeSettings = ({
       name="LinksHover"
       onChange={handleChange.bind(null, 'LinksHover')}
       label="Links hover"
-      margin="normal"
-    />
-    <ColorPicker
-      defaultValue={thirdSection}
-      value={thirdSection}
-      name="thirdSection"
-      onChange={handleChange.bind(null, 'thirdSection')}
-      label="third section background"
       margin="normal"
     />
     <ColorPicker
@@ -118,6 +117,34 @@ const ProfileThemeSettings = ({
         <MenuItem value="right">right</MenuItem>
       </Select>
     </ProfileThemeSettings.SelectWrapper>
+    <ProfileThemeSettings.Label>
+      Headings font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-headlineFont"
+      apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
+      activeFont={headlineFont}
+      name="headlineFont"
+      options={{
+        name : 'headlineFont'
+      }}
+      onChange={handleFontChange.bind(null, 'headlineFont')}
+      sort="popularity"
+    />
+    <ProfileThemeSettings.Label>
+      Regular text font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-regularTextFont"
+      apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
+      activeFont={regularTextFont}
+      name="regularTextFont"
+      options={{
+        name : 'regularTextFont'
+      }}
+      onChange={handleFontChange.bind(null, 'regularTextFont')}
+      sort="popularity"
+    />
     <ProfileThemeSettings.SliderWrapper>
       <ProfileThemeSettings.Label>
         Headlines font size: {h1FontSize}px
@@ -134,7 +161,7 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.SliderWrapper>
     <ProfileThemeSettings.SliderWrapper>
       <ProfileThemeSettings.Label>
-        Sub headline font size: {h2FontSize}px
+        SubHead font size: {h2FontSize}px
       </ProfileThemeSettings.Label>
       <Slider
         value={h2FontSize}
@@ -206,8 +233,8 @@ ProfileThemeSettings.SelectWrapper = styled(FormControl)`
 `;
 
 const updateThemeMutation = gql`
-  mutation($style: String!) {
-    updateTheme(style: $style) {
+  mutation($style: String!, $fonts: String!) {
+    updateTheme(style: $style, fonts: $fonts) {
       ok
       errors {
         path
@@ -219,6 +246,7 @@ const updateThemeMutation = gql`
 
 ProfileThemeSettings.propTypes = {
   styles             : PropTypes.object.isRequired,
+  fonts              : PropTypes.object.isRequired,
   submit             : PropTypes.func.isRequired,
   handleChange       : PropTypes.func.isRequired,
   hideAlert          : PropTypes.func.isRequired,
@@ -226,6 +254,7 @@ ProfileThemeSettings.propTypes = {
   errorsList         : PropTypes.array.isRequired,
   sliderChange       : PropTypes.func.isRequired,
   handleSelectChange : PropTypes.func.isRequired,
+  handleFontChange   : PropTypes.func.isRequired,
 };
 
 
@@ -245,9 +274,13 @@ const withRecompose = compose(
         LinksHover        : '',
         MenuLinksPosition : '',
       },
+      fonts      = {
+        headlineFont    : '',
+        regularTextFont : '',
+      },
       hasError   = false,
       errorsList = [],
-    }) => ({ styles, errorsList, hasError }),
+    }) => ({ styles, errorsList, hasError, fonts }),
     {
       handleChange : state => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
@@ -257,6 +290,11 @@ const withRecompose = compose(
       handleSelectChange : state => ({target}) => {
         const styles = R.assoc(target.name, target.value, state.styles);
         return ({ styles });
+      },
+
+      handleFontChange : state => (field, value) => {
+        const fonts = R.assoc(field, value.family, state.fonts);
+        return ({ fonts });
       },
 
       sliderChange : state => (field, event, value) => {
@@ -269,10 +307,11 @@ const withRecompose = compose(
     },
   ),
   withHandlers({
-    submit : ({ styles, mutate, errorsList, showAlert }) => async () => {
+    submit : ({ styles, mutate, errorsList, showAlert, fonts }) => async () => {
       const stringStyles = JSON.stringify(styles);
+      const stringFonts = JSON.stringify(fonts);
       const response = await mutate({
-        variables: { style : stringStyles },
+        variables: { style : stringStyles, fonts : stringFonts },
       });
 
       const { ok, errors } = response.data.updateTheme;
