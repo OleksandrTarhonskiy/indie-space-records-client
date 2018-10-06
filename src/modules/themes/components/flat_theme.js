@@ -10,7 +10,10 @@ import {
   graphql
 }                          from 'react-apollo';
 
-import { firstThemeStyle } from '../models/themes_styles'
+import {
+  firstThemeStyle,
+  firstThemeFont
+}                          from '../models/themes_styles'
 
 const FlatTheme = ({setTheme}) => (
   <div>
@@ -127,8 +130,8 @@ FlatTheme.SecondSection = styled.div`
 `;
 
 const createThemeMutation = gql`
-  mutation($name: String!, $style: String!) {
-    createTheme(name: $name,  style: $style) {
+  mutation($name: String!, $style: String!, $fonts: String!) {
+    createTheme(name: $name,  style: $style, fonts: $fonts) {
       ok
       errors {
         path
@@ -146,6 +149,7 @@ const withRecompose = compose(
         variables: {
           name  : 'flat theme',
           style : firstThemeStyle,
+          fonts : firstThemeFont,
         },
       });
     },

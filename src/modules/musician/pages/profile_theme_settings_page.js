@@ -16,6 +16,7 @@ const ProfileThemeSettingsPage = ({ data: { allProfiles = []} }) => (
         <ProfileThemeSettings
           key={profile.id}
           styles={JSON.parse(profile.theme.style)}
+          fonts={JSON.parse(profile.theme.fonts)}
         />
       )}
     </ProfileThemeSettingsPage.SideBar>
@@ -56,6 +57,7 @@ const allProfilesQuery = gql`
       genres
       theme {
         style
+        fonts
       }
     }
   }
