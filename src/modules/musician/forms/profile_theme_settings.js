@@ -122,7 +122,7 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-headlineFont"
-      apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
       activeFont={headlineFont}
       name="headlineFont"
       options={{
@@ -136,7 +136,7 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-regularTextFont"
-      apiKey="AIzaSyBvwktH1c-b6mtFv6KKfp5M2WLGUkHRqY4"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
       activeFont={regularTextFont}
       name="regularTextFont"
       options={{
