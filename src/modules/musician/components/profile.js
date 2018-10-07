@@ -5,14 +5,17 @@ import { gql, graphql } from 'react-apollo';
 const Profile = ({ data: { allProfiles = []} }) => (
   <div>
     {allProfiles.map(profile =>
-      <Profile.Body key={profile.id} a={JSON.parse(profile.theme.style)}>
-        <Profile.Navigation a={JSON.parse(profile.theme.style)}>
-          <Profile.NavItems a={JSON.parse(profile.theme.style)}>
-            <Profile.NavItem a={JSON.parse(profile.theme.style)}>
+      <Profile.Body
+        key={profile.id}
+        elemetStyles={JSON.parse(profile.theme.style)}
+      >
+        <Profile.Navigation elemetStyles={JSON.parse(profile.theme.style)}>
+          <Profile.NavItems elemetStyles={JSON.parse(profile.theme.style)}>
+            <Profile.NavItem elemetStyles={JSON.parse(profile.theme.style)}>
               <Profile.Link
                 href=""
-                a={JSON.parse(profile.theme.style)}
-                b={JSON.parse(profile.theme.fonts)}
+                elemetStyles={JSON.parse(profile.theme.style)}
+                elemetFont={JSON.parse(profile.theme.fonts)}
                 className="apply-font-LinksFont"
               >
                 Music
@@ -21,8 +24,8 @@ const Profile = ({ data: { allProfiles = []} }) => (
             <Profile.NavItem>
               <Profile.Link
                 href=""
-                a={JSON.parse(profile.theme.style)}
-                b={JSON.parse(profile.theme.fonts)}
+                elemetStyles={JSON.parse(profile.theme.style)}
+                elemetFont={JSON.parse(profile.theme.fonts)}
                 className="apply-font-LinksFont"
               >
               Merch
@@ -31,8 +34,8 @@ const Profile = ({ data: { allProfiles = []} }) => (
             <Profile.NavItem>
               <Profile.Link
                 href=""
-                a={JSON.parse(profile.theme.style)}
-                b={JSON.parse(profile.theme.fonts)}
+                elemetStyles={JSON.parse(profile.theme.style)}
+                elemetFont={JSON.parse(profile.theme.fonts)}
                 className="apply-font-LinksFont"
               >
                 About
@@ -42,24 +45,24 @@ const Profile = ({ data: { allProfiles = []} }) => (
         </Profile.Navigation>
         <Profile.Header>
           <Profile.Headline
-            b={JSON.parse(profile.theme.fonts)}
+            elemetFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-headlineFont"
-            a={JSON.parse(profile.theme.style)}
+            elemetStyles={JSON.parse(profile.theme.style)}
           >
             {profile.name}
           </Profile.Headline>
         </Profile.Header>
-        <Profile.Members a={JSON.parse(profile.theme.style)}>
+        <Profile.Members elemetStyles={JSON.parse(profile.theme.style)}>
           <Profile.SubHeadline
-            a={JSON.parse(profile.theme.style)}
-            b={JSON.parse(profile.theme.fonts)}
+            elemetStyles={JSON.parse(profile.theme.style)}
+            elemetFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-subHead"
           >
             Section#1
           </Profile.SubHeadline>
           <Profile.Text
-            a={JSON.parse(profile.theme.style)}
-            b={JSON.parse(profile.theme.fonts)}
+            elemetStyles={JSON.parse(profile.theme.style)}
+            elemetFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -88,10 +91,10 @@ const Profile = ({ data: { allProfiles = []} }) => (
             versions of Lorem Ipsum.
           </Profile.Text>
         </Profile.Members>
-        <Profile.Music a={JSON.parse(profile.theme.style)}>
+        <Profile.Music elemetStyles={JSON.parse(profile.theme.style)}>
           <Profile.Text
-            a={JSON.parse(profile.theme.style)}
-            b={JSON.parse(profile.theme.fonts)}
+            elemetStyles={JSON.parse(profile.theme.style)}
+            elemetFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -120,10 +123,10 @@ const Profile = ({ data: { allProfiles = []} }) => (
             versions of Lorem Ipsum.
           </Profile.Text>
         </Profile.Music>
-        <Profile.Merch a={JSON.parse(profile.theme.style)}>
+        <Profile.Merch elemetStyles={JSON.parse(profile.theme.style)}>
           <Profile.Text
-            a={JSON.parse(profile.theme.style)}
-            b={JSON.parse(profile.theme.fonts)}
+            elemetStyles={JSON.parse(profile.theme.style)}
+            elemetFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -158,15 +161,15 @@ const Profile = ({ data: { allProfiles = []} }) => (
 );
 
 Profile.Body = styled.div`
-  color            : ${props => props.a.color};
-  background-color : ${props => props.a.backgroundColor};
+  color            : ${props => props.elemetStyles.color};
+  background-color : ${props => props.elemetStyles.backgroundColor};
   position         : relative;
 `;
 
 Profile.Navigation = styled.div`
   position   : absolute;
   width      : 100%;
-  text-align : ${props => props.a.MenuLinksPosition};;
+  text-align : ${props => props.elemetStyles.MenuLinksPosition};;
 `;
 
 Profile.NavItems = styled.ul`
@@ -176,12 +179,13 @@ Profile.NavItems = styled.ul`
 
 Profile.Link = styled.a`
   && {
-    color           : ${props => props.a.LinksColor};
+    color           : ${props => props.elemetStyles.LinksColor};
     text-decoration : none;
+    font-family     : ${props => `${props.elemetFont.LinksFont}`};
     font-weight     : 600;
 
     &:hover {
-      color : ${props => props.a.LinksHover};
+      color : ${props => props.elemetStyles.LinksHover};
     }
   }
 `;
@@ -193,13 +197,13 @@ Profile.NavItem = styled.li`
 
 Profile.Members = styled.div`
   min-height : 400px;
-  background : ${props => props.a.firstSection};
+  background : ${props => props.elemetStyles.firstSection};
   padding    : 2%;
 `;
 
 Profile.Merch = styled.div`
   min-height : 400px;
-  background : ${props => props.a.thirdSection};
+  background : ${props => props.elemetStyles.thirdSection};
   padding    : 2%;
 `;
 
@@ -211,17 +215,18 @@ Profile.Header = styled.div`
 
 Profile.Music = styled.div`
   min-height : 400px;
-  background : ${props => props.a.secondSection};
+  background : ${props => props.elemetStyles.secondSection};
   padding    : 2%;
 `;
 
 Profile.SubHeadline = styled.h2`
-  font-size   : ${props => props.a.h2FontSize}px;
+  font-family : ${props => `${props.elemetFont.subHead}`};
+  font-size   : ${props => props.elemetStyles.h2FontSize}px;
 `;
 
 Profile.Text = styled.p`
-  font-family : ${props => `${props.b.regularTextFont}`};
-  font-size   : ${props => props.a.RegularFontSize}px;
+  font-family : ${props => `${props.elemetFont.regularTextFont}`};
+  font-size   : ${props => props.elemetStyles.RegularFontSize}px;
 `;
 
 Profile.BioSection = styled.div`
@@ -230,8 +235,8 @@ Profile.BioSection = styled.div`
 `;
 
 Profile.Headline = styled.h1`
-  font-family : ${props => `${props.b.headlineFont}`};
-  font-size : ${props => props.a.h1FontSize}px;
+  font-family : ${props => `${props.elemetFont.headlineFont}`};
+  font-size   : ${props => props.elemetStyles.h1FontSize}px;
 `;
 
 const allProfilesQuery = gql`
