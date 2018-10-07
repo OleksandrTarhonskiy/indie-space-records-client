@@ -12,6 +12,8 @@ const Profile = ({ data: { allProfiles = []} }) => (
               <Profile.Link
                 href=""
                 a={JSON.parse(profile.theme.style)}
+                b={JSON.parse(profile.theme.fonts)}
+                className="apply-font-LinksFont"
               >
                 Music
               </Profile.Link>
@@ -20,6 +22,8 @@ const Profile = ({ data: { allProfiles = []} }) => (
               <Profile.Link
                 href=""
                 a={JSON.parse(profile.theme.style)}
+                b={JSON.parse(profile.theme.fonts)}
+                className="apply-font-LinksFont"
               >
               Merch
               </Profile.Link>
@@ -28,6 +32,8 @@ const Profile = ({ data: { allProfiles = []} }) => (
               <Profile.Link
                 href=""
                 a={JSON.parse(profile.theme.style)}
+                b={JSON.parse(profile.theme.fonts)}
+                className="apply-font-LinksFont"
               >
                 About
               </Profile.Link>
@@ -44,7 +50,11 @@ const Profile = ({ data: { allProfiles = []} }) => (
           </Profile.Headline>
         </Profile.Header>
         <Profile.Members a={JSON.parse(profile.theme.style)}>
-          <Profile.SubHeadline a={JSON.parse(profile.theme.style)}>
+          <Profile.SubHeadline
+            a={JSON.parse(profile.theme.style)}
+            b={JSON.parse(profile.theme.fonts)}
+            className="apply-font-subHead"
+          >
             Section#1
           </Profile.SubHeadline>
           <Profile.Text
@@ -82,7 +92,7 @@ const Profile = ({ data: { allProfiles = []} }) => (
           <Profile.Text
             a={JSON.parse(profile.theme.style)}
             b={JSON.parse(profile.theme.fonts)}
-
+            className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industrys standard dummy text ever since the 1500s,
@@ -114,7 +124,7 @@ const Profile = ({ data: { allProfiles = []} }) => (
           <Profile.Text
             a={JSON.parse(profile.theme.style)}
             b={JSON.parse(profile.theme.fonts)}
-
+            className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industrys standard dummy text ever since the 1500s,

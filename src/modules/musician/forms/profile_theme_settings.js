@@ -43,6 +43,8 @@ const ProfileThemeSettings = ({
   fonts: {
     headlineFont,
     regularTextFont,
+    LinksFont,
+    subHead,
   },
   handleChange,
   submit,
@@ -143,6 +145,34 @@ const ProfileThemeSettings = ({
         name : 'regularTextFont'
       }}
       onChange={handleFontChange.bind(null, 'regularTextFont')}
+      sort="popularity"
+    />
+    <ProfileThemeSettings.Label>
+      SubHeadline font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-subHead"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      activeFont={subHead}
+      name="subHead"
+      options={{
+        name : 'subHead'
+      }}
+      onChange={handleFontChange.bind(null, 'subHead')}
+      sort="popularity"
+    />
+    <ProfileThemeSettings.Label>
+      Links font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-LinksFont"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      activeFont={LinksFont}
+      name="LinksFont"
+      options={{
+        name : 'LinksFont'
+      }}
+      onChange={handleFontChange.bind(null, 'LinksFont')}
       sort="popularity"
     />
     <ProfileThemeSettings.SliderWrapper>
@@ -277,6 +307,8 @@ const withRecompose = compose(
       fonts      = {
         headlineFont    : '',
         regularTextFont : '',
+        LinksFont       : '',
+        subHead         : '',
       },
       hasError   = false,
       errorsList = [],
