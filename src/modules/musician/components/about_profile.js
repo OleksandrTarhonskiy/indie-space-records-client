@@ -1,4 +1,5 @@
 import React        from 'react';
+import PropTypes    from 'prop-types';
 import Paper        from '@material-ui/core/Paper';
 import styled       from 'styled-components';
 import PersonIcon   from '@material-ui/icons/Person';
@@ -58,5 +59,9 @@ AboutProfile.Headline = styled.h2`
 AboutProfile.List = styled(List)`
   color       : #565656;
 `;
+
+AboutProfile.propTypes = {
+  profile : PropTypes.object.isRequired,
+};
 
 export default AboutProfile;

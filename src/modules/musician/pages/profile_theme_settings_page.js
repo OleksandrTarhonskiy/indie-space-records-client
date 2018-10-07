@@ -1,4 +1,5 @@
 import React                from 'react';
+import PropTypes            from 'prop-types';
 import {
   gql,
   graphql
@@ -48,6 +49,10 @@ ProfileThemeSettingsPage.ProfileWrapper = styled(Paper)`
   padding : 1%;
   margin  : 1% 0;
 `;
+
+ProfileThemeSettingsPage.propTypes = {
+  data : PropTypes.object.isRequired,
+};
 
 const allProfilesQuery = gql`
   {

@@ -13,7 +13,7 @@ import {
 import {
   firstThemeStyle,
   firstThemeFont
-}                          from '../models/themes_styles'
+}                          from '../models/themes_styles';
 
 const FlatTheme = ({setTheme}) => (
   <div>

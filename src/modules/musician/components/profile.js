@@ -1,4 +1,5 @@
 import React            from 'react';
+import PropTypes        from 'prop-types';
 import styled           from 'styled-components';
 import { gql, graphql } from 'react-apollo';
 
@@ -7,20 +8,20 @@ const Profile = ({ data: { allProfiles = []} }) => (
     {allProfiles.map(profile =>
       <Profile.Body
         key={profile.id}
-        elemetStyles={JSON.parse(profile.theme.style)}
+        elementStyles={JSON.parse(profile.theme.style)}
       >
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).LinksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
-        <Profile.Navigation elemetStyles={JSON.parse(profile.theme.style)}>
-          <Profile.NavItems elemetStyles={JSON.parse(profile.theme.style)}>
-            <Profile.NavItem elemetStyles={JSON.parse(profile.theme.style)}>
+        <Profile.Navigation elementStyles={JSON.parse(profile.theme.style)}>
+          <Profile.NavItems elementStyles={JSON.parse(profile.theme.style)}>
+            <Profile.NavItem elementStyles={JSON.parse(profile.theme.style)}>
               <Profile.Link
                 href=""
-                elemetStyles={JSON.parse(profile.theme.style)}
-                elemetFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-LinksFont"
+                elementStyles={JSON.parse(profile.theme.style)}
+                elementFont={JSON.parse(profile.theme.fonts)}
+                className="apply-font-linksFont"
               >
                 Music
               </Profile.Link>
@@ -28,19 +29,19 @@ const Profile = ({ data: { allProfiles = []} }) => (
             <Profile.NavItem>
               <Profile.Link
                 href=""
-                elemetStyles={JSON.parse(profile.theme.style)}
-                elemetFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-LinksFont"
+                elementStyles={JSON.parse(profile.theme.style)}
+                elementFont={JSON.parse(profile.theme.fonts)}
+                className="apply-font-linksFont"
               >
-              Merch
+                Merch
               </Profile.Link>
             </Profile.NavItem>
             <Profile.NavItem>
               <Profile.Link
                 href=""
-                elemetStyles={JSON.parse(profile.theme.style)}
-                elemetFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-LinksFont"
+                elementStyles={JSON.parse(profile.theme.style)}
+                elementFont={JSON.parse(profile.theme.fonts)}
+                className="apply-font-linksFont"
               >
                 About
               </Profile.Link>
@@ -49,24 +50,24 @@ const Profile = ({ data: { allProfiles = []} }) => (
         </Profile.Navigation>
         <Profile.Header>
           <Profile.Headline
-            elemetFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={JSON.parse(profile.theme.style)}
+            elementFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-headlineFont"
-            elemetStyles={JSON.parse(profile.theme.style)}
           >
             {profile.name}
           </Profile.Headline>
         </Profile.Header>
-        <Profile.Members elemetStyles={JSON.parse(profile.theme.style)}>
+        <Profile.Members elementStyles={JSON.parse(profile.theme.style)}>
           <Profile.SubHeadline
-            elemetStyles={JSON.parse(profile.theme.style)}
-            elemetFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={JSON.parse(profile.theme.style)}
+            elementFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-subHead"
           >
             Section#1
           </Profile.SubHeadline>
           <Profile.Text
-            elemetStyles={JSON.parse(profile.theme.style)}
-            elemetFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={JSON.parse(profile.theme.style)}
+            elementFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -95,10 +96,10 @@ const Profile = ({ data: { allProfiles = []} }) => (
             versions of Lorem Ipsum.
           </Profile.Text>
         </Profile.Members>
-        <Profile.Music elemetStyles={JSON.parse(profile.theme.style)}>
+        <Profile.Music elementStyles={JSON.parse(profile.theme.style)}>
           <Profile.Text
-            elemetStyles={JSON.parse(profile.theme.style)}
-            elemetFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={JSON.parse(profile.theme.style)}
+            elementFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -127,10 +128,10 @@ const Profile = ({ data: { allProfiles = []} }) => (
             versions of Lorem Ipsum.
           </Profile.Text>
         </Profile.Music>
-        <Profile.Merch elemetStyles={JSON.parse(profile.theme.style)}>
+        <Profile.Merch elementStyles={JSON.parse(profile.theme.style)}>
           <Profile.Text
-            elemetStyles={JSON.parse(profile.theme.style)}
-            elemetFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={JSON.parse(profile.theme.style)}
+            elementFont={JSON.parse(profile.theme.fonts)}
             className="apply-font-regularTextFont"
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -165,15 +166,15 @@ const Profile = ({ data: { allProfiles = []} }) => (
 );
 
 Profile.Body = styled.div`
-  color            : ${props => props.elemetStyles.color};
-  background-color : ${props => props.elemetStyles.backgroundColor};
+  color            : ${props => props.elementStyles.color};
+  background-color : ${props => props.elementStyles.backgroundColor};
   position         : relative;
 `;
 
 Profile.Navigation = styled.div`
   position   : absolute;
   width      : 100%;
-  text-align : ${props => props.elemetStyles.MenuLinksPosition};;
+  text-align : ${props => props.elementStyles.MenuLinksPosition};;
 `;
 
 Profile.NavItems = styled.ul`
@@ -183,13 +184,14 @@ Profile.NavItems = styled.ul`
 
 Profile.Link = styled.a`
   && {
-    color           : ${props => props.elemetStyles.LinksColor};
+    color           : ${props => props.elementStyles.LinksColor};
     text-decoration : none;
-    font-family     : ${props => `${props.elemetFont.LinksFont}`}, sans-serif;
+    font-family     : ${props => `${props.elementFont.linksFont}`}, sans-serif;
     font-weight     : 600;
+    outline         : none;
 
     &:hover {
-      color : ${props => props.elemetStyles.LinksHover};
+      color : ${props => props.elementStyles.LinksHover};
     }
   }
 `;
@@ -201,13 +203,13 @@ Profile.NavItem = styled.li`
 
 Profile.Members = styled.div`
   min-height : 400px;
-  background : ${props => props.elemetStyles.firstSection};
+  background : ${props => props.elementStyles.firstSection};
   padding    : 2%;
 `;
 
 Profile.Merch = styled.div`
   min-height : 400px;
-  background : ${props => props.elemetStyles.thirdSection};
+  background : ${props => props.elementStyles.thirdSection};
   padding    : 2%;
 `;
 
@@ -219,18 +221,18 @@ Profile.Header = styled.div`
 
 Profile.Music = styled.div`
   min-height : 400px;
-  background : ${props => props.elemetStyles.secondSection};
+  background : ${props => props.elementStyles.secondSection};
   padding    : 2%;
 `;
 
 Profile.SubHeadline = styled.h2`
-  font-family : ${props => `${props.elemetFont.subHead}`}, sans-serif;
-  font-size   : ${props => props.elemetStyles.h2FontSize}px;
+  font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.h2FontSize}px;
 `;
 
 Profile.Text = styled.p`
-  font-family : ${props => `${props.elemetFont.regularTextFont}`}, sans-serif;
-  font-size   : ${props => props.elemetStyles.RegularFontSize}px;
+  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
 Profile.BioSection = styled.div`
@@ -239,9 +241,14 @@ Profile.BioSection = styled.div`
 `;
 
 Profile.Headline = styled.h1`
-  font-family : ${props => `${props.elemetFont.headlineFont}`}, sans-serif;
-  font-size   : ${props => props.elemetStyles.h1FontSize}px;
+  font-family : ${props => `${props.elementFont.headlineFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.h1FontSize}px;
 `;
+
+Profile.propTypes = {
+  data : PropTypes.object.isRequired,
+};
+
 
 const allProfilesQuery = gql`
   {
