@@ -38,11 +38,12 @@ const ProfileThemeSettings = ({
     LinksColor,
     LinksHover,
     MenuLinksPosition,
-    activeFont,
   },
   fonts: {
     headlineFont,
     regularTextFont,
+    linksFont,
+    subHead,
   },
   handleChange,
   submit,
@@ -143,6 +144,34 @@ const ProfileThemeSettings = ({
         name : 'regularTextFont'
       }}
       onChange={handleFontChange.bind(null, 'regularTextFont')}
+      sort="popularity"
+    />
+    <ProfileThemeSettings.Label>
+      SubHeadline font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-subHead"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      activeFont={subHead}
+      name="subHead"
+      options={{
+        name : 'subHead'
+      }}
+      onChange={handleFontChange.bind(null, 'subHead')}
+      sort="popularity"
+    />
+    <ProfileThemeSettings.Label>
+      Links font
+    </ProfileThemeSettings.Label>
+    <FontPicker
+      id="font-picker-linksFont"
+      apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      activeFont={linksFont}
+      name="linksFont"
+      options={{
+        name : 'linksFont'
+      }}
+      onChange={handleFontChange.bind(null, 'linksFont')}
       sort="popularity"
     />
     <ProfileThemeSettings.SliderWrapper>
@@ -257,7 +286,6 @@ ProfileThemeSettings.propTypes = {
   handleFontChange   : PropTypes.func.isRequired,
 };
 
-
 const withRecompose = compose(
   graphql(updateThemeMutation),
   withStateHandlers(
@@ -277,6 +305,8 @@ const withRecompose = compose(
       fonts      = {
         headlineFont    : '',
         regularTextFont : '',
+        linksFont       : '',
+        subHead         : '',
       },
       hasError   = false,
       errorsList = [],

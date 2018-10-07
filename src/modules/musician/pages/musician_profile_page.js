@@ -1,4 +1,5 @@
 import React               from 'react';
+import PropTypes           from 'prop-types';
 import decode              from 'jwt-decode';
 import styled              from 'styled-components';
 import {
@@ -53,6 +54,10 @@ MusicianProfilePage.ProfileWrapper = styled.div`
   width          : 100%;
   background     : ${props => props.background ? '#eaedf5' : 'transparent'};
 `;
+
+MusicianProfilePage.propTypes = {
+  data : PropTypes.object.isRequired,
+};
 
 const allProfilesQuery = gql`
   {

@@ -1,5 +1,5 @@
 import React            from 'react';
-import ChipInput        from 'material-ui-chip-input'
+import ChipInput        from 'material-ui-chip-input';
 import TextField        from '@material-ui/core/TextField';
 import Snackbar         from '@material-ui/core/Snackbar';
 import SnackbarContent  from '@material-ui/core/SnackbarContent';
@@ -189,13 +189,12 @@ const withRecompose = compose(
       },
       handleReginChange : state => (field, value) => {
         const form = R.assoc(field, value, state.form);
-        console.log(form)
         return ({
           form,
-          canSubmit : canSubmitForm(form),
+          canSubmit     : canSubmitForm(form),
         });
       },
-      addChip       : state => (field, value) => {
+      addChip           : state => (field, value) => {
         const fieldLens = R.lensProp(field);
         const form = R.set(fieldLens, R.compose(R.append(value), R.view(fieldLens))(state.form), state.form);
         return ({
@@ -204,14 +203,14 @@ const withRecompose = compose(
         });
       },
       deleteChip : state => (field, value, ind) => {
-        const form = R.dissocPath([field, ind], (state.form: Object));
+        const form = R.dissocPath([field, ind], (state.form));
         return ({
           form,
           canSubmit : canSubmitForm(form),
         });
       },
-      showError     : () => () => ({ hasError: true }),
-      hideError     : () => () => ({ hasError: false }),
+      showError          : () => () => ({ hasError: true }),
+      hideError          : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
@@ -227,7 +226,7 @@ const withRecompose = compose(
       showError,
       history,
     }) => async () => {
-      const genresString = genres.toString()
+      const genresString = genres.toString();
       const response = await mutate({
         variables: {name: name, genres: genresString, country: country, region: region}
       });
