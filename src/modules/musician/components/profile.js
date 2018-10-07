@@ -181,7 +181,7 @@ Profile.Link = styled.a`
   && {
     color           : ${props => props.elemetStyles.LinksColor};
     text-decoration : none;
-    font-family     : ${props => `${props.elemetFont.LinksFont}`};
+    font-family     : ${props => `${props.elemetFont.LinksFont}`}, sans-serif;
     font-weight     : 600;
 
     &:hover {
@@ -220,12 +220,12 @@ Profile.Music = styled.div`
 `;
 
 Profile.SubHeadline = styled.h2`
-  font-family : ${props => `${props.elemetFont.subHead}`};
+  font-family : ${props => `${props.elemetFont.subHead}`}, sans-serif;
   font-size   : ${props => props.elemetStyles.h2FontSize}px;
 `;
 
 Profile.Text = styled.p`
-  font-family : ${props => `${props.elemetFont.regularTextFont}`};
+  font-family : ${props => `${props.elemetFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elemetStyles.RegularFontSize}px;
 `;
 
@@ -235,7 +235,7 @@ Profile.BioSection = styled.div`
 `;
 
 Profile.Headline = styled.h1`
-  font-family : ${props => `${props.elemetFont.headlineFont}`};
+  font-family : ${props => `${props.elemetFont.headlineFont}`}, sans-serif;
   font-size   : ${props => props.elemetStyles.h1FontSize}px;
 `;
 
