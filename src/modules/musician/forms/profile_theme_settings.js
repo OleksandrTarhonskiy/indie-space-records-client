@@ -326,6 +326,7 @@ const withRecompose = compose(
 
       handleFontChange : state => (field, value) => {
         const fonts = R.assoc(field, value.family, state.fonts);
+        console.log(value, "**************")
         return ({ fonts });
       },
 

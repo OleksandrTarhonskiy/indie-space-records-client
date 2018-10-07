@@ -9,6 +9,10 @@ const Profile = ({ data: { allProfiles = []} }) => (
         key={profile.id}
         elemetStyles={JSON.parse(profile.theme.style)}
       >
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).LinksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
         <Profile.Navigation elemetStyles={JSON.parse(profile.theme.style)}>
           <Profile.NavItems elemetStyles={JSON.parse(profile.theme.style)}>
             <Profile.NavItem elemetStyles={JSON.parse(profile.theme.style)}>
