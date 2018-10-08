@@ -2,6 +2,7 @@ import React            from 'react';
 import PropTypes        from 'prop-types';
 import styled           from 'styled-components';
 import { gql, graphql } from 'react-apollo';
+import {Helmet}         from "react-helmet";
 
 const Profile = ({ data: { allProfiles = []} }) => (
   <div>
@@ -10,10 +11,12 @@ const Profile = ({ data: { allProfiles = []} }) => (
         key={profile.id}
         elementStyles={JSON.parse(profile.theme.style)}
       >
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
+        <Helmet>
+          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
+          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
+          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
+        </Helmet>
         <Profile.Navigation elementStyles={JSON.parse(profile.theme.style)}>
           <Profile.NavItems elementStyles={JSON.parse(profile.theme.style)}>
             <Profile.NavItem elementStyles={JSON.parse(profile.theme.style)}>
