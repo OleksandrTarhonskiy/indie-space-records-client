@@ -43,6 +43,7 @@
   "devDependencies": {
     "eslint": "^5.2.0",
     "eslint-plugin-react": "^7.10.0",
+    "prettier": "1.14.3",
     "react-country-region-selector": "^1.4.1"
   }
 }
