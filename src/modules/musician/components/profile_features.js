@@ -22,7 +22,7 @@ const ProfileFeatures = () => (
         Home
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/profile/events">
       <ProfileFeatures.MenuItemText>
         <GradeIcon />
         Events
