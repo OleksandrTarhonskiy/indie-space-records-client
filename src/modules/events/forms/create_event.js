@@ -10,10 +10,12 @@ import {
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                       from 'recompose';
 import validator        from 'validator';
 import Switch           from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { gql, graphql } from 'react-apollo';
 
 import GradientButton   from '../../../layouts/gradient_button';
 
@@ -28,6 +30,7 @@ const CreateEvent = ({
   handleChange,
   handleReginChange,
   canSubmit,
+  createEvent,
 }) => (
   <div>
     <CreateEvent.Headline>
@@ -75,6 +78,7 @@ const CreateEvent = ({
       <GradientButton
         text={'Create'}
         disabled={!canSubmit}
+        onClick={createEvent}
       />
     </form>
   </div>
@@ -131,7 +135,20 @@ const canSubmitForm = ({
   !R.isEmpty(region),
 ]);
 
+const createEventMutation = gql`
+  mutation($title: String!, $details: String!, $price: Float!, $country: String!, $region: String!) {
+    createEvent(title: $title, details: $details, price: $price, country: $country, region: $region) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
 const withRecompose = compose(
+  graphql(createEventMutation),
   withStateHandlers(
     ({
       form      = {
@@ -161,6 +178,13 @@ const withRecompose = compose(
       },
     },
   ),
+  withHandlers({
+    createEvent : ({mutate, form}) => async () => {
+      const response = await mutate({
+        variables: form
+      });
+    },
+  })
 );
 
 export default withRecompose(CreateEvent);
