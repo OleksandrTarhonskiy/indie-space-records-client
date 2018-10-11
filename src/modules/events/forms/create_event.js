@@ -1,33 +1,43 @@
-import React            from 'react';
-import PropTypes        from 'prop-types';
-import TextField        from '@material-ui/core/TextField';
-import styled           from 'styled-components';
-import * as R           from 'ramda';
+import React                   from 'react';
+import PropTypes               from 'prop-types';
+import TextField               from '@material-ui/core/TextField';
+import styled                  from 'styled-components';
+import * as R                  from 'ramda';
+import moment                  from 'moment';
 import {
   CountryDropdown,
   RegionDropdown,
-}                       from 'react-country-region-selector';
+}                              from 'react-country-region-selector';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                       from 'recompose';
-import { gql, graphql } from 'react-apollo';
+}                              from 'recompose';
+import { gql, graphql }        from 'react-apollo';
+import {
+  DatePicker,
+  TimePicker,
+}                              from 'material-ui-pickers';
+import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
-import GradientButton   from '../../../layouts/gradient_button';
+import GradientButton          from '../../../layouts/gradient_button';
 
 const CreateEvent = ({
   form: {
     title,
     details,
     price,
+    date,
+    time,
     country,
     region,
   },
   handleChange,
-  handleReginChange,
+  handleRegionChange,
   canSubmit,
   createEvent,
+  handleDateChange,
 }) => (
   <div>
     <CreateEvent.Headline>
@@ -62,14 +72,32 @@ const CreateEvent = ({
           }}
           margin="normal"
         />
+        <MuiPickersUtilsProvider utils={DateFnsUtils} moment={moment}>
+          <DatePicker
+            label="Date"
+            format="YYYY/dd/MM"
+            keyboard
+            disableOpenOnEnter
+            animateYearScrolling={false}
+            value={date}
+            onChange={handleDateChange.bind(null, 'date')}
+          />
+          <TimePicker
+            clearable
+            ampm={false}
+            label="Time"
+            value={time}
+            onChange={handleDateChange.bind(null, 'time')}
+          />
+        </MuiPickersUtilsProvider>
         <CreateEvent.CountryDropdown
           value={country}
-          onChange={handleReginChange.bind(null, 'country')}
+          onChange={handleRegionChange.bind(null, 'country')}
         />
         <CreateEvent.RegionDropdown
           country={country}
           value={region}
-          onChange={handleReginChange.bind(null, 'region')}
+          onChange={handleRegionChange.bind(null, 'region')}
         />
       </CreateEvent.InputsWrapper>
       <GradientButton
@@ -152,6 +180,8 @@ const withRecompose = compose(
         title   : '',
         details : '',
         price   : '',
+        date    : '',
+        time    : '',
         country : '',
         region  : '',
       },
@@ -166,7 +196,15 @@ const withRecompose = compose(
         });
       },
 
-      handleReginChange : state => (field, value) => {
+      handleRegionChange : state => (field, value) => {
+        const form = R.assoc(field, value, state.form);
+        return ({
+          form,
+          canSubmit     : canSubmitForm(form),
+        });
+      },
+
+      handleDateChange : state => (field, value) => {
         const form = R.assoc(field, value, state.form);
         return ({
           form,
