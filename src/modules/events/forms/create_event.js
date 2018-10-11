@@ -12,9 +12,6 @@ import {
   withStateHandlers,
   withHandlers,
 }                       from 'recompose';
-import validator        from 'validator';
-import Switch           from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { gql, graphql } from 'react-apollo';
 
 import GradientButton   from '../../../layouts/gradient_button';
