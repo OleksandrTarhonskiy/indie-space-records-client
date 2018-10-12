@@ -2,7 +2,7 @@ import React            from 'react';
 import PropTypes        from 'prop-types';
 import styled           from 'styled-components';
 import { gql, graphql } from 'react-apollo';
-import { Helmet }       from "react-helmet";
+import { Helmet }       from 'react-helmet';
 
 const Profile = ({ data: { allProfiles = []} }) => (
   <div>

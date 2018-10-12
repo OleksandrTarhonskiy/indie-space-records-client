@@ -1,9 +1,10 @@
-import React from 'react';
-import Table from '@material-ui/core/Table';
+import React     from 'react';
+import PropTypes from 'prop-types';
+import Table     from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import TableRow  from '@material-ui/core/TableRow';
 
 const EventsList = ({events}) => (
   <Table>
@@ -36,5 +37,9 @@ const EventsList = ({events}) => (
     </TableBody>
   </Table>
 );
+
+EventsList.propTypes = {
+  events : PropTypes.array.isRequired,
+};
 
 export default EventsList;
