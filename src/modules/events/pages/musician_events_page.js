@@ -1,14 +1,22 @@
 import React       from 'react';
 import styled      from 'styled-components';
 import Paper       from '@material-ui/core/Paper';
+import {
+  gql,
+  graphql
+}                  from 'react-apollo';
 
 import CreateEvent from '../forms/create_event'
+import EventsList  from '../forms/events_list'
 
-const MusicianEventsPage = () => (
+const MusicianEventsPage = ({ data: { allMyEvents = []} }) => (
   <MusicianEventsPage.Wrapper>
     <MusicianEventsPage.FormWrapper>
       <CreateEvent />
     </MusicianEventsPage.FormWrapper>
+    <MusicianEventsPage.TableWrapper>
+      <EventsList events={allMyEvents} />
+    </MusicianEventsPage.TableWrapper>
   </MusicianEventsPage.Wrapper>
 );
 
@@ -24,4 +32,22 @@ MusicianEventsPage.FormWrapper = styled(Paper)`
   padding : 2%;
 `;
 
-export default MusicianEventsPage;
+MusicianEventsPage.TableWrapper = styled(Paper)`
+  margin  : 1% 0;
+  padding : 2%;
+`;
+
+const allMyEventsQuery = gql`
+  {
+    allMyEvents{
+      id
+      title
+      country
+      region
+      date
+      price
+    }
+  }
+`;
+
+export default graphql(allMyEventsQuery)(MusicianEventsPage);
