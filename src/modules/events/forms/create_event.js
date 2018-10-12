@@ -14,10 +14,7 @@ import {
   withHandlers,
 }                              from 'recompose';
 import { gql, graphql }        from 'react-apollo';
-import {
-  DatePicker,
-  TimePicker,
-}                              from 'material-ui-pickers';
+import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
@@ -29,7 +26,6 @@ const CreateEvent = ({
     details,
     price,
     date,
-    time,
     country,
     region,
   },
@@ -73,21 +69,15 @@ const CreateEvent = ({
           margin="normal"
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils} moment={moment}>
-          <DatePicker
-            label="Date"
-            format="YYYY/dd/MM"
+          <DateTimePicker
             keyboard
-            disableOpenOnEnter
-            animateYearScrolling={false}
+            label="Started at"
+            minDate={Date.now()}
             value={date}
+            format="yyyy-MM-dd hh:mm A"
+            disableOpenOnEnter
+            mask={[/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M']}
             onChange={handleDateChange.bind(null, 'date')}
-          />
-          <TimePicker
-            clearable
-            ampm={false}
-            label="Time"
-            value={time}
-            onChange={handleDateChange.bind(null, 'time')}
           />
         </MuiPickersUtilsProvider>
         <CreateEvent.CountryDropdown
@@ -150,19 +140,21 @@ const canSubmitForm = ({
   title,
   details,
   price,
+  date,
   country,
   region,
 }) => R.all(R.equals(true))([
   !R.isEmpty(title),
   !R.isEmpty(details),
   !R.isEmpty(price),
+  !R.isEmpty(date),
   !R.isEmpty(country),
   !R.isEmpty(region),
 ]);
 
 const createEventMutation = gql`
-  mutation($title: String!, $details: String!, $price: Float!, $country: String!, $region: String!) {
-    createEvent(title: $title, details: $details, price: $price, country: $country, region: $region) {
+  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!) {
+    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region) {
       ok
       errors {
         path
@@ -180,8 +172,7 @@ const withRecompose = compose(
         title   : '',
         details : '',
         price   : '',
-        date    : '',
-        time    : '',
+        date    : (new Date()).toString(),
         country : '',
         region  : '',
       },
