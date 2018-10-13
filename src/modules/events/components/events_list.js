@@ -5,6 +5,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow  from '@material-ui/core/TableRow';
+import { Link }  from 'react-router-dom';
 
 const EventsList = ({events}) => (
   <Table>
@@ -15,6 +16,7 @@ const EventsList = ({events}) => (
         <TableCell>State</TableCell>
         <TableCell>Started at</TableCell>
         <TableCell numeric>Price</TableCell>
+        <TableCell>Actions</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -31,6 +33,11 @@ const EventsList = ({events}) => (
             <TableCell>{event.region}</TableCell>
             <TableCell>{event.date}</TableCell>
             <TableCell numeric>{event.price}</TableCell>
+            <TableCell numeric>
+              <Link to={`/events/${event.id}`}>
+                View details
+              </Link>
+            </TableCell>
           </TableRow>
         );
       })}
