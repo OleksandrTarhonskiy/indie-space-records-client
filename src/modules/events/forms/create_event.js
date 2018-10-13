@@ -30,10 +30,9 @@ const CreateEvent = ({
     region,
   },
   handleChange,
-  handleRegionChange,
   canSubmit,
   createEvent,
-  handleDateChange,
+  handleFieldChange,
 }) => (
   <div>
     <CreateEvent.Headline>
@@ -77,17 +76,17 @@ const CreateEvent = ({
             format="yyyy-MM-dd hh:mm A"
             disableOpenOnEnter
             mask={[/\d/, /\d/, /\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M']}
-            onChange={handleDateChange.bind(null, 'date')}
+            onChange={handleFieldChange.bind(null, 'date')}
           />
         </MuiPickersUtilsProvider>
         <CreateEvent.CountryDropdown
           value={country}
-          onChange={handleRegionChange.bind(null, 'country')}
+          onChange={handleFieldChange.bind(null, 'country')}
         />
         <CreateEvent.RegionDropdown
           country={country}
           value={region}
-          onChange={handleRegionChange.bind(null, 'region')}
+          onChange={handleFieldChange.bind(null, 'region')}
         />
       </CreateEvent.InputsWrapper>
       <GradientButton
@@ -181,23 +180,15 @@ const withRecompose = compose(
       canSubmit = false,
     }) => ({ form, canSubmit }),
     {
-      handleChange : state => ({ target }) => {
+      handleChange      : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
-        return ({
-          form,
-          canSubmit : canSubmitForm(form),
-        });
-      },
-
-      handleRegionChange : state => (field, value) => {
-        const form = R.assoc(field, value, state.form);
         return ({
           form,
           canSubmit     : canSubmitForm(form),
         });
       },
 
-      handleDateChange : state => (field, value) => {
+      handleFieldChange : state => (field, value) => {
         const form = R.assoc(field, value, state.form);
         return ({
           form,
