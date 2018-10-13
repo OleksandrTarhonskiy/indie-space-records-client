@@ -1,6 +1,7 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
 import { withRouter } from 'react-router'
+import moment         from 'moment'
 import {
   gql,
   graphql
@@ -20,7 +21,7 @@ const EventDetails = ({
       {viewEvent.title}
     </EventDetails.Headline>
     <p>Price: {viewEvent.price}$</p>
-    <p>Started : {viewEvent.date}</p>
+    <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
     <p>Country : {viewEvent.country}</p>
     <p>Region : {viewEvent.region}</p>
     <p>About:</p>

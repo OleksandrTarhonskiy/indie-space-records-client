@@ -1,5 +1,6 @@
 import React     from 'react';
 import PropTypes from 'prop-types';
+import moment    from 'moment'
 import Table     from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -31,7 +32,7 @@ const EventsList = ({events}) => (
             </TableCell>
             <TableCell>{event.country}</TableCell>
             <TableCell>{event.region}</TableCell>
-            <TableCell>{event.date}</TableCell>
+            <TableCell>{moment(Date.parse(event.date)).format('DD/MM/YYYY h:mm A')}</TableCell>
             <TableCell numeric>{event.price}</TableCell>
             <TableCell numeric>
               <Link to={`/events/${event.id}`}>
