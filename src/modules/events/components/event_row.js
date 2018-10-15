@@ -57,7 +57,7 @@ EventRow.ActionsWrapper = styled.div`
 `;
 
 EventRow.DeleteIconWrapper = styled.div`
-  cursor  : pointer;
+  cursor : pointer;
 `;
 
 const deleteEventMutation = gql`
