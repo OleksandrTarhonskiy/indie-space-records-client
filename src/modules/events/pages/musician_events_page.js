@@ -44,9 +44,9 @@ const allMyEventsQuery = gql`
       title
       country
       region
+      address
       date
       price
-      address
     }
   }
 `;

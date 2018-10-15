@@ -1,6 +1,6 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
-import moment         from 'moment'
+import moment         from 'moment';
 import {
   gql,
   graphql
@@ -22,6 +22,7 @@ const EventDetails = ({
     <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
     <p>Country : {viewEvent.country}</p>
     <p>Region : {viewEvent.region}</p>
+    <p>Address : {viewEvent.address}</p>
     <p>About:</p>
     <EventDetails.About>
       {viewEvent.details}
@@ -40,6 +41,7 @@ const viewEventQuery = gql`
       details
       country
       region
+      address
       date
       price
     }
