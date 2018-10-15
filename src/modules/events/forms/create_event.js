@@ -153,6 +153,7 @@ const canSubmitForm = ({
   date,
   country,
   region,
+  address,
 }) => R.all(R.equals(true))([
   !R.isEmpty(title),
   !R.isEmpty(details),
@@ -160,6 +161,7 @@ const canSubmitForm = ({
   !R.isEmpty(date),
   !R.isEmpty(country),
   !R.isEmpty(region),
+  !R.isEmpty(address),
 ]);
 
 const createEventMutation = gql`
