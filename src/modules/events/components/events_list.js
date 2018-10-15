@@ -15,6 +15,7 @@ const EventsList = ({events}) => (
         <TableCell>Title</TableCell>
         <TableCell>Country</TableCell>
         <TableCell>State</TableCell>
+        <TableCell>Address</TableCell>
         <TableCell>Started at</TableCell>
         <TableCell numeric>Price</TableCell>
         <TableCell>Actions</TableCell>
@@ -32,6 +33,7 @@ const EventsList = ({events}) => (
             </TableCell>
             <TableCell>{event.country}</TableCell>
             <TableCell>{event.region}</TableCell>
+            <TableCell>{event.address}</TableCell>
             <TableCell>{moment(Date.parse(event.date)).format('DD/MM/YYYY h:mm A')}</TableCell>
             <TableCell numeric>{event.price}</TableCell>
             <TableCell numeric>

@@ -1,6 +1,5 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
-import { withRouter } from 'react-router'
 import moment         from 'moment'
 import {
   gql,
@@ -8,7 +7,6 @@ import {
 }                     from 'react-apollo';
 import { compose }    from 'recompose';
 import styled         from 'styled-components';
-import Button         from '@material-ui/core/Button';
 
 import GradientButton from '../../../layouts/gradient_button';
 

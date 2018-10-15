@@ -28,6 +28,7 @@ const CreateEvent = ({
     date,
     country,
     region,
+    address,
   },
   handleChange,
   canSubmit,
@@ -87,6 +88,14 @@ const CreateEvent = ({
           country={country}
           value={region}
           onChange={handleFieldChange.bind(null, 'region')}
+        />
+        <TextField
+          name="address"
+          label="address"
+          margin="normal"
+          value={address}
+          onChange={handleChange}
+          fullWidth
         />
       </CreateEvent.InputsWrapper>
       <GradientButton
@@ -154,8 +163,8 @@ const canSubmitForm = ({
 ]);
 
 const createEventMutation = gql`
-  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!) {
-    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region) {
+  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
+    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
       ok
       errors {
         path
@@ -176,6 +185,7 @@ const withRecompose = compose(
         date    : (new Date()).toString(),
         country : '',
         region  : '',
+        address : '',
       },
       canSubmit = false,
     }) => ({ form, canSubmit }),
