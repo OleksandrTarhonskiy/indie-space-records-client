@@ -12,16 +12,20 @@ const EventPage = ({
     }
   },
 }) => (
-  <EventPage.PagaWrapper>
+  <EventPage.PageWrapper>
     <EventDetails id={id} />
-  </EventPage.PagaWrapper>
+  </EventPage.PageWrapper>
 );
 
-EventPage.PagaWrapper = styled.div`
+EventPage.PageWrapper = styled.div`
   padding     : 5%;
   dispay      : flex;
   font-family : 'Roboto', sans-serif;
   color       : #3c3c3e;
 `;
+
+EventPage.propTypes = {
+  match : PropTypes.object.isRequired,
+};
 
 export default withRouter(EventPage);
