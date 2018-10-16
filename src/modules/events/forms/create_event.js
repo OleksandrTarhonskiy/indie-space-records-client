@@ -138,12 +138,11 @@ CreateEvent.RegionDropdown = styled(RegionDropdown)`
 `;
 
 CreateEvent.propTypes = {
-  form               : PropTypes.object.isRequired,
-  canSubmit          : PropTypes.bool.isRequired,
-  handleChange       : PropTypes.func.isRequired,
-  handleRegionChange : PropTypes.func.isRequired,
-  handleDateChange   : PropTypes.func.isRequired,
-  createEvent        : PropTypes.func.isRequired,
+  form              : PropTypes.object.isRequired,
+  canSubmit         : PropTypes.bool.isRequired,
+  handleChange      : PropTypes.func.isRequired,
+  handleFieldChange : PropTypes.func.isRequired,
+  createEvent       : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({
