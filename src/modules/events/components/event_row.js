@@ -43,6 +43,9 @@ const EventRow = ({
         <Link to={`/events/${id}`}>
           View details
         </Link>
+        <Link to={`/events/${id}/edit`}>
+          Edit
+        </Link>
         <EventRow.DeleteIconWrapper>
           <ClearIcon Click={deleteEvent} />
         </EventRow.DeleteIconWrapper>
