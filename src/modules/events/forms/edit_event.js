@@ -19,7 +19,7 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 import GradientButton          from '../../../layouts/gradient_button';
 
 const EditEvent = ({
-  form: {
+  currentEvent: {
     title,
     details,
     price,
@@ -30,9 +30,10 @@ const EditEvent = ({
   },
   handleChange,
   handleFieldChange,
+  currentEvent,
 }) => (
   <div>
-    <EditEvent.Headline>
+    <EditEvent.Headline onClick={() => console.log(currentEvent)}>
       Edit event
     </EditEvent.Headline>
     <form>
@@ -132,7 +133,7 @@ EditEvent.RegionDropdown = styled(RegionDropdown)`
 `;
 
 EditEvent.propTypes = {
-  form              : PropTypes.object.isRequired,
+  event             : PropTypes.object.isRequired,
   canSubmit         : PropTypes.bool.isRequired,
   handleChange      : PropTypes.func.isRequired,
   handleFieldChange : PropTypes.func.isRequired,
@@ -141,7 +142,7 @@ EditEvent.propTypes = {
 const withRecompose = compose(
   withStateHandlers(
     ({
-      form      = {
+      currentEvent = {
         title   : '',
         details : '',
         price   : '',
@@ -150,17 +151,16 @@ const withRecompose = compose(
         region  : '',
         address : '',
       },
-      canSubmit = false,
-    }) => ({ form, canSubmit }),
+    }) => ({ currentEvent }),
     {
       handleChange      : state => ({ target }) => {
-        const form = R.assoc(target.name, target.value, state.form);
-        return ({ form });
+        const currentEvent = R.assoc(target.name, target.value, state.currentEvent);
+        return ({ currentEvent });
       },
 
       handleFieldChange : state => (field, value) => {
-        const form = R.assoc(field, value, state.form);
-        return ({ form });
+        const currentEvent = R.assoc(field, value, state.currentEvent);
+        return ({ currentEvent });
       },
     },
   ),
