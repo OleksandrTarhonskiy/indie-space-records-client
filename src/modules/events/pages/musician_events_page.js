@@ -1,4 +1,5 @@
 import React       from 'react';
+import PropTypes   from 'prop-types';
 import styled      from 'styled-components';
 import Paper       from '@material-ui/core/Paper';
 import {
@@ -36,6 +37,11 @@ MusicianEventsPage.TableWrapper = styled(Paper)`
   margin  : 1% 0;
   padding : 2%;
 `;
+
+MusicianEventsPage.propTypes = {
+  data : PropTypes.object.isRequired,
+};
+
 
 const allMyEventsQuery = gql`
   {

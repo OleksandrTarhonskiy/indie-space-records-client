@@ -1,28 +1,34 @@
 import React          from 'react';
+import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
 import {
   gql,
   graphql
 }                     from 'react-apollo';
 import { compose }    from 'recompose';
-import { withRouter } from 'react-router';
 
-import EditEvent      from '../forms/edit_event';
+import EditEventForm  from '../forms/edit_event_form';
 
-const EditEventPage = ({
+const EditEvent = ({
+  id,
   data: { viewEvent = {} },
 }) => (
-  <EditEventPage.PageWrapper >
-    <EditEvent currentEvent={viewEvent} />
-  </EditEventPage.PageWrapper >
+  <EditEvent.PageWrapper>
+    <EditEventForm currentEvent={viewEvent} />
+  </EditEvent.PageWrapper>
 );
 
-EditEventPage.PageWrapper = styled.div`
+EditEvent.PageWrapper = styled.div`
   padding     : 5% 10%;
   dispay      : flex;
   font-family : 'Roboto', sans-serif;
   color       : #3c3c3e;
 `;
+
+EditEvent.propTypes = {
+  id   : PropTypes.number.isRequired,
+  data : PropTypes.object.isRequired,
+};
 
 const viewEventQuery = gql`
   query viewEvent($eventId: Int!){
@@ -40,14 +46,13 @@ const viewEventQuery = gql`
 `;
 
 const withRecompose = compose(
-  withRouter,
   graphql(viewEventQuery, {
-    options: {
+    options: (ownProps) => ({
       variables: {
-        eventId: 8
+        eventId: ownProps.id,
       }
-    }
+    })
   })
 );
 
-export default withRecompose(EditEventPage);
+export default withRecompose(EditEvent);

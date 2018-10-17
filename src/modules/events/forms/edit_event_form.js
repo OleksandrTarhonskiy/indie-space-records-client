@@ -3,6 +3,7 @@ import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
+import { gql, graphql }        from 'react-apollo';
 import moment                  from 'moment';
 import {
   CountryDropdown,
@@ -11,6 +12,7 @@ import {
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                              from 'recompose';
 import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
@@ -18,8 +20,9 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 
 import GradientButton          from '../../../layouts/gradient_button';
 
-const EditEvent = ({
+const EditEventForm = ({
   currentEvent: {
+    id,
     title,
     details,
     price,
@@ -30,14 +33,14 @@ const EditEvent = ({
   },
   handleChange,
   handleFieldChange,
-  currentEvent,
+  updateEvent,
 }) => (
   <div>
-    <EditEvent.Headline onClick={() => console.log(currentEvent)}>
+    <EditEventForm.Headline>
       Edit event
-    </EditEvent.Headline>
+    </EditEventForm.Headline>
     <form>
-      <EditEvent.InputsWrapper>
+      <EditEventForm.InputsWrapper>
         <TextField
           name="title"
           label="Title"
@@ -77,11 +80,11 @@ const EditEvent = ({
             onChange={handleFieldChange.bind(null, 'date')}
           />
         </MuiPickersUtilsProvider>
-        <EditEvent.CountryDropdown
+        <EditEventForm.CountryDropdown
           value={country}
           onChange={handleFieldChange.bind(null, 'country')}
         />
-        <EditEvent.RegionDropdown
+        <EditEventForm.RegionDropdown
           country={country}
           value={region}
           onChange={handleFieldChange.bind(null, 'region')}
@@ -94,27 +97,28 @@ const EditEvent = ({
           onChange={handleChange}
           fullWidth
         />
-      </EditEvent.InputsWrapper>
+      </EditEventForm.InputsWrapper>
       <GradientButton
         text={'Update'}
+        onClick={updateEvent}
       />
     </form>
   </div>
 );
 
-EditEvent.InputsWrapper = styled.div`
+EditEventForm.InputsWrapper = styled.div`
   display        : flex;
   flex-direction : column;
 `;
 
-EditEvent.Headline = styled.h1`
+EditEventForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
   text-align  : center;
   font-weight : 300;
 `;
 
-EditEvent.CountryDropdown = styled(CountryDropdown)`
+EditEventForm.CountryDropdown = styled(CountryDropdown)`
   background    : #ffff;
   border        : 1px solid #999;
   height        : 33px;
@@ -123,7 +127,7 @@ EditEvent.CountryDropdown = styled(CountryDropdown)`
   margin-top    : 2%;
 `;
 
-EditEvent.RegionDropdown = styled(RegionDropdown)`
+EditEventForm.RegionDropdown = styled(RegionDropdown)`
   background    : #ffff;
   border        : 1px solid #999;
   height        : 33px;
@@ -132,14 +136,28 @@ EditEvent.RegionDropdown = styled(RegionDropdown)`
   margin-top    : 2%;
 `;
 
-EditEvent.propTypes = {
-  event             : PropTypes.object.isRequired,
+EditEventForm.propTypes = {
+  currentEvent      : PropTypes.object.isRequired,
   canSubmit         : PropTypes.bool.isRequired,
   handleChange      : PropTypes.func.isRequired,
   handleFieldChange : PropTypes.func.isRequired,
+  updateEvent       : PropTypes.func.isRequired,
 };
 
+const updateEventMutation = gql`
+  mutation($eventId: Int!, $title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
+    updateEvent(eventId: $eventId, title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
 const withRecompose = compose(
+  graphql(updateEventMutation),
   withStateHandlers(
     ({
       currentEvent = {
@@ -164,6 +182,22 @@ const withRecompose = compose(
       },
     },
   ),
+  withHandlers({
+    updateEvent : ({ mutate, currentEvent }) => async () => {
+      const response = await mutate({
+        variables: {
+          eventId : currentEvent.id,
+          title   : currentEvent.title,
+          details : currentEvent.details,
+          price   : currentEvent.price,
+          date    : currentEvent.date,
+          country : currentEvent.country,
+          region  : currentEvent.region,
+          address : currentEvent.address,
+        }
+      });
+    },
+  })
 );
 
-export default withRecompose(EditEvent);
+export default withRecompose(EditEventForm);

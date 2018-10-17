@@ -1,4 +1,5 @@
 import React     from 'react';
+import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow  from '@material-ui/core/TableRow';
 import { Link }  from 'react-router-dom';
@@ -43,11 +44,8 @@ const EventRow = ({
         <Link to={`/events/${id}`}>
           View details
         </Link>
-        <Link to={`/events/${id}/edit`}>
-          Edit
-        </Link>
         <EventRow.DeleteIconWrapper>
-          <ClearIcon Click={deleteEvent} />
+          <ClearIcon onClick={deleteEvent} />
         </EventRow.DeleteIconWrapper>
       </EventRow.ActionsWrapper>
     </TableCell>
@@ -62,6 +60,11 @@ EventRow.ActionsWrapper = styled.div`
 EventRow.DeleteIconWrapper = styled.div`
   cursor : pointer;
 `;
+
+EventRow.propTypes = {
+  deleteEvent : PropTypes.func.isRequired,
+  event       : PropTypes.object.isRequired,
+};
 
 const deleteEventMutation = gql`
   mutation($eventId: Int!) {

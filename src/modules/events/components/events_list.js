@@ -8,7 +8,7 @@ import TableRow  from '@material-ui/core/TableRow';
 
 import EventRow  from './event_row';
 
-const EventsList = ({events, deleteEvent}) => (
+const EventsList = ({events}) => (
   <Table>
     <TableHead>
       <TableRow>

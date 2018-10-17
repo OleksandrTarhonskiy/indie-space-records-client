@@ -21,7 +21,6 @@ import Profile                  from '../modules/musician/components/profile';
 import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_settings_page';
 import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
 import EventPage                from '../modules/events/pages/event_page';
-import EditEventPage            from '../modules/events/pages/edit_event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
 import PrivateRoute             from './private_route';
@@ -46,7 +45,6 @@ export default (
         <PrivateRoute exact path="/me" component={Profile} />
         <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
-        <PrivateRoute exact path="/events/:id/edit" component={EditEventPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
