@@ -1,6 +1,10 @@
 import React                   from 'react';
 import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
+import Snackbar                from '@material-ui/core/Snackbar';
+import SnackbarContent         from '@material-ui/core/SnackbarContent';
+import WarningIcon             from '@material-ui/icons/Warning';
+import DoneIcon                from '@material-ui/icons/Done';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
 import { gql, graphql }        from 'react-apollo';
@@ -19,6 +23,7 @@ import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 import GradientButton          from '../../../layouts/gradient_button';
+import Alert                   from '../../../layouts/alert';
 
 const EditEventForm = ({
   currentEvent: {
@@ -34,6 +39,9 @@ const EditEventForm = ({
   handleChange,
   handleFieldChange,
   updateEvent,
+  hasError,
+  errorsList,
+  hideAlert,
 }) => (
   <div>
     <EditEventForm.Headline>
@@ -103,6 +111,12 @@ const EditEventForm = ({
         onClick={updateEvent}
       />
     </form>
+    <Alert
+      action="update"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </div>
 );
 
@@ -138,10 +152,12 @@ EditEventForm.RegionDropdown = styled(RegionDropdown)`
 
 EditEventForm.propTypes = {
   currentEvent      : PropTypes.object.isRequired,
-  canSubmit         : PropTypes.bool.isRequired,
   handleChange      : PropTypes.func.isRequired,
   handleFieldChange : PropTypes.func.isRequired,
   updateEvent       : PropTypes.func.isRequired,
+  hasError          : PropTypes.bool.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
 };
 
 const updateEventMutation = gql`
@@ -169,7 +185,9 @@ const withRecompose = compose(
         region  : '',
         address : '',
       },
-    }) => ({ currentEvent }),
+      hasError    = false,
+      errorsList  = [],
+    }) => ({ currentEvent, hasError, errorsList }),
     {
       handleChange      : state => ({ target }) => {
         const currentEvent = R.assoc(target.name, target.value, state.currentEvent);
@@ -180,10 +198,13 @@ const withRecompose = compose(
         const currentEvent = R.assoc(field, value, state.currentEvent);
         return ({ currentEvent });
       },
+
+      showAlert         : () => () => ({ hasError: true }),
+      hideAlert         : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
-    updateEvent : ({ mutate, currentEvent }) => async () => {
+    updateEvent : ({ mutate, currentEvent, errorsList, showAlert }) => async () => {
       const response = await mutate({
         variables: {
           eventId : currentEvent.id,
@@ -196,6 +217,21 @@ const withRecompose = compose(
           address : currentEvent.address,
         }
       });
+
+      const { ok, errors } = response.data.updateEvent;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
