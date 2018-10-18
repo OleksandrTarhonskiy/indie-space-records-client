@@ -19,6 +19,7 @@ import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 import GradientButton          from '../../../layouts/gradient_button';
+import Alert                   from '../../../layouts/alert';
 
 const CreateEvent = ({
   form: {
@@ -34,6 +35,9 @@ const CreateEvent = ({
   canSubmit,
   createEvent,
   handleFieldChange,
+  hasError,
+  errorsList,
+  hideAlert,
 }) => (
   <div>
     <CreateEvent.Headline>
@@ -104,6 +108,12 @@ const CreateEvent = ({
         onClick={createEvent}
       />
     </form>
+    <Alert
+      action="create"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </div>
 );
 
@@ -188,8 +198,10 @@ const withRecompose = compose(
         region  : '',
         address : '',
       },
-      canSubmit = false,
-    }) => ({ form, canSubmit }),
+      hasError   = false,
+      errorsList = [],
+      canSubmit  = false,
+    }) => ({ form, canSubmit, hasError, errorsList }),
     {
       handleChange      : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -206,13 +218,31 @@ const withRecompose = compose(
           canSubmit     : canSubmitForm(form),
         });
       },
+
+      showAlert         : () => () => ({ hasError: true }),
+      hideAlert         : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
-    createEvent : ({mutate, form}) => async () => {
+    createEvent : ({ mutate, form, errorsList, showAlert }) => async () => {
       const response = await mutate({
         variables: form
       });
+
+      const { ok, errors } = response.data.createEvent;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
