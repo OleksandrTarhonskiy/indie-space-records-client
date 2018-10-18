@@ -13,7 +13,9 @@ import {
 import {
   compose,
   withHandlers,
+  withStateHandlers,
 }                from 'recompose';
+import Alert     from '../../../layouts/alert';
 
 const EventRow = ({
   event: {
@@ -25,6 +27,9 @@ const EventRow = ({
     date,
     price,
   },
+  hasError,
+  errorsList,
+  hideAlert,
   deleteEvent,
 }) => (
   <TableRow>
@@ -49,6 +54,12 @@ const EventRow = ({
         </EventRow.DeleteIconWrapper>
       </EventRow.ActionsWrapper>
     </TableCell>
+    <Alert
+      action="delete"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </TableRow>
 );
 
@@ -80,11 +91,36 @@ const deleteEventMutation = gql`
 
 const withRecompose = compose(
   graphql(deleteEventMutation),
+  withStateHandlers(
+    ({
+      hasError   = false,
+      errorsList = [],
+    }) => ({ hasError, errorsList }),
+    {
+      showAlert         : () => () => ({ hasError: true }),
+      hideAlert         : () => () => ({ hasError: false }),
+    },
+  ),
   withHandlers({
-    deleteEvent : ({ event, mutate }) => async () => {
+    deleteEvent : ({ event, mutate, showAlert, errorsList }) => async () => {
       const response = await mutate({
         variables: { eventId : event.id}
       });
+
+      const { ok, errors } = response.data.deleteEvent;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
