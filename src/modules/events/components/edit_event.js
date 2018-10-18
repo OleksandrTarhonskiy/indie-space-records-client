@@ -26,7 +26,7 @@ EditEvent.PageWrapper = styled.div`
 `;
 
 EditEvent.propTypes = {
-  id   : PropTypes.number.isRequired,
+  id   : PropTypes.string.isRequired,
   data : PropTypes.object.isRequired,
 };
 

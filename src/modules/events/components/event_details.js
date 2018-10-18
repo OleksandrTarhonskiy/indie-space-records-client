@@ -75,7 +75,7 @@ EventDetails.Headline = styled.h1`
 `;
 
 EventDetails.propTypes = {
-  id           : PropTypes.number.isRequired,
+  id           : PropTypes.string.isRequired,
   data         : PropTypes.object.isRequired,
   editing      : PropTypes.bool.isRequired,
   setToEditing : PropTypes.func.isRequired,
