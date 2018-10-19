@@ -1,21 +1,23 @@
-import React     from 'react';
-import PropTypes from 'prop-types';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow  from '@material-ui/core/TableRow';
-import { Link }  from 'react-router-dom';
-import ClearIcon from '@material-ui/icons/Clear';
-import styled    from 'styled-components';
-import moment    from 'moment';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import TableCell      from '@material-ui/core/TableCell';
+import IconButton     from '@material-ui/core/IconButton';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import TableRow       from '@material-ui/core/TableRow';
+import { Link }       from 'react-router-dom';
+import ClearIcon      from '@material-ui/icons/Clear';
+import styled         from 'styled-components';
+import moment         from 'moment';
 import {
   gql,
   graphql
-}                from 'react-apollo';
+}                     from 'react-apollo';
 import {
   compose,
   withHandlers,
   withStateHandlers,
-}                from 'recompose';
-import Alert     from '../../../layouts/alert';
+}                     from 'recompose';
+import Alert          from '../../../layouts/alert';
 
 const EventRow = ({
   event: {
@@ -46,12 +48,12 @@ const EventRow = ({
     <TableCell numeric>{price}</TableCell>
     <TableCell>
       <EventRow.ActionsWrapper>
-        <Link to={`/events/${id}`}>
-          View details
-        </Link>
-        <EventRow.DeleteIconWrapper>
-          <ClearIcon onClick={deleteEvent} />
-        </EventRow.DeleteIconWrapper>
+        <IconButton component={Link} to={`/events/${id}`}>
+          <VisibilityIcon />
+        </IconButton>
+        <IconButton onClick={deleteEvent}>
+          <ClearIcon />
+        </IconButton>
       </EventRow.ActionsWrapper>
     </TableCell>
     <Alert
@@ -66,10 +68,6 @@ const EventRow = ({
 EventRow.ActionsWrapper = styled.div`
   display        : flex;
   flex-direction : row;
-`;
-
-EventRow.DeleteIconWrapper = styled.div`
-  cursor : pointer;
 `;
 
 EventRow.propTypes = {
