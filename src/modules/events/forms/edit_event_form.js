@@ -3,6 +3,7 @@ import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
+import { gql, graphql }        from 'react-apollo';
 import moment                  from 'moment';
 import {
   CountryDropdown,
@@ -13,7 +14,6 @@ import {
   withStateHandlers,
   withHandlers,
 }                              from 'recompose';
-import { gql, graphql }        from 'react-apollo';
 import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
@@ -21,8 +21,9 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 import GradientButton          from '../../../layouts/gradient_button';
 import Alert                   from '../../../layouts/alert';
 
-const CreateEvent = ({
-  form: {
+const EditEventForm = ({
+  currentEvent: {
+    id,
     title,
     details,
     price,
@@ -32,19 +33,18 @@ const CreateEvent = ({
     address,
   },
   handleChange,
-  canSubmit,
-  createEvent,
   handleFieldChange,
+  updateEvent,
   hasError,
   errorsList,
   hideAlert,
 }) => (
   <div>
-    <CreateEvent.Headline>
-      Create new event
-    </CreateEvent.Headline>
+    <EditEventForm.Headline>
+      Edit event
+    </EditEventForm.Headline>
     <form>
-      <CreateEvent.InputsWrapper>
+      <EditEventForm.InputsWrapper>
         <TextField
           name="title"
           label="Title"
@@ -84,11 +84,11 @@ const CreateEvent = ({
             onChange={handleFieldChange.bind(null, 'date')}
           />
         </MuiPickersUtilsProvider>
-        <CreateEvent.CountryDropdown
+        <EditEventForm.CountryDropdown
           value={country}
           onChange={handleFieldChange.bind(null, 'country')}
         />
-        <CreateEvent.RegionDropdown
+        <EditEventForm.RegionDropdown
           country={country}
           value={region}
           onChange={handleFieldChange.bind(null, 'region')}
@@ -101,15 +101,14 @@ const CreateEvent = ({
           onChange={handleChange}
           fullWidth
         />
-      </CreateEvent.InputsWrapper>
+      </EditEventForm.InputsWrapper>
       <GradientButton
-        text={'Create'}
-        disabled={!canSubmit}
-        onClick={createEvent}
+        text={'Update'}
+        onClick={updateEvent}
       />
     </form>
     <Alert
-      action="create"
+      action="update"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}
@@ -117,19 +116,19 @@ const CreateEvent = ({
   </div>
 );
 
-CreateEvent.InputsWrapper = styled.div`
+EditEventForm.InputsWrapper = styled.div`
   display        : flex;
   flex-direction : column;
 `;
 
-CreateEvent.Headline = styled.h1`
+EditEventForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
   text-align  : center;
   font-weight : 300;
 `;
 
-CreateEvent.CountryDropdown = styled(CountryDropdown)`
+EditEventForm.CountryDropdown = styled(CountryDropdown)`
   background    : #ffff;
   border        : 1px solid #999;
   height        : 33px;
@@ -138,7 +137,7 @@ CreateEvent.CountryDropdown = styled(CountryDropdown)`
   margin-top    : 2%;
 `;
 
-CreateEvent.RegionDropdown = styled(RegionDropdown)`
+EditEventForm.RegionDropdown = styled(RegionDropdown)`
   background    : #ffff;
   border        : 1px solid #999;
   height        : 33px;
@@ -147,35 +146,19 @@ CreateEvent.RegionDropdown = styled(RegionDropdown)`
   margin-top    : 2%;
 `;
 
-CreateEvent.propTypes = {
-  form              : PropTypes.object.isRequired,
-  canSubmit         : PropTypes.bool.isRequired,
+EditEventForm.propTypes = {
+  currentEvent      : PropTypes.object.isRequired,
   handleChange      : PropTypes.func.isRequired,
   handleFieldChange : PropTypes.func.isRequired,
-  createEvent       : PropTypes.func.isRequired,
+  updateEvent       : PropTypes.func.isRequired,
+  hasError          : PropTypes.bool.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
 };
 
-const canSubmitForm = ({
-  title,
-  details,
-  price,
-  date,
-  country,
-  region,
-  address,
-}) => R.all(R.equals(true))([
-  !R.isEmpty(title),
-  !R.isEmpty(details),
-  !R.isEmpty(price),
-  !R.isEmpty(date),
-  !R.isEmpty(country),
-  !R.isEmpty(region),
-  !R.isEmpty(address),
-]);
-
-const createEventMutation = gql`
-  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
-    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
+const updateEventMutation = gql`
+  mutation($eventId: Int!, $title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
+    updateEvent(eventId: $eventId, title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
       ok
       errors {
         path
@@ -186,10 +169,10 @@ const createEventMutation = gql`
 `;
 
 const withRecompose = compose(
-  graphql(createEventMutation),
+  graphql(updateEventMutation),
   withStateHandlers(
     ({
-      form      = {
+      currentEvent = {
         title   : '',
         details : '',
         price   : '',
@@ -198,25 +181,18 @@ const withRecompose = compose(
         region  : '',
         address : '',
       },
-      hasError   = false,
-      errorsList = [],
-      canSubmit  = false,
-    }) => ({ form, canSubmit, hasError, errorsList }),
+      hasError    = false,
+      errorsList  = [],
+    }) => ({ currentEvent, hasError, errorsList }),
     {
       handleChange      : state => ({ target }) => {
-        const form = R.assoc(target.name, target.value, state.form);
-        return ({
-          form,
-          canSubmit     : canSubmitForm(form),
-        });
+        const currentEvent = R.assoc(target.name, target.value, state.currentEvent);
+        return ({ currentEvent });
       },
 
       handleFieldChange : state => (field, value) => {
-        const form = R.assoc(field, value, state.form);
-        return ({
-          form,
-          canSubmit     : canSubmitForm(form),
-        });
+        const currentEvent = R.assoc(field, value, state.currentEvent);
+        return ({ currentEvent });
       },
 
       showAlert         : () => () => ({ hasError: true }),
@@ -224,12 +200,21 @@ const withRecompose = compose(
     },
   ),
   withHandlers({
-    createEvent : ({ mutate, form, errorsList, showAlert }) => async () => {
+    updateEvent : ({ mutate, currentEvent, errorsList, showAlert }) => async () => {
       const response = await mutate({
-        variables: form
+        variables: {
+          eventId : currentEvent.id,
+          title   : currentEvent.title,
+          details : currentEvent.details,
+          price   : currentEvent.price,
+          date    : currentEvent.date,
+          country : currentEvent.country,
+          region  : currentEvent.region,
+          address : currentEvent.address,
+        }
       });
 
-      const { ok, errors } = response.data.createEvent;
+      const { ok, errors } = response.data.updateEvent;
 
       if (ok) {
         showAlert();
@@ -247,4 +232,4 @@ const withRecompose = compose(
   })
 );
 
-export default withRecompose(CreateEvent);
+export default withRecompose(EditEventForm);

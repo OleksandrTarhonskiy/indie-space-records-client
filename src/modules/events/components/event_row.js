@@ -1,18 +1,23 @@
-import React     from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow  from '@material-ui/core/TableRow';
-import { Link }  from 'react-router-dom';
-import ClearIcon from '@material-ui/icons/Clear';
-import styled    from 'styled-components';
-import moment    from 'moment';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import TableCell      from '@material-ui/core/TableCell';
+import IconButton     from '@material-ui/core/IconButton';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import TableRow       from '@material-ui/core/TableRow';
+import { Link }       from 'react-router-dom';
+import ClearIcon      from '@material-ui/icons/Clear';
+import styled         from 'styled-components';
+import moment         from 'moment';
 import {
   gql,
   graphql
-}                from 'react-apollo';
+}                     from 'react-apollo';
 import {
   compose,
   withHandlers,
-}                from 'recompose';
+  withStateHandlers,
+}                     from 'recompose';
+import Alert          from '../../../layouts/alert';
 
 const EventRow = ({
   event: {
@@ -24,6 +29,9 @@ const EventRow = ({
     date,
     price,
   },
+  hasError,
+  errorsList,
+  hideAlert,
   deleteEvent,
 }) => (
   <TableRow>
@@ -40,14 +48,20 @@ const EventRow = ({
     <TableCell numeric>{price}</TableCell>
     <TableCell>
       <EventRow.ActionsWrapper>
-        <Link to={`/events/${id}`}>
-          View details
-        </Link>
-        <EventRow.DeleteIconWrapper>
-          <ClearIcon Click={deleteEvent} />
-        </EventRow.DeleteIconWrapper>
+        <IconButton component={Link} to={`/events/${id}`}>
+          <VisibilityIcon />
+        </IconButton>
+        <IconButton onClick={deleteEvent}>
+          <ClearIcon />
+        </IconButton>
       </EventRow.ActionsWrapper>
     </TableCell>
+    <Alert
+      action="delete"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </TableRow>
 );
 
@@ -56,9 +70,10 @@ EventRow.ActionsWrapper = styled.div`
   flex-direction : row;
 `;
 
-EventRow.DeleteIconWrapper = styled.div`
-  cursor : pointer;
-`;
+EventRow.propTypes = {
+  deleteEvent : PropTypes.func.isRequired,
+  event       : PropTypes.object.isRequired,
+};
 
 const deleteEventMutation = gql`
   mutation($eventId: Int!) {
@@ -74,11 +89,36 @@ const deleteEventMutation = gql`
 
 const withRecompose = compose(
   graphql(deleteEventMutation),
+  withStateHandlers(
+    ({
+      hasError   = false,
+      errorsList = [],
+    }) => ({ hasError, errorsList }),
+    {
+      showAlert         : () => () => ({ hasError: true }),
+      hideAlert         : () => () => ({ hasError: false }),
+    },
+  ),
   withHandlers({
-    deleteEvent : ({ event, mutate }) => async () => {
+    deleteEvent : ({ event, mutate, showAlert, errorsList }) => async () => {
       const response = await mutate({
         variables: { eventId : event.id}
       });
+
+      const { ok, errors } = response.data.deleteEvent;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
