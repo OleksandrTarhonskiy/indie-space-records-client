@@ -1,10 +1,6 @@
 import React                   from 'react';
 import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
-import Snackbar                from '@material-ui/core/Snackbar';
-import SnackbarContent         from '@material-ui/core/SnackbarContent';
-import WarningIcon             from '@material-ui/icons/Warning';
-import DoneIcon                from '@material-ui/icons/Done';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
 import { gql, graphql }        from 'react-apollo';
