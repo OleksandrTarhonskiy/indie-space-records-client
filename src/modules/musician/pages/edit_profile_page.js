@@ -18,7 +18,7 @@ const EditProfilePage = ({ data: { allProfiles = []} }) => (
 );
 
 EditProfilePage.FormWrapper = styled.div`
-  padding : 5% 10%;
+  padding : 8% 10%;
 `;
 
 const allProfilesQuery = gql`
