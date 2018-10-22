@@ -252,7 +252,6 @@ Profile.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-
 const allProfilesQuery = gql`
   {
     allProfiles{
@@ -266,4 +265,5 @@ const allProfilesQuery = gql`
     }
   }
 `;
+
 export default graphql(allProfilesQuery)(Profile);
