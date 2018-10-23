@@ -20,6 +20,7 @@ import styled           from 'styled-components';
 import { withRouter }   from 'react-router-dom';
 
 import GradientButton   from '../../../layouts/gradient_button';
+import Alert            from '../../../layouts/alert';
 
 const EditProfileForm = ({
   form: {
@@ -33,7 +34,7 @@ const EditProfileForm = ({
   submit,
   handleChange,
   hasError,
-  hideError,
+  hideAlert,
   errorsList,
   handleReginChange,
 }) => (
@@ -74,24 +75,12 @@ const EditProfileForm = ({
       text={'Update'}
       onClick={submit}
     />
-    <Snackbar
-      open={hasError}
-      autoHideDuration={2000}
-      onClose={hideError}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <EditProfileForm.Alert
-        message={
-          errorsList.length > 0 ?
-            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-            :
-            null
-        }
-      />
-    </Snackbar>
+    <Alert
+      action="update"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </form>
 );
 
@@ -160,7 +149,7 @@ const withRecompose = compose(
   withRouter,
   withStateHandlers(
     ({
-      form       = {
+      form      = {
         name    : '',
         genres  : [],
         country : '',
@@ -170,7 +159,7 @@ const withRecompose = compose(
       hasError   = false,
     }) => ({ form, errorsList, hasError }),
     {
-      handleChange : state => ({ target }) => {
+      handleChange      : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
         return ({ form });
       },
@@ -183,12 +172,12 @@ const withRecompose = compose(
         const form = R.set(fieldLens, R.compose(R.append(value), R.view(fieldLens))(state.form), state.form);
         return ({ form });
       },
-      deleteChip : state => (field, value, ind) => {
+      deleteChip        : state => (field, value, ind) => {
         const form = R.dissocPath([field, ind], (state.form));
         return ({ form });
       },
-      showError          : () => () => ({ hasError: true }),
-      hideError          : () => () => ({ hasError: false }),
+      showAlert          : () => () => ({ hasError: true }),
+      hideAlert          : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
@@ -201,13 +190,28 @@ const withRecompose = compose(
       },
       mutate,
       errorsList,
-      showError,
+      showAlert,
       history,
     }) => async () => {
       const genresString = genres.toString();
       const response = await mutate({
         variables: {profileId : 1, name: name, genres: genresString, country: country, region: region}
       });
+
+      const { ok, errors } = response.data.updateProfile;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
