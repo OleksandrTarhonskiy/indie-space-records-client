@@ -73,6 +73,9 @@ EventRow.ActionsWrapper = styled.div`
 EventRow.propTypes = {
   deleteEvent : PropTypes.func.isRequired,
   event       : PropTypes.object.isRequired,
+  hideAlert   : PropTypes.func.isRequired,
+  errorsList  : PropTypes.array.isRequired,
+  hasError    : PropTypes.bool.isRequired,
 };
 
 const deleteEventMutation = gql`
