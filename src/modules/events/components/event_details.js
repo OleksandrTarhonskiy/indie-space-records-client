@@ -95,8 +95,8 @@ const withRecompose = compose(
       editing = false,
     }) => ({ editing }),
     {
-      setToEditing : state => ({editing}) => R.assoc('editing', true, state),
-      setToDetails : state => ({editing}) => R.assoc('editing', false, state),
+      setToEditing : state => () => R.assoc('editing', true, state),
+      setToDetails : state => () => R.assoc('editing', false, state),
     },
   ),
 );

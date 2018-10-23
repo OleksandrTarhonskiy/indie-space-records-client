@@ -1,9 +1,6 @@
 import React            from 'react';
 import ChipInput        from 'material-ui-chip-input';
 import TextField        from '@material-ui/core/TextField';
-import Snackbar         from '@material-ui/core/Snackbar';
-import SnackbarContent  from '@material-ui/core/SnackbarContent';
-import WarningIcon      from '@material-ui/icons/Warning';
 import {
   CountryDropdown,
   RegionDropdown
@@ -17,7 +14,6 @@ import {
 }                       from 'recompose';
 import { gql, graphql } from 'react-apollo';
 import styled           from 'styled-components';
-import { withRouter }   from 'react-router-dom';
 
 import GradientButton   from '../../../layouts/gradient_button';
 import Alert            from '../../../layouts/alert';
@@ -96,11 +92,6 @@ EditProfileForm.Headline = styled.h1`
   font-weight : 300;
 `;
 
-EditProfileForm.Alert = styled(SnackbarContent)`
-  background-color : #ee3c25 !important;
-  font-family      : 'Roboto', sans-serif;
-`;
-
 EditProfileForm.CountryDropdown = styled(CountryDropdown)`
   background    : #ffff;
   border        : 1px solid #999;
@@ -121,14 +112,13 @@ EditProfileForm.RegionDropdown = styled(RegionDropdown)`
 
 EditProfileForm.propTypes = {
   form              : PropTypes.object.isRequired,
-  canSubmit         : PropTypes.bool.isRequired,
   submit            : PropTypes.func.isRequired,
   addChip           : PropTypes.func.isRequired,
   deleteChip        : PropTypes.func.isRequired,
   handleChange      : PropTypes.func.isRequired,
   hasError          : PropTypes.bool.isRequired,
   errorsList        : PropTypes.array.isRequired,
-  hideError         : PropTypes.func.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
   handleReginChange : PropTypes.func.isRequired,
 };
 
@@ -146,7 +136,6 @@ const updateProfileMutation = gql`
 
 const withRecompose = compose(
   graphql(updateProfileMutation),
-  withRouter,
   withStateHandlers(
     ({
       form      = {
@@ -183,6 +172,7 @@ const withRecompose = compose(
   withHandlers({
     submit : ({
       form : {
+        id,
         name,
         genres,
         country,
@@ -191,11 +181,10 @@ const withRecompose = compose(
       mutate,
       errorsList,
       showAlert,
-      history,
     }) => async () => {
       const genresString = genres.toString();
       const response = await mutate({
-        variables: {profileId : 1, name: name, genres: genresString, country: country, region: region}
+        variables: {profileId : id, name: name, genres: genresString, country: country, region: region}
       });
 
       const { ok, errors } = response.data.updateProfile;

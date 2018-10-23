@@ -153,6 +153,9 @@ CreateEvent.propTypes = {
   handleChange      : PropTypes.func.isRequired,
   handleFieldChange : PropTypes.func.isRequired,
   createEvent       : PropTypes.func.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hasError          : PropTypes.bool.isRequired,
 };
 
 const canSubmitForm = ({

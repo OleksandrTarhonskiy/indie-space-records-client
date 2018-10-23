@@ -1,4 +1,5 @@
 import React           from 'react';
+import PropTypes       from 'prop-types';
 import Snackbar        from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon     from '@material-ui/icons/Warning';
@@ -35,5 +36,12 @@ Alert.Notification = styled(SnackbarContent)`
   background-color : ${props => props.message ? '#59d859' : '#ee3c25'} !important;
   font-family      : 'Roboto', sans-serif;
 `;
+
+Alert.propTypes = {
+  action     : PropTypes.string.isRequired,
+  hasError   : PropTypes.bool.isRequired,
+  hideAlert  : PropTypes.func.isRequired,
+  errorsList : PropTypes.array.isRequired,
+};
 
 export default Alert;

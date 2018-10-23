@@ -1,16 +1,18 @@
 import React            from 'react';
+import PropTypes        from 'prop-types';
 import { gql, graphql } from 'react-apollo';
 import * as R           from 'ramda';
 import styled           from 'styled-components';
 
-import EditProfileForm  from '../forms/edit_profile_form'
+import EditProfileForm  from '../forms/edit_profile_form';
 
 const EditProfilePage = ({ data: { allProfiles = []} }) => (
   <EditProfilePage.FormWrapper>
     {
       allProfiles.map(profile =>
         <EditProfileForm
-          form={R.assoc('genres', profile.genres.split(","), profile)}
+          key={profile.id}
+          form={R.assoc('genres', profile.genres.split(','), profile)}
         />
       )
     }
@@ -32,5 +34,9 @@ const allProfilesQuery = gql`
     }
   }
 `;
+
+EditProfilePage.propTypes = {
+  data : PropTypes.object.isRequired,
+};
 
 export default graphql(allProfilesQuery)(EditProfilePage);
