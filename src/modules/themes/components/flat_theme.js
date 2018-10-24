@@ -1,27 +1,20 @@
-import React              from 'react';
-import styled             from 'styled-components';
-import Button             from '@material-ui/core/Button';
-import {
-  compose,
-  withHandlers
-}                          from 'recompose';
-import {
-  gql,
-  graphql
-}                          from 'react-apollo';
+import React      from 'react';
+import styled     from 'styled-components';
+import Button     from '@material-ui/core/Button';
 
 import {
   firstThemeStyle,
   firstThemeFont
-}                          from '../models/themes_styles';
+}                  from '../models/themes_styles';
+
+import SetTheme    from './set_theme'
 
 const FlatTheme = ({setTheme}) => (
   <div>
-    <FlatTheme.SettingsHeader>
-      <FlatTheme.Button onClick={setTheme}>
-        Get this theme
-      </FlatTheme.Button>
-    </FlatTheme.SettingsHeader>
+    <SetTheme
+      style={firstThemeStyle}
+      fonts={firstThemeFont}
+    />
     <FlatTheme.ThemeWrapper>
       <FlatTheme.Navigation>
         <FlatTheme.NavItems>
@@ -51,14 +44,6 @@ const FlatTheme = ({setTheme}) => (
     </FlatTheme.ThemeWrapper>
   </div>
 );
-
-FlatTheme.SettingsHeader = styled.div`
-  background      : #515151;
-  display         : flex;
-  flex-direction  : row;
-  justify-content : end;
-  padding         : 1%;
-`;
 
 FlatTheme.ThemeWrapper = styled.div`
   color       : #ffff;
@@ -105,13 +90,6 @@ FlatTheme.ThirdSection = styled.div`
   padding    : 2%;
 `;
 
-FlatTheme.Button = styled(Button)`
-  background : transparent;
-  color      : #ffff !important;
-  border     : 1px solid #eaedf5 !important;
-  position   : absolute;
-`;
-
 FlatTheme.Header = styled.div`
   width             : 100%;
   background        : linear-gradient(to right,#413b53 0%,#e84d75 100%);
@@ -129,31 +107,4 @@ FlatTheme.SecondSection = styled.div`
   padding    : 2%;
 `;
 
-const createThemeMutation = gql`
-  mutation($name: String!, $style: String!, $fonts: String!) {
-    createTheme(name: $name,  style: $style, fonts: $fonts) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
-
-const withRecompose = compose(
-  graphql(createThemeMutation),
-  withHandlers({
-    setTheme : ({mutate}) => async () => {
-      const response = await mutate({
-        variables: {
-          name  : 'flat theme',
-          style : firstThemeStyle,
-          fonts : firstThemeFont,
-        },
-      });
-    },
-  })
-);
-
-export default withRecompose(FlatTheme);
+export default FlatTheme;
