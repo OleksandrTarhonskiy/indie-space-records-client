@@ -21,19 +21,26 @@ const Alert = ({
       horizontal: 'right',
     }}
   >
-    <Alert.Notification
-      message={
-        errorsList.length > 0 ?
-          errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-          :
-          <p><DoneIcon /> {`successfully ${action}d`}</p>
-      }
+  {
+    errorsList.length > 0 ?
+    <Alert.Error
+      message={errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)}
     />
+    :
+    <Alert.Notification
+      message={<p><DoneIcon /> {`successfully ${action}d`}</p>}
+    />
+  }
   </Snackbar>
 );
 
 Alert.Notification = styled(SnackbarContent)`
-  background-color : ${props => props.message ? '#59d859' : '#ee3c25'} !important;
+  background-color : #59d859 !important;
+  font-family      : 'Roboto', sans-serif;
+`;
+
+Alert.Error = styled(SnackbarContent)`
+  background-color : #ee3c25 !important;
   font-family      : 'Roboto', sans-serif;
 `;
 
