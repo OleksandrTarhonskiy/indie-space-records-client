@@ -38,6 +38,7 @@ const EditEventForm = ({
   hasError,
   errorsList,
   hideAlert,
+  canSubmit,
 }) => (
   <div>
     <EditEventForm.Headline>
@@ -104,6 +105,7 @@ const EditEventForm = ({
       </EditEventForm.InputsWrapper>
       <GradientButton
         text={'Update'}
+        disabled={!canSubmit}
         onClick={updateEvent}
       />
     </form>
@@ -154,7 +156,18 @@ EditEventForm.propTypes = {
   hasError          : PropTypes.bool.isRequired,
   errorsList        : PropTypes.array.isRequired,
   hideAlert         : PropTypes.func.isRequired,
+  canSubmit         : PropTypes.bool.isRequired,
 };
+
+const canSubmitForm = ({ title, details, price, date, country, region, address }) => R.all(R.equals(true))([
+  !R.isEmpty(title),
+  !R.isEmpty(details),
+  !R.isEmpty(price),
+  !R.isEmpty(date),
+  !R.isEmpty(country),
+  !R.isEmpty(region),
+  !R.isEmpty(address),
+]);
 
 const updateEventMutation = gql`
   mutation($eventId: Int!, $title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
@@ -183,16 +196,23 @@ const withRecompose = compose(
       },
       hasError    = false,
       errorsList  = [],
-    }) => ({ currentEvent, hasError, errorsList }),
+      canSubmit   = true,
+    }) => ({ currentEvent, hasError, errorsList, canSubmit }),
     {
       handleChange      : state => ({ target }) => {
         const currentEvent = R.assoc(target.name, target.value, state.currentEvent);
-        return ({ currentEvent });
+        return ({
+          currentEvent,
+          canSubmit : canSubmitForm(currentEvent),
+        });
       },
 
       handleFieldChange : state => (field, value) => {
         const currentEvent = R.assoc(field, value, state.currentEvent);
-        return ({ currentEvent });
+        return ({
+          currentEvent,
+          canSubmit : canSubmitForm(currentEvent),
+        });
       },
 
       showAlert         : () => () => ({ hasError: true }),
