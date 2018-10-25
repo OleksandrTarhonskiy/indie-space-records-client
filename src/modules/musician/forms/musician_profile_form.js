@@ -1,6 +1,11 @@
 import React            from 'react';
 import ChipInput        from 'material-ui-chip-input';
 import TextField        from '@material-ui/core/TextField';
+import InputLabel       from '@material-ui/core/InputLabel';
+import FormControl      from '@material-ui/core/FormControl';
+import Input            from '@material-ui/core/Input';
+import Select           from '@material-ui/core/Select';
+import MenuItem         from '@material-ui/core/MenuItem';
 import Snackbar         from '@material-ui/core/Snackbar';
 import SnackbarContent  from '@material-ui/core/SnackbarContent';
 import WarningIcon      from '@material-ui/icons/Warning';
@@ -20,6 +25,7 @@ import styled           from 'styled-components';
 import { withRouter }   from 'react-router-dom';
 
 import GradientButton   from '../../../layouts/gradient_button';
+import { currencies }   from '../models/currencies';
 
 const MusicianProfileForm = ({
   form: {
@@ -27,6 +33,7 @@ const MusicianProfileForm = ({
     genres,
     country,
     region,
+    currency,
   },
   addChip,
   deleteChip,
@@ -70,6 +77,28 @@ const MusicianProfileForm = ({
         onChange={handleReginChange.bind(null, 'region')}
       />
     </MusicianProfileForm.InputsWrapper>
+    <MusicianProfileForm.SelectWrapper>
+      <InputLabel
+        ref={ref => {
+          this.InputLabelRef = ref;
+        }}
+        htmlFor="currency"
+      >
+        Currency
+      </InputLabel>
+      <Select
+        value={currency}
+        onChange={handleChange}
+        input={
+          <Input
+            name="currency"
+            id="currency"
+          />
+        }
+      >
+        { currencies.map((c, index) => <MenuItem key={index} value={c}>{c}</MenuItem>) }
+      </Select>
+    </MusicianProfileForm.SelectWrapper>
     <br />
     <GradientButton
       text={'Create'}
@@ -132,6 +161,10 @@ MusicianProfileForm.RegionDropdown = styled(RegionDropdown)`
   margin-top    : 2%;
 `;
 
+MusicianProfileForm.SelectWrapper = styled(FormControl)`
+  width : 100%
+`;
+
 MusicianProfileForm.propTypes = {
   form              : PropTypes.object.isRequired,
   canSubmit         : PropTypes.bool.isRequired,
@@ -145,16 +178,17 @@ MusicianProfileForm.propTypes = {
   handleReginChange : PropTypes.func.isRequired,
 };
 
-const canSubmitForm = ({ name, genres, country, region }) => R.all(R.equals(true))([
+const canSubmitForm = ({ name, genres, country, region, currency }) => R.all(R.equals(true))([
   !R.isEmpty(genres),
   !R.isEmpty(name),
   !R.isEmpty(country),
   !R.isEmpty(region),
+  !R.isEmpty(currency),
 ]);
 
 const createProfileMutation = gql`
-  mutation($name: String!, $genres: String!, $country: String!, $region: String!) {
-    createProfile(name: $name, genres: $genres, country: $country, region: $region) {
+  mutation($name: String!, $genres: String!, $country: String!, $region: String!, $currency: String!) {
+    createProfile(name: $name, genres: $genres, country: $country, region: $region, currency: $currency) {
       ok
       errors {
         path
@@ -170,10 +204,11 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       form       = {
-        name    : '',
-        genres  : [],
-        country : '',
-        region  : '',
+        name     : '',
+        genres   : [],
+        country  : '',
+        region   : '',
+        currency : '',
       },
       canSubmit  = false,
       errorsList = [],
@@ -220,6 +255,7 @@ const withRecompose = compose(
         genres,
         country,
         region,
+        currency,
       },
       mutate,
       errorsList,
@@ -228,7 +264,13 @@ const withRecompose = compose(
     }) => async () => {
       const genresString = genres.toString();
       const response = await mutate({
-        variables: {name: name, genres: genresString, country: country, region: region}
+        variables: {
+          name     : name,
+          genres   : genresString, 
+          country  : country,
+          region   : region,
+          currency : currency,
+        }
       });
 
       const { ok, errors } = response.data.createProfile;

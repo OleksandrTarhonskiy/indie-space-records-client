@@ -1,6 +1,11 @@
 import React            from 'react';
 import ChipInput        from 'material-ui-chip-input';
 import TextField        from '@material-ui/core/TextField';
+import InputLabel       from '@material-ui/core/InputLabel';
+import FormControl      from '@material-ui/core/FormControl';
+import Input            from '@material-ui/core/Input';
+import Select           from '@material-ui/core/Select';
+import MenuItem         from '@material-ui/core/MenuItem';
 import {
   CountryDropdown,
   RegionDropdown
@@ -17,6 +22,7 @@ import styled           from 'styled-components';
 
 import GradientButton   from '../../../layouts/gradient_button';
 import Alert            from '../../../layouts/alert';
+import { currencies }   from '../models/currencies';
 
 const EditProfileForm = ({
   form: {
@@ -24,6 +30,7 @@ const EditProfileForm = ({
     genres,
     country,
     region,
+    currency,
   },
   addChip,
   deleteChip,
@@ -67,6 +74,28 @@ const EditProfileForm = ({
         onChange={handleReginChange.bind(null, 'region')}
       />
     </EditProfileForm.InputsWrapper>
+    <EditProfileForm.SelectWrapper>
+      <InputLabel
+        ref={ref => {
+          this.InputLabelRef = ref;
+        }}
+        htmlFor="currency"
+      >
+        Currency
+      </InputLabel>
+      <Select
+        value={currency}
+        onChange={handleChange}
+        input={
+          <Input
+            name="currency"
+            id="currency"
+          />
+        }
+      >
+        { currencies.map((c, index) => <MenuItem key={index} value={c}>{c}</MenuItem>) }
+      </Select>
+    </EditProfileForm.SelectWrapper>
     <br />
     <GradientButton
       text={'Update'}
@@ -112,6 +141,10 @@ EditProfileForm.RegionDropdown = styled(RegionDropdown)`
   margin-top    : 2%;
 `;
 
+EditProfileForm.SelectWrapper = styled(FormControl)`
+  width : 100%
+`;
+
 EditProfileForm.propTypes = {
   form              : PropTypes.object.isRequired,
   submit            : PropTypes.func.isRequired,
@@ -133,8 +166,8 @@ const canSubmitForm = ({ name, genres, country, region }) => R.all(R.equals(true
 ]);
 
 const updateProfileMutation = gql`
-  mutation($profileId: Int!, $name: String!, $genres: String!, $country: String!, $region: String!) {
-    updateProfile(profileId: $profileId, name: $name, genres: $genres, country: $country, region: $region) {
+  mutation($profileId: Int!, $name: String!, $genres: String!, $country: String!, $region: String!, $currency: String!) {
+    updateProfile(profileId: $profileId, name: $name, genres: $genres, country: $country, region: $region, currency: $currency) {
       ok
       errors {
         path
@@ -149,10 +182,11 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       form      = {
-        name    : '',
-        genres  : [],
-        country : '',
-        region  : '',
+        name     : '',
+        genres   : [],
+        country  : '',
+        region   : '',
+        currency : '',
       },
       canSubmit  = true,
       errorsList = [],
@@ -200,6 +234,7 @@ const withRecompose = compose(
         genres,
         country,
         region,
+        currency,
       },
       mutate,
       errorsList,
@@ -207,7 +242,14 @@ const withRecompose = compose(
     }) => async () => {
       const genresString = genres.toString();
       const response = await mutate({
-        variables: {profileId : id, name: name, genres: genresString, country: country, region: region}
+        variables: {
+          profileId : id,
+          name      : name,
+          genres    : genresString,
+          country   : country,
+          region    : region,
+          currency  : currency,
+        }
       });
 
       const { ok, errors } = response.data.updateProfile;
