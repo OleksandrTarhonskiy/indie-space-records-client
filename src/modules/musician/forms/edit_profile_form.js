@@ -33,6 +33,7 @@ const EditProfileForm = ({
   hideAlert,
   errorsList,
   handleReginChange,
+  canSubmit,
 }) => (
   <form>
     <EditProfileForm.InputsWrapper>
@@ -69,6 +70,7 @@ const EditProfileForm = ({
     <br />
     <GradientButton
       text={'Update'}
+      disabled={!canSubmit}
       onClick={submit}
     />
     <Alert
@@ -120,7 +122,15 @@ EditProfileForm.propTypes = {
   errorsList        : PropTypes.array.isRequired,
   hideAlert         : PropTypes.func.isRequired,
   handleReginChange : PropTypes.func.isRequired,
+  canSubmit         : PropTypes.bool.isRequired,
 };
+
+const canSubmitForm = ({ name, genres, country, region }) => R.all(R.equals(true))([
+  !R.isEmpty(name),
+  !R.isEmpty(genres),
+  !R.isEmpty(country),
+  !R.isEmpty(region),
+]);
 
 const updateProfileMutation = gql`
   mutation($profileId: Int!, $name: String!, $genres: String!, $country: String!, $region: String!) {
@@ -144,26 +154,39 @@ const withRecompose = compose(
         country : '',
         region  : '',
       },
+      canSubmit  = true,
       errorsList = [],
       hasError   = false,
-    }) => ({ form, errorsList, hasError }),
+    }) => ({ form, errorsList, hasError, canSubmit }),
     {
       handleChange      : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       handleReginChange : state => (field, value) => {
         const form = R.assoc(field, value, state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       addChip           : state => (field, value) => {
         const fieldLens = R.lensProp(field);
         const form = R.set(fieldLens, R.compose(R.append(value), R.view(fieldLens))(state.form), state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       deleteChip        : state => (field, value, ind) => {
         const form = R.dissocPath([field, ind], (state.form));
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
       showAlert          : () => () => ({ hasError: true }),
       hideAlert          : () => () => ({ hasError: false }),
