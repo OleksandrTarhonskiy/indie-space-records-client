@@ -15,7 +15,7 @@ const AllThemesPage = () => (
       <AllThemesPage.ThemeItem to="/demos/flat_theme">
         View Demo
       </AllThemesPage.ThemeItem>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
+      <AllThemesPage.ThemeItem to="/demos/beautiful_play">
         View Demo
       </AllThemesPage.ThemeItem>
       <AllThemesPage.ThemeItem to="/demos/flat_theme">

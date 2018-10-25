@@ -24,6 +24,7 @@ import MusicianEventsPage       from '../modules/events/pages/musician_events_pa
 import EventPage                from '../modules/events/pages/event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
+import BeautifulPlay            from '../modules/themes/components/beautiful_play';
 import PrivateRoute             from './private_route';
 
 export default (
@@ -43,6 +44,7 @@ export default (
         <PrivateRoute exact path="/musician/home" component={MusicianProfilePage} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
+        <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
         <PrivateRoute exact path="/me" component={Profile} />
         <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
