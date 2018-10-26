@@ -31,6 +31,7 @@ const allProfilesQuery = gql`
       genres
       country
       region
+      currency
     }
   }
 `;
