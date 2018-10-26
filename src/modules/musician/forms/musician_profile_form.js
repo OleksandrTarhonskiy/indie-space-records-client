@@ -96,7 +96,7 @@ const MusicianProfileForm = ({
           />
         }
       >
-        { currencies.map((c, index) => <MenuItem key={index} value={c}>{c}</MenuItem>) }
+        { currencies.map((c, index) => <MenuItem key={index} value={c.code}>{c.name}</MenuItem>) }
       </Select>
     </MusicianProfileForm.SelectWrapper>
     <br />
@@ -266,7 +266,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           name     : name,
-          genres   : genresString, 
+          genres   : genresString,
           country  : country,
           region   : region,
           currency : currency,

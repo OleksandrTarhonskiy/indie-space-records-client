@@ -93,7 +93,7 @@ const EditProfileForm = ({
           />
         }
       >
-        { currencies.map((c, index) => <MenuItem key={index} value={c}>{c}</MenuItem>) }
+        { currencies.map((c, index) => <MenuItem key={index} value={c.code}>{c.name}</MenuItem>) }
       </Select>
     </EditProfileForm.SelectWrapper>
     <br />
