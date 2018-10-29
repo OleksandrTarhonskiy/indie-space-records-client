@@ -220,6 +220,7 @@ const withRecompose = compose(
     createEvent : ({ mutate, form, errorsList, showAlert }) => async () => {
       const response = await mutate({
         variables: form,
+        refetchQueries: [ { query: allMyEvents }]
       });
 
       const { ok, errors } = response.data.createEvent;
