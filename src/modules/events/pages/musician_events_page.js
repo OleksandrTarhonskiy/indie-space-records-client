@@ -9,6 +9,7 @@ import {
 
 import CreateEvent from '../forms/create_event';
 import EventsList  from '../components/events_list';
+import allMyEvents from '../graphql/allMyEvents'
 
 const MusicianEventsPage = ({ data: { allMyEvents = []} }) => (
   <MusicianEventsPage.Wrapper>
@@ -42,19 +43,4 @@ MusicianEventsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-
-const allMyEventsQuery = gql`
-  {
-    allMyEvents{
-      id
-      title
-      country
-      region
-      address
-      date
-      price
-    }
-  }
-`;
-
-export default graphql(allMyEventsQuery)(MusicianEventsPage);
+export default graphql(allMyEvents)(MusicianEventsPage);

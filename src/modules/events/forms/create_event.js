@@ -20,6 +20,8 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 
 import GradientButton          from '../../../layouts/gradient_button';
 import Alert                   from '../../../layouts/alert';
+import createEvent             from '../graphql/createEvent';
+import allMyEvents from '../graphql/allMyEvents'
 
 const CreateEvent = ({
   form: {
@@ -176,20 +178,8 @@ const canSubmitForm = ({
   !R.isEmpty(address),
 ]);
 
-const createEventMutation = gql`
-  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
-    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
-
 const withRecompose = compose(
-  graphql(createEventMutation),
+  graphql(createEvent),
   withStateHandlers(
     ({
       form      = {
@@ -229,7 +219,7 @@ const withRecompose = compose(
   withHandlers({
     createEvent : ({ mutate, form, errorsList, showAlert }) => async () => {
       const response = await mutate({
-        variables: form
+        variables: form,
       });
 
       const { ok, errors } = response.data.createEvent;
