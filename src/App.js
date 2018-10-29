@@ -10,22 +10,11 @@ import { InMemoryCache }    from 'apollo-cache-inmemory';
 import { ApolloProvider }   from 'react-apollo';
 import { setContext }       from 'apollo-link-context';
 import { ApolloLink }       from 'apollo-link';
-import { withClientState }  from 'apollo-link-state'
-import gql                  from 'graphql-tag';
 
 import Routes                from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const cache = new InMemoryCache()
-
 const httpLink = createHttpLink({ uri: 'http://localhost:8080/graphql' });
-
-const defaultState = {}
-
-const stateLink = withClientState({
-  cache,
-  defaults: defaultState,
-})
 
 const middlewareLink = setContext(() => ({
   headers: {
@@ -56,12 +45,9 @@ const afterwareLink = new ApolloLink((operation, forward) => {
 const link = afterwareLink.concat(middlewareLink.concat(httpLink));
 
 const client = new ApolloClient({
-  link: ApolloLink.from([
-    stateLink,
-    link,
-  ]),
-  cache
-})
+  link,
+  cache: new InMemoryCache(),
+});
 
 class App extends Component {
   render() {
