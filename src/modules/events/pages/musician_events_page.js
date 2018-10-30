@@ -2,10 +2,7 @@ import React       from 'react';
 import PropTypes   from 'prop-types';
 import styled      from 'styled-components';
 import Paper       from '@material-ui/core/Paper';
-import {
-  gql,
-  graphql
-}                  from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 import CreateEvent from '../forms/create_event';
 import EventsList  from '../components/events_list';

@@ -13,7 +13,7 @@ import {
   withStateHandlers,
   withHandlers,
 }                              from 'recompose';
-import { gql, graphql }        from 'react-apollo';
+import { graphql }             from 'react-apollo';
 import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
