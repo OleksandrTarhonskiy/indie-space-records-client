@@ -21,6 +21,7 @@ const EventDetails = ({
   editing,
   setToEditing,
   setToDetails,
+  currency,
 }) => (
   <div>
     { editing?
@@ -30,7 +31,7 @@ const EventDetails = ({
         <EventDetails.Headline>
           {viewEvent.title}
         </EventDetails.Headline>
-        <p>Price: {viewEvent.price}$</p>
+        <p>Price: {`${viewEvent.price} ${currency}`}</p>
         <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
         <p>Country : {viewEvent.country}</p>
         <p>Region : {viewEvent.region}</p>
@@ -80,6 +81,7 @@ EventDetails.propTypes = {
   editing      : PropTypes.bool.isRequired,
   setToEditing : PropTypes.func.isRequired,
   setToDetails : PropTypes.func.isRequired,
+  currency     : PropTypes.string.isRequired,
 };
 
 const withRecompose = compose(

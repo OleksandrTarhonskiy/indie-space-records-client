@@ -26,3 +26,11 @@ export const myProfileWithThemeQuery = gql`
     }
   }
 `;
+
+export const getCurrencyQuery = gql`
+  {
+    myProfile{
+      currency
+    }
+  }
+`;
