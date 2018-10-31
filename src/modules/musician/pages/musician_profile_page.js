@@ -10,6 +10,7 @@ import {
 import MusicianProfileForm from '../forms/musician_profile_form';
 import ProfileFeatures     from '../components/profile_features';
 import AboutProfile        from '../components/about_profile';
+import CircularProgress    from '@material-ui/core/CircularProgress';
 
 const token = localStorage.getItem('token');
 let hasProfile = '';
@@ -21,18 +22,21 @@ try {
   null;
 }
 
-const MusicianProfilePage = ({ data: { allProfiles = []} }) => (
+const MusicianProfilePage = ({ data: { loading, myProfile = {} } }) => (
   <div>
     {
       hasProfile ?
         <MusicianProfilePage.ProfileWrapper background={true}>
           <ProfileFeatures />
-          {allProfiles.map(profile =>
-            <AboutProfile
-              key={profile.id}
-              profile={profile}
-            />
-          )}
+          {
+            loading?
+              <CircularProgress />
+              :
+              <AboutProfile
+                key={myProfile.id}
+                profile={myProfile}
+              />
+          }
         </MusicianProfilePage.ProfileWrapper>
         :
         <MusicianProfilePage.FormWrapper background={false}>
@@ -61,7 +65,7 @@ MusicianProfilePage.propTypes = {
 
 const allProfilesQuery = gql`
   {
-    allProfiles{
+    myProfile{
       id
       name
       genres

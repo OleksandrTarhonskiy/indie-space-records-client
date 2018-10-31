@@ -21,7 +21,7 @@ import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsPr
 import GradientButton          from '../../../layouts/gradient_button';
 import Alert                   from '../../../layouts/alert';
 import createEvent             from '../graphql/createEvent';
-import allMyEvents from '../graphql/allMyEvents'
+import allMyEvents from '../graphql/allMyEvents';
 
 const CreateEvent = ({
   form: {

@@ -6,9 +6,8 @@ import theme, { muiTheme }  from './layouts/theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { ApolloProvider }   from 'react-apollo';
 
-import Routes                from './routes';
 import registerServiceWorker from './registerServiceWorker';
-import client                from './graphql/client'
+import client                from './graphql/client';
 
 class App extends Component {
   render() {

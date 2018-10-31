@@ -6,7 +6,7 @@ import { graphql } from 'react-apollo';
 
 import CreateEvent from '../forms/create_event';
 import EventsList  from '../components/events_list';
-import allMyEvents from '../graphql/allMyEvents'
+import allMyEvents from '../graphql/allMyEvents';
 
 const MusicianEventsPage = ({ data: { allMyEvents = []} }) => (
   <MusicianEventsPage.Wrapper>

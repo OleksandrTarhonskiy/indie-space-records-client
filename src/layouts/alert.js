@@ -21,16 +21,16 @@ const Alert = ({
       horizontal: 'right',
     }}
   >
-  {
-    errorsList.length > 0 ?
-    <Alert.Error
-      message={errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)}
-    />
-    :
-    <Alert.Notification
-      message={<p><DoneIcon /> {`successfully ${action}d`}</p>}
-    />
-  }
+    {
+      errorsList.length > 0 ?
+        <Alert.Error
+          message={errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)}
+        />
+        :
+        <Alert.Notification
+          message={<p><DoneIcon /> {`successfully ${action}d`}</p>}
+        />
+    }
   </Snackbar>
 );
 

@@ -6,7 +6,7 @@ import {
   BeautifulPlayFont
 }                  from '../models/themes_styles';
 
-import SetTheme    from './set_theme'
+import SetTheme    from './set_theme';
 
 const BeautifulPlay = ({setTheme}) => (
   <div>

@@ -6,20 +6,24 @@ import {
 }                           from 'react-apollo';
 import styled               from 'styled-components';
 import Paper                from '@material-ui/core/Paper';
+import CircularProgress     from '@material-ui/core/CircularProgress';
 
 import ProfileThemeSettings from '../forms/profile_theme_settings';
 import Profile              from '../components/profile';
 
-const ProfileThemeSettingsPage = ({ data: { allProfiles = []} }) => (
+const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
   <ProfileThemeSettingsPage.Wrapper>
     <ProfileThemeSettingsPage.SideBar>
-      {allProfiles.map(profile =>
-        <ProfileThemeSettings
-          key={profile.id}
-          styles={JSON.parse(profile.theme.style)}
-          fonts={JSON.parse(profile.theme.fonts)}
-        />
-      )}
+      {
+        loading?
+          <CircularProgress />
+          :
+          <ProfileThemeSettings
+            key={myProfile.id}
+            styles={JSON.parse(myProfile.theme.style)}
+            fonts={JSON.parse(myProfile.theme.fonts)}
+          />
+      }
     </ProfileThemeSettingsPage.SideBar>
     <ProfileThemeSettingsPage.ProfileWrapper>
       <Profile />
@@ -56,7 +60,7 @@ ProfileThemeSettingsPage.propTypes = {
 
 const allProfilesQuery = gql`
   {
-    allProfiles{
+    myProfile{
       id
       name
       genres
