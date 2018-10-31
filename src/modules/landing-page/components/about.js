@@ -1,8 +1,8 @@
-import React          from 'react';
-import styled         from 'styled-components';
-import breakpoint     from 'styled-components-breakpoint';
-
-import GradientButton from '../../../layouts/gradient_button';
+import React      from 'react';
+import styled     from 'styled-components';
+import breakpoint from 'styled-components-breakpoint';
+import { Link }   from 'react-router-dom';
+import Button     from '@material-ui/core/Button';
 
 const About = () => (
   <About.Wrapper>
@@ -17,7 +17,12 @@ const About = () => (
         since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </About.Description>
       <About.ButtonWrapper>
-        <GradientButton text="Sign up as Fan" size="large" />
+        <About.Button
+          component={Link}
+          to="/fan/sign_up"
+        >
+          Sign up as Fan
+        </About.Button>
       </About.ButtonWrapper>
     </About.SubSectionWrapper>
     <About.SubSectionWrapper>
@@ -31,7 +36,12 @@ const About = () => (
        since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
       </About.Description>
       <About.ButtonWrapper>
-        <GradientButton text="Sign up as Musician" size="large" />
+        <About.Button
+          component={Link}
+          to="/musician/sign_up"
+        >
+          Sign up as Musician
+        </About.Button>
       </About.ButtonWrapper>
     </About.SubSectionWrapper>
   </About.Wrapper>
@@ -48,6 +58,12 @@ About.Wrapper = styled.div`
       flex-direction : row;
     `}
   }
+`;
+
+About.Button = styled(Button)`
+  background : linear-gradient(to right, #723af9, #46aafc);
+  color      : #ffff !important;
+  margin-top : 1% !important;
 `;
 
 About.SubSectionWrapper = styled.div`
