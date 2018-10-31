@@ -2,15 +2,13 @@ import React               from 'react';
 import PropTypes           from 'prop-types';
 import decode              from 'jwt-decode';
 import styled              from 'styled-components';
-import {
-  gql,
-  graphql
-}                          from 'react-apollo';
+import { graphql }         from 'react-apollo';
 
 import MusicianProfileForm from '../forms/musician_profile_form';
 import ProfileFeatures     from '../components/profile_features';
 import AboutProfile        from '../components/about_profile';
 import CircularProgress    from '@material-ui/core/CircularProgress';
+import { myProfilesQuery } from '../graphql/queries';
 
 const token = localStorage.getItem('token');
 let hasProfile = '';
@@ -63,16 +61,4 @@ MusicianProfilePage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-const allProfilesQuery = gql`
-  {
-    myProfile{
-      id
-      name
-      genres
-      country
-      region
-    }
-  }
-`;
-
-export default graphql(allProfilesQuery)(MusicianProfilePage);
+export default graphql(myProfilesQuery)(MusicianProfilePage);

@@ -1,15 +1,13 @@
-import React                from 'react';
-import PropTypes            from 'prop-types';
-import {
-  gql,
-  graphql
-}                           from 'react-apollo';
-import styled               from 'styled-components';
-import Paper                from '@material-ui/core/Paper';
-import CircularProgress     from '@material-ui/core/CircularProgress';
+import React                       from 'react';
+import PropTypes                   from 'prop-types';
+import { graphql }                 from 'react-apollo';
+import styled                      from 'styled-components';
+import Paper                       from '@material-ui/core/Paper';
+import CircularProgress            from '@material-ui/core/CircularProgress';
 
-import ProfileThemeSettings from '../forms/profile_theme_settings';
-import Profile              from '../components/profile';
+import ProfileThemeSettings        from '../forms/profile_theme_settings';
+import Profile                     from '../components/profile';
+import { myProfileWithThemeQuery } from '../graphql/queries';
 
 const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
   <ProfileThemeSettingsPage.Wrapper>
@@ -58,18 +56,4 @@ ProfileThemeSettingsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-const allProfilesQuery = gql`
-  {
-    myProfile{
-      id
-      name
-      genres
-      theme {
-        style
-        fonts
-      }
-    }
-  }
-`;
-
-export default graphql(allProfilesQuery)(ProfileThemeSettingsPage);
+export default graphql(myProfileWithThemeQuery)(ProfileThemeSettingsPage);

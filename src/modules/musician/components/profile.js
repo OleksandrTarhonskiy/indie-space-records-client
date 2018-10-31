@@ -1,9 +1,11 @@
-import React            from 'react';
-import PropTypes        from 'prop-types';
-import styled           from 'styled-components';
-import { gql, graphql } from 'react-apollo';
-import { Helmet }       from 'react-helmet';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React                       from 'react';
+import PropTypes                   from 'prop-types';
+import styled                      from 'styled-components';
+import { graphql }                 from 'react-apollo';
+import { Helmet }                  from 'react-helmet';
+import CircularProgress            from '@material-ui/core/CircularProgress';
+
+import { myProfileWithThemeQuery } from '../graphql/queries';
 
 const Profile = ({ data: { loading, myProfile = {} } }) => (
   <div>
@@ -256,18 +258,4 @@ Profile.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-const allProfilesQuery = gql`
-  {
-    myProfile{
-      id
-      name
-      genres
-      theme {
-        style
-        fonts
-      }
-    }
-  }
-`;
-
-export default graphql(allProfilesQuery)(Profile);
+export default graphql(myProfileWithThemeQuery)(Profile);
