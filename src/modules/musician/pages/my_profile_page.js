@@ -1,8 +1,7 @@
 import React                       from 'react';
-import Profile                     from '../components/profile'
+import Profile                     from '../components/profile';
 import { graphql }                 from 'react-apollo';
 import CircularProgress            from '@material-ui/core/CircularProgress';
-import { withRouter }              from 'react-router-dom';
 import { compose }                 from 'recompose';
 import { Link }                    from 'react-router-dom';
 import styled                      from 'styled-components';
@@ -11,28 +10,27 @@ import { myProfileWithThemeQuery } from '../graphql/queries';
 
 const MyProfilePage = ({
   data: { loading, myProfile = {} },
-  history,
 }) => {
   if (myProfile.theme) {
-  return(
-    <div>
-      {
-        loading?
-        <CircularProgress />
-        :
-        <Profile myProfile={myProfile} />
-      }
-    </div>
- )} else {
-   return (
-     <MyProfilePage.RedirectContainer>
+    return(
+      <div>
+        {
+          loading?
+            <CircularProgress />
+            :
+            <Profile myProfile={myProfile} />
+        }
+      </div>
+    );} else {
+    return (
+      <MyProfilePage.RedirectContainer>
       choose theme
-      <Link to="/musician/themes">
-        here
-      </Link>
-    </MyProfilePage.RedirectContainer>
-   );
- }
+        <Link to="/musician/themes">
+          here
+        </Link>
+      </MyProfilePage.RedirectContainer>
+    );
+  }
 };
 
 MyProfilePage.RedirectContainer = styled.div`
@@ -43,7 +41,6 @@ MyProfilePage.RedirectContainer = styled.div`
 `;
 
 const withRecompose = compose(
-  withRouter,
   graphql(myProfileWithThemeQuery),
 );
 

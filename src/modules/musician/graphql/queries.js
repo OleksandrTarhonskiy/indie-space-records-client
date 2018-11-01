@@ -34,3 +34,11 @@ export const getCurrencyQuery = gql`
     }
   }
 `;
+
+export const hasProfileQuery = gql`
+  {
+    me{
+      hasProfile
+    }
+  }
+`;
