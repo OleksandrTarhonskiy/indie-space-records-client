@@ -12,14 +12,14 @@ const ProfileHomeWrapper = ({ data: { loading, me = {} } }) => (
   <div>
     {
       loading ?
-      <CircularProgress />
-      :
-       me.hasProfile?
-      <MusicianProfileDetails />
-      :
-      <ProfileHomeWrapper.FormWrapper>
-        <MusicianProfileForm />
-      </ProfileHomeWrapper.FormWrapper>
+        <CircularProgress />
+        :
+        me.hasProfile?
+          <MusicianProfileDetails />
+          :
+          <ProfileHomeWrapper.FormWrapper>
+            <MusicianProfileForm />
+          </ProfileHomeWrapper.FormWrapper>
     }
   </div>
 );

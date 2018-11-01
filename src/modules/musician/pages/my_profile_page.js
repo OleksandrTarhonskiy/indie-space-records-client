@@ -1,5 +1,5 @@
 import React                       from 'react';
-import Profile                     from '../components/profile'
+import Profile                     from '../components/profile';
 import { graphql }                 from 'react-apollo';
 import CircularProgress            from '@material-ui/core/CircularProgress';
 import { withRouter }              from 'react-router-dom';
@@ -14,25 +14,25 @@ const MyProfilePage = ({
   history,
 }) => {
   if (myProfile.theme) {
-  return(
-    <div>
-      {
-        loading?
-        <CircularProgress />
-        :
-        <Profile myProfile={myProfile} />
-      }
-    </div>
- )} else {
-   return (
-     <MyProfilePage.RedirectContainer>
+    return(
+      <div>
+        {
+          loading?
+            <CircularProgress />
+            :
+            <Profile myProfile={myProfile} />
+        }
+      </div>
+    );} else {
+    return (
+      <MyProfilePage.RedirectContainer>
       choose theme
-      <Link to="/musician/themes">
+        <Link to="/musician/themes">
         here
-      </Link>
-    </MyProfilePage.RedirectContainer>
-   );
- }
+        </Link>
+      </MyProfilePage.RedirectContainer>
+    );
+  }
 };
 
 MyProfilePage.RedirectContainer = styled.div`

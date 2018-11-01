@@ -18,7 +18,7 @@ import { graphql }       from 'react-apollo';
 import { withRouter }    from 'react-router-dom';
 
 import GradientButton    from '../../../layouts/gradient_button';
-import { loginMutation } from '../graphql/mutations'
+import { loginMutation } from '../graphql/mutations';
 
 const LoginForm = ({
   form: {
