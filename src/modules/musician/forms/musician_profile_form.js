@@ -22,7 +22,6 @@ import {
 }                                from 'recompose';
 import { graphql }               from 'react-apollo';
 import styled                    from 'styled-components';
-import { withRouter }            from 'react-router-dom';
 
 import GradientButton            from '../../../layouts/gradient_button';
 import { currencies }            from '../models/currencies';
@@ -189,7 +188,6 @@ const canSubmitForm = ({ name, genres, country, region, currency }) => R.all(R.e
 
 const withRecompose = compose(
   graphql(createProfileMutation),
-  withRouter,
   withStateHandlers(
     ({
       form       = {
@@ -249,7 +247,6 @@ const withRecompose = compose(
       mutate,
       errorsList,
       showError,
-      history,
     }) => async () => {
       const genresString = genres.toString();
       const response = await mutate({
@@ -265,7 +262,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.createProfile;
 
       if (ok) {
-        return history.push('/');
+        return window.location.reload();
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);

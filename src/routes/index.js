@@ -1,31 +1,31 @@
-import React                      from 'react';
+import React                    from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-}                                 from 'react-router-dom';
+}                               from 'react-router-dom';
 
-import HomePage                   from '../modules/landing-page/pages/home_page';
-import Header                     from '../layouts/header';
-import NotFound                   from '../layouts/not_found';
-import Footer                     from '../layouts/footer';
-import HelpContactPage            from '../modules/help-contact/pages/help_contact_page';
-import MusicianSignUp             from '../modules/musician/pages/sign_up';
-import FanSignUp                  from '../modules/fan/pages/sign_up';
-import InfoForMusicians           from '../modules/musician/pages/information';
-import AllTagsPage                from '../modules/tags/pages/all_tags_page';
-import LoginPage                  from '../modules/auth/pages/login_page';
-import LogoutPage                 from '../modules/auth/pages/log_out_page';
-import MusicianProfileDetailsPage from '../modules/musician/pages/musician_profile_details_page';
-import MyProfilePage              from '../modules/musician/pages/my_profile_page';
-import ProfileThemeSettingsPage   from '../modules/musician/pages/profile_theme_settings_page';
-import EditProfilePage            from '../modules/musician/pages/edit_profile_page';
-import MusicianEventsPage         from '../modules/events/pages/musician_events_page';
-import EventPage                  from '../modules/events/pages/event_page';
-import AllThemesPage              from '../modules/themes/pages/all_themes_page';
-import FlatTheme                  from '../modules/themes/components/flat_theme';
-import BeautifulPlay              from '../modules/themes/components/beautiful_play';
-import PrivateRoute               from './private_route';
+import HomePage                 from '../modules/landing-page/pages/home_page';
+import Header                   from '../layouts/header';
+import NotFound                 from '../layouts/not_found';
+import Footer                   from '../layouts/footer';
+import HelpContactPage          from '../modules/help-contact/pages/help_contact_page';
+import MusicianSignUp           from '../modules/musician/pages/sign_up';
+import FanSignUp                from '../modules/fan/pages/sign_up';
+import InfoForMusicians         from '../modules/musician/pages/information';
+import AllTagsPage              from '../modules/tags/pages/all_tags_page';
+import LoginPage                from '../modules/auth/pages/login_page';
+import LogoutPage               from '../modules/auth/pages/log_out_page';
+import ProfileHomeWrapper       from '../modules/musician/pages/profile_home_wrapper';
+import MyProfilePage            from '../modules/musician/pages/my_profile_page';
+import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_settings_page';
+import EditProfilePage          from '../modules/musician/pages/edit_profile_page';
+import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
+import EventPage                from '../modules/events/pages/event_page';
+import AllThemesPage            from '../modules/themes/pages/all_themes_page';
+import FlatTheme                from '../modules/themes/components/flat_theme';
+import BeautifulPlay            from '../modules/themes/components/beautiful_play';
+import PrivateRoute             from './private_route';
 
 export default (
   <Router>
@@ -41,7 +41,7 @@ export default (
         <Route exact path="/login"            component={LoginPage} />
         <Route exact path="/logout"           component={LogoutPage} />
         <Route exact path="/events/:id"       component={EventPage} />
-        <PrivateRoute exact path="/musician/home" component={MusicianProfileDetailsPage} />
+        <PrivateRoute exact path="/musician/home" component={ProfileHomeWrapper} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
