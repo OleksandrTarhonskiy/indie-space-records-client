@@ -1,31 +1,32 @@
-import React            from 'react';
-import ChipInput        from 'material-ui-chip-input';
-import TextField        from '@material-ui/core/TextField';
-import InputLabel       from '@material-ui/core/InputLabel';
-import FormControl      from '@material-ui/core/FormControl';
-import Input            from '@material-ui/core/Input';
-import Select           from '@material-ui/core/Select';
-import MenuItem         from '@material-ui/core/MenuItem';
-import Snackbar         from '@material-ui/core/Snackbar';
-import SnackbarContent  from '@material-ui/core/SnackbarContent';
-import WarningIcon      from '@material-ui/icons/Warning';
+import React                     from 'react';
+import ChipInput                 from 'material-ui-chip-input';
+import TextField                 from '@material-ui/core/TextField';
+import InputLabel                from '@material-ui/core/InputLabel';
+import FormControl               from '@material-ui/core/FormControl';
+import Input                     from '@material-ui/core/Input';
+import Select                    from '@material-ui/core/Select';
+import MenuItem                  from '@material-ui/core/MenuItem';
+import Snackbar                  from '@material-ui/core/Snackbar';
+import SnackbarContent           from '@material-ui/core/SnackbarContent';
+import WarningIcon               from '@material-ui/icons/Warning';
 import {
   CountryDropdown,
   RegionDropdown
-}                       from 'react-country-region-selector';
-import * as R           from 'ramda';
-import PropTypes        from 'prop-types';
+}                                from 'react-country-region-selector';
+import * as R                    from 'ramda';
+import PropTypes                 from 'prop-types';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                       from 'recompose';
-import { gql, graphql } from 'react-apollo';
-import styled           from 'styled-components';
-import { withRouter }   from 'react-router-dom';
+}                                from 'recompose';
+import { graphql }               from 'react-apollo';
+import styled                    from 'styled-components';
+import { withRouter }            from 'react-router-dom';
 
-import GradientButton   from '../../../layouts/gradient_button';
-import { currencies }   from '../models/currencies';
+import GradientButton            from '../../../layouts/gradient_button';
+import { currencies }            from '../models/currencies';
+import { createProfileMutation } from '../graphql/mutations';
 
 const MusicianProfileForm = ({
   form: {
@@ -185,18 +186,6 @@ const canSubmitForm = ({ name, genres, country, region, currency }) => R.all(R.e
   !R.isEmpty(region),
   !R.isEmpty(currency),
 ]);
-
-const createProfileMutation = gql`
-  mutation($name: String!, $genres: String!, $country: String!, $region: String!, $currency: String!) {
-    createProfile(name: $name, genres: $genres, country: $country, region: $region, currency: $currency) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   graphql(createProfileMutation),

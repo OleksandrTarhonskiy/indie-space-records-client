@@ -1,30 +1,28 @@
-import React           from 'react';
-import PropTypes       from 'prop-types';
-import ColorPicker     from 'material-ui-color-picker';
-import * as R          from 'ramda';
-import Slider          from '@material-ui/lab/Slider';
-import Snackbar        from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import InputLabel      from '@material-ui/core/InputLabel';
-import MenuItem        from '@material-ui/core/MenuItem';
-import Select          from '@material-ui/core/Select';
-import FormControl     from '@material-ui/core/FormControl';
-import Typography      from '@material-ui/core/Typography';
-import styled          from 'styled-components';
-import FontPicker      from 'font-picker-react';
-import WarningIcon     from '@material-ui/icons/Warning';
-import DoneIcon        from '@material-ui/icons/Done';
+import React                   from 'react';
+import PropTypes               from 'prop-types';
+import ColorPicker             from 'material-ui-color-picker';
+import * as R                  from 'ramda';
+import Slider                  from '@material-ui/lab/Slider';
+import Snackbar                from '@material-ui/core/Snackbar';
+import SnackbarContent         from '@material-ui/core/SnackbarContent';
+import InputLabel              from '@material-ui/core/InputLabel';
+import MenuItem                from '@material-ui/core/MenuItem';
+import Select                  from '@material-ui/core/Select';
+import FormControl             from '@material-ui/core/FormControl';
+import Typography              from '@material-ui/core/Typography';
+import styled                  from 'styled-components';
+import FontPicker              from 'font-picker-react';
+import WarningIcon             from '@material-ui/icons/Warning';
+import DoneIcon                from '@material-ui/icons/Done';
 import {
   compose,
   withStateHandlers,
   withHandlers
-}                      from 'recompose';
-import {
-  gql,
-  graphql
-}                      from 'react-apollo';
+}                              from 'recompose';
+import { graphql }             from 'react-apollo';
 
-import GradientButton  from '../../../layouts/gradient_button';
+import GradientButton          from '../../../layouts/gradient_button';
+import { updateThemeMutation } from '../graphql/mutations';
 
 const ProfileThemeSettings = ({
   styles: {
@@ -259,18 +257,6 @@ ProfileThemeSettings.Label = styled(Typography)`
 
 ProfileThemeSettings.SelectWrapper = styled(FormControl)`
   width : 88%;
-`;
-
-const updateThemeMutation = gql`
-  mutation($style: String!, $fonts: String!) {
-    updateTheme(style: $style, fonts: $fonts) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
 `;
 
 ProfileThemeSettings.propTypes = {

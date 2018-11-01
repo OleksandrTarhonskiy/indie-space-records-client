@@ -1,25 +1,26 @@
-import React            from 'react';
-import PropTypes        from 'prop-types';
-import TextField        from '@material-ui/core/TextField';
-import Snackbar         from '@material-ui/core/Snackbar';
-import SnackbarContent  from '@material-ui/core/SnackbarContent';
-import WarningIcon      from '@material-ui/icons/Warning';
-import styled           from 'styled-components';
-import * as R           from 'ramda';
+import React              from 'react';
+import PropTypes          from 'prop-types';
+import TextField          from '@material-ui/core/TextField';
+import Snackbar           from '@material-ui/core/Snackbar';
+import SnackbarContent    from '@material-ui/core/SnackbarContent';
+import WarningIcon        from '@material-ui/icons/Warning';
+import styled             from 'styled-components';
+import * as R             from 'ramda';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                       from 'recompose';
-import validator        from 'validator';
-import Switch           from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { gql, graphql } from 'react-apollo';
+}                         from 'recompose';
+import validator          from 'validator';
+import Switch             from '@material-ui/core/Switch';
+import FormControlLabel   from '@material-ui/core/FormControlLabel';
+import { graphql }        from 'react-apollo';
 import {
   withRouter,
-}                       from 'react-router-dom';
+}                         from 'react-router-dom';
 
-import GradientButton   from '../../../layouts/gradient_button';
+import GradientButton     from '../../../layouts/gradient_button';
+import { signUpMutation } from '../graphql/mutations';
 
 const MusicianSignUpForm = ({
   form: {
@@ -160,18 +161,6 @@ const canSubmitForm = ({ bandName, name, email, password, confirmPassword, licen
   R.equals(password, confirmPassword),
   R.equals(license, true),
 ]);
-
-const signUpMutation = gql`
-  mutation($bandName: String!, $name: String!, $email: String!, $password: String!) {
-    signUp(bandName: $bandName, name: $name, email: $email, password: $password) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   withRouter,
