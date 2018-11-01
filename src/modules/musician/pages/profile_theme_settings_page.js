@@ -6,7 +6,7 @@ import Paper                       from '@material-ui/core/Paper';
 import CircularProgress            from '@material-ui/core/CircularProgress';
 
 import ProfileThemeSettings        from '../forms/profile_theme_settings';
-import Profile                     from '../components/profile';
+import MyProfilePage               from './my_profile_page';
 import { myProfileWithThemeQuery } from '../graphql/queries';
 
 const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
@@ -24,7 +24,7 @@ const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
       }
     </ProfileThemeSettingsPage.SideBar>
     <ProfileThemeSettingsPage.ProfileWrapper>
-      <Profile />
+      <MyProfilePage />
     </ProfileThemeSettingsPage.ProfileWrapper>
   </ProfileThemeSettingsPage.Wrapper>
 );

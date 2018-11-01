@@ -17,7 +17,7 @@ import AllTagsPage                from '../modules/tags/pages/all_tags_page';
 import LoginPage                  from '../modules/auth/pages/login_page';
 import LogoutPage                 from '../modules/auth/pages/log_out_page';
 import MusicianProfileDetailsPage from '../modules/musician/pages/musician_profile_details_page';
-import Profile                    from '../modules/musician/components/profile';
+import MyProfilePage              from '../modules/musician/pages/my_profile_page';
 import ProfileThemeSettingsPage   from '../modules/musician/pages/profile_theme_settings_page';
 import EditProfilePage            from '../modules/musician/pages/edit_profile_page';
 import MusicianEventsPage         from '../modules/events/pages/musician_events_page';
@@ -45,7 +45,7 @@ export default (
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
-        <PrivateRoute exact path="/me" component={Profile} />
+        <PrivateRoute exact path="/me" component={MyProfilePage} />
         <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
         <PrivateRoute exact path="/profile/edit" component={EditProfilePage} />
