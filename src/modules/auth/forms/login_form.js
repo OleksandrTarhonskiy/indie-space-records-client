@@ -1,26 +1,24 @@
-import React           from 'react';
-import PropTypes       from 'prop-types';
-import TextField       from '@material-ui/core/TextField';
-import Snackbar        from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import WarningIcon     from '@material-ui/icons/Warning';
-import Typography      from '@material-ui/core/Typography';
-import styled          from 'styled-components';
-import * as R          from 'ramda';
+import React             from 'react';
+import PropTypes         from 'prop-types';
+import TextField         from '@material-ui/core/TextField';
+import Snackbar          from '@material-ui/core/Snackbar';
+import SnackbarContent   from '@material-ui/core/SnackbarContent';
+import WarningIcon       from '@material-ui/icons/Warning';
+import Typography        from '@material-ui/core/Typography';
+import styled            from 'styled-components';
+import * as R            from 'ramda';
 import {
   compose,
   withStateHandlers,
-  withHandlers
-}                      from 'recompose';
-import validator       from 'validator';
-import { Link }        from 'react-router-dom';
-import {
-  gql,
-  graphql
-}                     from 'react-apollo';
-import { withRouter } from 'react-router-dom';
+  withHandlers,
+}                        from 'recompose';
+import validator         from 'validator';
+import { Link }          from 'react-router-dom';
+import { graphql }       from 'react-apollo';
+import { withRouter }    from 'react-router-dom';
 
-import GradientButton from '../../../layouts/gradient_button';
+import GradientButton    from '../../../layouts/gradient_button';
+import { loginMutation } from '../graphql/mutations'
 
 const LoginForm = ({
   form: {
@@ -124,20 +122,6 @@ const canSubmitForm = ({ email, password }) => R.all(R.equals(true))([
   !R.isEmpty(email),
   !R.isEmpty(password),
 ]);
-
-const loginMutation = gql`
-  mutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      ok
-      token
-      refreshToken
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   withRouter,
