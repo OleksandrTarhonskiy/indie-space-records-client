@@ -20,11 +20,11 @@ try {
   null;
 }
 
-const MusicianProfilePage = ({ data: { loading, myProfile = {} } }) => (
+const MusicianProfileDetailsPage = ({ data: { loading, myProfile = {} } }) => (
   <div>
     {
       hasProfile ?
-        <MusicianProfilePage.ProfileWrapper background={true}>
+        <MusicianProfileDetailsPage.ProfileWrapper background={true}>
           <ProfileFeatures />
           {
             loading?
@@ -35,30 +35,30 @@ const MusicianProfilePage = ({ data: { loading, myProfile = {} } }) => (
                 profile={myProfile}
               />
           }
-        </MusicianProfilePage.ProfileWrapper>
+        </MusicianProfileDetailsPage.ProfileWrapper>
         :
-        <MusicianProfilePage.FormWrapper background={false}>
+        <MusicianProfileDetailsPage.FormWrapper background={false}>
           <MusicianProfileForm />
-        </MusicianProfilePage.FormWrapper>
+        </MusicianProfileDetailsPage.FormWrapper>
     }
   </div>
 );
 
-MusicianProfilePage.FormWrapper = styled.div`
+MusicianProfileDetailsPage.FormWrapper = styled.div`
   padding         : 15% 15%;
   display         : flex;
   justify-content : center;
 `;
 
-MusicianProfilePage.ProfileWrapper = styled.div`
+MusicianProfileDetailsPage.ProfileWrapper = styled.div`
   display        : flex;
   flex-direction : row;
   width          : 100%;
   background     : ${props => props.background ? '#eaedf5' : 'transparent'};
 `;
 
-MusicianProfilePage.propTypes = {
+MusicianProfileDetailsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-export default graphql(myProfilesQuery)(MusicianProfilePage);
+export default graphql(myProfilesQuery)(MusicianProfileDetailsPage);
