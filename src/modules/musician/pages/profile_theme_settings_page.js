@@ -1,28 +1,30 @@
-import React                from 'react';
-import PropTypes            from 'prop-types';
-import {
-  gql,
-  graphql
-}                           from 'react-apollo';
-import styled               from 'styled-components';
-import Paper                from '@material-ui/core/Paper';
+import React                       from 'react';
+import PropTypes                   from 'prop-types';
+import { graphql }                 from 'react-apollo';
+import styled                      from 'styled-components';
+import Paper                       from '@material-ui/core/Paper';
+import CircularProgress            from '@material-ui/core/CircularProgress';
 
-import ProfileThemeSettings from '../forms/profile_theme_settings';
-import Profile              from '../components/profile';
+import ProfileThemeSettings        from '../forms/profile_theme_settings';
+import MyProfilePage               from './my_profile_page';
+import { myProfileWithThemeQuery } from '../graphql/queries';
 
-const ProfileThemeSettingsPage = ({ data: { allProfiles = []} }) => (
+const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
   <ProfileThemeSettingsPage.Wrapper>
     <ProfileThemeSettingsPage.SideBar>
-      {allProfiles.map(profile =>
-        <ProfileThemeSettings
-          key={profile.id}
-          styles={JSON.parse(profile.theme.style)}
-          fonts={JSON.parse(profile.theme.fonts)}
-        />
-      )}
+      {
+        loading?
+          <CircularProgress />
+          :
+          <ProfileThemeSettings
+            key={myProfile.id}
+            styles={JSON.parse(myProfile.theme.style)}
+            fonts={JSON.parse(myProfile.theme.fonts)}
+          />
+      }
     </ProfileThemeSettingsPage.SideBar>
     <ProfileThemeSettingsPage.ProfileWrapper>
-      <Profile />
+      <MyProfilePage />
     </ProfileThemeSettingsPage.ProfileWrapper>
   </ProfileThemeSettingsPage.Wrapper>
 );
@@ -54,18 +56,4 @@ ProfileThemeSettingsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-const allProfilesQuery = gql`
-  {
-    allProfiles{
-      id
-      name
-      genres
-      theme {
-        style
-        fonts
-      }
-    }
-  }
-`;
-
-export default graphql(allProfilesQuery)(ProfileThemeSettingsPage);
+export default graphql(myProfileWithThemeQuery)(ProfileThemeSettingsPage);

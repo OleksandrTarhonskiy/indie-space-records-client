@@ -3,7 +3,7 @@ import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
-import { gql, graphql }        from 'react-apollo';
+import { graphql }             from 'react-apollo';
 import moment                  from 'moment';
 import {
   CountryDropdown,
@@ -18,6 +18,7 @@ import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
+import { updateEventMutation } from '../graphql/mutations';
 import GradientButton          from '../../../layouts/gradient_button';
 import Alert                   from '../../../layouts/alert';
 
@@ -168,18 +169,6 @@ const canSubmitForm = ({ title, details, price, date, country, region, address }
   !R.isEmpty(region),
   !R.isEmpty(address),
 ]);
-
-const updateEventMutation = gql`
-  mutation($eventId: Int!, $title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
-    updateEvent(eventId: $eventId, title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   graphql(updateEventMutation),

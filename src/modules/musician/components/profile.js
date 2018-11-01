@@ -1,170 +1,167 @@
-import React            from 'react';
-import PropTypes        from 'prop-types';
-import styled           from 'styled-components';
-import { gql, graphql } from 'react-apollo';
-import { Helmet }       from 'react-helmet';
+import React                       from 'react';
+import PropTypes                   from 'prop-types';
+import styled                      from 'styled-components';
+import { Helmet }                  from 'react-helmet';
 
-const Profile = ({ data: { allProfiles = []} }) => (
+const Profile = ({ myProfile }) => (
   <div>
-    {allProfiles.map(profile =>
-      <Profile.Body
-        key={profile.id}
-        elementStyles={JSON.parse(profile.theme.style)}
-      >
-        <Helmet>
-          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
-          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
-          <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
-        </Helmet>
-        <Profile.Navigation elementStyles={JSON.parse(profile.theme.style)}>
-          <Profile.NavItems elementStyles={JSON.parse(profile.theme.style)}>
-            <Profile.NavItem elementStyles={JSON.parse(profile.theme.style)}>
-              <Profile.Link
-                href=""
-                elementStyles={JSON.parse(profile.theme.style)}
-                elementFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-linksFont"
-              >
-                Music
-              </Profile.Link>
-            </Profile.NavItem>
-            <Profile.NavItem>
-              <Profile.Link
-                href=""
-                elementStyles={JSON.parse(profile.theme.style)}
-                elementFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-linksFont"
-              >
-                Merch
-              </Profile.Link>
-            </Profile.NavItem>
-            <Profile.NavItem>
-              <Profile.Link
-                href=""
-                elementStyles={JSON.parse(profile.theme.style)}
-                elementFont={JSON.parse(profile.theme.fonts)}
-                className="apply-font-linksFont"
-              >
-                About
-              </Profile.Link>
-            </Profile.NavItem>
-          </Profile.NavItems>
-        </Profile.Navigation>
-        <Profile.Header>
-          <Profile.Headline
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
-            className="apply-font-headlineFont"
-          >
-            {profile.name}
-          </Profile.Headline>
-        </Profile.Header>
-        <Profile.Members elementStyles={JSON.parse(profile.theme.style)}>
-          <Profile.SubHeadline
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
-            className="apply-font-subHead"
-          >
-            Section#1
-          </Profile.SubHeadline>
-          <Profile.Text
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
-            className="apply-font-regularTextFont"
-          >
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-          </Profile.Text>
-        </Profile.Members>
-        <Profile.Music elementStyles={JSON.parse(profile.theme.style)}>
-          <Profile.Text
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
-            className="apply-font-regularTextFont"
-          >
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-          </Profile.Text>
-        </Profile.Music>
-        <Profile.Merch elementStyles={JSON.parse(profile.theme.style)}>
-          <Profile.Text
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
-            className="apply-font-regularTextFont"
-          >
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industrys standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type
-            specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including
-            versions of Lorem Ipsum.
-          </Profile.Text>
-        </Profile.Merch>
-      </Profile.Body>
-    )}
+    <Profile.Body
+      key={myProfile.id}
+      elementStyles={JSON.parse(myProfile.theme.style)}
+    >
+      <Helmet>
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).headlineFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).linksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).subHead}`} rel="stylesheet" />
+      </Helmet>
+      <Profile.Navigation elementStyles={JSON.parse(myProfile.theme.style)}>
+        <Profile.NavItems elementStyles={JSON.parse(myProfile.theme.style)}>
+          <Profile.NavItem elementStyles={JSON.parse(myProfile.theme.style)}>
+            <Profile.Link
+              href=""
+              elementStyles={JSON.parse(myProfile.theme.style)}
+              elementFont={JSON.parse(myProfile.theme.fonts)}
+              className="apply-font-linksFont"
+            >
+            Music
+            </Profile.Link>
+          </Profile.NavItem>
+          <Profile.NavItem>
+            <Profile.Link
+              href=""
+              elementStyles={JSON.parse(myProfile.theme.style)}
+              elementFont={JSON.parse(myProfile.theme.fonts)}
+              className="apply-font-linksFont"
+            >
+            Merch
+            </Profile.Link>
+          </Profile.NavItem>
+          <Profile.NavItem>
+            <Profile.Link
+              href=""
+              elementStyles={JSON.parse(myProfile.theme.style)}
+              elementFont={JSON.parse(myProfile.theme.fonts)}
+              className="apply-font-linksFont"
+            >
+            About
+            </Profile.Link>
+          </Profile.NavItem>
+        </Profile.NavItems>
+      </Profile.Navigation>
+      <Profile.Header>
+        <Profile.Headline
+          elementStyles={JSON.parse(myProfile.theme.style)}
+          elementFont={JSON.parse(myProfile.theme.fonts)}
+          className="apply-font-headlineFont"
+        >
+          {myProfile.name}
+        </Profile.Headline>
+      </Profile.Header>
+      <Profile.Members elementStyles={JSON.parse(myProfile.theme.style)}>
+        <Profile.SubHeadline
+          elementStyles={JSON.parse(myProfile.theme.style)}
+          elementFont={JSON.parse(myProfile.theme.fonts)}
+          className="apply-font-subHead"
+        >
+        Section#1
+        </Profile.SubHeadline>
+        <Profile.Text
+          elementStyles={JSON.parse(myProfile.theme.style)}
+          elementFont={JSON.parse(myProfile.theme.fonts)}
+          className="apply-font-regularTextFont"
+        >
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        </Profile.Text>
+      </Profile.Members>
+      <Profile.Music elementStyles={JSON.parse(myProfile.theme.style)}>
+        <Profile.Text
+          elementStyles={JSON.parse(myProfile.theme.style)}
+          elementFont={JSON.parse(myProfile.theme.fonts)}
+          className="apply-font-regularTextFont"
+        >
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        </Profile.Text>
+      </Profile.Music>
+      <Profile.Merch elementStyles={JSON.parse(myProfile.theme.style)}>
+        <Profile.Text
+          elementStyles={JSON.parse(myProfile.theme.style)}
+          elementFont={JSON.parse(myProfile.theme.fonts)}
+          className="apply-font-regularTextFont"
+        >
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+        Ipsum has been the industrys standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book. It has survived not only five centuries, but also the leap into
+        electronic typesetting, remaining essentially unchanged. It was popularised in
+        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more recently with desktop publishing software like Aldus PageMaker including
+        versions of Lorem Ipsum.
+        </Profile.Text>
+      </Profile.Merch>
+    </Profile.Body>
   </div>
 );
 
@@ -252,18 +249,4 @@ Profile.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-const allProfilesQuery = gql`
-  {
-    allProfiles{
-      id
-      name
-      genres
-      theme {
-        style
-        fonts
-      }
-    }
-  }
-`;
-
-export default graphql(allProfilesQuery)(Profile);
+export default Profile;

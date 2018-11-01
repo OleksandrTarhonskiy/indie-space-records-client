@@ -1,14 +1,12 @@
-import React       from 'react';
-import PropTypes   from 'prop-types';
-import styled      from 'styled-components';
-import Paper       from '@material-ui/core/Paper';
-import {
-  gql,
-  graphql
-}                  from 'react-apollo';
+import React                from 'react';
+import PropTypes            from 'prop-types';
+import styled               from 'styled-components';
+import Paper                from '@material-ui/core/Paper';
+import { graphql }          from 'react-apollo';
 
-import CreateEvent from '../forms/create_event';
-import EventsList  from '../components/events_list';
+import CreateEvent          from '../forms/create_event';
+import EventsList           from '../components/events_list';
+import { allMyEventsQuery } from '../graphql/queries';
 
 const MusicianEventsPage = ({ data: { allMyEvents = []} }) => (
   <MusicianEventsPage.Wrapper>
@@ -41,20 +39,5 @@ MusicianEventsPage.TableWrapper = styled(Paper)`
 MusicianEventsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
-
-
-const allMyEventsQuery = gql`
-  {
-    allMyEvents{
-      id
-      title
-      country
-      region
-      address
-      date
-      price
-    }
-  }
-`;
 
 export default graphql(allMyEventsQuery)(MusicianEventsPage);

@@ -13,13 +13,14 @@ import {
   withStateHandlers,
   withHandlers,
 }                              from 'recompose';
-import { gql, graphql }        from 'react-apollo';
+import { graphql }             from 'react-apollo';
 import { DateTimePicker }      from 'material-ui-pickers';
 import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 import GradientButton          from '../../../layouts/gradient_button';
 import Alert                   from '../../../layouts/alert';
+import { createEventMutation } from '../graphql/mutations';
 
 const CreateEvent = ({
   form: {
@@ -176,18 +177,6 @@ const canSubmitForm = ({
   !R.isEmpty(address),
 ]);
 
-const createEventMutation = gql`
-  mutation($title: String!, $details: String!, $price: Float!, $date: String!, $country: String!, $region: String!, $address: String!) {
-    createEvent(title: $title, details: $details, price: $price, date: $date, country: $country, region: $region, address: $address) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
-
 const withRecompose = compose(
   graphql(createEventMutation),
   withStateHandlers(
@@ -229,7 +218,7 @@ const withRecompose = compose(
   withHandlers({
     createEvent : ({ mutate, form, errorsList, showAlert }) => async () => {
       const response = await mutate({
-        variables: form
+        variables: form,
       });
 
       const { ok, errors } = response.data.createEvent;

@@ -1,28 +1,29 @@
-import React            from 'react';
-import ChipInput        from 'material-ui-chip-input';
-import TextField        from '@material-ui/core/TextField';
-import InputLabel       from '@material-ui/core/InputLabel';
-import FormControl      from '@material-ui/core/FormControl';
-import Input            from '@material-ui/core/Input';
-import Select           from '@material-ui/core/Select';
-import MenuItem         from '@material-ui/core/MenuItem';
+import React                     from 'react';
+import ChipInput                 from 'material-ui-chip-input';
+import TextField                 from '@material-ui/core/TextField';
+import InputLabel                from '@material-ui/core/InputLabel';
+import FormControl               from '@material-ui/core/FormControl';
+import Input                     from '@material-ui/core/Input';
+import Select                    from '@material-ui/core/Select';
+import MenuItem                  from '@material-ui/core/MenuItem';
 import {
   CountryDropdown,
   RegionDropdown
-}                       from 'react-country-region-selector';
-import * as R           from 'ramda';
-import PropTypes        from 'prop-types';
+}                                from 'react-country-region-selector';
+import * as R                    from 'ramda';
+import PropTypes                 from 'prop-types';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                       from 'recompose';
-import { gql, graphql } from 'react-apollo';
-import styled           from 'styled-components';
+}                                from 'recompose';
+import { graphql }               from 'react-apollo';
+import styled                    from 'styled-components';
 
-import GradientButton   from '../../../layouts/gradient_button';
-import Alert            from '../../../layouts/alert';
-import { currencies }   from '../models/currencies';
+import GradientButton            from '../../../layouts/gradient_button';
+import Alert                     from '../../../layouts/alert';
+import { currencies }            from '../models/currencies';
+import { updateProfileMutation } from '../graphql/mutations';
 
 const EditProfileForm = ({
   form: {
@@ -164,18 +165,6 @@ const canSubmitForm = ({ name, genres, country, region }) => R.all(R.equals(true
   !R.isEmpty(country),
   !R.isEmpty(region),
 ]);
-
-const updateProfileMutation = gql`
-  mutation($profileId: Int!, $name: String!, $genres: String!, $country: String!, $region: String!, $currency: String!) {
-    updateProfile(profileId: $profileId, name: $name, genres: $genres, country: $country, region: $region, currency: $currency) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   graphql(updateProfileMutation),

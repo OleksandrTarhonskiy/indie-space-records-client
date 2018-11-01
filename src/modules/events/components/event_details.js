@@ -1,19 +1,17 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import moment         from 'moment';
-import * as R         from 'ramda';
-import {
-  gql,
-  graphql
-}                     from 'react-apollo';
+import React              from 'react';
+import PropTypes          from 'prop-types';
+import moment             from 'moment';
+import * as R             from 'ramda';
+import { graphql }        from 'react-apollo';
 import {
   compose,
   withStateHandlers,
-}                     from 'recompose';
-import styled         from 'styled-components';
+}                         from 'recompose';
+import styled             from 'styled-components';
 
-import GradientButton from '../../../layouts/gradient_button';
-import EditEvent      from './edit_event';
+import GradientButton     from '../../../layouts/gradient_button';
+import EditEvent          from './edit_event';
+import { viewEventQuery } from '../graphql/queries';
 
 const EventDetails = ({
   data: { viewEvent = {} },
@@ -21,6 +19,7 @@ const EventDetails = ({
   editing,
   setToEditing,
   setToDetails,
+  currency,
 }) => (
   <div>
     { editing?
@@ -30,7 +29,7 @@ const EventDetails = ({
         <EventDetails.Headline>
           {viewEvent.title}
         </EventDetails.Headline>
-        <p>Price: {viewEvent.price}$</p>
+        <p>Price: {`${viewEvent.price} ${currency}`}</p>
         <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
         <p>Country : {viewEvent.country}</p>
         <p>Region : {viewEvent.region}</p>
@@ -51,21 +50,6 @@ const EventDetails = ({
   </div>
 );
 
-const viewEventQuery = gql`
-  query viewEvent($eventId: Int!){
-    viewEvent(eventId: $eventId) {
-      id
-      title
-      details
-      country
-      region
-      address
-      date
-      price
-    }
-  }
-`;
-
 EventDetails.About = styled.div`
   padding : 1%;
 `;
@@ -80,6 +64,7 @@ EventDetails.propTypes = {
   editing      : PropTypes.bool.isRequired,
   setToEditing : PropTypes.func.isRequired,
   setToDetails : PropTypes.func.isRequired,
+  currency     : PropTypes.string.isRequired,
 };
 
 const withRecompose = compose(
