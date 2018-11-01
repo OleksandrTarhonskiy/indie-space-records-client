@@ -4,13 +4,10 @@ import {
   compose,
   withHandlers
 }                              from 'recompose';
-import {
-  gql,
-  graphql
-}                              from 'react-apollo';
+import { graphql }             from 'react-apollo';
 import Button                  from '@material-ui/core/Button';
 
-import { createThemeMutation } from '../graphql/mutation';
+import { createThemeMutation } from '../graphql/mutations';
 
 const SetTheme = ({
   setTheme,
