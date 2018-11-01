@@ -1,14 +1,16 @@
-import React  from 'react';
-import styled from 'styled-components';
+import React                   from 'react';
+import styled                  from 'styled-components';
 import {
   compose,
   withHandlers
-}              from 'recompose';
+}                              from 'recompose';
 import {
   gql,
   graphql
-}              from 'react-apollo';
-import Button  from '@material-ui/core/Button';
+}                              from 'react-apollo';
+import Button                  from '@material-ui/core/Button';
+
+import { createThemeMutation } from '../graphql/mutation';
 
 const SetTheme = ({
   setTheme,
@@ -35,18 +37,6 @@ SetTheme.Button = styled(Button)`
   color      : #ffff !important;
   border     : 1px solid #eaedf5 !important;
   position   : absolute;
-`;
-
-const createThemeMutation = gql`
-  mutation($name: String!, $style: String!, $fonts: String!) {
-    createTheme(name: $name,  style: $style, fonts: $fonts) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
 `;
 
 const withRecompose = compose(
