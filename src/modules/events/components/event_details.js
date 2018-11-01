@@ -1,19 +1,17 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import moment         from 'moment';
-import * as R         from 'ramda';
-import {
-  gql,
-  graphql
-}                     from 'react-apollo';
+import React              from 'react';
+import PropTypes          from 'prop-types';
+import moment             from 'moment';
+import * as R             from 'ramda';
+import { graphql }        from 'react-apollo';
 import {
   compose,
   withStateHandlers,
-}                     from 'recompose';
-import styled         from 'styled-components';
+}                         from 'recompose';
+import styled             from 'styled-components';
 
-import GradientButton from '../../../layouts/gradient_button';
-import EditEvent      from './edit_event';
+import GradientButton     from '../../../layouts/gradient_button';
+import EditEvent          from './edit_event';
+import { viewEventQuery } from '../graphql/queries';
 
 const EventDetails = ({
   data: { viewEvent = {} },
@@ -51,21 +49,6 @@ const EventDetails = ({
     />
   </div>
 );
-
-const viewEventQuery = gql`
-  query viewEvent($eventId: Int!){
-    viewEvent(eventId: $eventId) {
-      id
-      title
-      details
-      country
-      region
-      address
-      date
-      price
-    }
-  }
-`;
 
 EventDetails.About = styled.div`
   padding : 1%;

@@ -1,23 +1,22 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import TableCell      from '@material-ui/core/TableCell';
-import IconButton     from '@material-ui/core/IconButton';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import TableRow       from '@material-ui/core/TableRow';
-import { Link }       from 'react-router-dom';
-import ClearIcon      from '@material-ui/icons/Clear';
-import styled         from 'styled-components';
-import moment         from 'moment';
-import {
-  gql,
-  graphql
-}                     from 'react-apollo';
+import React                   from 'react';
+import PropTypes               from 'prop-types';
+import TableCell               from '@material-ui/core/TableCell';
+import IconButton              from '@material-ui/core/IconButton';
+import VisibilityIcon          from '@material-ui/icons/Visibility';
+import TableRow                from '@material-ui/core/TableRow';
+import { Link }                from 'react-router-dom';
+import ClearIcon               from '@material-ui/icons/Clear';
+import styled                  from 'styled-components';
+import moment                  from 'moment';
+import { graphql }             from 'react-apollo';
 import {
   compose,
   withHandlers,
   withStateHandlers,
-}                     from 'recompose';
-import Alert          from '../../../layouts/alert';
+}                              from 'recompose';
+import Alert                   from '../../../layouts/alert';
+
+import { deleteEventMutation } from '../graphql/mutations';
 
 const EventRow = ({
   event: {
@@ -77,18 +76,6 @@ EventRow.propTypes = {
   errorsList  : PropTypes.array.isRequired,
   hasError    : PropTypes.bool.isRequired,
 };
-
-const deleteEventMutation = gql`
-  mutation($eventId: Int!) {
-    deleteEvent(eventId: $eventId) {
-      ok
-      errors {
-        path
-        message
-      }
-    }
-  }
-`;
 
 const withRecompose = compose(
   graphql(deleteEventMutation),

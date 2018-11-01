@@ -1,12 +1,12 @@
-import React       from 'react';
-import PropTypes   from 'prop-types';
-import styled      from 'styled-components';
-import Paper       from '@material-ui/core/Paper';
-import { graphql } from 'react-apollo';
+import React                from 'react';
+import PropTypes            from 'prop-types';
+import styled               from 'styled-components';
+import Paper                from '@material-ui/core/Paper';
+import { graphql }          from 'react-apollo';
 
-import CreateEvent from '../forms/create_event';
-import EventsList  from '../components/events_list';
-import allMyEvents from '../graphql/allMyEvents';
+import CreateEvent          from '../forms/create_event';
+import EventsList           from '../components/events_list';
+import { allMyEventsQuery } from '../graphql/queries';
 
 const MusicianEventsPage = ({ data: { allMyEvents = []} }) => (
   <MusicianEventsPage.Wrapper>
@@ -40,4 +40,4 @@ MusicianEventsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-export default graphql(allMyEvents)(MusicianEventsPage);
+export default graphql(allMyEventsQuery)(MusicianEventsPage);
