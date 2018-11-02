@@ -19,6 +19,9 @@ export const myProfileWithThemeQuery = gql`
       id
       name
       genres
+      country
+      region
+      currency
       theme {
         style
         fonts

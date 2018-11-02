@@ -1,17 +1,17 @@
-import React          from 'react';
-import styled         from 'styled-components';
-import HomeIcon       from '@material-ui/icons/Home';
-import GradeIcon      from '@material-ui/icons/Grade';
-import BuildIcon      from '@material-ui/icons/Build';
-import Paper          from '@material-ui/core/Paper';
-import PersonIcon     from '@material-ui/icons/Person';
-import StyleIcon      from '@material-ui/icons/Style';
-import StarIcon       from '@material-ui/icons/Star';
-import DoneIcon       from '@material-ui/icons/Done';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import { Link }       from 'react-router-dom';
+import React                       from 'react';
+import styled                      from 'styled-components';
+import HomeIcon                    from '@material-ui/icons/Home';
+import GradeIcon                   from '@material-ui/icons/Grade';
+import BuildIcon                   from '@material-ui/icons/Build';
+import Paper                       from '@material-ui/core/Paper';
+import PersonIcon                  from '@material-ui/icons/Person';
+import StyleIcon                   from '@material-ui/icons/Style';
+import StarIcon                    from '@material-ui/icons/Star';
+import DoneIcon                    from '@material-ui/icons/Done';
+import VisibilityIcon              from '@material-ui/icons/Visibility';
+import { Link }                    from 'react-router-dom';
 
-const ProfileFeatures = () => (
+const ProfileFeatures = ({ myProfile }) => (
   <ProfileFeatures.SettingsMenu
     position="static"
     color="default"
@@ -28,7 +28,7 @@ const ProfileFeatures = () => (
         Events
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/me">
+    <ProfileFeatures.MenuItem to={myProfile.theme? "/me" : "/musician/themes"}>
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
@@ -46,7 +46,7 @@ const ProfileFeatures = () => (
         Profile settings
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/profile/settings">
+    <ProfileFeatures.MenuItem to={myProfile.theme? "/profile/settings" : "/musician/themes"}>
       <ProfileFeatures.MenuItemText>
         <StyleIcon />
         Customize my profile
