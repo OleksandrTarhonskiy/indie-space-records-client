@@ -19,7 +19,7 @@ import LogoutPage               from '../modules/auth/pages/log_out_page';
 import ProfileHomeWrapper       from '../modules/musician/pages/profile_home_wrapper';
 import MyProfilePage            from '../modules/musician/pages/my_profile_page';
 import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_settings_page';
-import EditProfilePage          from '../modules/musician/pages/edit_profile_page';
+import SettingsPage             from '../modules/musician/pages/settings_page';
 import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
 import EventPage                from '../modules/events/pages/event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
@@ -48,7 +48,7 @@ export default (
         <PrivateRoute exact path="/me" component={MyProfilePage} />
         <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
-        <PrivateRoute exact path="/profile/edit" component={EditProfilePage} />
+        <PrivateRoute path="/profile" component={SettingsPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
