@@ -40,7 +40,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Choose Theme
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/profile">
+    <ProfileFeatures.MenuItem to="/profile/general">
       <ProfileFeatures.MenuItemText>
         <BuildIcon />
         Profile settings
