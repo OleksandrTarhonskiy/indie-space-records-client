@@ -28,7 +28,6 @@ const EventPage = ({
 
 EventPage.PageWrapper = styled.div`
   padding     : 5%;
-  dispay      : flex;
   font-family : 'Roboto', sans-serif;
   color       : #3c3c3e;
 `;

@@ -91,7 +91,7 @@ FlatTheme.ThirdSection = styled.div`
 
 FlatTheme.Header = styled.div`
   width             : 100%;
-  background        : linear-gradient(to right,#413b53 0%,#e84d75 100%);
+  background        : linear-gradient(to right, #413b53 0%, #e84d75 100%);
   padding           : 15% 0;
   display           : flex;
   justify-content   : center;

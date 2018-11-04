@@ -246,7 +246,7 @@ ProfileThemeSettings.Alert = styled(SnackbarContent)`
 `;
 
 ProfileThemeSettings.SliderWrapper = styled.div`
-  width      : 80%
+  width      : 80%;
   height     : 60px;
   margin-top : 20px;
 `;

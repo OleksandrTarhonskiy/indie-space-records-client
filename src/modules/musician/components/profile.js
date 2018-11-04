@@ -174,7 +174,7 @@ Profile.Body = styled.div`
 Profile.Navigation = styled.div`
   position   : absolute;
   width      : 100%;
-  text-align : ${props => props.elementStyles.MenuLinksPosition};;
+  text-align : ${props => props.elementStyles.MenuLinksPosition};
 `;
 
 Profile.NavItems = styled.ul`
@@ -246,7 +246,7 @@ Profile.Headline = styled.h1`
 `;
 
 Profile.propTypes = {
-  data : PropTypes.object.isRequired,
+  myProfile : PropTypes.object.isRequired,
 };
 
 export default Profile;
