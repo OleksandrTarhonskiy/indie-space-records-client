@@ -162,7 +162,7 @@ MusicianProfileForm.RegionDropdown = styled(RegionDropdown)`
 `;
 
 MusicianProfileForm.SelectWrapper = styled(FormControl)`
-  width : 100%
+  width : 100%;
 `;
 
 MusicianProfileForm.propTypes = {

@@ -20,7 +20,6 @@ const EditEvent = ({
 
 EditEvent.PageWrapper = styled.div`
   padding     : 5% 10%;
-  dispay      : flex;
   font-family : 'Roboto', sans-serif;
   color       : #3c3c3e;
 `;

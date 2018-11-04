@@ -77,18 +77,18 @@ ProfileFeatures.SettingsMenu = styled(Paper)`
 `;
 
 ProfileFeatures.MenuItem = styled(Link)`
-&& {
-  display         : flex;
-  height          : 100px;
-  width           : 100%;
-  justify-content : center;
-  flex-direction  : column;
-  font-family     : 'Roboto', sans-serif;
-  font-size       : 18px;
-  cursor          : pointer;
-  text-decoration : none;
-  color           : #374142;
-  outline         : none;
+  && {
+    display         : flex;
+    height          : 100px;
+    width           : 100%;
+    justify-content : center;
+    flex-direction  : column;
+    font-family     : 'Roboto', sans-serif;
+    font-size       : 18px;
+    cursor          : pointer;
+    text-decoration : none;
+    color           : #374142;
+    outline         : none;
 
     &:hover {
       background : #e9e9e9;

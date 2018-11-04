@@ -143,7 +143,7 @@ EditProfileForm.RegionDropdown = styled(RegionDropdown)`
 `;
 
 EditProfileForm.SelectWrapper = styled(FormControl)`
-  width : 100%
+  width : 100%;
 `;
 
 EditProfileForm.propTypes = {

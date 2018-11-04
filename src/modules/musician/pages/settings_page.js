@@ -36,7 +36,6 @@ SettingsPage.PageWrapper = styled.div`
 SettingsPage.Header = styled.div`
   display         : flex;
   flex-direction  : column;
-  justify-content : space-between;
   width           : 100%;
   background      : #ffff;
   justify-content : center;
