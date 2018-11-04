@@ -1,4 +1,5 @@
 import React                       from 'react';
+import PropTypes                   from 'prop-types';
 import styled                      from 'styled-components';
 import HomeIcon                    from '@material-ui/icons/Home';
 import GradeIcon                   from '@material-ui/icons/Grade';
@@ -28,7 +29,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Events
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to={myProfile.theme? "/me" : "/musician/themes"}>
+    <ProfileFeatures.MenuItem to={myProfile.theme? '/me' : '/musician/themes'}>
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
@@ -46,7 +47,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Profile settings
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to={myProfile.theme? "/profile/settings" : "/musician/themes"}>
+    <ProfileFeatures.MenuItem to={myProfile.theme? '/profile/settings' : '/musician/themes'}>
       <ProfileFeatures.MenuItemText>
         <StyleIcon />
         Customize my profile
@@ -100,5 +101,9 @@ ProfileFeatures.MenuItemText = styled.div`
   flex-direction  : row;
   justify-content : center;
 `;
+
+ProfileFeatures.propTypes = {
+  myProfile : PropTypes.object.isRequired,
+};
 
 export default ProfileFeatures;

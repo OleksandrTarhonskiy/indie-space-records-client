@@ -10,7 +10,7 @@ import {
 }                     from '../models/settings_routing';
 
 const mapLocationToTab = ({ pathname }) => SETTINGS_PATHS.indexOf(pathname);
-console.log(mapLocationToTab)
+
 const NavigationTabs = ({ location }) => (
   <Tabs
     value={mapLocationToTab(location)}

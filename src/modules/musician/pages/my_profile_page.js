@@ -1,4 +1,5 @@
 import React                       from 'react';
+import PropTypes                   from 'prop-types';
 import Profile                     from '../components/profile';
 import { graphql }                 from 'react-apollo';
 import CircularProgress            from '@material-ui/core/CircularProgress';
@@ -19,6 +20,10 @@ const MyProfilePage = ({
       }
     </div>
   );
+};
+
+MyProfilePage.propTypes = {
+  data : PropTypes.object.isRequired,
 };
 
 const withRecompose = compose(

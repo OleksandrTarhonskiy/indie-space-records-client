@@ -246,7 +246,7 @@ Profile.Headline = styled.h1`
 `;
 
 Profile.propTypes = {
-  data : PropTypes.object.isRequired,
+  myProfile : PropTypes.object.isRequired,
 };
 
 export default Profile;
