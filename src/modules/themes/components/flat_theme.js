@@ -8,7 +8,7 @@ import {
 
 import SetTheme    from './set_theme';
 
-const FlatTheme = ({setTheme}) => (
+const FlatTheme = () => (
   <div>
     <SetTheme
       style={firstThemeStyle}

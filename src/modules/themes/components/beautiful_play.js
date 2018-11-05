@@ -8,7 +8,7 @@ import {
 
 import SetTheme    from './set_theme';
 
-const BeautifulPlay = ({setTheme}) => (
+const BeautifulPlay = () => (
   <div>
     <SetTheme
       style={BeautifulPlayStyle}
