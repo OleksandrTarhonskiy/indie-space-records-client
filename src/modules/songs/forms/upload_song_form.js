@@ -1,7 +1,14 @@
-import React from 'react';
+import React          from 'react';
+
+import FileUpload     from '../components/file_upload';
+import GradientButton from '../../../layouts/gradient_button';
 
 const UploadSongForm = () => (
-  <h1>404</h1>
+  <FileUpload>
+    <GradientButton
+      text={'Upload'}
+    />
+  </FileUpload>
 );
 
 export default UploadSongForm;
