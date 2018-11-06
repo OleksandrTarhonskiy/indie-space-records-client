@@ -26,6 +26,7 @@
     "react": "^16.4.1",
     "react-apollo": "^1.4.16",
     "react-dom": "^16.4.1",
+    "react-dropzone": "^7.0.1",
     "react-font-picker": "^1.1.8",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
