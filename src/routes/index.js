@@ -25,7 +25,7 @@ import EventPage                from '../modules/events/pages/event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
-import SongUpload               from '../modules/songs/pages/song_upload'
+import Upload                   from '../modules/upload/pages/upload'
 import PrivateRoute             from './private_route';
 
 export default (
@@ -50,7 +50,7 @@ export default (
         <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
         <PrivateRoute path="/profile" component={SettingsPage} />
-        <PrivateRoute path="/upload_song" component={SongUpload} />
+        <PrivateRoute path="/upload_song" component={Upload} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
