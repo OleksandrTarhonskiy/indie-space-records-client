@@ -1,4 +1,5 @@
 import React          from 'react';
+import PropTypes      from 'prop-types';
 import Tab            from '@material-ui/core/Tab';
 import Tabs           from '@material-ui/core/Tabs';
 import { withRouter } from 'react-router';
@@ -31,5 +32,9 @@ const NavigationTabs = ({ location }) => (
     />
   </Tabs>
 );
+
+NavigationTabs.propTypes = {
+  location : PropTypes.object.isRequired,
+};
 
 export default withRouter(NavigationTabs);
