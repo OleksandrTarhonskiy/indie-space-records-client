@@ -208,7 +208,6 @@ const withRecompose = compose(
       mutate,
       form,
     }) => async () => {
-      console.log(form)
       const response = await mutate({
         variables: form
       });
