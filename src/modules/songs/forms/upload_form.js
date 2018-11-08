@@ -12,14 +12,15 @@ import DateFnsUtils            from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import * as R                  from 'ramda';
 import moment                  from 'moment';
+import Dropzone                from 'react-dropzone';
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                              from 'recompose';
 import { graphql }             from 'react-apollo';
 
 import GradientButton          from '../../../layouts/gradient_button';
-import FileUpload              from '../components/file_upload';
 import { RADIO_BUTTONS }       from '../models/radio-buttons';
 import { uploadSongMutation }  from '../graphql/mutations';
 
@@ -30,12 +31,16 @@ const UploadForm = ({
     price,
     release,
     pricingType,
+    file,
   },
   handleChange,
   handleFieldChange,
+  disableClick,
+  upload,
+  handleFileUpload,
 }) => (
-  <FileUpload.Form>
-    <FileUpload.Wrapper>
+  <UploadForm.Form>
+    <UploadForm.Wrapper>
       <UploadForm.SectionWrapper>
         <UploadForm.Headline>
           About Track
@@ -64,11 +69,16 @@ const UploadForm = ({
           />
         </MuiPickersUtilsProvider>
         <br />
-        <FileUpload>
+        <Dropzone
+          className="ignore"
+          name="file"
+          onDrop={handleFileUpload.bind(null, 'file')}
+          disableClick={disableClick}
+        >
           <GradientButton
             text={'choose file'}
           />
-        </FileUpload>
+        </Dropzone>
       </UploadForm.SectionWrapper>
       <UploadForm.SectionWrapper>
         <UploadForm.Headline>
@@ -87,9 +97,9 @@ const UploadForm = ({
             margin="normal"
             disabled={pricingType === 'free'}
           />
-          <FileUpload.CurrencyWrapper>
+          <UploadForm.CurrencyWrapper>
             {currency}
-          </FileUpload.CurrencyWrapper>
+          </UploadForm.CurrencyWrapper>
         </UploadForm.InputWrapper>
         <FormControl component="fieldset">
           <FormLabel component="legend">Pricing type</FormLabel>
@@ -112,18 +122,19 @@ const UploadForm = ({
           </RadioGroup>
         </FormControl>
       </UploadForm.SectionWrapper>
-    </FileUpload.Wrapper>
+    </UploadForm.Wrapper>
     <GradientButton
       text={'Save & upload'}
+      onClick={upload}
     />
-  </FileUpload.Form>
+  </UploadForm.Form>
 );
 
-FileUpload.Form = styled.form`
+UploadForm.Form = styled.form`
   padding : 4%;
 `;
 
-FileUpload.Wrapper = styled.div`
+UploadForm.Wrapper = styled.div`
   && {
     display        : flex;
     flex-direction : column;
@@ -156,7 +167,7 @@ UploadForm.InputWrapper = styled.div`
   display : flex;
 `;
 
-FileUpload.CurrencyWrapper = styled.div`
+UploadForm.CurrencyWrapper = styled.div`
   color       : #565656;
   font-family : 'Roboto', sans-serif;
   font-size   : 20px;
@@ -172,6 +183,7 @@ const withRecompose = compose(
         price       : '',
         release     : (new Date()).toString(),
         pricingType : 'free',
+        file        : null,
       },
     }) => ({ form }),
     {
@@ -184,8 +196,24 @@ const withRecompose = compose(
         const form = R.assoc(field, value, state.form);
         return ({ form });
       },
+
+      handleFileUpload : state => (field, [value]) => {
+        const form = R.assoc(field, value, state.form);
+        return ({ form });
+      },
     },
   ),
+  withHandlers({
+    upload : ({
+      mutate,
+      form,
+    }) => async () => {
+      console.log(form)
+      const response = await mutate({
+        variables: form
+      });
+    },
+  })
 );
 
 export default withRecompose(UploadForm);
