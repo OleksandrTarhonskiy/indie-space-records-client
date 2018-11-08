@@ -16,10 +16,12 @@ import {
   compose,
   withStateHandlers,
 }                              from 'recompose';
+import { graphql }             from 'react-apollo';
 
 import GradientButton          from '../../../layouts/gradient_button';
 import FileUpload              from '../components/file_upload';
 import { RADIO_BUTTONS }       from '../models/radio-buttons';
+import { uploadSongMutation }  from '../graphql/mutations';
 
 const UploadForm = ({
   currency,
@@ -162,6 +164,7 @@ FileUpload.CurrencyWrapper = styled.div`
 `;
 
 const withRecompose = compose(
+  graphql(uploadSongMutation),
   withStateHandlers(
     ({
       form = {
