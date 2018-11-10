@@ -138,7 +138,6 @@ UploadForm.Wrapper = styled.div`
   && {
     display        : flex;
     flex-direction : column;
-
     ${breakpoint('md')`
       flex-direction : row;
     `}
@@ -148,7 +147,6 @@ UploadForm.Wrapper = styled.div`
 UploadForm.SectionWrapper = styled.div`
   && {
     width   : 100%;
-
     ${breakpoint('md')`
       width : 50%;
     `}
