@@ -32,7 +32,6 @@ const UploadForm = ({
     price,
     release,
     pricingType,
-    file,
   },
   handleChange,
   handleFieldChange,
