@@ -1,4 +1,5 @@
 import React                   from 'react';
+import PropTypes               from 'prop-types';
 import styled                  from 'styled-components';
 import breakpoint              from 'styled-components-breakpoint';
 import TextField               from '@material-ui/core/TextField';
@@ -171,6 +172,15 @@ UploadForm.CurrencyWrapper = styled.div`
   font-size   : 20px;
   padding     : 13% 5%;
 `;
+
+UploadForm.propTypes = {
+  form              : PropTypes.object.isRequired,
+  handleChange      : PropTypes.func.isRequired,
+  handleFieldChange : PropTypes.func.isRequired,
+  handleFileUpload  : PropTypes.func.isRequired,
+  currency          : PropTypes.string,
+  upload            : PropTypes.func.isRequired,
+};
 
 const withRecompose = compose(
   graphql(uploadSongMutation),
