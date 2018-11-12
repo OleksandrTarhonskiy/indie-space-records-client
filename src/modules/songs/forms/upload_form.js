@@ -24,6 +24,7 @@ import { graphql }             from 'react-apollo';
 import GradientButton          from '../../../layouts/gradient_button';
 import { RADIO_BUTTONS }       from '../models/radio-buttons';
 import { uploadSongMutation }  from '../graphql/mutations';
+import Alert                   from '../../../layouts/alert';
 
 const UploadForm = ({
   currency,
@@ -38,6 +39,9 @@ const UploadForm = ({
   disableClick,
   upload,
   handleFileUpload,
+  hasError,
+  errorsList,
+  hideAlert,
 }) => (
   <UploadForm.Form>
     <UploadForm.Wrapper>
@@ -127,6 +131,12 @@ const UploadForm = ({
       text={'Save & upload'}
       onClick={upload}
     />
+    <Alert
+      action="upload"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </UploadForm.Form>
 );
 
@@ -179,20 +189,25 @@ UploadForm.propTypes = {
   handleFileUpload  : PropTypes.func.isRequired,
   currency          : PropTypes.string,
   upload            : PropTypes.func.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hasError          : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(
   graphql(uploadSongMutation),
   withStateHandlers(
     ({
-      form = {
+      form       = {
         name        : '',
         price       : '',
         release     : (new Date()).toString(),
         pricingType : 'free',
         file        : null,
       },
-    }) => ({ form }),
+      hasError   = false,
+      errorsList = [],
+    }) => ({ form, hasError, errorsList}),
     {
       handleChange      : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
@@ -208,16 +223,37 @@ const withRecompose = compose(
         const form = R.assoc(field, value, state.form);
         return ({ form });
       },
+
+      showAlert        : () => () => ({ hasError: true }),
+      hideAlert        : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
     upload : ({
       mutate,
       form,
+      errorsList,
+      showAlert,
     }) => async () => {
       const response = await mutate({
         variables: form
       });
+
+      const { ok, errors } = response.data.uploadSong;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
