@@ -1,10 +1,11 @@
-import { ApolloClient }     from 'apollo-client';
-import { createHttpLink }   from 'apollo-link-http';
-import { InMemoryCache }    from 'apollo-cache-inmemory';
-import { setContext }       from 'apollo-link-context';
-import { ApolloLink }       from 'apollo-link';
+import { ApolloClient }   from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache }  from 'apollo-cache-inmemory';
+import { setContext }     from 'apollo-link-context';
+import { ApolloLink }     from 'apollo-link';
+import createFileLink     from './create_file_link';
 
-const httpLink = createHttpLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = createFileLink({ uri: 'http://localhost:8080/graphql' });
 
 const middlewareLink = setContext(() => ({
   headers: {
