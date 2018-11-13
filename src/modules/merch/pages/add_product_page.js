@@ -1,7 +1,18 @@
-import React from 'react';
+import React          from 'react';
+import styled         from 'styled-components';
+import Paper          from '@material-ui/core/Paper';
+
+import AddProductForm from '../forms/add_product_form';
 
 const AddProductPage = () => (
-  <h1>product page</h1>
+  <AddProductPage.PageWrapper>
+    <AddProductForm />
+  </AddProductPage.PageWrapper>
 );
+
+AddProductPage.PageWrapper = styled.div`
+  background : #eaedf5;
+  padding    : 1% 0 1%;
+`;
 
 export default AddProductPage;
