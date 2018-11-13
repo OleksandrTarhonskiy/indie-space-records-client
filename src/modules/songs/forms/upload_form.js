@@ -200,7 +200,7 @@ const withRecompose = compose(
     ({
       form       = {
         name        : '',
-        price       : '',
+        price       : 0,
         release     : (new Date()).toString(),
         pricingType : 'free',
         file        : null,
