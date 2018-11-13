@@ -66,7 +66,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Members
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/">
+    <ProfileFeatures.MenuItem to="/merch/create">
       <ProfileFeatures.MenuItemText>
         <StarIcon />
         My store
