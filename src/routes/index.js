@@ -25,7 +25,7 @@ import EventPage                from '../modules/events/pages/event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
-import UploadSong               from '../modules/songs/pages/upload_song'
+import UploadSong               from '../modules/songs/pages/upload_song';
 import PrivateRoute             from './private_route';
 
 export default (
