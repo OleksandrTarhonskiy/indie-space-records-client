@@ -58,6 +58,24 @@ const AddProductForm = () => (
         text={'Upload image'}
       />
     </AddProductForm.Section>
+    <AddProductForm.Section>
+      <h2>Pricing:</h2>
+      <AddProductForm.PriceBlock>
+        <TextField
+          label="Price"
+          value={0}
+          name="price"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
+        />
+        <AddProductForm.PriceDesc>
+          for 1 unit
+        </AddProductForm.PriceDesc>
+      </AddProductForm.PriceBlock>
+    </AddProductForm.Section>
   </AddProductForm.FormWrapper>
 );
 
@@ -74,4 +92,14 @@ AddProductForm.Section = styled(Paper)`
 AddProductForm.SelectWrapper = styled(FormControl)`
   width : 100%;
 `;
+
+AddProductForm.PriceBlock = styled.div`
+  display        : flex;
+  flex-direction : row;
+`;
+
+AddProductForm.PriceDesc = styled.p`
+  margin : 3%;
+`;
+
 export default AddProductForm;
