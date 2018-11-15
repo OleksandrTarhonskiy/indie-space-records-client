@@ -8,6 +8,7 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import { Link }               from 'react-router-dom';
 
 import { allMyProductsQuery } from '../graphql/queries';
+import ProductsTable          from '../components/products_table';
 
 const MerchMainPage = ({
   data: {
@@ -23,7 +24,7 @@ const MerchMainPage = ({
         <MerchMainPage.Container>
           {
             allMyProducts.length ?
-              <p>you have some</p>
+              <ProductsTable products={allMyProducts} />
               :
               <MerchMainPage.MessageWrapper>
                 <h2>You dont have products...</h2>

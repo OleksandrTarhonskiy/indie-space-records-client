@@ -7,6 +7,7 @@ export const allMyProductsQuery = gql`
       type
       title
       price
+      inStock
     }
   }
 `;
