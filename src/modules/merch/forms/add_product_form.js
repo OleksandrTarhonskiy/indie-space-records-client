@@ -1,17 +1,40 @@
-import React              from 'react';
-import styled             from 'styled-components';
-import TextField          from '@material-ui/core/TextField';
-import InputLabel         from '@material-ui/core/InputLabel';
-import FormControl        from '@material-ui/core/FormControl';
-import Input              from '@material-ui/core/Input';
-import Select             from '@material-ui/core/Select';
-import MenuItem           from '@material-ui/core/MenuItem';
-import Paper              from '@material-ui/core/Paper';
+import React                     from 'react';
+import PropTypes                 from 'prop-types';
+import styled                    from 'styled-components';
+import TextField                 from '@material-ui/core/TextField';
+import InputLabel                from '@material-ui/core/InputLabel';
+import FormControl               from '@material-ui/core/FormControl';
+import Input                     from '@material-ui/core/Input';
+import Select                    from '@material-ui/core/Select';
+import MenuItem                  from '@material-ui/core/MenuItem';
+import Paper                     from '@material-ui/core/Paper';
+import { graphql }               from 'react-apollo';
+import {
+  compose,
+  withStateHandlers,
+  withHandlers,
+}                                from 'recompose';
+import * as R                    from 'ramda';
 
-import { PRODUCTS_TYPES } from '../models/types';
-import GradientButton     from '../../../layouts/gradient_button';
+import { PRODUCTS_TYPES }        from '../models/types';
+import GradientButton            from '../../../layouts/gradient_button';
+import { createProductMutation } from '../graphql/mutations';
+import Alert                     from '../../../layouts/alert';
 
-const AddProductForm = () => (
+const AddProductForm = ({
+  form: {
+    type,
+    title,
+    desc,
+    price,
+    deliveryType,
+  },
+  handleChange,
+  hasError,
+  hideAlert,
+  errorsList,
+  create,
+}) => (
   <AddProductForm.FormWrapper>
     <AddProductForm.Section>
       <h2>About product:</h2>
@@ -25,7 +48,8 @@ const AddProductForm = () => (
           Type of product
         </InputLabel>
         <Select
-          value={'none'}
+          value={type}
+          onChange={handleChange}
           input={
             <Input
               name="type"
@@ -41,15 +65,17 @@ const AddProductForm = () => (
         label="Title"
         type="text"
         margin="normal"
-        value=""
+        onChange={handleChange}
+        value={title}
         fullWidth
       />
       <TextField
-        name="description"
+        name="desc"
         label="Description"
         type="text"
         margin="normal"
-        value=""
+        onChange={handleChange}
+        value={desc}
         multiline={true}
         fullWidth
       />
@@ -63,7 +89,8 @@ const AddProductForm = () => (
       <AddProductForm.PriceBlock>
         <TextField
           label="Price"
-          value={0}
+          value={price}
+          onChange={handleChange}
           name="price"
           type="number"
           InputLabelProps={{
@@ -76,6 +103,29 @@ const AddProductForm = () => (
         </AddProductForm.PriceDesc>
       </AddProductForm.PriceBlock>
     </AddProductForm.Section>
+    <AddProductForm.Section>
+      <h2>Delivery:</h2>
+      <TextField
+        name="deliveryType"
+        label="delivery type"
+        type="text"
+        margin="normal"
+        onChange={handleChange}
+        value={deliveryType}
+        multiline={true}
+        fullWidth
+      />
+      <GradientButton
+        text={'Submit'}
+        onClick={create}
+      />
+    </AddProductForm.Section>
+    <Alert
+      action="create"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </AddProductForm.FormWrapper>
 );
 
@@ -102,4 +152,67 @@ AddProductForm.PriceDesc = styled.p`
   margin : 3%;
 `;
 
-export default AddProductForm;
+AddProductForm.propTypes = {
+  form         : PropTypes.object.isRequired,
+  create       : PropTypes.func.isRequired,
+  handleChange : PropTypes.func.isRequired,
+  hasError     : PropTypes.bool.isRequired,
+  errorsList   : PropTypes.array.isRequired,
+  hideAlert    : PropTypes.func.isRequired,
+};
+
+const withRecompose = compose(
+  graphql(createProductMutation),
+  withStateHandlers(
+    ({
+      form       = {
+        type         : '',
+        title        : '',
+        desc         : '',
+        price        : 0,
+        deliveryType : '',
+      },
+      hasError   = false,
+      errorsList = [],
+    }) => ({ form, hasError, errorsList}),
+    {
+      handleChange : state => ({ target }) => {
+        const form = R.assoc(target.name, target.value, state.form);
+        return ({ form });
+      },
+
+      showAlert    : () => () => ({ hasError: true }),
+      hideAlert    : () => () => ({ hasError: false }),
+    },
+  ),
+  withHandlers({
+    create : ({
+      mutate,
+      form,
+      errorsList,
+      showAlert,
+    }) => async () => {
+      const response = await mutate({
+        variables: form
+      });
+
+      const { ok, errors } = response.data.createProduct;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+
+        showAlert();
+        errorsList.pop();
+      }
+    },
+  })
+);
+
+export default withRecompose(AddProductForm);
