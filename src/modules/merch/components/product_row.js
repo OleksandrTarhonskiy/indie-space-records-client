@@ -103,9 +103,9 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       edit = {
-        type : false,
-        title : false,
-        price : false,
+        type    : false,
+        title   : false,
+        price   : false,
         inStock : false,
       },
     }) => ({ edit }),
