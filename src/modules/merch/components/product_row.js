@@ -1,5 +1,6 @@
 import React         from 'react';
 import PropTypes     from 'prop-types';
+import styled        from 'styled-components';
 import TableCell     from '@material-ui/core/TableCell';
 import TableRow      from '@material-ui/core/TableRow';
 import TextField     from '@material-ui/core/TextField';
@@ -24,7 +25,7 @@ const ProductRow = ({
   <TableRow>
     {
       edit.type ?
-      <TableCell>
+      <ProductRow.TableCell>
         <TextField
           name="type"
           label="type"
@@ -32,16 +33,18 @@ const ProductRow = ({
           value={type}
           fullWidth
         />
-        <IconButton onClick={toggleEdit.bind(null, 'type', false)}>
+        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
           <CloseIcon />
-        </IconButton>
-      </TableCell>
+        </ProductRow.IconButton>
+      </ProductRow.TableCell>
       :
-      <TableCell onClick={toggleEdit.bind(null, 'type', true)}>{type}</TableCell>
+      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'type', true)}>
+        {type}
+      </ProductRow.TableCell>
     }
     {
       edit.title ?
-      <TableCell>
+      <ProductRow.TableCell>
         <TextField
           name="title"
           label="Title"
@@ -49,16 +52,18 @@ const ProductRow = ({
           value={title}
           fullWidth
         />
-        <IconButton onClick={toggleEdit.bind(null, 'title', false)}>
+        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
           <CloseIcon />
-        </IconButton>
-      </TableCell>
+        </ProductRow.IconButton>
+      </ProductRow.TableCell>
       :
-      <TableCell onClick={toggleEdit.bind(null, 'title', true)}>{title}</TableCell>
+      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'title', true)}>
+        {title}
+      </ProductRow.TableCell>
     }
     {
       edit.price ?
-      <TableCell>
+      <ProductRow.TableCell>
         <TextField
           name="price"
           label="price"
@@ -66,16 +71,18 @@ const ProductRow = ({
           value={price}
           fullWidth
         />
-        <IconButton onClick={toggleEdit.bind(null, 'price', false)}>
+        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
           <CloseIcon />
-        </IconButton>
-      </TableCell>
+        </ProductRow.IconButton>
+      </ProductRow.TableCell>
       :
-      <TableCell onClick={toggleEdit.bind(null, 'price', true)}>{price}</TableCell>
+      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'price', true)}>
+        {price}
+      </ProductRow.TableCell>
     }
     {
       edit.inStock ?
-      <TableCell>
+      <ProductRow.TableCell>
         <TextField
           name="inStock"
           label="in stock"
@@ -83,21 +90,32 @@ const ProductRow = ({
           value={inStock}
           fullWidth
         />
-        <IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
+        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
           <CloseIcon />
-        </IconButton>
-      </TableCell>
+        </ProductRow.IconButton>
+      </ProductRow.TableCell>
       :
-      <TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>{String(inStock)}</TableCell>
+      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>
+        {String(inStock)}
+      </ProductRow.TableCell>
     }
-    <TableCell numeric>{0}</TableCell>
-    <TableCell numeric>{0}</TableCell>
+    <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
+    <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
   </TableRow>
 );
 
 ProductRow.propTypes = {
   product : PropTypes.object.isRequired,
 };
+
+ProductRow.TableCell = styled(TableCell)`
+  white-space : nowrap;
+  height      : 107px !important;
+`;
+
+ProductRow.IconButton = styled(IconButton)`
+  margin : 25px !important;
+`;
 
 const withRecompose = compose(
   withStateHandlers(
