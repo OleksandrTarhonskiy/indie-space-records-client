@@ -1,27 +1,28 @@
-import React              from 'react';
-import PropTypes          from 'prop-types';
-import styled             from 'styled-components';
-import TableCell          from '@material-ui/core/TableCell';
-import TableRow           from '@material-ui/core/TableRow';
-import TextField          from '@material-ui/core/TextField';
-import InputLabel         from '@material-ui/core/InputLabel';
-import FormControl        from '@material-ui/core/FormControl';
-import Input              from '@material-ui/core/Input';
-import Select             from '@material-ui/core/Select';
-import MenuItem           from '@material-ui/core/MenuItem';
-import IconButton         from '@material-ui/core/IconButton';
-import DoneIcon           from '@material-ui/icons/Done';
-import CloseIcon          from '@material-ui/icons/Close';
-import { graphql }        from 'react-apollo';
-import * as R             from 'ramda';
+import React                     from 'react';
+import PropTypes                 from 'prop-types';
+import styled                    from 'styled-components';
+import TableCell                 from '@material-ui/core/TableCell';
+import TableRow                  from '@material-ui/core/TableRow';
+import TextField                 from '@material-ui/core/TextField';
+import InputLabel                from '@material-ui/core/InputLabel';
+import FormControl               from '@material-ui/core/FormControl';
+import Input                     from '@material-ui/core/Input';
+import Select                    from '@material-ui/core/Select';
+import MenuItem                  from '@material-ui/core/MenuItem';
+import IconButton                from '@material-ui/core/IconButton';
+import DoneIcon                  from '@material-ui/icons/Done';
+import CloseIcon                 from '@material-ui/icons/Close';
+import { graphql }               from 'react-apollo';
+import * as R                    from 'ramda';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                         from 'recompose';
+}                                from 'recompose';
 
-import { PRODUCTS_TYPES } from '../models/types';
+import { PRODUCTS_TYPES }        from '../models/types';
 import { updateProductMutation } from '../graphql/mutations';
+import Alert                     from '../../../layouts/alert';
 
 const ProductRow = ({
   product: {
@@ -35,6 +36,9 @@ const ProductRow = ({
   edit,
   handleChange,
   create,
+  hasError,
+  hideAlert,
+  errorsList,
 }) => (
   <TableRow>
     {
@@ -147,6 +151,12 @@ const ProductRow = ({
     }
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
+    <Alert
+      action="update"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </TableRow>
 );
 
@@ -176,20 +186,22 @@ const withRecompose = compose(
   graphql(updateProductMutation),
   withStateHandlers(
     ({
-      edit = {
+      edit      = {
         type    : false,
         title   : false,
         price   : false,
         inStock : false,
       },
-      product = {
-        type         : '',
-        title        : '',
-        price        : 0,
+      product   = {
+        type  : '',
+        title : '',
+        price : 0,
       },
-    }) => ({ edit, product }),
+      hasError   = false,
+      errorsList = [],
+    }) => ({ edit, product, hasError, errorsList}),
     {
-      toggleEdit : state => (cell, value) => {
+      toggleEdit  : state => (cell, value) => {
         const edit = R.assoc(cell, value, state.edit);
         return ({ edit });
       },
@@ -198,12 +210,17 @@ const withRecompose = compose(
         const product = R.assoc(target.name, target.value, state.product);
         return ({ product });
       },
+
+      showAlert    : () => () => ({ hasError: true }),
+      hideAlert    : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
     create : ({
       mutate,
       product,
+      errorsList,
+      showAlert,
     }) => async () => {
       const response = await mutate({
         variables: {
@@ -214,6 +231,22 @@ const withRecompose = compose(
           inStock   : product.inStock,
         }
       });
+
+      const { ok, errors } = response.data.updateProduct;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
