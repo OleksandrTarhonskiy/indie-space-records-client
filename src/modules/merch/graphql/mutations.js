@@ -11,3 +11,15 @@ export const createProductMutation = gql`
     }
   }
 `;
+
+export const updateProductMutation = gql`
+  mutation($productId: Int!, $type: String, $title: String, $price: Float, $inStock: Boolean) {
+    updateProduct(productId: $productId, type: $type, title: $title, price: $price, inStock: $inStock){
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

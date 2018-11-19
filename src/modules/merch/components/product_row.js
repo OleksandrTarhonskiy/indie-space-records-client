@@ -10,17 +10,22 @@ import Input              from '@material-ui/core/Input';
 import Select             from '@material-ui/core/Select';
 import MenuItem           from '@material-ui/core/MenuItem';
 import IconButton         from '@material-ui/core/IconButton';
+import DoneIcon           from '@material-ui/icons/Done';
 import CloseIcon          from '@material-ui/icons/Close';
+import { graphql }        from 'react-apollo';
 import * as R             from 'ramda';
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                         from 'recompose';
 
 import { PRODUCTS_TYPES } from '../models/types';
+import { updateProductMutation } from '../graphql/mutations';
 
 const ProductRow = ({
   product: {
+    id,
     type,
     title,
     price,
@@ -29,6 +34,7 @@ const ProductRow = ({
   toggleEdit,
   edit,
   handleChange,
+  create,
 }) => (
   <TableRow>
     {
@@ -56,6 +62,9 @@ const ProductRow = ({
             { PRODUCTS_TYPES.map((t, index) => <MenuItem key={index} value={t}>{t}</MenuItem>) }
           </Select>
         </ProductRow.SelectWrapper>
+        <ProductRow.IconButton onClick={create}>
+          <DoneIcon />
+        </ProductRow.IconButton>
         <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
           <CloseIcon />
         </ProductRow.IconButton>
@@ -68,7 +77,7 @@ const ProductRow = ({
     {
       edit.title ?
       <ProductRow.TableCell>
-        <TextField
+        <ProductRow.TextField
           name="title"
           label="Title"
           margin="normal"
@@ -76,6 +85,9 @@ const ProductRow = ({
           value={title}
           fullWidth
         />
+        <ProductRow.IconButton onClick={create}>
+          <DoneIcon />
+        </ProductRow.IconButton>
         <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
           <CloseIcon />
         </ProductRow.IconButton>
@@ -88,7 +100,7 @@ const ProductRow = ({
     {
       edit.price ?
       <ProductRow.TableCell>
-        <TextField
+        <ProductRow.TextField
           label="Price"
           value={price}
           onChange={handleChange}
@@ -99,6 +111,9 @@ const ProductRow = ({
           }}
           margin="normal"
         />
+        <ProductRow.IconButton onClick={create}>
+          <DoneIcon />
+        </ProductRow.IconButton>
         <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
           <CloseIcon />
         </ProductRow.IconButton>
@@ -111,13 +126,16 @@ const ProductRow = ({
     {
       edit.inStock ?
       <ProductRow.TableCell>
-        <TextField
+        <ProductRow.TextField
           name="inStock"
           label="in stock"
           margin="normal"
           value={inStock}
           fullWidth
         />
+        <ProductRow.IconButton onClick={create}>
+          <DoneIcon />
+        </ProductRow.IconButton>
         <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
           <CloseIcon />
         </ProductRow.IconButton>
@@ -142,7 +160,7 @@ ProductRow.TableCell = styled(TableCell)`
 `;
 
 ProductRow.IconButton = styled(IconButton)`
-  margin : 25px !important;
+  margin : 25px 5px !important;
 `;
 
 ProductRow.SelectWrapper = styled(FormControl)`
@@ -150,7 +168,12 @@ ProductRow.SelectWrapper = styled(FormControl)`
   padding-top : 14px !important;
 `;
 
+ProductRow.TextField = styled(TextField)`
+  width : 65% !important;
+`;
+
 const withRecompose = compose(
+  graphql(updateProductMutation),
   withStateHandlers(
     ({
       edit = {
@@ -171,12 +194,28 @@ const withRecompose = compose(
         return ({ edit });
       },
 
-      handleChange : state => ({ target }) => {
+      handleChange : state => ({ target, mutate }) => {
         const product = R.assoc(target.name, target.value, state.product);
         return ({ product });
       },
     },
   ),
+  withHandlers({
+    create : ({
+      mutate,
+      product,
+    }) => async () => {
+      const response = await mutate({
+        variables: {
+          productId : product.id,
+          type      : product.type,
+          title     : product.title,
+          price     : product.price,
+          inStock   : product.inStock,
+        }
+      });
+    },
+  })
 );
 
 export default withRecompose(ProductRow);
