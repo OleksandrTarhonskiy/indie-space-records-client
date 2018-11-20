@@ -1,14 +1,15 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
 import styled                 from 'styled-components';
-import Paper                  from '@material-ui/core/Paper';
+import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
 import { compose }            from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 import { Link }               from 'react-router-dom';
 
 import { allMyProductsQuery } from '../graphql/queries';
-import ProductsTable          from '../components/products_table';
+import MerchHomePage          from './merch_home_page';
+import NavTabs                from '../components/nav_tabs';
 
 const MerchMainPage = ({
   data: {
@@ -21,20 +22,26 @@ const MerchMainPage = ({
   } else {
     return (
       <MerchMainPage.PageWrapper>
-        <MerchMainPage.Container>
-          {
-            allMyProducts.length ?
-              <ProductsTable products={allMyProducts} />
-              :
-              <MerchMainPage.MessageWrapper>
-                <h2>You dont have products...</h2>
-                <h3>
-                But you can create them
-                  <Link to="merch/create"> here</Link>
-                </h3>
-              </MerchMainPage.MessageWrapper>
-          }
-        </MerchMainPage.Container>
+        {
+          allMyProducts.length ?
+          <MerchMainPage.Header>
+            <NavTabs />
+          </MerchMainPage.Header>
+          :
+          null
+        }
+        {
+          allMyProducts.length ?
+            <MerchHomePage products={allMyProducts} />
+            :
+            <MerchMainPage.MessageWrapper>
+              <h2>You dont have products...</h2>
+              <h3>
+              But you can create them
+                <Link to="merch/create"> here</Link>
+              </h3>
+            </MerchMainPage.MessageWrapper>
+        }
       </MerchMainPage.PageWrapper>
     );
   }
@@ -42,12 +49,20 @@ const MerchMainPage = ({
 
 MerchMainPage.PageWrapper = styled.div`
   background : #eaedf5;
-  padding    : 1% 0 1%;
+  padding    : 0 0 1%;
 `;
 
-MerchMainPage.Container = styled(Paper)`
-  margin  : 1%;
-  padding : 2%;
+MerchMainPage.Header = styled.div`
+  display         : flex;
+  flex-direction  : column;
+  width           : 100%;
+  background      : #ffff;
+  justify-content : center;
+  box-shadow      : 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+
+  ${breakpoint('md')`
+    flex-direction: row;
+  `}
 `;
 
 MerchMainPage.MessageWrapper = styled.div`
