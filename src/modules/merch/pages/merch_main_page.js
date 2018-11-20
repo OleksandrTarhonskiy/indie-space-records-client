@@ -38,7 +38,7 @@ const MerchMainPage = ({
               <h2>You dont have products...</h2>
               <h3>
               But you can create them
-                <Link to="merch/create"> here</Link>
+                <Link to="merch/create_first_product"> here</Link>
               </h3>
             </MerchMainPage.MessageWrapper>
         }
