@@ -5,7 +5,6 @@ import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
 import { compose }            from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
-import { Link }               from 'react-router-dom';
 
 import { allMyProductsQuery } from '../graphql/queries';
 import MerchHomePage          from './merch_home_page';
@@ -22,26 +21,10 @@ const MerchMainPage = ({
   } else {
     return (
       <MerchMainPage.PageWrapper>
-        {
-          allMyProducts.length ?
-          <MerchMainPage.Header>
-            <NavTabs />
-          </MerchMainPage.Header>
-          :
-          null
-        }
-        {
-          allMyProducts.length ?
-            <MerchHomePage products={allMyProducts} />
-            :
-            <MerchMainPage.MessageWrapper>
-              <h2>You dont have products...</h2>
-              <h3>
-              But you can create them
-                <Link to="merch/create_first_product"> here</Link>
-              </h3>
-            </MerchMainPage.MessageWrapper>
-        }
+        <MerchMainPage.Header>
+          <NavTabs />
+        </MerchMainPage.Header>
+        <MerchHomePage products={allMyProducts} />
       </MerchMainPage.PageWrapper>
     );
   }
