@@ -5,6 +5,9 @@ import TableCell                 from '@material-ui/core/TableCell';
 import TableRow                  from '@material-ui/core/TableRow';
 import TextField                 from '@material-ui/core/TextField';
 import InputLabel                from '@material-ui/core/InputLabel';
+import Radio                     from '@material-ui/core/Radio';
+import RadioGroup                from '@material-ui/core/RadioGroup';
+import FormControlLabel          from '@material-ui/core/FormControlLabel';
 import FormControl               from '@material-ui/core/FormControl';
 import Input                     from '@material-ui/core/Input';
 import Select                    from '@material-ui/core/Select';
@@ -43,111 +46,122 @@ const ProductRow = ({
   <TableRow>
     {
       edit.type ?
-      <ProductRow.TableCell>
-        <ProductRow.SelectWrapper>
-          <InputLabel
-            ref={ref => {
-              this.InputLabelRef = ref;
-            }}
-            htmlFor="type"
-          >
+        <ProductRow.TableCell>
+          <ProductRow.SelectWrapper>
+            <InputLabel
+              ref={ref => {
+                this.InputLabelRef = ref;
+              }}
+              htmlFor="type"
+            >
             Type of product
-          </InputLabel>
-          <Select
-            value={type}
-            onChange={handleChange}
-            input={
-              <Input
-                name="type"
-                id="type"
-              />
-            }
-          >
-            { PRODUCTS_TYPES.map((t, index) => <MenuItem key={index} value={t}>{t}</MenuItem>) }
-          </Select>
-        </ProductRow.SelectWrapper>
-        <ProductRow.IconButton onClick={create}>
-          <DoneIcon />
-        </ProductRow.IconButton>
-        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
-          <CloseIcon />
-        </ProductRow.IconButton>
-      </ProductRow.TableCell>
-      :
-      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'type', true)}>
-        {type}
-      </ProductRow.TableCell>
+            </InputLabel>
+            <Select
+              value={type}
+              onChange={handleChange}
+              input={
+                <Input
+                  name="type"
+                  id="type"
+                />
+              }
+            >
+              { PRODUCTS_TYPES.map((t, index) => <MenuItem key={index} value={t}>{t}</MenuItem>) }
+            </Select>
+          </ProductRow.SelectWrapper>
+          <ProductRow.IconButton onClick={create}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'type', true)}>
+          {type}
+        </ProductRow.TableCell>
     }
     {
       edit.title ?
-      <ProductRow.TableCell>
-        <ProductRow.TextField
-          name="title"
-          label="Title"
-          margin="normal"
-          onChange={handleChange}
-          value={title}
-          fullWidth
-        />
-        <ProductRow.IconButton onClick={create}>
-          <DoneIcon />
-        </ProductRow.IconButton>
-        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
-          <CloseIcon />
-        </ProductRow.IconButton>
-      </ProductRow.TableCell>
-      :
-      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'title', true)}>
-        {title}
-      </ProductRow.TableCell>
+        <ProductRow.TableCell>
+          <ProductRow.TextField
+            name="title"
+            label="Title"
+            margin="normal"
+            onChange={handleChange}
+            value={title}
+            fullWidth
+          />
+          <ProductRow.IconButton onClick={create}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'title', true)}>
+          {title}
+        </ProductRow.TableCell>
     }
     {
       edit.price ?
-      <ProductRow.TableCell>
-        <ProductRow.TextField
-          label="Price"
-          value={price}
-          onChange={handleChange}
-          name="price"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-        />
-        <ProductRow.IconButton onClick={create}>
-          <DoneIcon />
-        </ProductRow.IconButton>
-        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
-          <CloseIcon />
-        </ProductRow.IconButton>
-      </ProductRow.TableCell>
-      :
-      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'price', true)}>
-        {price}
-      </ProductRow.TableCell>
+        <ProductRow.TableCell>
+          <ProductRow.TextField
+            label="Price"
+            value={price}
+            onChange={handleChange}
+            name="price"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <ProductRow.IconButton onClick={create}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'price', true)}>
+          {price}
+        </ProductRow.TableCell>
     }
     {
       edit.inStock ?
-      <ProductRow.TableCell>
-        <ProductRow.TextField
-          name="inStock"
-          label="in stock"
-          margin="normal"
-          value={inStock}
-          fullWidth
-        />
-        <ProductRow.IconButton onClick={create}>
-          <DoneIcon />
-        </ProductRow.IconButton>
-        <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
-          <CloseIcon />
-        </ProductRow.IconButton>
-      </ProductRow.TableCell>
-      :
-      <ProductRow.TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>
-        {String(inStock)}
-      </ProductRow.TableCell>
+        <ProductRow.TableCell>
+          <FormControl component="fieldset">
+            <RadioGroup
+              name="inStock"
+              value={String(inStock)}
+              onChange={handleChange}
+            >
+              <FormControlLabel
+                value="true"
+                control={<Radio color="primary" />}
+                label="yes"
+              />
+              <FormControlLabel
+                value="false"
+                control={<Radio color="primary" />}
+                label="no"
+              />
+            </RadioGroup>
+          </FormControl>
+          <ProductRow.IconButton onClick={create}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>
+          {String(inStock)}
+        </ProductRow.TableCell>
     }
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
@@ -193,9 +207,10 @@ const withRecompose = compose(
         inStock : false,
       },
       product   = {
-        type  : '',
-        title : '',
-        price : 0,
+        type    : '',
+        title   : '',
+        price   : 0,
+        inStock : 'true',
       },
       hasError   = false,
       errorsList = [],
@@ -206,8 +221,9 @@ const withRecompose = compose(
         return ({ edit });
       },
 
-      handleChange : state => ({ target, mutate }) => {
+      handleChange : state => ({ target }) => {
         const product = R.assoc(target.name, target.value, state.product);
+        console.log(target);
         return ({ product });
       },
 
@@ -228,7 +244,7 @@ const withRecompose = compose(
           type      : product.type,
           title     : product.title,
           price     : product.price,
-          inStock   : product.inStock,
+          inStock   : product.inStock === 'true' ? true : false,
         }
       });
 
