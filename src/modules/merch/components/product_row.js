@@ -175,7 +175,14 @@ const ProductRow = ({
 );
 
 ProductRow.propTypes = {
-  product : PropTypes.object.isRequired,
+  product      : PropTypes.object.isRequired,
+  toggleEdit   : PropTypes.func.isRequired,
+  handleChange : PropTypes.func.isRequired,
+  hasError     : PropTypes.bool.isRequired,
+  errorsList   : PropTypes.array.isRequired,
+  hideAlert    : PropTypes.func.isRequired,
+  create       : PropTypes.func.isRequired,
+  edit         : PropTypes.object.isRequired,
 };
 
 ProductRow.TableCell = styled(TableCell)`

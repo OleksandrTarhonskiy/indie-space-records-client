@@ -5,10 +5,15 @@ import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
 import { compose }            from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
+import { Switch }             from 'react-router-dom';
 
 import { allMyProductsQuery } from '../graphql/queries';
-import MerchHomePage          from './merch_home_page';
 import NavTabs                from '../components/nav_tabs';
+import PrivateRoute           from '../../../routes/private_route';
+import { MERCH_PATH }         from '../models/merch_routing';
+import ProductsTable          from '../components/products_table';
+import OrdersPage             from './orders_page';
+import AddProductForm         from '../forms/add_product_form';
 
 const MerchMainPage = ({
   data: {
@@ -24,7 +29,11 @@ const MerchMainPage = ({
         <MerchMainPage.Header>
           <NavTabs />
         </MerchMainPage.Header>
-        <MerchHomePage products={allMyProducts} />
+        <Switch>
+          <PrivateRoute exact path={MERCH_PATH.PRODUCTS} component={() => <ProductsTable products={allMyProducts} />} />
+          <PrivateRoute exact path={MERCH_PATH.CREATE} component={AddProductForm} />
+          <PrivateRoute exact path={MERCH_PATH.ORDEDS} component={OrdersPage} />
+        </Switch>
       </MerchMainPage.PageWrapper>
     );
   }
