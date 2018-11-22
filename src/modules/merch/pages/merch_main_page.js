@@ -1,14 +1,19 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
 import styled                 from 'styled-components';
-import Paper                  from '@material-ui/core/Paper';
+import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
 import { compose }            from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
-import { Link }               from 'react-router-dom';
+import { Switch }             from 'react-router-dom';
 
 import { allMyProductsQuery } from '../graphql/queries';
+import NavTabs                from '../components/nav_tabs';
+import PrivateRoute           from '../../../routes/private_route';
+import { MERCH_PATH }         from '../models/merch_routing';
 import ProductsTable          from '../components/products_table';
+import OrdersPage             from './orders_page';
+import AddProductForm         from '../forms/add_product_form';
 
 const MerchMainPage = ({
   data: {
@@ -21,20 +26,14 @@ const MerchMainPage = ({
   } else {
     return (
       <MerchMainPage.PageWrapper>
-        <MerchMainPage.Container>
-          {
-            allMyProducts.length ?
-              <ProductsTable products={allMyProducts} />
-              :
-              <MerchMainPage.MessageWrapper>
-                <h2>You dont have products...</h2>
-                <h3>
-                But you can create them
-                  <Link to="merch/create"> here</Link>
-                </h3>
-              </MerchMainPage.MessageWrapper>
-          }
-        </MerchMainPage.Container>
+        <MerchMainPage.Header>
+          <NavTabs />
+        </MerchMainPage.Header>
+        <Switch>
+          <PrivateRoute exact path={MERCH_PATH.PRODUCTS} component={() => <ProductsTable products={allMyProducts} />} />
+          <PrivateRoute exact path={MERCH_PATH.CREATE} component={AddProductForm} />
+          <PrivateRoute exact path={MERCH_PATH.ORDEDS} component={OrdersPage} />
+        </Switch>
       </MerchMainPage.PageWrapper>
     );
   }
@@ -42,12 +41,20 @@ const MerchMainPage = ({
 
 MerchMainPage.PageWrapper = styled.div`
   background : #eaedf5;
-  padding    : 1% 0 1%;
+  padding    : 0 0 1%;
 `;
 
-MerchMainPage.Container = styled(Paper)`
-  margin  : 1%;
-  padding : 2%;
+MerchMainPage.Header = styled.div`
+  display         : flex;
+  flex-direction  : column;
+  width           : 100%;
+  background      : #ffff;
+  justify-content : center;
+  box-shadow      : 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+
+  ${breakpoint('md')`
+    flex-direction: row;
+  `}
 `;
 
 MerchMainPage.MessageWrapper = styled.div`
