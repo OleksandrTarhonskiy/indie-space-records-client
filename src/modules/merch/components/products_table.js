@@ -27,7 +27,7 @@ const ProductsTable = ({ products }) => (
         {products.map(product => {
           return (
             <ProductRow
-              key={products.id}
+              key={product.id}
               product={product}
             />
           );
