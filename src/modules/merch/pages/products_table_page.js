@@ -1,23 +1,16 @@
-import React                  from 'react';
-import PropTypes              from 'prop-types';
-import styled                 from 'styled-components';
-import TextField              from '@material-ui/core/TextField';
-import * as R                 from 'ramda';
-import { graphql }            from 'react-apollo';
+import React         from 'react';
+import PropTypes     from 'prop-types';
+import styled        from 'styled-components';
+import TextField     from '@material-ui/core/TextField';
+import * as R        from 'ramda';
 import {
   compose,
   withStateHandlers,
-}                             from 'recompose';
-import CircularProgress       from '@material-ui/core/CircularProgress';
+}                    from 'recompose';
 
-import { allMyProductsQuery } from '../graphql/queries';
-import ProductsTable          from '../components/products_table';
+import SearchResults from './search_results'
 
 const ProductsTablePage = ({
-  data: {
-    loading,
-    allMyProducts = [],
-  },
   tableOptions: {
     searchQuery,
   },
@@ -35,12 +28,7 @@ const ProductsTablePage = ({
         fullWidth
       />
     </ProductsTablePage.InputsWrapper>
-    {
-      loading ?
-      <CircularProgress />
-      :
-      <ProductsTable products={allMyProducts} />
-    }
+    <SearchResults search={searchQuery} />
   </div>
 );
 
@@ -54,7 +42,6 @@ ProductsTablePage.propTypes = {
 };
 
 const withRecompose = compose(
-  graphql(allMyProductsQuery),
   withStateHandlers(
     ({
       tableOptions = {

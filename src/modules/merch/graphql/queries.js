@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const allMyProductsQuery = gql`
-  {
-    allMyProducts{
+  query allMyProducts($searchQuery: String){
+    allMyProducts(searchQuery: $searchQuery) {
       id
       type
       title
