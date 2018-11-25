@@ -188,6 +188,9 @@ ProductRow.propTypes = {
 ProductRow.TableCell = styled(TableCell)`
   white-space : nowrap;
   height      : 107px !important;
+  font-weight : 500 !important;
+  font-size   : 16px !important;
+  color       : #3c3c3e !important;
 `;
 
 ProductRow.IconButton = styled(IconButton)`
