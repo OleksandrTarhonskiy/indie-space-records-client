@@ -26,6 +26,7 @@ export const myProfileWithThemeQuery = gql`
         style
         fonts
         sections {
+          id
           name
           type
           content
