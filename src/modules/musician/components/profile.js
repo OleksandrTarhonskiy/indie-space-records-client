@@ -16,7 +16,6 @@ const Profile = ({ myProfile }) => (
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
       <Profile.Header>
-      {console.log(JSON.parse(myProfile.theme.style))}
         <Profile.NavItems >
           {
             myProfile.theme.sections.map(section =>
@@ -40,7 +39,20 @@ const Profile = ({ myProfile }) => (
             key={section.id}
             elementStyles={JSON.parse(section.style)}
           >
-            sddsdsds
+            <Profile.SubHeadline
+              elementStyles={JSON.parse(myProfile.theme.style)}
+              elementFont={JSON.parse(myProfile.theme.fonts)}
+              className="apply-font-subHead"
+            >
+              {section.name}
+            </Profile.SubHeadline>
+            <Profile.SectionContent
+              elementStyles={JSON.parse(myProfile.theme.style)}
+              elementFont={JSON.parse(myProfile.theme.fonts)}
+              className="apply-font-regularTextFont"
+            >
+              sddsdsds
+            </Profile.SectionContent>
           </Profile.Section>
         )
       }
@@ -56,6 +68,8 @@ Profile.Body = styled.div`
 
 Profile.Section = styled.div`
   background-color : ${props => props.elementStyles.background};
+  display          : flex;
+  flex-direction   : column;
 `;
 
 Profile.NavItems = styled.ul`
@@ -65,14 +79,14 @@ Profile.NavItems = styled.ul`
 
 Profile.Link = styled.a`
   && {
-    color           : ${props => props.elementStyles.basicStyles.LinksColor};
+    color           : ${props => props.elementStyles.LinksColor};
     text-decoration : none;
     font-family     : ${props => `${props.elementFont.linksFont}`}, sans-serif;
     font-weight     : 600;
     outline         : none;
 
     &:hover {
-      color : ${props => props.elementStyles.basicStyles.LinksHover};
+      color : ${props => props.elementStyles.LinksHover};
     }
   }
 `;
@@ -84,6 +98,16 @@ Profile.NavItem = styled.li`
 
 Profile.Header = styled.div`
   background-color : #17171a;
+`;
+
+Profile.SubHeadline = styled.h2`
+  font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.h2FontSize}px;
+`;
+
+Profile.SectionContent = styled.p`
+  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
 Profile.propTypes = {
