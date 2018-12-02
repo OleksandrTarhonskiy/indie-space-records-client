@@ -52,3 +52,13 @@ export const hasProfileQuery = gql`
     }
   }
 `;
+
+export const allProfilesQuery = gql`
+  {
+    allProfiles{
+      id
+      name
+      genres
+    }
+  }
+`;

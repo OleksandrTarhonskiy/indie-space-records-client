@@ -27,6 +27,7 @@ import MerchMainPage            from '../modules/merch/pages/merch_main_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
 import UploadSong               from '../modules/songs/pages/upload_song';
+import AllProfilesPage          from '../modules/musician/pages/all_profiles_page';
 import PrivateRoute             from './private_route';
 
 export default (
@@ -44,6 +45,7 @@ export default (
         <Route exact path="/logout"           component={LogoutPage} />
         <Route exact path="/events/:id"       component={EventPage} />
         <PrivateRoute exact path="/musician/home" component={ProfileHomeWrapper} />
+        <PrivateRoute exact path="/musicians" component={AllProfilesPage} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
