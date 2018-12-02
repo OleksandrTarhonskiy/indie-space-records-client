@@ -62,3 +62,27 @@ export const allProfilesQuery = gql`
     }
   }
 `;
+
+export const fetchProfileQuery = gql`
+  query fetchProfile($profileId: Int!){
+    fetchProfile(profileId: $profileId) {
+      id
+      name
+      genres
+      country
+      region
+      currency
+      theme {
+        style
+        fonts
+        sections {
+          id
+          name
+          type
+          content
+          style
+        }
+      }
+    }
+  }
+`;
