@@ -13,12 +13,9 @@ const ProfileWrapper = ({
     <div>
       {
         loading?
-          <CircularProgress />
-          :
-          <div>
-          {console.log(fetchProfile)}
-          <Profile myProfile={fetchProfile} />
-          </div>
+        <CircularProgress />
+        :
+        <Profile myProfile={fetchProfile} />
       }
     </div>
   );
