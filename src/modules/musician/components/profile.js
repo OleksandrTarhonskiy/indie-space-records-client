@@ -19,7 +19,7 @@ const Profile = ({ myProfile }) => (
         <Profile.NavItems >
           {
             myProfile.theme.sections.map(section =>
-              <Profile.NavItem>
+              <Profile.NavItem key={section.id}>
                 <Profile.Link
                   href=""
                   elementStyles={JSON.parse(myProfile.theme.style)}
