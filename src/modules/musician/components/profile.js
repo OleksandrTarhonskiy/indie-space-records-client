@@ -15,7 +15,7 @@ const Profile = ({ myProfile }) => (
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).linksFont}`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
-      <Profile.Header>
+      <Profile.Header elementStyles={JSON.parse(myProfile.theme.style)}>
         <Profile.NavItems >
           {
             myProfile.theme.sections.map(section =>
@@ -97,7 +97,8 @@ Profile.NavItem = styled.li`
 `;
 
 Profile.Header = styled.div`
-  background-color : #17171a;
+  background-color : ${props => props.elementStyles.headerBackground};
+  text-align       : ${props => props.elementStyles.MenuLinksPosition};
 `;
 
 Profile.SubHeadline = styled.h2`
