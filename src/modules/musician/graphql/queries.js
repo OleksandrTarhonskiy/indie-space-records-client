@@ -22,6 +22,10 @@ export const myProfileWithThemeQuery = gql`
       country
       region
       currency
+      events {
+        id
+        title
+      }
       theme {
         style
         fonts
@@ -72,6 +76,10 @@ export const fetchProfileQuery = gql`
       country
       region
       currency
+      events {
+        id
+        title
+      }
       theme {
         style
         fonts

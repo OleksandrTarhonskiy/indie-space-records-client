@@ -1,29 +1,31 @@
-import React                       from 'react';
-import PropTypes                   from 'prop-types';
-import styled                      from 'styled-components';
-import { Helmet }                  from 'react-helmet';
+import React      from 'react';
+import PropTypes  from 'prop-types';
+import styled     from 'styled-components';
+import { Helmet } from 'react-helmet';
 
-const Profile = ({ myProfile }) => (
+import Section    from './section';
+
+const Profile = ({ profile }) => (
   <div>
     <Profile.Body
-      key={myProfile.id}
-      elementStyles={JSON.parse(myProfile.theme.style)}
+      key={profile.id}
+      elementStyles={JSON.parse(profile.theme.style)}
     >
       <Helmet>
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).headlineFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).linksFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).subHead}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
-      <Profile.Header elementStyles={JSON.parse(myProfile.theme.style)}>
+      <Profile.Header elementStyles={JSON.parse(profile.theme.style)}>
         <Profile.NavItems >
           {
-            myProfile.theme.sections.map(section =>
+            profile.theme.sections.map(section =>
               <Profile.NavItem key={section.id}>
                 <Profile.Link
                   href=""
-                  elementStyles={JSON.parse(myProfile.theme.style)}
-                  elementFont={JSON.parse(myProfile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                  elementFont={JSON.parse(profile.theme.fonts)}
                   className="apply-font-linksFont"
                 >
                   {section.name}
@@ -34,24 +36,27 @@ const Profile = ({ myProfile }) => (
         </Profile.NavItems>
       </Profile.Header>
       {
-        myProfile.theme.sections.map(section =>
+        profile.theme.sections.map(section =>
           <Profile.Section
             key={section.id}
             elementStyles={JSON.parse(section.style)}
           >
             <Profile.SubHeadline
-              elementStyles={JSON.parse(myProfile.theme.style)}
-              elementFont={JSON.parse(myProfile.theme.fonts)}
+              elementStyles={JSON.parse(profile.theme.style)}
+              elementFont={JSON.parse(profile.theme.fonts)}
               className="apply-font-subHead"
             >
               {section.name}
             </Profile.SubHeadline>
             <Profile.SectionContent
-              elementStyles={JSON.parse(myProfile.theme.style)}
-              elementFont={JSON.parse(myProfile.theme.fonts)}
+              elementStyles={JSON.parse(profile.theme.style)}
+              elementFont={JSON.parse(profile.theme.fonts)}
               className="apply-font-regularTextFont"
             >
-              sddsdsds
+              <Section
+                type={section.type}
+                events={profile.events}
+              />
             </Profile.SectionContent>
           </Profile.Section>
         )
@@ -112,7 +117,7 @@ Profile.SectionContent = styled.p`
 `;
 
 Profile.propTypes = {
-  myProfile : PropTypes.object.isRequired,
+  profile : PropTypes.object.isRequired,
 };
 
 export default Profile;

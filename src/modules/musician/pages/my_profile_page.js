@@ -16,7 +16,7 @@ const MyProfilePage = ({
         loading?
           <CircularProgress />
           :
-          <Profile myProfile={myProfile} />
+          <Profile profile={myProfile} />
       }
     </div>
   );

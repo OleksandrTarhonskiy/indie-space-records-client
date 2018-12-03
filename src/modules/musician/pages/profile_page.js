@@ -1,7 +1,7 @@
 import React          from 'react';
 import { withRouter } from 'react-router';
 
-import ProfileWrapper from './profile_wrapper'
+import ProfileWrapper from './profile_wrapper';
 
 const ProfilePage = ({
   match: {
