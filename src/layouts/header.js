@@ -24,7 +24,7 @@ try {
   const { user } = decode(token);
   name = user.name;
 } catch (err) {
-  null;
+  alert(err);
 }
 
 const Header = ({

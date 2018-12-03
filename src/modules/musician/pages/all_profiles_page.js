@@ -19,6 +19,7 @@ const allProfilesPage = ({ data: { loading, allProfiles = [] } }) => (
                 src="https://newmusicshelf.com/wp-content/uploads/blank-profile-picture.png"
                 heigh="255px"
                 width="255px"
+                alt={profile.name}
               />
             </allProfilesPage.PhotoWrapper>
             <br />
