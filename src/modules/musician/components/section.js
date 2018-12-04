@@ -3,12 +3,17 @@ import React from 'react';
 const Section = ({
   type,
   events,
+  products,
 }) => {
   switch (type) {
   case 'music':
     return(<p>music here</p>);
   case 'merch':
-    return(<p>merch here</p>);
+    return(
+      products.map(p =>
+        <p key={p.id}>{p.title}</p>
+      )
+    );
   case 'events':
     return(
       events.map(e =>

@@ -26,6 +26,10 @@ export const myProfileWithThemeQuery = gql`
         id
         title
       }
+      products {
+        id
+        title
+      }
       theme {
         style
         fonts
