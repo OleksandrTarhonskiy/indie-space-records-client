@@ -80,6 +80,10 @@ export const fetchProfileQuery = gql`
       country
       region
       currency
+      products {
+        id
+        title
+      }
       events {
         id
         title
