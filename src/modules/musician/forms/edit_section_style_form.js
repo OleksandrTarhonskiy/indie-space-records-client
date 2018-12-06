@@ -7,6 +7,7 @@ import {
   withStateHandlers,
   withHandlers,
 }                                     from 'recompose';
+import GradientButton                 from '../../../layouts/gradient_button';
 
 import { updateSectionStyleMutation } from '../graphql/mutations';
 
@@ -27,7 +28,10 @@ const EditSectionStyleForm = ({
       label="Background color"
       margin="normal"
     />
-    <button onClick={submit}>draste</button>
+    <GradientButton
+      text={'Update this section'}
+      onClick={submit}
+    />
   </div>
 );
 
