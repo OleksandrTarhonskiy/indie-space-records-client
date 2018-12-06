@@ -13,7 +13,7 @@ import Typography                  from '@material-ui/core/Typography';
 import ProfileThemeSettings        from '../forms/profile_theme_settings';
 import MyProfilePage               from './my_profile_page';
 import { myProfileWithThemeQuery } from '../graphql/queries';
-import EditSectionForm             from '../forms/edit_section_form';
+import EditSectionStyleForm        from '../forms/edit_section_style_form';
 
 const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
   <ProfileThemeSettingsPage.Wrapper>
@@ -45,7 +45,7 @@ const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
               <Typography>{section.name} section styles</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <EditSectionForm
+              <EditSectionStyleForm
                 key={section.id}
                 style={JSON.parse(section.style)}
               />
