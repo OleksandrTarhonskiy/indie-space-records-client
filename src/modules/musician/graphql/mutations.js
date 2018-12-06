@@ -47,3 +47,15 @@ export const signUpMutation = gql`
     }
   }
 `;
+
+export const updateSectionStyleMutation = gql`
+  mutation($sectionId: Int!, $style: String!) {
+    updateSectionStyle(sectionId: $sectionId, style: $style) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

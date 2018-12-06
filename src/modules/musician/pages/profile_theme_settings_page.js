@@ -47,7 +47,8 @@ const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
             <ExpansionPanelDetails>
               <EditSectionStyleForm
                 key={section.id}
-                style={JSON.parse(section.style)}
+                id={section.id}
+                styles={JSON.parse(section.style)}
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>

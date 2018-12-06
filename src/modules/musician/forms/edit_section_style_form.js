@@ -1,43 +1,64 @@
-import React         from 'react';
-import ColorPicker   from 'material-ui-color-picker';
-import * as R        from 'ramda';
+import React                          from 'react';
+import ColorPicker                    from 'material-ui-color-picker';
+import * as R                         from 'ramda';
+import { graphql }                    from 'react-apollo';
 import {
   compose,
   withStateHandlers,
-}                    from 'recompose';
+  withHandlers,
+}                                     from 'recompose';
+
+import { updateSectionStyleMutation } from '../graphql/mutations';
 
 const EditSectionStyleForm = ({
-  style: {
+  id,
+  styles: {
     background,
   },
   handleChange,
+  submit,
 }) => (
   <div>
     <ColorPicker
       defaultValue={background}
       value={background}
-      onChange={handleChange}
+      onChange={handleChange.bind(null, 'background')}
       name="background"
       label="Background color"
       margin="normal"
     />
+    <button onClick={submit}>draste</button>
   </div>
 );
 
 const withRecompose = compose(
+  graphql(updateSectionStyleMutation),
   withStateHandlers(
     ({
-      style     = {
+      styles     = {
         background : '',
       },
-    }) => ({ style }),
+    }) => ({ styles }),
     {
       handleChange : state => (field, value) => {
-        const styles = R.assoc(field, value, state.style);
+        const styles = R.assoc(field, value, state.styles);
         return ({ styles });
       },
     },
   ),
+  withHandlers({
+    submit : ({ styles, mutate, id }) => async () => {
+      const stringStyle = JSON.stringify(styles);
+      const response = await mutate({
+        variables: {
+          sectionId : id,
+          style     : stringStyle,
+        },
+      });
+
+      console.log(response);
+    },
+  })
 );
 
 export default withRecompose(EditSectionStyleForm);
