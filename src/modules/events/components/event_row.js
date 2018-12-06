@@ -3,6 +3,7 @@ import PropTypes               from 'prop-types';
 import TableCell               from '@material-ui/core/TableCell';
 import IconButton              from '@material-ui/core/IconButton';
 import VisibilityIcon          from '@material-ui/icons/Visibility';
+import BuildIcon               from '@material-ui/icons/Build';
 import TableRow                from '@material-ui/core/TableRow';
 import { Link }                from 'react-router-dom';
 import ClearIcon               from '@material-ui/icons/Clear';
@@ -49,6 +50,9 @@ const EventRow = ({
       <EventRow.ActionsWrapper>
         <IconButton component={Link} to={`/events/${id}`}>
           <VisibilityIcon />
+        </IconButton>
+        <IconButton component={Link} to={`/events/edit/${id}`}>
+          <BuildIcon />
         </IconButton>
         <IconButton onClick={deleteEvent}>
           <ClearIcon />

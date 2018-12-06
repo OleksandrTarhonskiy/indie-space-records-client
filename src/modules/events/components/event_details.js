@@ -1,52 +1,36 @@
 import React              from 'react';
 import PropTypes          from 'prop-types';
 import moment             from 'moment';
-import * as R             from 'ramda';
 import { graphql }        from 'react-apollo';
-import {
-  compose,
-  withStateHandlers,
-}                         from 'recompose';
+import { compose }        from 'recompose';
 import styled             from 'styled-components';
 
 import GradientButton     from '../../../layouts/gradient_button';
-import EditEvent          from './edit_event';
 import { viewEventQuery } from '../graphql/queries';
 
 const EventDetails = ({
   data: { viewEvent = {} },
   id,
-  editing,
-  setToEditing,
-  setToDetails,
   currency,
 }) => (
   <div>
-    { editing?
-      <EditEvent id={id} />
-      :
-      <div>
-        <EventDetails.Headline>
-          {viewEvent.title}
-        </EventDetails.Headline>
-        <p>Price: {`${viewEvent.price} ${currency}`}</p>
-        <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
-        <p>Country : {viewEvent.country}</p>
-        <p>Region : {viewEvent.region}</p>
-        <p>Address : {viewEvent.address}</p>
-        <p>About:</p>
-        <EventDetails.About>
-          {viewEvent.details}
-        </EventDetails.About>
-        <GradientButton
-          text={'View tikets'}
-        />
-      </div>
-    }
-    <GradientButton
-      text={editing? 'View event' : 'Edit event'}
-      onClick={editing? setToDetails : setToEditing}
-    />
+    <div>
+      <EventDetails.Headline>
+        {viewEvent.title}
+      </EventDetails.Headline>
+      <p>Price: {`${viewEvent.price} ${currency}`}</p>
+      <p>Started : {moment(Date.parse(viewEvent.date)).format('DD/MM/YYYY h:mm A')}</p>
+      <p>Country : {viewEvent.country}</p>
+      <p>Region : {viewEvent.region}</p>
+      <p>Address : {viewEvent.address}</p>
+      <p>About:</p>
+      <EventDetails.About>
+        {viewEvent.details}
+      </EventDetails.About>
+      <GradientButton
+        text={'View tikets'}
+      />
+    </div>
   </div>
 );
 
@@ -75,15 +59,6 @@ const withRecompose = compose(
       }
     })
   }),
-  withStateHandlers(
-    ({
-      editing = false,
-    }) => ({ editing }),
-    {
-      setToEditing : state => () => R.assoc('editing', true, state),
-      setToDetails : state => () => R.assoc('editing', false, state),
-    },
-  ),
 );
 
 export default withRecompose(EventDetails);
