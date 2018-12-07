@@ -102,3 +102,14 @@ export const fetchProfileQuery = gql`
     }
   }
 `;
+
+export const allMySectionsQuery = gql`
+  {
+    allMySections{
+      id
+      type
+      name
+      content
+    }
+  }
+`;

@@ -8,7 +8,10 @@ import { myProfileWithThemeQuery } from '../graphql/queries';
 import Profile                     from '../components/profile';
 
 const MyProfilePage = ({
-  data: { loading, myProfile = {} },
+  data: {
+    loading,
+    myProfile = {}
+  },
 }) => {
   return(
     <div>
