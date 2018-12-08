@@ -71,3 +71,15 @@ export const updateSectionContentMutation = gql`
     }
   }
 `;
+
+export const createSectionMutation = gql`
+  mutation($type: String!, $name: String!, $content: String, $style: String!) {
+    createSection(type: $type, name: $name, content: $content, style: $style) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

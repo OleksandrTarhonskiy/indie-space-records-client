@@ -1,22 +1,22 @@
-import React             from 'react';
-import styled            from 'styled-components';
-import TextField         from '@material-ui/core/TextField';
-import InputLabel        from '@material-ui/core/InputLabel';
-import FormControl       from '@material-ui/core/FormControl';
-import Input             from '@material-ui/core/Input';
-import Select            from '@material-ui/core/Select';
-import MenuItem          from '@material-ui/core/MenuItem';
-import { graphql }       from 'react-apollo';
-import * as R            from 'ramda';
+import React                            from 'react';
+import styled                           from 'styled-components';
+import TextField                        from '@material-ui/core/TextField';
+import InputLabel                       from '@material-ui/core/InputLabel';
+import FormControl                      from '@material-ui/core/FormControl';
+import Input                            from '@material-ui/core/Input';
+import Select                           from '@material-ui/core/Select';
+import MenuItem                         from '@material-ui/core/MenuItem';
+import { graphql }                      from 'react-apollo';
+import * as R                           from 'ramda';
 import {
   compose,
   withStateHandlers,
   withHandlers,
-}                        from 'recompose';
+}                                       from 'recompose';
 
-import { SECTION_TYPES } from '../models/section_types';
+import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
-import GradientButton                 from '../../../layouts/gradient_button';
+import GradientButton                   from '../../../layouts/gradient_button';
 
 const EditSectionsContent = ({
   section: {
