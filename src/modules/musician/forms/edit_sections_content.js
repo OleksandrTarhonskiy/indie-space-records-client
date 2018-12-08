@@ -6,21 +6,27 @@ import FormControl       from '@material-ui/core/FormControl';
 import Input             from '@material-ui/core/Input';
 import Select            from '@material-ui/core/Select';
 import MenuItem          from '@material-ui/core/MenuItem';
+import { graphql }       from 'react-apollo';
 import * as R            from 'ramda';
 import {
   compose,
   withStateHandlers,
+  withHandlers,
 }                        from 'recompose';
 
 import { SECTION_TYPES } from '../models/section_types';
+import { updateSectionContentMutation } from '../graphql/mutations';
+import GradientButton                 from '../../../layouts/gradient_button';
 
 const EditSectionsContent = ({
   section: {
+    id,
     name,
     type,
     content,
   },
   handleChange,
+  updateSection,
 }) => (
   <EditSectionsContent.Form>
     <TextField
@@ -43,7 +49,7 @@ const EditSectionsContent = ({
         Type
       </InputLabel>
       <Select
-        value={type}
+        value={type || ''}
         onChange={handleChange}
         input={
           <Input
@@ -68,6 +74,10 @@ const EditSectionsContent = ({
         <p>in this section will be displaying your {type}</p>
       }
     </EditSectionsContent.ContentBlock>
+    <GradientButton
+      text={'Update this section'}
+      onClick={updateSection}
+    />
   </EditSectionsContent.Form>
 );
 
@@ -91,6 +101,7 @@ EditSectionsContent.SelectWrapper = styled(FormControl)`
 `;
 
 const withRecompose = compose(
+  graphql(updateSectionContentMutation),
   withStateHandlers(
     ({
       section    = {
@@ -106,6 +117,22 @@ const withRecompose = compose(
       },
     },
   ),
+  withHandlers({
+    updateSection : ({
+      section,
+      mutate,
+    }) => async () => {
+      const response = await mutate({
+        variables: {
+          sectionId : section.id,
+          name      : section.name,
+          content   : section.content,
+          type      : section.type,
+        }
+      });
+      console.log(response)
+    },
+  })
 );
 
 export default withRecompose(EditSectionsContent);

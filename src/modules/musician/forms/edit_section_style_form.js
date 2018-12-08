@@ -7,8 +7,8 @@ import {
   withStateHandlers,
   withHandlers,
 }                                     from 'recompose';
-import GradientButton                 from '../../../layouts/gradient_button';
 
+import GradientButton                 from '../../../layouts/gradient_button';
 import { updateSectionStyleMutation } from '../graphql/mutations';
 
 const EditSectionStyleForm = ({

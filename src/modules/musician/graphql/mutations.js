@@ -59,3 +59,15 @@ export const updateSectionStyleMutation = gql`
     }
   }
 `;
+
+export const updateSectionContentMutation = gql`
+  mutation($sectionId: Int!, $type: String, $name: String, $content: String) {
+    updateSectionContent(sectionId: $sectionId, type: $type, name: $name, content: $content) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

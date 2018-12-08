@@ -4,6 +4,7 @@ const Section = ({
   type,
   events,
   products,
+  content,
 }) => {
   switch (type) {
   case 'music':
@@ -21,7 +22,11 @@ const Section = ({
       )
     );
   default:
-    return(<p>text here</p>);
+  return(
+    events.map(e =>
+      <p key={e.id}>{e.content}</p>
+    )
+  );
   }
 };
 
