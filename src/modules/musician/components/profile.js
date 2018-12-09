@@ -44,6 +44,7 @@ const Profile = ({ profile }) => (
             <Profile.SubHeadline
               elementStyles={JSON.parse(profile.theme.style)}
               elementFont={JSON.parse(profile.theme.fonts)}
+              display={JSON.parse(section.style).displayHeadline}
               className="apply-font-subHead"
             >
               {section.name}
@@ -111,6 +112,7 @@ Profile.Header = styled.div`
 Profile.SubHeadline = styled.h2`
   font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
   font-size   : ${props => props.elementStyles.h2FontSize}px;
+  display     : ${props => props.display === 'false' ? 'none' : 'block'};
 `;
 
 Profile.SectionContent = styled.p`

@@ -2,6 +2,10 @@ import React                          from 'react';
 import ColorPicker                    from 'material-ui-color-picker';
 import * as R                         from 'ramda';
 import { graphql }                    from 'react-apollo';
+import Radio                     from '@material-ui/core/Radio';
+import RadioGroup                from '@material-ui/core/RadioGroup';
+import FormControlLabel          from '@material-ui/core/FormControlLabel';
+import FormControl               from '@material-ui/core/FormControl';
 import {
   compose,
   withStateHandlers,
@@ -15,19 +19,39 @@ const EditSectionStyleForm = ({
   id,
   styles: {
     background,
+    displayHeadline,
   },
   handleChange,
+  handleColorChange,
   submit,
 }) => (
   <div>
     <ColorPicker
       defaultValue={background}
       value={background}
-      onChange={handleChange.bind(null, 'background')}
+      onChange={handleColorChange.bind(null, 'background')}
       name="background"
       label="Background color"
       margin="normal"
     />
+    <FormControl component="fieldset">
+      <RadioGroup
+        name="displayHeadline"
+        value={String(displayHeadline)}
+        onChange={handleChange}
+      >
+        <FormControlLabel
+          value="true"
+          control={<Radio color="primary" />}
+          label="yes"
+        />
+        <FormControlLabel
+          value="false"
+          control={<Radio color="primary" />}
+          label="no"
+        />
+      </RadioGroup>
+    </FormControl>
     <GradientButton
       text={'Update this section'}
       onClick={submit}
@@ -40,12 +64,18 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       styles     = {
-        background : '',
+        background      : '',
+        displayHeadline : 'true',
       },
     }) => ({ styles }),
     {
-      handleChange : state => (field, value) => {
+      handleColorChange : state => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
+        return ({ styles });
+      },
+
+      handleChange : state => ({ target }) => {
+        const styles = R.assoc(target.name, target.value, state.styles);
         return ({ styles });
       },
     },

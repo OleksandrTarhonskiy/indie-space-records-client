@@ -67,6 +67,7 @@ const EditSectionsContent = ({
         <TextField
           name="content"
           value={content}
+          onChange={handleChange}
           label="page content"
           multiline="true"
         />

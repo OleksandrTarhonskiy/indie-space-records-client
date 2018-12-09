@@ -230,7 +230,6 @@ const withRecompose = compose(
 
       handleChange : state => ({ target }) => {
         const product = R.assoc(target.name, target.value, state.product);
-        console.log(target);
         return ({ product });
       },
 
