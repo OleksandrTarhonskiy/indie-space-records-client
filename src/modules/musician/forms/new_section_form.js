@@ -121,7 +121,7 @@ const withRecompose = compose(
           name    : section.name,
           content : section.content,
           type    : section.type,
-          style   : '{"background" : "#fffff"}'
+          style   : '{"background" : "#fffff", "displayHeadline" : "true"}'
         }
       });
       console.log(response)

@@ -2,10 +2,11 @@ import React                          from 'react';
 import ColorPicker                    from 'material-ui-color-picker';
 import * as R                         from 'ramda';
 import { graphql }                    from 'react-apollo';
-import Radio                     from '@material-ui/core/Radio';
-import RadioGroup                from '@material-ui/core/RadioGroup';
-import FormControlLabel          from '@material-ui/core/FormControlLabel';
-import FormControl               from '@material-ui/core/FormControl';
+import Radio                          from '@material-ui/core/Radio';
+import RadioGroup                     from '@material-ui/core/RadioGroup';
+import FormControlLabel               from '@material-ui/core/FormControlLabel';
+import FormControl                    from '@material-ui/core/FormControl';
+import Typography                     from '@material-ui/core/Typography';
 import {
   compose,
   withStateHandlers,
@@ -35,8 +36,10 @@ const EditSectionStyleForm = ({
       margin="normal"
     />
     <FormControl component="fieldset">
+      <Typography>Display section headline?</Typography>
       <RadioGroup
         name="displayHeadline"
+        id="displayHeadline"
         value={String(displayHeadline)}
         onChange={handleChange}
       >
