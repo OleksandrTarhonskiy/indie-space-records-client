@@ -22,11 +22,7 @@ const Section = ({
       )
     );
   default:
-  return(
-    events.map(e =>
-      <p key={e.id}>{e.content}</p>
-    )
-  );
+  return(<p>{content}</p>);
   }
 };
 

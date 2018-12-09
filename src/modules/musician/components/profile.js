@@ -57,6 +57,7 @@ const Profile = ({ profile }) => (
                 type={section.type}
                 events={profile.events}
                 products={profile.products}
+                content={section.content}
               />
             </Profile.SectionContent>
           </Profile.Section>
