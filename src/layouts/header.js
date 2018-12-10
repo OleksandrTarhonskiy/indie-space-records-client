@@ -1,21 +1,22 @@
-import React         from 'react';
-import PropTypes     from 'prop-types';
-import styled        from 'styled-components';
-import * as R        from 'ramda';
-import breakpoint    from 'styled-components-breakpoint';
-import AppBar        from '@material-ui/core/AppBar';
-import Toolbar       from '@material-ui/core/Toolbar';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import styled         from 'styled-components';
+import * as R         from 'ramda';
+import breakpoint     from 'styled-components-breakpoint';
+import AppBar         from '@material-ui/core/AppBar';
+import Toolbar        from '@material-ui/core/Toolbar';
 import {
   compose,
   withStateHandlers,
   lifecycle
-}                    from 'recompose';
-import { Link }      from 'react-router-dom';
+}                     from 'recompose';
+import { Link }       from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import MenuBar       from './menu';
-import Logo          from './theme/logo.png';
-import Mobile        from './theme/mobile-logo.png';
-import decode        from 'jwt-decode';
+import MenuBar        from './menu';
+import Logo           from './theme/logo.png';
+import Mobile         from './theme/mobile-logo.png';
+import decode         from 'jwt-decode';
 
 let name = '';
 const token = localStorage.getItem('token');
@@ -31,8 +32,13 @@ const Header = ({
   style: {
     position,
   },
+  location,
 }) => (
-  <Header.MenuBar position={position}>
+  <Header.MenuBar
+    position={position}
+    location={location}
+  >
+  {console.log(location)}
     <Header.LogoWrapper to="/" />
     <Header.Toolbar>
       {
@@ -88,13 +94,13 @@ Header.UserLink = styled(Link)`
 `;
 
 Header.MenuBar = styled(AppBar)`
-  display        : flex;
   height         : 70px;
   flex-direction : row !important;
   background     : linear-gradient(to right, #723af9, #46aafc) !important;
   box-shadow     : none !important;
   padding        : 0 25px 0 25px;
   position       : ${props => props.position};
+  display        : ${props => props.location.pathname.includes('/musicians/') ? 'none' : 'flex'} !important;
 `;
 
 Header.Toolbar = styled(Toolbar)`
@@ -111,6 +117,7 @@ Header.propTypes = {
 };
 
 const withState = compose(
+  withRouter,
   withStateHandlers(
     ({
       style = {
