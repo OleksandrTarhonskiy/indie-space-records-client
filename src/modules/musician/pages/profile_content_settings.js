@@ -8,6 +8,7 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import Typography             from '@material-ui/core/Typography';
 import IconButton             from '@material-ui/core/IconButton';
 import Add                    from '@material-ui/icons/Add';
+import CloseIcon              from '@material-ui/icons/Close';
 import styled                 from 'styled-components';
 import {
   compose,
@@ -43,9 +44,16 @@ const ProfileContentSettings = ({
       )
     }
     <ProfileContentSettings.CreateNewWrapper>
-      <IconButton onClick={toggleForm.bind(null, isOpenForm ? false : true)}>
-        <Add />
-      </IconButton>
+      <ProfileContentSettings.IconButton
+        onClick={toggleForm.bind(null, isOpenForm ? false : true)}
+      >
+        {
+          isOpenForm ?
+          <CloseIcon />
+          :
+          <Add />
+        }
+      </ProfileContentSettings.IconButton>
       <ProfileContentSettings.SubHead>
         Add new section to your profile
       </ProfileContentSettings.SubHead>
@@ -76,6 +84,10 @@ ProfileContentSettings.SubHead = styled.h3`
   color        : #374142;
   font-weight  : 500;
   padding-left : 10px;
+`;
+
+ProfileContentSettings.IconButton = styled(IconButton)`
+  width : 56px;
 `;
 
 const withRecompose = compose(
