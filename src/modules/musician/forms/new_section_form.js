@@ -1,4 +1,5 @@
 import React                     from 'react';
+import PropTypes                 from 'prop-types';
 import styled                    from 'styled-components';
 import TextField                 from '@material-ui/core/TextField';
 import InputLabel                from '@material-ui/core/InputLabel';
@@ -21,7 +22,6 @@ import Alert                     from '../../../layouts/alert';
 
 const NewSectionForm = ({
   section: {
-    id,
     name,
     type,
     content,
@@ -67,8 +67,8 @@ const NewSectionForm = ({
         { SECTION_TYPES.map(type => <MenuItem key={type} value={type}>{type}</MenuItem>) }
       </Select>
     </NewSectionForm.SelectWrapper>
-      {
-        type === 'text'?
+    {
+      type === 'text'?
         <TextField
           name="content"
           onChange={handleChange}
@@ -78,7 +78,7 @@ const NewSectionForm = ({
         />
         :
         null
-      }
+    }
     <br />
     <GradientButton
       text={'Create'}
@@ -93,6 +93,16 @@ const NewSectionForm = ({
     />
   </NewSectionForm.Form>
 );
+
+NewSectionForm.propTypes = {
+  section       : PropTypes.object.isRequired,
+  handleChange  : PropTypes.func.isRequired,
+  createSection : PropTypes.func.isRequired,
+  hasError      : PropTypes.bool.isRequired,
+  errorsList    : PropTypes.array.isRequired,
+  hideAlert     : PropTypes.func.isRequired,
+  canSubmit     : PropTypes.bool.isRequired,
+};
 
 NewSectionForm.Form = styled.form`
   width       : 100%;
@@ -122,7 +132,7 @@ const withRecompose = compose(
       canSubmit  = true,
       errorsList = [],
       hasError   = false,
-    }) => ({ section, errorsList, hasError }),
+    }) => ({ section, errorsList, hasError, canSubmit }),
     {
       handleChange : state => ({ target }) => {
         const section = R.assoc(target.name, target.value, state.section);
@@ -142,9 +152,8 @@ const withRecompose = compose(
       mutate,
       showAlert,
       errorsList,
-      hasError,
     }) => async () => {
-      console.log(section)
+      console.log(section);
       const response = await mutate({
         variables: {
           name    : section.name,

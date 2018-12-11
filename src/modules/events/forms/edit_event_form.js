@@ -24,7 +24,6 @@ import Alert                   from '../../../layouts/alert';
 
 const EditEventForm = ({
   currentEvent: {
-    id,
     title,
     details,
     price,

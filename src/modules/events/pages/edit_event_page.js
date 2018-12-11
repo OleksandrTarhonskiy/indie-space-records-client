@@ -1,7 +1,8 @@
-import React  from 'react';
-import { withRouter }       from 'react-router';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import { withRouter } from 'react-router';
 
-import EditEvent from '../components/edit_event';
+import EditEvent      from '../components/edit_event';
 
 const EditEventPage = ({
   match: {
@@ -12,5 +13,9 @@ const EditEventPage = ({
 }) => (
   <EditEvent id={id} />
 );
+
+EditEventPage.propTypes = {
+  match : PropTypes.object.isRequired,
+};
 
 export default withRouter(EditEventPage);

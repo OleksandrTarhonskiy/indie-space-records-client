@@ -1,4 +1,5 @@
 import React               from 'react';
+import PropTypes           from 'prop-types';
 import { graphql }         from 'react-apollo';
 import CircularProgress    from '@material-ui/core/CircularProgress';
 import styled              from 'styled-components';
@@ -58,5 +59,9 @@ allProfilesPage.DescWrapper = styled.div`
   flex-direction : column;
   padding        : 5% 0;
 `;
+
+allProfilesPage.propTypes = {
+  data : PropTypes.array.isRequired,
+};
 
 export default graphql(allProfilesQuery)(allProfilesPage);

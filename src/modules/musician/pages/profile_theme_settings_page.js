@@ -20,39 +20,38 @@ const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
     <ProfileThemeSettingsPage.SideBar>
       {
         loading?
-        <CircularProgress />
-        :
-        <ExpansionPanel defaultExpanded>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Basic theme styles</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <ProfileThemeSettings
-              key={myProfile.id}
-              styles={JSON.parse(myProfile.theme.style)}
-              fonts={JSON.parse(myProfile.theme.fonts)}
-            />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      }
-      {
-        loading?
-        <CircularProgress />
-        :
-        myProfile.theme.sections.map(section =>
-          <ExpansionPanel>
+          <CircularProgress />
+          :
+          <ExpansionPanel defaultExpanded>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>{section.name} section styles</Typography>
+              <Typography>Basic theme styles</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <EditSectionStyleForm
-                key={section.id}
-                id={section.id}
-                styles={JSON.parse(section.style)}
+              <ProfileThemeSettings
+                key={myProfile.id}
+                styles={JSON.parse(myProfile.theme.style)}
+                fonts={JSON.parse(myProfile.theme.fonts)}
               />
             </ExpansionPanelDetails>
           </ExpansionPanel>
-        )
+      }
+      {
+        loading?
+          <CircularProgress />
+          :
+          myProfile.theme.sections.map(section =>
+            <ExpansionPanel key={section.id}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>{section.name} section styles</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <EditSectionStyleForm
+                  id={section.id}
+                  styles={JSON.parse(section.style)}
+                />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          )
       }
     </ProfileThemeSettingsPage.SideBar>
     <ProfileThemeSettingsPage.ProfileWrapper>

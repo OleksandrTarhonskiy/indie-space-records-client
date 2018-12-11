@@ -1,4 +1,5 @@
 import React                  from 'react';
+import PropTypes              from 'prop-types';
 import { graphql }            from 'react-apollo';
 import ExpansionPanel         from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary  from '@material-ui/core/ExpansionPanelSummary';
@@ -16,8 +17,8 @@ import {
 }                             from 'recompose';
 
 import { allMySectionsQuery } from '../graphql/queries';
-import EditSectionsContent    from '../forms/edit_sections_content'
-import NewSectionForm         from '../forms/new_section_form'
+import EditSectionsContent    from '../forms/edit_sections_content';
+import NewSectionForm         from '../forms/new_section_form';
 
 const ProfileContentSettings = ({
   data: {
@@ -30,18 +31,18 @@ const ProfileContentSettings = ({
   <div>
     {
       loading?
-      <CircularProgress />
-      :
-      allMySections.map(section =>
-        <ExpansionPanel key={section.id}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{section.name} settings</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <EditSectionsContent section={section} />
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      )
+        <CircularProgress />
+        :
+        allMySections.map(section =>
+          <ExpansionPanel key={section.id}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>{section.name} settings</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <EditSectionsContent section={section} />
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        )
     }
     <ProfileContentSettings.CreateNewWrapper>
       <ProfileContentSettings.IconButton
@@ -49,9 +50,9 @@ const ProfileContentSettings = ({
       >
         {
           isOpenForm ?
-          <CloseIcon />
-          :
-          <Add />
+            <CloseIcon />
+            :
+            <Add />
         }
       </ProfileContentSettings.IconButton>
       <ProfileContentSettings.SubHead>
@@ -60,11 +61,11 @@ const ProfileContentSettings = ({
     </ProfileContentSettings.CreateNewWrapper>
     {
       isOpenForm?
-      <ProfileContentSettings.FormWrapper>
-        <NewSectionForm />
-      </ProfileContentSettings.FormWrapper>
-      :
-      null
+        <ProfileContentSettings.FormWrapper>
+          <NewSectionForm />
+        </ProfileContentSettings.FormWrapper>
+        :
+        null
     }
   </div>
 );
@@ -89,6 +90,12 @@ ProfileContentSettings.SubHead = styled.h3`
 ProfileContentSettings.IconButton = styled(IconButton)`
   width : 56px;
 `;
+
+ProfileContentSettings.propTypes = {
+  data       : PropTypes.object.isRequired,
+  isOpenForm : PropTypes.bool.isRequired,
+  toggleForm : PropTypes.func.isRequired,
+};
 
 const withRecompose = compose(
   graphql(allMySectionsQuery),

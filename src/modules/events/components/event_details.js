@@ -10,7 +10,6 @@ import { viewEventQuery } from '../graphql/queries';
 
 const EventDetails = ({
   data: { viewEvent = {} },
-  id,
   currency,
 }) => (
   <div>

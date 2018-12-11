@@ -1,4 +1,5 @@
 import React                            from 'react';
+import PropTypes                        from 'prop-types';
 import styled                           from 'styled-components';
 import TextField                        from '@material-ui/core/TextField';
 import InputLabel                       from '@material-ui/core/InputLabel';
@@ -69,15 +70,15 @@ const EditSectionsContent = ({
     <EditSectionsContent.ContentBlock>
       {
         type === 'text'?
-        <TextField
-          name="content"
-          value={content}
-          onChange={handleChange}
-          label="page content"
-          multiline="true"
-        />
-        :
-        <p>in this section will be displaying your {type}</p>
+          <TextField
+            name="content"
+            value={content}
+            onChange={handleChange}
+            label="page content"
+            multiline={true}
+          />
+          :
+          <p>in this section will be displaying your {type}</p>
       }
     </EditSectionsContent.ContentBlock>
     <GradientButton
@@ -113,6 +114,15 @@ EditSectionsContent.SelectWrapper = styled(FormControl)`
   width : 100%;
 `;
 
+EditSectionsContent.propTypes = {
+  section       : PropTypes.object.isRequired,
+  updateSection : PropTypes.func.isRequired,
+  handleChange  : PropTypes.func.isRequired,
+  hasError      : PropTypes.bool.isRequired,
+  errorsList    : PropTypes.array.isRequired,
+  hideAlert     : PropTypes.func.isRequired,
+};
+
 const withRecompose = compose(
   graphql(updateSectionContentMutation),
   withStateHandlers(
@@ -141,7 +151,6 @@ const withRecompose = compose(
       mutate,
       showAlert,
       errorsList,
-      hasError,
     }) => async () => {
       const response = await mutate({
         variables: {

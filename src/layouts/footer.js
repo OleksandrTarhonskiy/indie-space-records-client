@@ -1,4 +1,5 @@
 import React           from 'react';
+import PropTypes       from 'prop-types';
 import styled          from 'styled-components';
 import { FaFacebook }  from 'react-icons/lib/fa';
 import { FaTwitter }   from 'react-icons/lib/fa';
@@ -61,5 +62,9 @@ Footer.SocialIcons = styled.div`
   justify-content : flex-end;
   width           : 50%;
 `;
+
+Footer.propTypes = {
+  location : PropTypes.object.isRequired,
+};
 
 export default withRouter(Footer);

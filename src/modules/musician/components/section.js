@@ -22,7 +22,7 @@ const Section = ({
       )
     );
   default:
-  return(<p>{content}</p>);
+    return(<p>{content}</p>);
   }
 };
 

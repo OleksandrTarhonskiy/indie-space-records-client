@@ -1,4 +1,5 @@
 import React                          from 'react';
+import PropTypes                      from 'prop-types';
 import ColorPicker                    from 'material-ui-color-picker';
 import * as R                         from 'ramda';
 import { graphql }                    from 'react-apollo';
@@ -18,7 +19,6 @@ import { updateSectionStyleMutation } from '../graphql/mutations';
 import Alert                          from '../../../layouts/alert';
 
 const EditSectionStyleForm = ({
-  id,
   styles: {
     background,
     displayHeadline,
@@ -72,6 +72,17 @@ const EditSectionStyleForm = ({
   </div>
 );
 
+EditSectionStyleForm.propTypes = {
+  id                : PropTypes.number.isRequired,
+  styles            : PropTypes.object.isRequired,
+  handleColorChange : PropTypes.func.isRequired,
+  handleChange      : PropTypes.func.isRequired,
+  submit            : PropTypes.func.isRequired,
+  hasError          : PropTypes.bool.isRequired,
+  errorsList        : PropTypes.array.isRequired,
+  hideAlert         : PropTypes.func.isRequired,
+};
+
 const withRecompose = compose(
   graphql(updateSectionStyleMutation),
   withStateHandlers(
@@ -105,7 +116,6 @@ const withRecompose = compose(
       id,
       showAlert,
       errorsList,
-      hasError,
     }) => async () => {
       const stringStyle = JSON.stringify(styles);
       const response = await mutate({

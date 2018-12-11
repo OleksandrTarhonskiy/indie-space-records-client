@@ -9,15 +9,14 @@ import EditEventForm      from '../forms/edit_event_form';
 import { viewEventQuery } from '../graphql/queries';
 
 const EditEvent = ({
-  id,
   data: { loading, viewEvent = {} },
 }) => (
   <EditEvent.PageWrapper>
     {
       loading?
-      <CircularProgress />
-      :
-      <EditEventForm currentEvent={viewEvent} />
+        <CircularProgress />
+        :
+        <EditEventForm currentEvent={viewEvent} />
     }
   </EditEvent.PageWrapper>
 );

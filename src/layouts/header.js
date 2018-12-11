@@ -38,7 +38,6 @@ const Header = ({
     position={position}
     location={location}
   >
-  {console.log(location)}
     <Header.LogoWrapper to="/" />
     <Header.Toolbar>
       {
@@ -113,7 +112,8 @@ Header.ToolbarItem = styled.h2`
 `;
 
 Header.propTypes = {
-  style : PropTypes.object.isRequired,
+  style    : PropTypes.object.isRequired,
+  location : PropTypes.object.isRequired,
 };
 
 const withState = compose(

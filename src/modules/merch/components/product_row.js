@@ -29,7 +29,6 @@ import Alert                     from '../../../layouts/alert';
 
 const ProductRow = ({
   product: {
-    id,
     type,
     title,
     price,
