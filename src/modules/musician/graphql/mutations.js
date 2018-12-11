@@ -83,3 +83,15 @@ export const createSectionMutation = gql`
     }
   }
 `;
+
+export const deleteSectionMutation = gql`
+  mutation($sectionId: Int!) {
+    deleteSection(sectionId: $sectionId) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

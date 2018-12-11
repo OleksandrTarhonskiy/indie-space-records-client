@@ -17,6 +17,7 @@ import {
 import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
 import GradientButton                   from '../../../layouts/gradient_button';
+import DeleteSectionButton              from '../components/delete_section_button';
 
 const EditSectionsContent = ({
   section: {
@@ -79,6 +80,7 @@ const EditSectionsContent = ({
       text={'Update this section'}
       onClick={updateSection}
     />
+    <DeleteSectionButton id={id} />
   </EditSectionsContent.Form>
 );
 
