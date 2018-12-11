@@ -1,12 +1,14 @@
 import React           from 'react';
+import PropTypes       from 'prop-types';
 import styled          from 'styled-components';
 import { FaFacebook }  from 'react-icons/lib/fa';
 import { FaTwitter }   from 'react-icons/lib/fa';
 import { FaInstagram } from 'react-icons/lib/fa';
 import IconButton      from '@material-ui/core/IconButton';
+import { withRouter }  from 'react-router-dom';
 
-const Footer = () => (
-  <Footer.Wrapper>
+const Footer = ({ location }) => (
+  <Footer.Wrapper location={location}>
     <Footer.Container>
       <Footer.Copyright>
         <p>© 2018 Indie space records</p>
@@ -41,6 +43,7 @@ Footer.Wrapper = styled.div`
   font-family : 'Roboto', sans-serif;
   font-size   : 16px;
   color       : #e9ecf5;
+  display     : ${props => props.location.pathname.includes('/musicians/') ? 'none' : 'block'};
 `;
 
 Footer.Container = styled.div`
@@ -60,4 +63,8 @@ Footer.SocialIcons = styled.div`
   width           : 50%;
 `;
 
-export default Footer;
+Footer.propTypes = {
+  location : PropTypes.object.isRequired,
+};
+
+export default withRouter(Footer);

@@ -22,9 +22,24 @@ export const myProfileWithThemeQuery = gql`
       country
       region
       currency
+      events {
+        id
+        title
+      }
+      products {
+        id
+        title
+      }
       theme {
         style
         fonts
+        sections {
+          id
+          name
+          type
+          content
+          style
+        }
       }
     }
   }
@@ -42,6 +57,59 @@ export const hasProfileQuery = gql`
   {
     me{
       hasProfile
+    }
+  }
+`;
+
+export const allProfilesQuery = gql`
+  {
+    allProfiles{
+      id
+      name
+      genres
+    }
+  }
+`;
+
+export const fetchProfileQuery = gql`
+  query fetchProfile($profileId: Int!){
+    fetchProfile(profileId: $profileId) {
+      id
+      name
+      genres
+      country
+      region
+      currency
+      products {
+        id
+        title
+      }
+      events {
+        id
+        title
+      }
+      theme {
+        style
+        fonts
+        sections {
+          id
+          name
+          type
+          content
+          style
+        }
+      }
+    }
+  }
+`;
+
+export const allMySectionsQuery = gql`
+  {
+    allMySections{
+      id
+      type
+      name
+      content
     }
   }
 `;

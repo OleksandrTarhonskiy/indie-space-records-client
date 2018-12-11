@@ -1,166 +1,69 @@
-import React                       from 'react';
-import PropTypes                   from 'prop-types';
-import styled                      from 'styled-components';
-import { Helmet }                  from 'react-helmet';
+import React      from 'react';
+import PropTypes  from 'prop-types';
+import styled     from 'styled-components';
+import { Helmet } from 'react-helmet';
 
-const Profile = ({ myProfile }) => (
+import Section    from './section';
+
+const Profile = ({ profile }) => (
   <div>
     <Profile.Body
-      key={myProfile.id}
-      elementStyles={JSON.parse(myProfile.theme.style)}
+      key={profile.id}
+      elementStyles={JSON.parse(profile.theme.style)}
     >
       <Helmet>
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).headlineFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).linksFont}`} rel="stylesheet" />
-        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(myProfile.theme.fonts).subHead}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).headlineFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).linksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(profile.theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
-      <Profile.Navigation elementStyles={JSON.parse(myProfile.theme.style)}>
-        <Profile.NavItems elementStyles={JSON.parse(myProfile.theme.style)}>
-          <Profile.NavItem elementStyles={JSON.parse(myProfile.theme.style)}>
-            <Profile.Link
-              href=""
-              elementStyles={JSON.parse(myProfile.theme.style)}
-              elementFont={JSON.parse(myProfile.theme.fonts)}
-              className="apply-font-linksFont"
-            >
-            Music
-            </Profile.Link>
-          </Profile.NavItem>
-          <Profile.NavItem>
-            <Profile.Link
-              href=""
-              elementStyles={JSON.parse(myProfile.theme.style)}
-              elementFont={JSON.parse(myProfile.theme.fonts)}
-              className="apply-font-linksFont"
-            >
-            Merch
-            </Profile.Link>
-          </Profile.NavItem>
-          <Profile.NavItem>
-            <Profile.Link
-              href=""
-              elementStyles={JSON.parse(myProfile.theme.style)}
-              elementFont={JSON.parse(myProfile.theme.fonts)}
-              className="apply-font-linksFont"
-            >
-            About
-            </Profile.Link>
-          </Profile.NavItem>
+      <Profile.Header elementStyles={JSON.parse(profile.theme.style)}>
+        <Profile.NavItems >
+          {
+            profile.theme.sections.map(section =>
+              <Profile.NavItem key={section.id}>
+                <Profile.Link
+                  href=""
+                  elementStyles={JSON.parse(profile.theme.style)}
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  className="apply-font-linksFont"
+                >
+                  {section.name}
+                </Profile.Link>
+              </Profile.NavItem>
+            )
+          }
         </Profile.NavItems>
-      </Profile.Navigation>
-      <Profile.Header>
-        <Profile.Headline
-          elementStyles={JSON.parse(myProfile.theme.style)}
-          elementFont={JSON.parse(myProfile.theme.fonts)}
-          className="apply-font-headlineFont"
-        >
-          {myProfile.name}
-        </Profile.Headline>
       </Profile.Header>
-      <Profile.Members elementStyles={JSON.parse(myProfile.theme.style)}>
-        <Profile.SubHeadline
-          elementStyles={JSON.parse(myProfile.theme.style)}
-          elementFont={JSON.parse(myProfile.theme.fonts)}
-          className="apply-font-subHead"
-        >
-        Section#1
-        </Profile.SubHeadline>
-        <Profile.Text
-          elementStyles={JSON.parse(myProfile.theme.style)}
-          elementFont={JSON.parse(myProfile.theme.fonts)}
-          className="apply-font-regularTextFont"
-        >
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        </Profile.Text>
-      </Profile.Members>
-      <Profile.Music elementStyles={JSON.parse(myProfile.theme.style)}>
-        <Profile.Text
-          elementStyles={JSON.parse(myProfile.theme.style)}
-          elementFont={JSON.parse(myProfile.theme.fonts)}
-          className="apply-font-regularTextFont"
-        >
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        </Profile.Text>
-      </Profile.Music>
-      <Profile.Merch elementStyles={JSON.parse(myProfile.theme.style)}>
-        <Profile.Text
-          elementStyles={JSON.parse(myProfile.theme.style)}
-          elementFont={JSON.parse(myProfile.theme.fonts)}
-          className="apply-font-regularTextFont"
-        >
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book. It has survived not only five centuries, but also the leap into
-        electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
-        </Profile.Text>
-      </Profile.Merch>
+      {
+        profile.theme.sections.map(section =>
+          <Profile.Section
+            key={section.id}
+            elementStyles={JSON.parse(section.style)}
+          >
+            <Profile.SubHeadline
+              elementStyles={JSON.parse(profile.theme.style)}
+              elementFont={JSON.parse(profile.theme.fonts)}
+              display={JSON.parse(section.style).displayHeadline}
+              className="apply-font-subHead"
+            >
+              {section.name}
+            </Profile.SubHeadline>
+            <Profile.SectionContent
+              elementStyles={JSON.parse(profile.theme.style)}
+              elementFont={JSON.parse(profile.theme.fonts)}
+              className="apply-font-regularTextFont"
+            >
+              <Section
+                type={section.type}
+                events={profile.events}
+                products={profile.products}
+                content={section.content}
+              />
+            </Profile.SectionContent>
+          </Profile.Section>
+        )
+      }
     </Profile.Body>
   </div>
 );
@@ -171,10 +74,10 @@ Profile.Body = styled.div`
   position         : relative;
 `;
 
-Profile.Navigation = styled.div`
-  position   : absolute;
-  width      : 100%;
-  text-align : ${props => props.elementStyles.MenuLinksPosition};
+Profile.Section = styled.div`
+  background-color : ${props => props.elementStyles.background};
+  display          : flex;
+  flex-direction   : column;
 `;
 
 Profile.NavItems = styled.ul`
@@ -201,52 +104,24 @@ Profile.NavItem = styled.li`
   padding : 2%;
 `;
 
-Profile.Members = styled.div`
-  min-height : 400px;
-  background : ${props => props.elementStyles.firstSection};
-  padding    : 2%;
-`;
-
-Profile.Merch = styled.div`
-  min-height : 400px;
-  background : ${props => props.elementStyles.thirdSection};
-  padding    : 2%;
-`;
-
 Profile.Header = styled.div`
-  min-height       : 400px;
-  background-color : #17171a;
-  padding          : 10%;
-`;
-
-Profile.Music = styled.div`
-  min-height : 400px;
-  background : ${props => props.elementStyles.secondSection};
-  padding    : 2%;
+  background-color : ${props => props.elementStyles.headerBackground};
+  text-align       : ${props => props.elementStyles.MenuLinksPosition};
 `;
 
 Profile.SubHeadline = styled.h2`
   font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
   font-size   : ${props => props.elementStyles.h2FontSize}px;
+  display     : ${props => props.display === 'false' ? 'none' : 'block'};
 `;
 
-Profile.Text = styled.p`
+Profile.SectionContent = styled.p`
   font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
-Profile.BioSection = styled.div`
-  min-height : 500px;
-  padding    : 10%;
-`;
-
-Profile.Headline = styled.h1`
-  font-family : ${props => `${props.elementFont.headlineFont}`}, sans-serif;
-  font-size   : ${props => props.elementStyles.h1FontSize}px;
-`;
-
 Profile.propTypes = {
-  myProfile : PropTypes.object.isRequired,
+  profile : PropTypes.object.isRequired,
 };
 
 export default Profile;

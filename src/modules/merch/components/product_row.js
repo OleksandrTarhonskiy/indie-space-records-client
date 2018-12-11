@@ -29,7 +29,6 @@ import Alert                     from '../../../layouts/alert';
 
 const ProductRow = ({
   product: {
-    id,
     type,
     title,
     price,
@@ -233,7 +232,6 @@ const withRecompose = compose(
 
       handleChange : state => ({ target }) => {
         const product = R.assoc(target.name, target.value, state.product);
-        console.log(target);
         return ({ product });
       },
 

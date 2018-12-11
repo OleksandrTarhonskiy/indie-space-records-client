@@ -22,11 +22,14 @@ import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_se
 import SettingsPage             from '../modules/musician/pages/settings_page';
 import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
 import EventPage                from '../modules/events/pages/event_page';
+import EditEventPage            from '../modules/events/pages/edit_event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import MerchMainPage            from '../modules/merch/pages/merch_main_page';
 import FlatTheme                from '../modules/themes/components/flat_theme';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
 import UploadSong               from '../modules/songs/pages/upload_song';
+import ProfilePage              from '../modules/musician/pages/profile_page';
+import AllProfilesPage          from '../modules/musician/pages/all_profiles_page';
 import PrivateRoute             from './private_route';
 
 export default (
@@ -43,7 +46,10 @@ export default (
         <Route exact path="/login"            component={LoginPage} />
         <Route exact path="/logout"           component={LogoutPage} />
         <Route exact path="/events/:id"       component={EventPage} />
+        <Route exact path="/events/edit/:id"       component={EditEventPage} />
         <PrivateRoute exact path="/musician/home" component={ProfileHomeWrapper} />
+        <PrivateRoute exact path="/musicians" component={AllProfilesPage} />
+        <Route exact path="/musicians/:id"     component={ProfilePage} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/flat_theme" component={FlatTheme} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />

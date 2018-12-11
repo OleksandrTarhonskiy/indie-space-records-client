@@ -1,20 +1,23 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import styled         from 'styled-components';
-import {
-  gql,
-  graphql
-}                     from 'react-apollo';
-import { compose }    from 'recompose';
+import React              from 'react';
+import PropTypes          from 'prop-types';
+import styled             from 'styled-components';
+import { graphql }        from 'react-apollo';
+import { compose }        from 'recompose';
+import CircularProgress   from '@material-ui/core/CircularProgress';
 
-import EditEventForm  from '../forms/edit_event_form';
+import EditEventForm      from '../forms/edit_event_form';
+import { viewEventQuery } from '../graphql/queries';
 
 const EditEvent = ({
-  id,
-  data: { viewEvent = {} },
+  data: { loading, viewEvent = {} },
 }) => (
   <EditEvent.PageWrapper>
-    <EditEventForm currentEvent={viewEvent} />
+    {
+      loading?
+        <CircularProgress />
+        :
+        <EditEventForm currentEvent={viewEvent} />
+    }
   </EditEvent.PageWrapper>
 );
 
@@ -28,21 +31,6 @@ EditEvent.propTypes = {
   id   : PropTypes.string.isRequired,
   data : PropTypes.object.isRequired,
 };
-
-const viewEventQuery = gql`
-  query viewEvent($eventId: Int!){
-    viewEvent(eventId: $eventId) {
-      id
-      title
-      details
-      country
-      region
-      address
-      date
-      price
-    }
-  }
-`;
 
 const withRecompose = compose(
   graphql(viewEventQuery, {

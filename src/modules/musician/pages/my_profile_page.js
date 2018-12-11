@@ -1,14 +1,17 @@
 import React                       from 'react';
 import PropTypes                   from 'prop-types';
-import Profile                     from '../components/profile';
 import { graphql }                 from 'react-apollo';
 import CircularProgress            from '@material-ui/core/CircularProgress';
 import { compose }                 from 'recompose';
 
 import { myProfileWithThemeQuery } from '../graphql/queries';
+import Profile                     from '../components/profile';
 
 const MyProfilePage = ({
-  data: { loading, myProfile = {} },
+  data: {
+    loading,
+    myProfile = {}
+  },
 }) => {
   return(
     <div>
@@ -16,7 +19,7 @@ const MyProfilePage = ({
         loading?
           <CircularProgress />
           :
-          <Profile myProfile={myProfile} />
+          <Profile profile={myProfile} />
       }
     </div>
   );

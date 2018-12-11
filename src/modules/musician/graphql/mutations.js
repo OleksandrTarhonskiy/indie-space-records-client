@@ -47,3 +47,51 @@ export const signUpMutation = gql`
     }
   }
 `;
+
+export const updateSectionStyleMutation = gql`
+  mutation($sectionId: Int!, $style: String!) {
+    updateSectionStyle(sectionId: $sectionId, style: $style) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
+export const updateSectionContentMutation = gql`
+  mutation($sectionId: Int!, $type: String, $name: String, $content: String) {
+    updateSectionContent(sectionId: $sectionId, type: $type, name: $name, content: $content) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
+export const createSectionMutation = gql`
+  mutation($type: String!, $name: String!, $content: String, $style: String!) {
+    createSection(type: $type, name: $name, content: $content, style: $style) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
+
+export const deleteSectionMutation = gql`
+  mutation($sectionId: Int!) {
+    deleteSection(sectionId: $sectionId) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;
