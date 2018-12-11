@@ -17,6 +17,7 @@ import {
 import { SECTION_TYPES }         from '../models/section_types';
 import { createSectionMutation } from '../graphql/mutations';
 import GradientButton            from '../../../layouts/gradient_button';
+import Alert                     from '../../../layouts/alert';
 
 const NewSectionForm = ({
   section: {
@@ -27,6 +28,10 @@ const NewSectionForm = ({
   },
   handleChange,
   createSection,
+  hasError,
+  hideAlert,
+  errorsList,
+  canSubmit,
 }) => (
   <NewSectionForm.Form>
     <h2>New section form</h2>
@@ -78,6 +83,13 @@ const NewSectionForm = ({
     <GradientButton
       text={'Create'}
       onClick={createSection}
+      disabled={!canSubmit}
+    />
+    <Alert
+      action="create"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
     />
   </NewSectionForm.Form>
 );
@@ -93,6 +105,11 @@ NewSectionForm.SelectWrapper = styled(FormControl)`
   width : 100%;
 `;
 
+const canSubmitForm = ({ name, type }) => R.all(R.equals(true))([
+  !R.isEmpty(name),
+  !R.isEmpty(type),
+]);
+
 const withRecompose = compose(
   graphql(createSectionMutation),
   withStateHandlers(
@@ -102,18 +119,30 @@ const withRecompose = compose(
         content : '',
         type    : '',
       },
-    }) => ({ section }),
+      canSubmit  = true,
+      errorsList = [],
+      hasError   = false,
+    }) => ({ section, errorsList, hasError }),
     {
       handleChange : state => ({ target }) => {
         const section = R.assoc(target.name, target.value, state.section);
-        return ({ section });
+        return ({
+          section,
+          canSubmit : canSubmitForm(section),
+        });
       },
+
+      showAlert          : () => () => ({ hasError: true }),
+      hideAlert          : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
     createSection : ({
       section,
       mutate,
+      showAlert,
+      errorsList,
+      hasError,
     }) => async () => {
       console.log(section)
       const response = await mutate({
@@ -124,7 +153,21 @@ const withRecompose = compose(
           style   : '{"background" : "#fffff", "displayHeadline" : "true"}'
         }
       });
-      console.log(response)
+
+      const { ok, errors } = response.data.createSection;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );

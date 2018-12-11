@@ -15,6 +15,7 @@ import {
 
 import GradientButton                 from '../../../layouts/gradient_button';
 import { updateSectionStyleMutation } from '../graphql/mutations';
+import Alert                          from '../../../layouts/alert';
 
 const EditSectionStyleForm = ({
   id,
@@ -25,6 +26,9 @@ const EditSectionStyleForm = ({
   handleChange,
   handleColorChange,
   submit,
+  hasError,
+  hideAlert,
+  errorsList,
 }) => (
   <div>
     <ColorPicker
@@ -59,6 +63,12 @@ const EditSectionStyleForm = ({
       text={'Update this section'}
       onClick={submit}
     />
+    <Alert
+      action="update"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </div>
 );
 
@@ -70,7 +80,9 @@ const withRecompose = compose(
         background      : '',
         displayHeadline : 'true',
       },
-    }) => ({ styles }),
+      errorsList = [],
+      hasError   = false,
+    }) => ({ styles, errorsList, hasError }),
     {
       handleColorChange : state => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
@@ -81,10 +93,20 @@ const withRecompose = compose(
         const styles = R.assoc(target.name, target.value, state.styles);
         return ({ styles });
       },
+
+      showAlert          : () => () => ({ hasError: true }),
+      hideAlert          : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
-    submit : ({ styles, mutate, id }) => async () => {
+    submit : ({
+      styles,
+      mutate,
+      id,
+      showAlert,
+      errorsList,
+      hasError,
+    }) => async () => {
       const stringStyle = JSON.stringify(styles);
       const response = await mutate({
         variables: {
@@ -93,7 +115,20 @@ const withRecompose = compose(
         },
       });
 
-      console.log(response);
+      const { ok, errors } = response.data.updateSectionStyle;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );

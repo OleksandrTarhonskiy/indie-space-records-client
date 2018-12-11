@@ -18,6 +18,7 @@ import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
 import GradientButton                   from '../../../layouts/gradient_button';
 import DeleteSectionButton              from '../components/delete_section_button';
+import Alert                            from '../../../layouts/alert';
 
 const EditSectionsContent = ({
   section: {
@@ -28,6 +29,9 @@ const EditSectionsContent = ({
   },
   handleChange,
   updateSection,
+  hasError,
+  hideAlert,
+  errorsList,
 }) => (
   <EditSectionsContent.Form>
     <TextField
@@ -81,6 +85,12 @@ const EditSectionsContent = ({
       onClick={updateSection}
     />
     <DeleteSectionButton id={id} />
+    <Alert
+      action="update"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </EditSectionsContent.Form>
 );
 
@@ -112,18 +122,26 @@ const withRecompose = compose(
         content : '',
         type    : '',
       },
-    }) => ({ section }),
+      errorsList = [],
+      hasError   = false,
+    }) => ({ section, errorsList, hasError }),
     {
       handleChange : state => ({ target }) => {
         const section = R.assoc(target.name, target.value, state.section);
         return ({ section });
       },
+
+      showAlert          : () => () => ({ hasError: true }),
+      hideAlert          : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
     updateSection : ({
       section,
       mutate,
+      showAlert,
+      errorsList,
+      hasError,
     }) => async () => {
       const response = await mutate({
         variables: {
@@ -133,7 +151,21 @@ const withRecompose = compose(
           type      : section.type,
         }
       });
-      console.log(response)
+
+      const { ok, errors } = response.data.updateSectionContent;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+        showAlert();
+        errorsList.pop();
+      }
     },
   })
 );
