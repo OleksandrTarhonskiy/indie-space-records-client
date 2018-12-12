@@ -1,7 +1,9 @@
-import React                    from 'react';
-import PropTypes                from 'prop-types';
-import styled                   from 'styled-components';
-import { graphql }              from 'react-apollo';
+import React                     from 'react';
+import PropTypes                 from 'prop-types';
+import styled                    from 'styled-components';
+import Button                    from '@material-ui/core/Button';
+import DeleteIcon                from '@material-ui/icons/Delete';
+import { graphql }               from 'react-apollo';
 import {
   compose,
   withHandlers,
@@ -9,7 +11,6 @@ import {
 }                                from 'recompose';
 
 import { deleteSectionMutation } from '../graphql/mutations';
-import GradientButton            from '../../../layouts/gradient_button';
 import Alert                     from '../../../layouts/alert';
 
 const DeleteSectionButton = ({
@@ -19,9 +20,13 @@ const DeleteSectionButton = ({
   errorsList,
 }) => (
   <DeleteSectionButton.Wrapper>
-    <GradientButton onClick={deleteSection}>
+    <Button
+      onClick={deleteSection}
+      variant="contained"
+    >
+      <DeleteIcon />
       Delete this section
-    </GradientButton>
+    </Button>
     <Alert
       action="delete"
       hasError={hasError}

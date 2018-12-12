@@ -1,12 +1,14 @@
 import React                            from 'react';
 import PropTypes                        from 'prop-types';
 import styled                           from 'styled-components';
+import Button                           from '@material-ui/core/Button';
 import TextField                        from '@material-ui/core/TextField';
 import InputLabel                       from '@material-ui/core/InputLabel';
 import FormControl                      from '@material-ui/core/FormControl';
 import Input                            from '@material-ui/core/Input';
 import Select                           from '@material-ui/core/Select';
 import MenuItem                         from '@material-ui/core/MenuItem';
+import DoneIcon                         from '@material-ui/icons/Done';
 import { graphql }                      from 'react-apollo';
 import * as R                           from 'ramda';
 import {
@@ -17,7 +19,6 @@ import {
 
 import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
-import GradientButton                   from '../../../layouts/gradient_button';
 import DeleteSectionButton              from '../components/delete_section_button';
 import Alert                            from '../../../layouts/alert';
 
@@ -81,9 +82,13 @@ const EditSectionsContent = ({
           <p>in this section will be displaying your {type}</p>
       }
     </EditSectionsContent.ContentBlock>
-    <GradientButton onClick={updateSection}>
+    <Button
+      variant="contained"
+      onClick={updateSection}
+    >
+      <DoneIcon />
       Update this section
-    </GradientButton>
+    </Button>
     <DeleteSectionButton id={id} />
     <Alert
       action="update"
