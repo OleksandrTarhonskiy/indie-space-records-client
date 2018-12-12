@@ -44,9 +44,6 @@ EventDetails.Headline = styled.h1`
 EventDetails.propTypes = {
   id           : PropTypes.string.isRequired,
   data         : PropTypes.object.isRequired,
-  editing      : PropTypes.bool.isRequired,
-  setToEditing : PropTypes.func.isRequired,
-  setToDetails : PropTypes.func.isRequired,
   currency     : PropTypes.string.isRequired,
 };
 

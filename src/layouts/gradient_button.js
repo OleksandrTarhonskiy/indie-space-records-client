@@ -27,7 +27,7 @@ GradientButton.Button = styled(Button)`
 `;
 
 GradientButton.propTypes = {
-  children : PropTypes.string.isRequired,
+  children : PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.element.isRequired]),
   size     : PropTypes.string,
   onClick  : PropTypes.func,
   disabled : PropTypes.bool,
