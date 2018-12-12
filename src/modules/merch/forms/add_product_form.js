@@ -80,9 +80,9 @@ const AddProductForm = ({
         fullWidth
       />
       <h3>Upload product image:</h3>
-      <GradientButton
-        text={'Upload image'}
-      />
+      <GradientButton>
+        Choose the file
+      </GradientButton>
     </AddProductForm.Section>
     <AddProductForm.Section>
       <h2>Pricing:</h2>
@@ -116,9 +116,10 @@ const AddProductForm = ({
         fullWidth
       />
       <GradientButton
-        text={'Submit'}
         onClick={create}
-      />
+      >
+        Submit
+      </GradientButton>
     </AddProductForm.Section>
     <Alert
       action="create"

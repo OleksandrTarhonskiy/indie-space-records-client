@@ -99,10 +99,11 @@ const EditProfileForm = ({
     </EditProfileForm.SelectWrapper>
     <br />
     <GradientButton
-      text={'Update'}
       disabled={!canSubmit}
       onClick={submit}
-    />
+    >
+      Update
+    </GradientButton>
     <Alert
       action="update"
       hasError={hasError}

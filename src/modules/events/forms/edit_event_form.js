@@ -104,10 +104,11 @@ const EditEventForm = ({
         />
       </EditEventForm.InputsWrapper>
       <GradientButton
-        text={'Update'}
         disabled={!canSubmit}
         onClick={updateEvent}
-      />
+      >
+        Update
+      </GradientButton>
     </form>
     <Alert
       action="update"

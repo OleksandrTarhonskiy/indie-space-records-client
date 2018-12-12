@@ -4,7 +4,7 @@ import Button    from '@material-ui/core/Button';
 import styled    from 'styled-components';
 
 const GradientButton = ({
-  text,
+  children,
   size,
   onClick,
   disabled,
@@ -16,7 +16,7 @@ const GradientButton = ({
     disabled={disabled}
     onSubmit={onSubmit}
   >
-    {text}
+    {children}
   </GradientButton.Button>
 );
 
@@ -27,7 +27,7 @@ GradientButton.Button = styled(Button)`
 `;
 
 GradientButton.propTypes = {
-  text     : PropTypes.string.isRequired,
+  children : PropTypes.string.isRequired,
   size     : PropTypes.string,
   onClick  : PropTypes.func,
   disabled : PropTypes.bool,

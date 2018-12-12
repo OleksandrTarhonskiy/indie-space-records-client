@@ -79,9 +79,9 @@ const UploadForm = ({
           onDrop={handleFileUpload.bind(null, 'file')}
           disableClick={disableClick}
         >
-          <GradientButton
-            text={'choose file'}
-          />
+          <GradientButton>
+            choose the file
+          </GradientButton>
         </Dropzone>
       </UploadForm.SectionWrapper>
       <UploadForm.SectionWrapper>
@@ -127,10 +127,9 @@ const UploadForm = ({
         </FormControl>
       </UploadForm.SectionWrapper>
     </UploadForm.Wrapper>
-    <GradientButton
-      text={'Save & upload'}
-      onClick={upload}
-    />
+    <GradientButton onClick={upload}>
+      Save & upload
+    </GradientButton>
     <Alert
       action="upload"
       hasError={hasError}

@@ -81,10 +81,9 @@ const EditSectionsContent = ({
           <p>in this section will be displaying your {type}</p>
       }
     </EditSectionsContent.ContentBlock>
-    <GradientButton
-      text={'Update this section'}
-      onClick={updateSection}
-    />
+    <GradientButton onClick={updateSection}>
+      Update this section
+    </GradientButton>
     <DeleteSectionButton id={id} />
     <Alert
       action="update"

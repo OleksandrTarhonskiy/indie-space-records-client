@@ -81,10 +81,11 @@ const NewSectionForm = ({
     }
     <br />
     <GradientButton
-      text={'Create'}
       onClick={createSection}
       disabled={!canSubmit}
-    />
+    >
+      Create
+    </GradientButton>
     <Alert
       action="create"
       hasError={hasError}

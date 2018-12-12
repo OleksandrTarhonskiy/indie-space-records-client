@@ -103,10 +103,11 @@ const MusicianSignUpForm = ({
       />
       <br />
       <GradientButton
-        text={'Sign up'}
         disabled={!canSubmit}
         onClick={submit}
-      />
+      >
+        Sign up
+      </GradientButton>
     </form>
     <Snackbar
       open={hasError}

@@ -58,10 +58,11 @@ const LoginForm = ({
       />
       <br />
       <GradientButton
-        text={'Sign in'}
         disabled={!canSubmit}
         onClick={submit}
-      />
+      >
+        Sign in
+      </GradientButton>
     </form>
     <LoginForm.CaptionWrapper>
       <Typography variant="caption" gutterBottom align="center">

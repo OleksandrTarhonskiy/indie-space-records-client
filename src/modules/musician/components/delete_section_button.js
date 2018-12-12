@@ -19,10 +19,9 @@ const DeleteSectionButton = ({
   errorsList,
 }) => (
   <DeleteSectionButton.Wrapper>
-    <GradientButton
-      text={'Delete this section'}
-      onClick={deleteSection}
-    />
+    <GradientButton onClick={deleteSection}>
+      Delete this section
+    </GradientButton>
     <Alert
       action="delete"
       hasError={hasError}

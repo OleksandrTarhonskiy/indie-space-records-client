@@ -197,10 +197,9 @@ const ProfileThemeSettings = ({
       />
     </ProfileThemeSettings.SliderWrapper>
     <br />
-    <GradientButton
-      text={'Update this section'}
-      onClick={submit}
-    />
+    <GradientButton onClick={submit}>
+      Update this section
+    </GradientButton>
     <Snackbar
       open={hasError}
       autoHideDuration={2000}

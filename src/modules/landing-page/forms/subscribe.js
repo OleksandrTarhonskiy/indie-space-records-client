@@ -9,7 +9,9 @@ const SubscribeForm = () => (
     <SubscribeForm.EmailInput
       label="Email"
     />
-    <GradientButton text="Subscribe" size="small" />
+    <GradientButton size="small">
+      Subscribe
+    </GradientButton>
   </SubscribeForm.SubscribeForm>
 );
 

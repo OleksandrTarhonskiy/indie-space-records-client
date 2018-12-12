@@ -26,9 +26,9 @@ const EventDetails = ({
       <EventDetails.About>
         {viewEvent.details}
       </EventDetails.About>
-      <GradientButton
-        text={'View tikets'}
-      />
+      <GradientButton>
+        View tikets
+      </GradientButton>
     </div>
   </div>
 );

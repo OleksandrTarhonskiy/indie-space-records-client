@@ -48,7 +48,9 @@ const LastNews = () => (
         </LastNews.Card>
       ))}
     </LastNews.PostsWrapper>
-    <GradientButton text="Read More" size="small" />
+    <GradientButton size="small">
+      Read More
+    </GradientButton>
   </LastNews.Wrapper>
 );
 

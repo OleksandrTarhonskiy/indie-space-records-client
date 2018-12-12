@@ -80,9 +80,10 @@ const FanSignUpForm = ({
       />
       <br />
       <GradientButton
-        text={'Sign up'}
         disabled={!canSubmit}
-      />
+      >
+        Sign up
+      </GradientButton>
     </form>
   </div>
 );

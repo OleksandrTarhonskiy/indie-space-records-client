@@ -50,7 +50,9 @@ const Features = () => (
         and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.
       </p>
-      <GradientButton text="learn more" />
+      <GradientButton>
+        learn more
+      </GradientButton>
     </Features.FeatureInfo>
   </Features.FeaturesWrapper>
 );

@@ -104,10 +104,11 @@ const CreateEvent = ({
         />
       </CreateEvent.InputsWrapper>
       <GradientButton
-        text={'Create'}
         disabled={!canSubmit}
         onClick={createEvent}
-      />
+      >
+        Create
+      </GradientButton>
     </form>
     <Alert
       action="create"

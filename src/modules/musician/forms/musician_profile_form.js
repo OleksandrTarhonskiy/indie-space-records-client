@@ -101,10 +101,11 @@ const MusicianProfileForm = ({
     </MusicianProfileForm.SelectWrapper>
     <br />
     <GradientButton
-      text={'Create'}
       onClick={submit}
       disabled={!canSubmit}
-    />
+    >
+      Create
+    </GradientButton>
     <Snackbar
       open={hasError}
       autoHideDuration={2000}

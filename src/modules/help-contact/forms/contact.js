@@ -21,7 +21,9 @@ const Contact = () => (
       multiline="true"
     />
     <Contact.ButtonWrapper>
-      <GradientButton text="Submit" />
+      <GradientButton>
+        Submit
+      </GradientButton>
     </Contact.ButtonWrapper>
   </Contact.FormWrapper>
 );

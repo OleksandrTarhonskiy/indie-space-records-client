@@ -59,10 +59,9 @@ const EditSectionStyleForm = ({
         />
       </RadioGroup>
     </FormControl>
-    <GradientButton
-      text={'Update this section'}
-      onClick={submit}
-    />
+    <GradientButton onClick={submit}>
+      Update this section
+    </GradientButton>
     <Alert
       action="update"
       hasError={hasError}
