@@ -38,7 +38,7 @@ ProductsTablePage.InputsWrapper = styled.div`
 `;
 
 ProductsTablePage.propTypes = {
-  data : PropTypes.object.isRequired,
+  tableOptions : PropTypes.object.isRequired,
 };
 
 const withRecompose = compose(
