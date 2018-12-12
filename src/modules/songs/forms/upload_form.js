@@ -2,6 +2,8 @@ import React                   from 'react';
 import PropTypes               from 'prop-types';
 import styled                  from 'styled-components';
 import breakpoint              from 'styled-components-breakpoint';
+import Button                  from '@material-ui/core/Button';
+import CloudUploadIcon         from '@material-ui/icons/CloudUpload';
 import TextField               from '@material-ui/core/TextField';
 import Radio                   from '@material-ui/core/Radio';
 import RadioGroup              from '@material-ui/core/RadioGroup';
@@ -79,9 +81,10 @@ const UploadForm = ({
           onDrop={handleFileUpload.bind(null, 'file')}
           disableClick={disableClick}
         >
-          <GradientButton>
+          <UploadForm.Button variant="contained">
+            <CloudUploadIcon />
             choose the file
-          </GradientButton>
+          </UploadForm.Button>
         </Dropzone>
       </UploadForm.SectionWrapper>
       <UploadForm.SectionWrapper>
@@ -179,6 +182,10 @@ UploadForm.CurrencyWrapper = styled.div`
   font-family : 'Roboto', sans-serif;
   font-size   : 20px;
   padding     : 13% 5%;
+`;
+
+UploadForm.Button = styled(Button)`
+  margin-top : 10px !important;
 `;
 
 UploadForm.propTypes = {
