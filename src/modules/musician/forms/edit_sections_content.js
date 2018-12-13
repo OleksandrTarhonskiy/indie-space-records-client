@@ -21,6 +21,7 @@ import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
 import DeleteSectionButton              from '../components/delete_section_button';
 import Alert                            from '../../../layouts/alert';
+import TextEditor                       from './text_editor';
 
 const EditSectionsContent = ({
   section: {
@@ -71,13 +72,7 @@ const EditSectionsContent = ({
     <EditSectionsContent.ContentBlock>
       {
         type === 'text'?
-          <TextField
-            name="content"
-            value={content}
-            onChange={handleChange}
-            label="page content"
-            multiline={true}
-          />
+          <TextEditor />
           :
           <p>in this section will be displaying your {type}</p>
       }
