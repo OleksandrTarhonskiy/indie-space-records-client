@@ -3,8 +3,6 @@ import PropTypes               from 'prop-types';
 import ColorPicker             from 'material-ui-color-picker';
 import * as R                  from 'ramda';
 import Slider                  from '@material-ui/lab/Slider';
-import Snackbar                from '@material-ui/core/Snackbar';
-import SnackbarContent         from '@material-ui/core/SnackbarContent';
 import InputLabel              from '@material-ui/core/InputLabel';
 import MenuItem                from '@material-ui/core/MenuItem';
 import Select                  from '@material-ui/core/Select';
@@ -12,8 +10,6 @@ import FormControl             from '@material-ui/core/FormControl';
 import Typography              from '@material-ui/core/Typography';
 import styled                  from 'styled-components';
 import FontPicker              from 'font-picker-react';
-import WarningIcon             from '@material-ui/icons/Warning';
-import DoneIcon                from '@material-ui/icons/Done';
 import {
   compose,
   withStateHandlers,
@@ -21,6 +17,7 @@ import {
 }                              from 'recompose';
 import { graphql }             from 'react-apollo';
 
+import Alert                   from '../../../layouts/alert';
 import GradientButton          from '../../../layouts/gradient_button';
 import { updateThemeMutation } from '../graphql/mutations';
 
@@ -200,31 +197,14 @@ const ProfileThemeSettings = ({
     <GradientButton onClick={submit}>
       Update this section
     </GradientButton>
-    <Snackbar
-      open={hasError}
-      autoHideDuration={2000}
-      onClose={hideAlert}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <ProfileThemeSettings.Alert
-        message={
-          errorsList.length > 0 ?
-            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-            :
-            <p><DoneIcon /> successfully updated</p>
-        }
-      />
-    </Snackbar>
+    <Alert
+      action="updated"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </div>
 );
-
-ProfileThemeSettings.Alert = styled(SnackbarContent)`
-  background-color : ${props => props.message ? '#59d859' : '#ee3c25'} !important;
-  font-family      : 'Roboto', sans-serif;
-`;
 
 ProfileThemeSettings.SliderWrapper = styled.div`
   width      : 80%;

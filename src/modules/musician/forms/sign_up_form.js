@@ -1,9 +1,6 @@
 import React              from 'react';
 import PropTypes          from 'prop-types';
 import TextField          from '@material-ui/core/TextField';
-import Snackbar           from '@material-ui/core/Snackbar';
-import SnackbarContent    from '@material-ui/core/SnackbarContent';
-import WarningIcon        from '@material-ui/icons/Warning';
 import styled             from 'styled-components';
 import * as R             from 'ramda';
 import {
@@ -19,6 +16,7 @@ import {
   withRouter,
 }                         from 'react-router-dom';
 
+import Alert              from '../../../layouts/alert';
 import GradientButton     from '../../../layouts/gradient_button';
 import { signUpMutation } from '../graphql/mutations';
 
@@ -109,24 +107,12 @@ const MusicianSignUpForm = ({
         Sign up
       </GradientButton>
     </form>
-    <Snackbar
-      open={hasError}
-      autoHideDuration={2000}
-      onClose={hideError}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <MusicianSignUpForm.Alert
-        message={
-          errorsList.length > 0 ?
-            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-            :
-            null
-        }
-      />
-    </Snackbar>
+    <Alert
+      action="created"
+      hasError={hasError}
+      hideAlert={hideError}
+      errorsList={errorsList}
+    />
   </div>
 );
 
@@ -135,11 +121,6 @@ MusicianSignUpForm.Headline = styled.h1`
   color       : #374142;
   text-align  : center;
   font-weight : 300;
-`;
-
-MusicianSignUpForm.Alert = styled(SnackbarContent)`
-  background-color : #ee3c25 !important;
-  font-family      : 'Roboto', sans-serif;
 `;
 
 MusicianSignUpForm.propTypes = {

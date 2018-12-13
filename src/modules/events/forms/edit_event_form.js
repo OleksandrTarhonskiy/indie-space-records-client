@@ -111,7 +111,7 @@ const EditEventForm = ({
       </GradientButton>
     </form>
     <Alert
-      action="update"
+      action="updated"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

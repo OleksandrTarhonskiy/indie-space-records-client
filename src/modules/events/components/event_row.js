@@ -60,7 +60,7 @@ const EventRow = ({
       </EventRow.ActionsWrapper>
     </TableCell>
     <Alert
-      action="delete"
+      action="deleted"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

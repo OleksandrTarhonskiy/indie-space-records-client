@@ -28,7 +28,7 @@ const DeleteSectionButton = ({
       Delete this section
     </Button>
     <Alert
-      action="delete"
+      action="deleted"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

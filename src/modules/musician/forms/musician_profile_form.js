@@ -6,9 +6,6 @@ import FormControl               from '@material-ui/core/FormControl';
 import Input                     from '@material-ui/core/Input';
 import Select                    from '@material-ui/core/Select';
 import MenuItem                  from '@material-ui/core/MenuItem';
-import Snackbar                  from '@material-ui/core/Snackbar';
-import SnackbarContent           from '@material-ui/core/SnackbarContent';
-import WarningIcon               from '@material-ui/icons/Warning';
 import {
   CountryDropdown,
   RegionDropdown
@@ -26,6 +23,7 @@ import styled                    from 'styled-components';
 import GradientButton            from '../../../layouts/gradient_button';
 import { currencies }            from '../models/currencies';
 import { createProfileMutation } from '../graphql/mutations';
+import Alert                     from '../../../layouts/alert';
 
 const MusicianProfileForm = ({
   form: {
@@ -106,24 +104,12 @@ const MusicianProfileForm = ({
     >
       Create
     </GradientButton>
-    <Snackbar
-      open={hasError}
-      autoHideDuration={2000}
-      onClose={hideError}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-    >
-      <MusicianProfileForm.Alert
-        message={
-          errorsList.length > 0 ?
-            errorsList.map((err, index) => <p key={index}><WarningIcon /> {err}</p>)
-            :
-            null
-        }
-      />
-    </Snackbar>
+    <Alert
+      action="created"
+      hasError={hasError}
+      hideAlert={hideError}
+      errorsList={errorsList}
+    />
   </form>
 );
 
@@ -137,11 +123,6 @@ MusicianProfileForm.Headline = styled.h1`
   color       : #374142;
   text-align  : center;
   font-weight : 300;
-`;
-
-MusicianProfileForm.Alert = styled(SnackbarContent)`
-  background-color : #ee3c25 !important;
-  font-family      : 'Roboto', sans-serif;
 `;
 
 MusicianProfileForm.CountryDropdown = styled(CountryDropdown)`

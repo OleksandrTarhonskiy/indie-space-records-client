@@ -91,7 +91,7 @@ const EditSectionsContent = ({
     </Button>
     <DeleteSectionButton id={id} />
     <Alert
-      action="update"
+      action="updated"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

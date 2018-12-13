@@ -111,7 +111,7 @@ const CreateEvent = ({
       </GradientButton>
     </form>
     <Alert
-      action="create"
+      action="created"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

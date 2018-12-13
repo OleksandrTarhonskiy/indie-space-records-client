@@ -25,7 +25,7 @@ const SetTheme = ({
       Get this theme
     </SetTheme.Button>
     <Alert
-      action="update"
+      action="updated"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

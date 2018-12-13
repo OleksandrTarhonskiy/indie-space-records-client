@@ -28,7 +28,7 @@ const Alert = ({
         />
         :
         <Alert.Notification
-          message={<p><DoneIcon /> {`successfully ${action}d`}</p>}
+          message={<p><DoneIcon /> {`successfully ${action}`}</p>}
         />
     }
   </Snackbar>

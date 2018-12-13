@@ -165,7 +165,7 @@ const ProductRow = ({
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <Alert
-      action="update"
+      action="updated"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

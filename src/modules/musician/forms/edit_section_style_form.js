@@ -63,7 +63,7 @@ const EditSectionStyleForm = ({
       Update this section
     </GradientButton>
     <Alert
-      action="update"
+      action="updated"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

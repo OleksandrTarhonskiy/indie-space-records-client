@@ -87,7 +87,7 @@ const NewSectionForm = ({
       Create
     </GradientButton>
     <Alert
-      action="create"
+      action="created"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}

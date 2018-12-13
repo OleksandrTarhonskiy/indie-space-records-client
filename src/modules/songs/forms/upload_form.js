@@ -134,7 +134,7 @@ const UploadForm = ({
       Save & upload
     </GradientButton>
     <Alert
-      action="upload"
+      action="uploaded"
       hasError={hasError}
       hideAlert={hideAlert}
       errorsList={errorsList}
