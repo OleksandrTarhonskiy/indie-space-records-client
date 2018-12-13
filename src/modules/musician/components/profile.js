@@ -59,6 +59,7 @@ const Profile = ({ profile }) => (
                 events={profile.events}
                 products={profile.products}
                 content={section.content}
+                currency={profile.currency}
               />
             </Profile.SectionContent>
           </Profile.Section>
