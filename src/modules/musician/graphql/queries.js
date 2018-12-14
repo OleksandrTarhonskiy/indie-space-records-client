@@ -25,6 +25,9 @@ export const myProfileWithThemeQuery = gql`
       events {
         id
         title
+        address
+        date
+        price
       }
       products {
         id
