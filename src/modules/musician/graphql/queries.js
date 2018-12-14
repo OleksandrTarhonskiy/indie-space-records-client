@@ -89,6 +89,9 @@ export const fetchProfileQuery = gql`
       events {
         id
         title
+        address
+        date
+        price
       }
       theme {
         style

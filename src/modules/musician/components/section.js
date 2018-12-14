@@ -1,6 +1,7 @@
 import React      from 'react';
 import styled     from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
+import moment     from 'moment';
 
 const Section = ({
   type,
@@ -28,7 +29,10 @@ const Section = ({
             >
               {p.title}
             </Section.ProductName>
-            <Section.Button>
+            <Section.Button
+              elementFont={elementFont}
+              className="apply-font-linksFont"
+            >
               {p.price + ' ' + currency}
             </Section.Button>
           </Section.ListItem>
@@ -38,13 +42,48 @@ const Section = ({
     );
   case 'events':
     return(
-      <Section.List>
+      <div>
       {
         events.map(e =>
-          <li key={e.id}>{e.title}</li>
+          <Section.EventsItem key={e.id}>
+            <Section.Cell
+              elementFont={elementFont}
+              elementStyles={elementStyles}
+              className="apply-font-regularTextFont"
+            >
+              {moment(e.date).format('D MMM HH:mm')}
+            </Section.Cell>
+            <Section.Cell
+              elementFont={elementFont}
+              elementStyles={elementStyles}
+              className="apply-font-regularTextFont"
+            >
+              {e.title}
+            </Section.Cell>
+            <Section.Cell
+              elementFont={elementFont}
+              elementStyles={elementStyles}
+              className="apply-font-regularTextFont"
+            >
+              {e.address}
+            </Section.Cell>
+            <Section.Cell
+              elementFont={elementFont}
+              elementStyles={elementStyles}
+              className="apply-font-regularTextFont"
+            >
+              {e.price}
+            </Section.Cell>
+            <Section.TiketsButton
+              elementFont={elementFont}
+              className="apply-font-linksFont"
+            >
+              Tikets
+            </Section.TiketsButton>
+          </Section.EventsItem>
         )
       }
-      </Section.List>
+      </div>
     );
   default:
     return(<p>{content}</p>);
@@ -79,6 +118,7 @@ Section.ImageWrapper = styled.div`
 `;
 
 Section.Button = styled.button`
+  font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
   background : transparent;
   height     : 62px;
   width      : 100%;
@@ -90,6 +130,37 @@ Section.Button = styled.button`
 Section.ProductName = styled.p`
   font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
+`;
+
+Section.EventsItem = styled.div`
+  && {
+    display        : flex;
+    flex-direction : column;
+    width          : 100%;
+
+    ${breakpoint('md')`
+      display        : flex;
+      flex-direction : row;
+    `}
+  }
+`;
+
+Section.Cell = styled.div`
+  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  font-size   : 20px;
+  width       : 220px;
+  margin      : 2%;
+  color       : #fff;
+`;
+
+Section.TiketsButton = styled.button`
+  font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
+  background  : transparent;
+  color       : #ffff;
+  border      : solid;
+  width       : 100px;
+  height      : 45px;
 `;
 
 export default Section;

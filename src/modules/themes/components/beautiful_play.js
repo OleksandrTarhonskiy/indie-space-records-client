@@ -1,6 +1,7 @@
 import React      from 'react';
 import styled     from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
+import moment     from 'moment';
 
 import {
   BeautifulPlayStyle,
@@ -8,6 +9,10 @@ import {
 }                  from '../models/themes_styles';
 
 import SetTheme    from './set_theme';
+import {
+  EVENTS,
+  PRODUCTS,
+}                  from '../models/beautiful_play';
 
 const BeautifulPlay = () => (
   <div>
@@ -43,64 +48,44 @@ const BeautifulPlay = () => (
       <BeautifulPlay.FirstSection>
         <h2>Merch</h2>
         <BeautifulPlay.List>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
-          <BeautifulPlay.ListItem>
-            <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <h3>
-              Lorem Ipsum
-            </h3>
-            <BeautifulPlay.Button>
-              5.99 $
-            </BeautifulPlay.Button>
-          </BeautifulPlay.ListItem>
+          {
+            PRODUCTS.map(p =>
+              <BeautifulPlay.ListItem>
+                <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
+                <h3>
+                  {p.name}
+                </h3>
+                <BeautifulPlay.Button>
+                  {p.price}
+                </BeautifulPlay.Button>
+              </BeautifulPlay.ListItem>
+            )
+          }
         </BeautifulPlay.List>
       </BeautifulPlay.FirstSection>
       <BeautifulPlay.SecondSection>
-        tracks and albums here
+        <h2>Upcoming Shows</h2>
+        {
+          EVENTS.map(e =>
+            <BeautifulPlay.EventsItem>
+              <BeautifulPlay.Cell>
+                {moment().format('D MMM HH:mm')}
+              </BeautifulPlay.Cell>
+              <BeautifulPlay.Cell>
+                {e.name}
+              </BeautifulPlay.Cell>
+              <BeautifulPlay.Cell>
+                {e.address}
+              </BeautifulPlay.Cell>
+              <BeautifulPlay.Cell>
+                {e.price}
+              </BeautifulPlay.Cell>
+              <BeautifulPlay.TiketsButton>
+                tikets
+              </BeautifulPlay.TiketsButton>
+            </BeautifulPlay.EventsItem>
+          )
+        }
       </BeautifulPlay.SecondSection>
       <BeautifulPlay.ThirdSection>
         tracks and albums here
@@ -173,8 +158,9 @@ BeautifulPlay.Headline = styled.div`
 
 BeautifulPlay.SecondSection = styled.div`
   min-height : 400px;
-  background : #ffff;
+  background : #061b40;
   padding    : 2%;
+  color      : #fff;
 `;
 
 BeautifulPlay.List = styled.ul`
@@ -211,6 +197,33 @@ BeautifulPlay.Button = styled.button`
   color      : #ffff;
   font-size  : 25px;
   border     : solid;
+`;
+
+BeautifulPlay.EventsItem = styled.div`
+  && {
+    display        : flex;
+    flex-direction : column;
+    width          : 100%;
+
+    ${breakpoint('md')`
+      display        : flex;
+      flex-direction : row;
+    `}
+  }
+`;
+
+BeautifulPlay.Cell = styled.div`
+  font-size : 20px;
+  width     : 220px;
+  margin    : 2%;
+`;
+
+BeautifulPlay.TiketsButton = styled.button`
+  background : transparent;
+  color      : #ffff;
+  border     : solid;
+  width      : 100px;
+  height     : 45px;
 `;
 
 export default BeautifulPlay;
