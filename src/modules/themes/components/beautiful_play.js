@@ -50,7 +50,7 @@ const BeautifulPlay = () => (
         <BeautifulPlay.List>
           {
             PRODUCTS.map(p =>
-              <BeautifulPlay.ListItem>
+              <BeautifulPlay.ListItem key={p.id}>
                 <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
                 <h3>
                   {p.name}
@@ -67,7 +67,7 @@ const BeautifulPlay = () => (
         <h2>Upcoming Shows</h2>
         {
           EVENTS.map(e =>
-            <BeautifulPlay.EventsItem>
+            <BeautifulPlay.EventsItem key={e.id}>
               <BeautifulPlay.Cell>
                 {moment().format('D MMM HH:mm')}
               </BeautifulPlay.Cell>
