@@ -8,6 +8,8 @@ const Section = ({
   products,
   content,
   currency,
+  elementFont,
+  elementStyles,
 }) => {
   switch (type) {
   case 'music':
@@ -16,10 +18,16 @@ const Section = ({
     return(
       <Section.List>
       {
-        products.map((p, index) =>
+        products.map(p =>
           <Section.ListItem key={p.id}>
             <Section.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            {p.title}
+            <Section.ProductName
+              elementFont={elementFont}
+              elementStyles={elementStyles}
+              className="apply-font-regularTextFont"
+            >
+              {p.title}
+            </Section.ProductName>
             <Section.Button>
               {p.price + ' ' + currency}
             </Section.Button>
@@ -77,6 +85,11 @@ Section.Button = styled.button`
   color      : #ffff;
   font-size  : 25px;
   border     : solid;
+`;
+
+Section.ProductName = styled.p`
+  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
 export default Section;

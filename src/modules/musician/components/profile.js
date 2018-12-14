@@ -60,6 +60,8 @@ const Profile = ({ profile }) => (
                 products={profile.products}
                 content={section.content}
                 currency={profile.currency}
+                elementFont={JSON.parse(profile.theme.fonts)}
+                elementStyles={JSON.parse(profile.theme.style)}
               />
             </Profile.SectionContent>
           </Profile.Section>
