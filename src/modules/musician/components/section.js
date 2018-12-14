@@ -18,71 +18,71 @@ const Section = ({
   case 'merch':
     return(
       <Section.List>
-      {
-        products.map(p =>
-          <Section.ListItem key={p.id}>
-            <Section.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-            <Section.ProductName
-              elementFont={elementFont}
-              elementStyles={elementStyles}
-              className="apply-font-regularTextFont"
-            >
-              {p.title}
-            </Section.ProductName>
-            <Section.Button
-              elementFont={elementFont}
-              className="apply-font-linksFont"
-            >
-              {p.price + ' ' + currency}
-            </Section.Button>
-          </Section.ListItem>
-        )
-      }
+        {
+          products.map(p =>
+            <Section.ListItem key={p.id}>
+              <Section.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
+              <Section.ProductName
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
+              >
+                {p.title}
+              </Section.ProductName>
+              <Section.Button
+                elementFont={elementFont}
+                className="apply-font-linksFont"
+              >
+                {p.price + ' ' + currency}
+              </Section.Button>
+            </Section.ListItem>
+          )
+        }
       </Section.List>
     );
   case 'events':
     return(
       <div>
-      {
-        events.map(e =>
-          <Section.EventsItem key={e.id}>
-            <Section.Cell
-              elementFont={elementFont}
-              elementStyles={elementStyles}
-              className="apply-font-regularTextFont"
-            >
-              {moment(e.date).format('D MMM HH:mm')}
-            </Section.Cell>
-            <Section.Cell
-              elementFont={elementFont}
-              elementStyles={elementStyles}
-              className="apply-font-regularTextFont"
-            >
-              {e.title}
-            </Section.Cell>
-            <Section.Cell
-              elementFont={elementFont}
-              elementStyles={elementStyles}
-              className="apply-font-regularTextFont"
-            >
-              {e.address}
-            </Section.Cell>
-            <Section.Cell
-              elementFont={elementFont}
-              elementStyles={elementStyles}
-              className="apply-font-regularTextFont"
-            >
-              {e.price}
-            </Section.Cell>
-            <Section.TiketsButton
-              elementFont={elementFont}
-              className="apply-font-linksFont"
-            >
+        {
+          events.map(e =>
+            <Section.EventsItem key={e.id}>
+              <Section.Cell
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
+              >
+                {moment(e.date).format('D MMM HH:mm')}
+              </Section.Cell>
+              <Section.Cell
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
+              >
+                {e.title}
+              </Section.Cell>
+              <Section.Cell
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
+              >
+                {e.address}
+              </Section.Cell>
+              <Section.Cell
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
+              >
+                {e.price}
+              </Section.Cell>
+              <Section.TiketsButton
+                elementFont={elementFont}
+                className="apply-font-linksFont"
+              >
               Tikets
-            </Section.TiketsButton>
-          </Section.EventsItem>
-        )
-      }
+              </Section.TiketsButton>
+            </Section.EventsItem>
+          )
+        }
       </div>
     );
   default:
