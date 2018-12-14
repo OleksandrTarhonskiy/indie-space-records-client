@@ -154,7 +154,6 @@ const withRecompose = compose(
       showAlert,
       errorsList,
     }) => async () => {
-      console.log(section);
       const response = await mutate({
         variables: {
           name    : section.name,
