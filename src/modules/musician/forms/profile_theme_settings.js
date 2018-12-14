@@ -138,7 +138,7 @@ const ProfileThemeSettings = ({
       sort="popularity"
     />
     <ProfileThemeSettings.Label>
-      Links font
+      links & Buttons Font
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-linksFont"
