@@ -2,6 +2,7 @@ import React      from 'react';
 import styled     from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import moment     from 'moment';
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
 import {
   BeautifulPlayStyle,
@@ -51,12 +52,19 @@ const BeautifulPlay = () => (
           {
             PRODUCTS.map(p =>
               <BeautifulPlay.ListItem key={p.id}>
-                <BeautifulPlay.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
-                <h3>
+                <BeautifulPlay.ImageWrapper background={'https://www.hypebot.com/.a/6a00d83451b36c69e201b8d13ade89970c-800wi'} />
+                <h2>
                   {p.name}
+                </h2>
+                <h3>
+                  {p.price}
                 </h3>
                 <BeautifulPlay.Button>
-                  {p.price}
+                  Buy now
+                </BeautifulPlay.Button>
+                <BeautifulPlay.Button>
+                  <AddShoppingCart />
+                  Add
                 </BeautifulPlay.Button>
               </BeautifulPlay.ListItem>
             )
@@ -129,13 +137,14 @@ BeautifulPlay.NavItem = styled.li`
 
 BeautifulPlay.FirstSection = styled.div`
   background : #021528;
-  padding    : 2%;
+  padding    : 5% 8%;
   color      : #ffff;
 `;
 
 BeautifulPlay.ThirdSection = styled.div`
   min-height : 400px;
   background : #2f3737;
+  padding    : 5% 8%;
   padding    : 2%;
 `;
 
@@ -159,7 +168,7 @@ BeautifulPlay.Headline = styled.div`
 BeautifulPlay.SecondSection = styled.div`
   min-height : 400px;
   background : #061b40;
-  padding    : 2%;
+  padding    : 5% 8%;
   color      : #fff;
 `;
 
@@ -193,10 +202,11 @@ BeautifulPlay.ImageWrapper = styled.div`
 BeautifulPlay.Button = styled.button`
   background : transparent;
   height     : 62px;
-  width      : 100%;
+  width      : 30%;
   color      : #ffff;
-  font-size  : 25px;
+  font-size  : 24px;
   border     : solid;
+  margin     : 1%;
 `;
 
 BeautifulPlay.EventsItem = styled.div`

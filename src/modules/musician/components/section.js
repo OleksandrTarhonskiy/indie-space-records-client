@@ -1,7 +1,8 @@
-import React      from 'react';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
-import moment     from 'moment';
+import React           from 'react';
+import styled          from 'styled-components';
+import breakpoint      from 'styled-components-breakpoint';
+import moment          from 'moment';
+import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
 const Section = ({
   type,
@@ -21,7 +22,7 @@ const Section = ({
         {
           products.map(p =>
             <Section.ListItem key={p.id}>
-              <Section.ImageWrapper background={'https://images1.popmeh.ru/upload/custom/6d6/6d622e39eb0bc3405da998fc1f98b92a.jpg'} />
+              <Section.ImageWrapper background={'https://www.hypebot.com/.a/6a00d83451b36c69e201b8d13ade89970c-800wi'} />
               <Section.ProductName
                 elementFont={elementFont}
                 elementStyles={elementStyles}
@@ -29,11 +30,27 @@ const Section = ({
               >
                 {p.title}
               </Section.ProductName>
-              <Section.Button
+              <Section.ProductPrice
                 elementFont={elementFont}
-                className="apply-font-linksFont"
+                elementStyles={elementStyles}
+                className="apply-font-regularTextFont"
               >
                 {p.price + ' ' + currency}
+              </Section.ProductPrice>
+              <Section.Button
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-linksFont"
+              >
+                Buy now
+              </Section.Button>
+              <Section.Button
+                elementFont={elementFont}
+                elementStyles={elementStyles}
+                className="apply-font-linksFont"
+              >
+                <AddShoppingCart />
+                Add
               </Section.Button>
             </Section.ListItem>
           )
@@ -76,6 +93,7 @@ const Section = ({
               </Section.Cell>
               <Section.TiketsButton
                 elementFont={elementFont}
+                elementStyles={elementStyles}
                 className="apply-font-linksFont"
               >
               Tikets
@@ -121,13 +139,19 @@ Section.Button = styled.button`
   font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
   background : transparent;
   height     : 62px;
-  width      : 100%;
-  color      : #ffff;
-  font-size  : 25px;
+  width      : 30%;
+  color      : ${props => props.elementStyles.LinksColor};
+  font-size  : 24px;
   border     : solid;
+  margin     : 1%;
 `;
 
-Section.ProductName = styled.p`
+Section.ProductName = styled.h2`
+  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+`;
+
+Section.ProductPrice = styled.h3`
   font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
@@ -151,13 +175,12 @@ Section.Cell = styled.div`
   font-size   : 20px;
   width       : 220px;
   margin      : 2%;
-  color       : #fff;
 `;
 
 Section.TiketsButton = styled.button`
   font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
   background  : transparent;
-  color       : #ffff;
+  color       : ${props => props.elementStyles.LinksColor};
   border      : solid;
   width       : 100px;
   height      : 45px;

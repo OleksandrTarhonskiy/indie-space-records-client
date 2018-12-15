@@ -23,7 +23,6 @@ import { updateThemeMutation } from '../graphql/mutations';
 
 const ProfileThemeSettings = ({
   styles: {
-    color,
     h1FontSize,
     h2FontSize,
     RegularFontSize,
@@ -48,14 +47,6 @@ const ProfileThemeSettings = ({
   handleFontChange,
 }) => (
   <div>
-    <ColorPicker
-      defaultValue={color}
-      value={color}
-      name="color"
-      onChange={handleChange.bind(null, 'color')}
-      label="Text color"
-      margin="normal"
-    />
     <ColorPicker
       defaultValue={LinksColor}
       value={LinksColor}
@@ -238,7 +229,6 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       styles     = {
-        color             : '',
         h1FontSize        : '',
         h2FontSize        : '',
         RegularFontSize   : '',
