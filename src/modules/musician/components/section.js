@@ -37,21 +37,23 @@ const Section = ({
               >
                 {p.price + ' ' + currency}
               </Section.ProductPrice>
-              <Section.Button
-                elementFont={elementFont}
-                elementStyles={elementStyles}
-                className="apply-font-linksFont"
-              >
-                Buy now
-              </Section.Button>
-              <Section.Button
-                elementFont={elementFont}
-                elementStyles={elementStyles}
-                className="apply-font-linksFont"
-              >
-                <AddShoppingCart />
-                Add
-              </Section.Button>
+              <Section.ButtonsWrapper>
+                <Section.Button
+                  elementFont={elementFont}
+                  elementStyles={elementStyles}
+                  className="apply-font-linksFont"
+                >
+                  Buy now
+                </Section.Button>
+                <Section.Button
+                  elementFont={elementFont}
+                  elementStyles={elementStyles}
+                  className="apply-font-linksFont"
+                >
+                  <AddShoppingCart />
+                  Add
+                </Section.Button>
+              </Section.ButtonsWrapper>
             </Section.ListItem>
           )
         }
@@ -135,11 +137,15 @@ Section.ImageWrapper = styled.div`
   background-repeat : no-repeat;
 `;
 
+Section.ButtonsWrapper = styled.div`
+  display               : grid;
+  grid-template-columns : 30% 30%;
+`;
+
 Section.Button = styled.button`
   font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
   background : transparent;
   height     : 62px;
-  width      : 30%;
   color      : ${props => props.elementStyles.LinksColor};
   font-size  : 24px;
   border     : solid;

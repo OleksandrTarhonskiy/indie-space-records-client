@@ -59,13 +59,15 @@ const BeautifulPlay = () => (
                 <h3>
                   {p.price}
                 </h3>
-                <BeautifulPlay.Button>
-                  Buy now
-                </BeautifulPlay.Button>
-                <BeautifulPlay.Button>
-                  <AddShoppingCart />
-                  Add
-                </BeautifulPlay.Button>
+                <BeautifulPlay.ButtonsWrapper>
+                  <BeautifulPlay.Button>
+                    Buy now
+                  </BeautifulPlay.Button>
+                  <BeautifulPlay.Button>
+                    <AddShoppingCart />
+                    Add
+                  </BeautifulPlay.Button>
+                </BeautifulPlay.ButtonsWrapper>
               </BeautifulPlay.ListItem>
             )
           }
@@ -199,10 +201,14 @@ BeautifulPlay.ImageWrapper = styled.div`
   background-repeat : no-repeat;
 `;
 
+BeautifulPlay.ButtonsWrapper = styled.div`
+  display               : grid;
+  grid-template-columns : 30% 30%;
+`;
+
 BeautifulPlay.Button = styled.button`
   background : transparent;
   height     : 62px;
-  width      : 30%;
   color      : #ffff;
   font-size  : 24px;
   border     : solid;
