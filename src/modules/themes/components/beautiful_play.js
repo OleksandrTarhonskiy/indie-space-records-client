@@ -1,19 +1,19 @@
-import React      from 'react';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
-import moment     from 'moment';
+import React           from 'react';
+import styled          from 'styled-components';
+import breakpoint      from 'styled-components-breakpoint';
+import moment          from 'moment';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 
 import {
   BeautifulPlayStyle,
   BeautifulPlayFont
-}                  from '../models/themes_styles';
+}                      from '../models/themes_styles';
 
-import SetTheme    from './set_theme';
+import SetTheme        from './set_theme';
 import {
   EVENTS,
   PRODUCTS,
-}                  from '../models/beautiful_play';
+}                      from '../models/beautiful_play';
 
 const BeautifulPlay = () => (
   <div>
