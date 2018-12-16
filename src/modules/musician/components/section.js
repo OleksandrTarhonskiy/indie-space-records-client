@@ -147,7 +147,7 @@ Section.Button = styled.button`
   background : transparent;
   height     : 62px;
   color      : ${props => props.elementStyles.LinksColor};
-  font-size  : 24px;
+  font-size  : 20px;
   border     : solid;
   margin     : 1%;
 `;
