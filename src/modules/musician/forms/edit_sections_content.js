@@ -2,6 +2,9 @@ import React                            from 'react';
 import PropTypes                        from 'prop-types';
 import styled                           from 'styled-components';
 import Button                           from '@material-ui/core/Button';
+import IconButton                       from '@material-ui/core/IconButton';
+import Add                              from '@material-ui/icons/Add';
+import CloseIcon                        from '@material-ui/icons/Close';
 import TextField                        from '@material-ui/core/TextField';
 import InputLabel                       from '@material-ui/core/InputLabel';
 import FormControl                      from '@material-ui/core/FormControl';
@@ -21,6 +24,7 @@ import { SECTION_TYPES }                from '../models/section_types';
 import { updateSectionContentMutation } from '../graphql/mutations';
 import DeleteSectionButton              from '../components/delete_section_button';
 import Alert                            from '../../../layouts/alert';
+import AddWidgetForm                    from '../../widgets/forms/add_widget_form';
 
 const EditSectionsContent = ({
   section: {
@@ -34,6 +38,8 @@ const EditSectionsContent = ({
   hasError,
   hideAlert,
   errorsList,
+  toggleForm,
+  isOpenForm,
 }) => (
   <EditSectionsContent.Form>
     <TextField
@@ -90,6 +96,27 @@ const EditSectionsContent = ({
       Update this section
     </Button>
     <DeleteSectionButton id={id} />
+    <EditSectionsContent.CreateNewWrapper>
+      <EditSectionsContent.IconButton
+        onClick={toggleForm.bind(null, isOpenForm ? false : true)}
+      >
+        {
+          isOpenForm ?
+            <CloseIcon />
+            :
+            <Add />
+        }
+      </EditSectionsContent.IconButton>
+        <EditSectionsContent.SubHead>
+          Add widget to this section
+        </EditSectionsContent.SubHead>
+    </EditSectionsContent.CreateNewWrapper>
+    {
+      isOpenForm ?
+      <AddWidgetForm id={id} />
+      :
+      null
+    }
     <Alert
       action="updated"
       hasError={hasError}
@@ -118,6 +145,23 @@ EditSectionsContent.SelectWrapper = styled(FormControl)`
   width : 100%;
 `;
 
+EditSectionsContent.CreateNewWrapper = styled.div`
+  padding        : 2%;
+  display        : flex;
+  flex-direction : row;
+`;
+
+EditSectionsContent.IconButton = styled(IconButton)`
+  width : 56px;
+`;
+
+EditSectionsContent.SubHead = styled.h3`
+  font-family  : 'Roboto', sans-serif;
+  color        : #374142;
+  font-weight  : 500;
+  padding-left : 10px;
+`;
+
 EditSectionsContent.propTypes = {
   section       : PropTypes.object.isRequired,
   updateSection : PropTypes.func.isRequired,
@@ -138,15 +182,16 @@ const withRecompose = compose(
       },
       errorsList = [],
       hasError   = false,
-    }) => ({ section, errorsList, hasError }),
+      isOpenForm = false
+    }) => ({ section, errorsList, hasError, isOpenForm }),
     {
       handleChange : state => ({ target }) => {
         const section = R.assoc(target.name, target.value, state.section);
         return ({ section });
       },
-
-      showAlert          : () => () => ({ hasError: true }),
-      hideAlert          : () => () => ({ hasError: false }),
+      showAlert    : () => () => ({ hasError: true }),
+      hideAlert    : () => () => ({ hasError: false }),
+      toggleForm   : () => isOpenForm => ({ isOpenForm }),
     },
   ),
   withHandlers({
