@@ -17,9 +17,9 @@ const SearchResults = ({
   <div>
     {
       loading ?
-      <CircularProgress />
-      :
-      <ProductsTable products={allMyProducts} />
+        <CircularProgress />
+        :
+        <ProductsTable products={allMyProducts} />
     }
   </div>
 );

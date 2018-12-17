@@ -21,6 +21,8 @@ import Alert                          from '../../../layouts/alert';
 const EditSectionStyleForm = ({
   styles: {
     background,
+    color,
+    headlineColor,
     displayHeadline,
   },
   handleChange,
@@ -39,6 +41,27 @@ const EditSectionStyleForm = ({
       label="Background color"
       margin="normal"
     />
+    <ColorPicker
+      defaultValue={color}
+      value={color}
+      name="color"
+      onChange={handleColorChange.bind(null, 'color')}
+      label="Text color"
+      margin="normal"
+    />
+    {
+      JSON.parse(displayHeadline)?
+      <ColorPicker
+        defaultValue={headlineColor}
+        value={headlineColor}
+        name="headlineColor"
+        onChange={handleColorChange.bind(null, 'headlineColor')}
+        label="Section Headline Color"
+        margin="normal"
+      />
+      :
+      null
+    }
     <FormControl component="fieldset">
       <Typography>Display section headline?</Typography>
       <RadioGroup
@@ -88,6 +111,8 @@ const withRecompose = compose(
     ({
       styles     = {
         background      : '',
+        color           : '',
+        headlineColor   : '',
         displayHeadline : 'true',
       },
       errorsList = [],

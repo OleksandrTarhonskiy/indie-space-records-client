@@ -25,10 +25,14 @@ export const myProfileWithThemeQuery = gql`
       events {
         id
         title
+        address
+        date
+        price
       }
       products {
         id
         title
+        price
       }
       theme {
         style
@@ -83,10 +87,14 @@ export const fetchProfileQuery = gql`
       products {
         id
         title
+        price
       }
       events {
         id
         title
+        address
+        date
+        price
       }
       theme {
         style

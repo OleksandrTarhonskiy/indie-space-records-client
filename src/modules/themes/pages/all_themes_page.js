@@ -1,7 +1,7 @@
 import React    from 'react';
 import { Link } from 'react-router-dom';
 import styled   from 'styled-components';
-import Preview  from './mockup.jpeg';
+import Preview  from './beautifulPlay.png';
 
 const AllThemesPage = () => (
   <AllThemesPage.ThemesWrapper>
@@ -12,24 +12,7 @@ const AllThemesPage = () => (
       </AllThemesPage.Cursive>
     </AllThemesPage.Headline>
     <AllThemesPage.HorizontalList>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
-        View Demo
-      </AllThemesPage.ThemeItem>
       <AllThemesPage.ThemeItem to="/demos/beautiful_play">
-        View Demo
-      </AllThemesPage.ThemeItem>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
-        View Demo
-      </AllThemesPage.ThemeItem>
-    </AllThemesPage.HorizontalList>
-    <AllThemesPage.HorizontalList>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
-        View Demo
-      </AllThemesPage.ThemeItem>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
-        View Demo
-      </AllThemesPage.ThemeItem>
-      <AllThemesPage.ThemeItem to="/demos/flat_theme">
         View Demo
       </AllThemesPage.ThemeItem>
     </AllThemesPage.HorizontalList>
@@ -37,15 +20,15 @@ const AllThemesPage = () => (
 );
 
 AllThemesPage.ThemesWrapper = styled.div`
-  padding        : 5% 15%;
+  padding : 5% 15%;
 `;
 
 AllThemesPage.ThemeItem = styled(Link)`
   && {
     background        : url(${Preview});
+    background-size   : cover;
     height            : 323px;
     width             : 30%;
-    background-size   : contain;
     background-repeat : no-repeat;
     margin            : 1%;
     outline           : none;

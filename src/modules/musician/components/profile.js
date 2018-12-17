@@ -45,6 +45,7 @@ const Profile = ({ profile }) => (
               elementStyles={JSON.parse(profile.theme.style)}
               elementFont={JSON.parse(profile.theme.fonts)}
               display={JSON.parse(section.style).displayHeadline}
+              sectionStyle={JSON.parse(section.style)}
               className="apply-font-subHead"
             >
               {section.name}
@@ -52,6 +53,7 @@ const Profile = ({ profile }) => (
             <Profile.SectionContent
               elementStyles={JSON.parse(profile.theme.style)}
               elementFont={JSON.parse(profile.theme.fonts)}
+              sectionStyle={JSON.parse(section.style)}
               className="apply-font-regularTextFont"
             >
               <Section
@@ -59,6 +61,9 @@ const Profile = ({ profile }) => (
                 events={profile.events}
                 products={profile.products}
                 content={section.content}
+                currency={profile.currency}
+                elementFont={JSON.parse(profile.theme.fonts)}
+                elementStyles={JSON.parse(profile.theme.style)}
               />
             </Profile.SectionContent>
           </Profile.Section>
@@ -69,7 +74,6 @@ const Profile = ({ profile }) => (
 );
 
 Profile.Body = styled.div`
-  color            : ${props => props.elementStyles.color};
   background-color : ${props => props.elementStyles.backgroundColor};
   position         : relative;
 `;
@@ -78,6 +82,7 @@ Profile.Section = styled.div`
   background-color : ${props => props.elementStyles.background};
   display          : flex;
   flex-direction   : column;
+  padding          : 5% 8%;
 `;
 
 Profile.NavItems = styled.ul`
@@ -113,11 +118,13 @@ Profile.SubHeadline = styled.h2`
   font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
   font-size   : ${props => props.elementStyles.h2FontSize}px;
   display     : ${props => props.display === 'false' ? 'none' : 'block'};
+  color       : ${props => props.sectionStyle.headlineColor};
 `;
 
 Profile.SectionContent = styled.p`
   font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  color       : ${props => props.sectionStyle.color};
 `;
 
 Profile.propTypes = {
