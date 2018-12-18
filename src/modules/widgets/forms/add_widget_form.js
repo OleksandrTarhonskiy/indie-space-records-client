@@ -21,13 +21,11 @@ import styled                from 'styled-components';
 
 import GradientButton        from '../../../layouts/gradient_button';
 import Alert                 from '../../../layouts/alert';
-import { SOCIAL_NETWORKS }   from '../models/social_networks';
 import { addWidgetMutation } from '../graphql/mutations';
 
 const AddWidgetForm = ({
   id,
   form: {
-    type,
     link,
   },
   submit,
@@ -41,28 +39,6 @@ const AddWidgetForm = ({
     <AddWidgetForm.Headline>
       Add social network widget
     </AddWidgetForm.Headline>
-    <AddWidgetForm.SelectWrapper>
-      <InputLabel
-        ref={ref => {
-          this.InputLabelRef = ref;
-        }}
-        htmlFor="type"
-      >
-        Social network
-      </InputLabel>
-      <Select
-        value={type}
-        onChange={handleChange}
-        input={
-          <Input
-            name="type"
-            id="type"
-          />
-        }
-      >
-        { SOCIAL_NETWORKS.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>) }
-      </Select>
-    </AddWidgetForm.SelectWrapper>
     <TextField
       name="link"
       label="Link"
@@ -132,8 +108,7 @@ AddWidgetForm.propTypes = {
   canSubmit    : PropTypes.bool.isRequired,
 };
 
-const canSubmitForm = ({ type, link }) => R.all(R.equals(true))([
-  !R.isEmpty(type),
+const canSubmitForm = ({ link }) => R.all(R.equals(true))([
   !R.isEmpty(link),
 ]);
 
@@ -142,7 +117,6 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       form      = {
-        type : '',
         link : '',
       },
       canSubmit  = false,
@@ -164,7 +138,6 @@ const withRecompose = compose(
   withHandlers({
     submit : ({
       form : {
-        type,
         link,
       },
       mutate,
@@ -175,7 +148,6 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           sectionId : id,
-          type,
           link,
         }
       });

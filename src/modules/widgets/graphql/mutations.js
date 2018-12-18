@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const addWidgetMutation = gql`
-  mutation($sectionId: Int!, $type: String!, $link: String!) {
-    addWidget(sectionId: $sectionId, type: $type, link: $link) {
+  mutation($sectionId: Int!, $link: String!) {
+    addWidget(sectionId: $sectionId, link: $link) {
       ok
       errors {
         path

@@ -45,7 +45,6 @@ export const myProfileWithThemeQuery = gql`
           style
           widgets {
             id
-            type
             link
             sectionId
           }
@@ -113,7 +112,6 @@ export const fetchProfileQuery = gql`
           style
           widgets {
             id
-            type
             link
             sectionId
           }
