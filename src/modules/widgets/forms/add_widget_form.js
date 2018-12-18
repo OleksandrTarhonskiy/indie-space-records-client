@@ -1,15 +1,6 @@
 import React                 from 'react';
 import PropTypes             from 'prop-types';
 import TextField             from '@material-ui/core/TextField';
-import InputLabel            from '@material-ui/core/InputLabel';
-import FormControl           from '@material-ui/core/FormControl';
-import Input                 from '@material-ui/core/Input';
-import Select                from '@material-ui/core/Select';
-import MenuItem              from '@material-ui/core/MenuItem';
-import {
-  CountryDropdown,
-  RegionDropdown
-}                            from 'react-country-region-selector';
 import * as R                from 'ramda';
 import {
   compose,
@@ -64,38 +55,11 @@ const AddWidgetForm = ({
   </form>
 );
 
-AddWidgetForm.InputsWrapper = styled.div`
-  display        : flex;
-  flex-direction : column;
-`;
-
 AddWidgetForm.Headline = styled.h1`
   font-family : 'Roboto', sans-serif;
   color       : #374142;
   text-align  : center;
   font-weight : 300;
-`;
-
-AddWidgetForm.CountryDropdown = styled(CountryDropdown)`
-  background    : #ffff;
-  border        : 1px solid #999;
-  height        : 33px;
-  border-radius : 0;
-  outline       : none;
-  margin-top    : 2%;
-`;
-
-AddWidgetForm.RegionDropdown = styled(RegionDropdown)`
-  background    : #ffff;
-  border        : 1px solid #999;
-  height        : 33px;
-  border-radius : 0;
-  outline       : none;
-  margin-top    : 2%;
-`;
-
-AddWidgetForm.SelectWrapper = styled(FormControl)`
-  width : 100%;
 `;
 
 AddWidgetForm.propTypes = {
