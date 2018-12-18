@@ -107,15 +107,15 @@ const EditSectionsContent = ({
             <Add />
         }
       </EditSectionsContent.IconButton>
-        <EditSectionsContent.SubHead>
+      <EditSectionsContent.SubHead>
           Add widget to this section
-        </EditSectionsContent.SubHead>
+      </EditSectionsContent.SubHead>
     </EditSectionsContent.CreateNewWrapper>
     {
       isOpenForm ?
-      <AddWidgetForm id={id} />
-      :
-      null
+        <AddWidgetForm id={id} />
+        :
+        null
     }
     <Alert
       action="updated"
@@ -169,6 +169,8 @@ EditSectionsContent.propTypes = {
   hasError      : PropTypes.bool.isRequired,
   errorsList    : PropTypes.array.isRequired,
   hideAlert     : PropTypes.func.isRequired,
+  isOpenForm    : PropTypes.bool.isRequired,
+  toggleForm    : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(

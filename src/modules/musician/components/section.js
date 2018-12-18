@@ -12,6 +12,7 @@ const Section = ({
   currency,
   elementFont,
   elementStyles,
+  widgets,
 }) => {
   switch (type) {
   case 'music':

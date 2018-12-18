@@ -2,6 +2,7 @@ import React      from 'react';
 import PropTypes  from 'prop-types';
 import styled     from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { SocialIcon } from 'react-social-icons';
 
 import Section    from './section';
 
@@ -65,6 +66,11 @@ const Profile = ({ profile }) => (
                 elementFont={JSON.parse(profile.theme.fonts)}
                 elementStyles={JSON.parse(profile.theme.style)}
               />
+              {
+                section.widgets.map(w =>
+                  section.id === w.sectionId? <Profile.SocialIcon url={w.link} /> : null
+                )
+              }
             </Profile.SectionContent>
           </Profile.Section>
         )
@@ -83,6 +89,10 @@ Profile.Section = styled.div`
   display          : flex;
   flex-direction   : column;
   padding          : 5% 8%;
+`;
+
+Profile.SocialIcon = styled(SocialIcon)`
+  margin : 1%;
 `;
 
 Profile.NavItems = styled.ul`
