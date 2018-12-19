@@ -11,3 +11,15 @@ export const addWidgetMutation = gql`
     }
   }
 `;
+
+export const deleteWidgetMutation = gql`
+  mutation($eventId: Int!) {
+    deleteWidget(eventId: $widgetId) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

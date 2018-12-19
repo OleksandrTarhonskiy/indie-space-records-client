@@ -19,7 +19,7 @@ import {
 import { allMySectionsQuery } from '../graphql/queries';
 import EditSectionsContent    from '../forms/edit_sections_content';
 import NewSectionForm         from '../forms/new_section_form';
-import WidgetsPanel           from '../components/widgets_panel';
+import WidgetsPanel           from '../../widgets/components/widgets_panel';
 
 const ProfileContentSettings = ({
   data: {
