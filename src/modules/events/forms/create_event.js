@@ -65,6 +65,7 @@ const CreateEvent = ({
         <TextField
           label="Price"
           value={price}
+          InputProps={{ inputProps : { min : 0 } }}
           name="price"
           onChange={handleChange}
           type="number"

@@ -90,6 +90,7 @@ const AddProductForm = ({
         <TextField
           label="Price"
           value={price}
+          InputProps={{ inputProps : { min : 0 } }}
           onChange={handleChange}
           name="price"
           type="number"
