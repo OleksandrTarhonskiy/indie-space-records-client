@@ -43,6 +43,11 @@ export const myProfileWithThemeQuery = gql`
           type
           content
           style
+          widgets {
+            id
+            link
+            sectionId
+          }
         }
       }
     }
@@ -105,6 +110,11 @@ export const fetchProfileQuery = gql`
           type
           content
           style
+          widgets {
+            id
+            link
+            sectionId
+          }
         }
       }
     }
@@ -118,6 +128,10 @@ export const allMySectionsQuery = gql`
       type
       name
       content
+      widgets {
+        id
+        link
+      }
     }
   }
 `;

@@ -19,6 +19,7 @@ import {
 import { allMySectionsQuery } from '../graphql/queries';
 import EditSectionsContent    from '../forms/edit_sections_content';
 import NewSectionForm         from '../forms/new_section_form';
+import WidgetsPanel           from '../../widgets/components/widgets_panel';
 
 const ProfileContentSettings = ({
   data: {
@@ -38,9 +39,10 @@ const ProfileContentSettings = ({
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>{section.name} settings</Typography>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            <ProfileContentSettings.ExpansionPanelDetails>
               <EditSectionsContent section={section} />
-            </ExpansionPanelDetails>
+              <WidgetsPanel widgets={section.widgets} />
+            </ProfileContentSettings.ExpansionPanelDetails>
           </ExpansionPanel>
         )
     }
@@ -74,6 +76,10 @@ ProfileContentSettings.CreateNewWrapper = styled.div`
   padding        : 2%;
   display        : flex;
   flex-direction : row;
+`;
+
+ProfileContentSettings.ExpansionPanelDetails = styled(ExpansionPanelDetails)`
+  flex-direction : column;
 `;
 
 ProfileContentSettings.FormWrapper = styled.div`

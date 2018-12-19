@@ -51,16 +51,16 @@ const EditSectionStyleForm = ({
     />
     {
       JSON.parse(displayHeadline)?
-      <ColorPicker
-        defaultValue={headlineColor}
-        value={headlineColor}
-        name="headlineColor"
-        onChange={handleColorChange.bind(null, 'headlineColor')}
-        label="Section Headline Color"
-        margin="normal"
-      />
-      :
-      null
+        <ColorPicker
+          defaultValue={headlineColor}
+          value={headlineColor}
+          name="headlineColor"
+          onChange={handleColorChange.bind(null, 'headlineColor')}
+          label="Section Headline Color"
+          margin="normal"
+        />
+        :
+        null
     }
     <FormControl component="fieldset">
       <Typography>Display section headline?</Typography>
