@@ -22,7 +22,7 @@ const DeleteWidgetButton = ({
   <DeleteWidgetButton.Wrapper>
     <IconButton onClick={deleteWidget}>
       <DeleteIcon />
-    </Button>
+    </IconButton>
     <Alert
       action="deleted"
       hasError={hasError}
@@ -32,7 +32,7 @@ const DeleteWidgetButton = ({
   </DeleteWidgetButton.Wrapper>
 );
 
-DeleteSectionButton.Wrapper = styled.span`
+DeleteWidgetButton.Wrapper = styled.span`
   padding-left : 15px;
 `;
 

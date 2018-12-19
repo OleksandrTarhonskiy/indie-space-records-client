@@ -13,8 +13,8 @@ export const addWidgetMutation = gql`
 `;
 
 export const deleteWidgetMutation = gql`
-  mutation($eventId: Int!) {
-    deleteWidget(eventId: $widgetId) {
+  mutation($widgetId: Int!) {
+    deleteWidget(widgetId: $widgetId) {
       ok
       errors {
         path
