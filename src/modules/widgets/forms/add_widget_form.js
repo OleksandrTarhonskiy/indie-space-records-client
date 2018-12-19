@@ -14,6 +14,15 @@ import GradientButton        from '../../../layouts/gradient_button';
 import Alert                 from '../../../layouts/alert';
 import { addWidgetMutation } from '../graphql/mutations';
 
+const urlify = (text) => {
+  const prefix = 'https://';
+  if (text.substr(0, prefix.length) !== prefix) {
+    return prefix + text;
+  } else {
+    return text;
+  }
+}
+
 const AddWidgetForm = ({
   id,
   form: {
@@ -30,15 +39,20 @@ const AddWidgetForm = ({
     <AddWidgetForm.Headline>
       Add social network widget
     </AddWidgetForm.Headline>
-    <TextField
-      name="link"
-      label="Link"
-      type="text"
-      margin="normal"
-      value={link}
-      onChange={handleChange}
-      fullWidth
-    />
+    <AddWidgetForm.InputWrapper>
+      <AddWidgetForm.Http>
+        {'https://'}
+      </AddWidgetForm.Http>
+      <TextField
+        name="link"
+        label="Link"
+        type="text"
+        margin="normal"
+        value={link}
+        onChange={handleChange}
+        fullWidth
+      />
+    </AddWidgetForm.InputWrapper>
     <br />
     <GradientButton
       disabled={!canSubmit}
@@ -60,6 +74,15 @@ AddWidgetForm.Headline = styled.h1`
   color       : #374142;
   text-align  : center;
   font-weight : 300;
+`;
+
+AddWidgetForm.InputWrapper = styled.div`
+  display        : flex;
+  flex-direction : row;
+`;
+
+AddWidgetForm.Http = styled.p`
+  padding : 25px 10px 0;
 `;
 
 AddWidgetForm.propTypes = {
@@ -112,7 +135,7 @@ const withRecompose = compose(
       const response = await mutate({
         variables: {
           sectionId : id,
-          link,
+          link      : urlify(link),
         }
       });
 
