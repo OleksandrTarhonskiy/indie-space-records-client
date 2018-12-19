@@ -128,6 +128,10 @@ export const allMySectionsQuery = gql`
       type
       name
       content
+      widgets {
+        id
+        link
+      }
     }
   }
 `;

@@ -1,10 +1,10 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import styled     from 'styled-components';
-import { Helmet } from 'react-helmet';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import styled         from 'styled-components';
+import { Helmet }     from 'react-helmet';
 import { SocialIcon } from 'react-social-icons';
 
-import Section    from './section';
+import Section        from './section';
 
 const Profile = ({ profile }) => (
   <div>
