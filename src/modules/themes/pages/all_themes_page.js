@@ -44,7 +44,7 @@ AllThemesPage.ThemeItem = styled(Link)`
     &:hover {
       color       : #ffff;
       opacity     : 0.8;
-      text-shadow : -4px -4px 0px rgba(0, 0, 0, 1);
+      text-shadow : -4px -4px 0 rgba(0, 0, 0, 1);
     }
   }
 `;

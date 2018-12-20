@@ -39,7 +39,7 @@ SettingsPage.Header = styled.div`
   width           : 100%;
   background      : #ffff;
   justify-content : center;
-  box-shadow      : 0px 3px 5px -1px rgba(0, 0, 0, 0.2);
+  box-shadow      : 0 3px 5px -1px rgba(0, 0, 0, 0.2);
 
   ${breakpoint('md')`
     flex-direction: row;
