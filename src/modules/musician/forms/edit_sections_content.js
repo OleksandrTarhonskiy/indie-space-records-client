@@ -116,7 +116,7 @@ const EditSectionsContent = ({
         }
       </EditSectionsContent.IconButton>
       <EditSectionsContent.SubHead>
-          Add widget to this section
+          { isOpenForm ? 'Close' : 'Add widget to this section' }
       </EditSectionsContent.SubHead>
     </EditSectionsContent.CreateNewWrapper>
     {
@@ -157,7 +157,7 @@ EditSectionsContent.IconButton = styled(IconButton)`
   width : 56px;
 `;
 
-EditSectionsContent.SubHead = styled.h3`
+EditSectionsContent.SubHead = styled.h4`
   font-family  : 'Roboto', sans-serif;
   color        : #374142;
   font-weight  : 500;
