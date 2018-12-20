@@ -21,10 +21,9 @@ const urlify = (text) => {
   } else {
     return text;
   }
-}
+};
 
 const AddWidgetForm = ({
-  id,
   form: {
     link,
   },

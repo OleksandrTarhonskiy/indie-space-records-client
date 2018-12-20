@@ -12,7 +12,6 @@ const SearchResults = ({
     loading,
     allMyProducts = [],
   },
-  search,
 }) => (
   <div>
     {

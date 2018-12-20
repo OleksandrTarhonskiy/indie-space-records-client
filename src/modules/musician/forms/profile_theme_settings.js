@@ -91,7 +91,11 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-headlineFont"
+      /*jshint ignore:start*/
+      /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      /*eslint-enable*/
+      /*jshint ignore:end*/
       activeFont={headlineFont}
       name="headlineFont"
       options={{
@@ -105,7 +109,11 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-regularTextFont"
+      /*jshint ignore:start*/
+      /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      /*eslint-enable*/
+      /*jshint ignore:end*/
       activeFont={regularTextFont}
       name="regularTextFont"
       options={{
@@ -119,7 +127,11 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-subHead"
+      /*jshint ignore:start*/
+      /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      /*eslint-enable*/
+      /*jshint ignore:end*/
       activeFont={subHead}
       name="subHead"
       options={{
@@ -133,7 +145,11 @@ const ProfileThemeSettings = ({
     </ProfileThemeSettings.Label>
     <FontPicker
       id="font-picker-linksFont"
+      /*jshint ignore:start*/
+      /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
+      /*eslint-enable*/
+      /*jshint ignore:end*/
       activeFont={linksFont}
       name="linksFont"
       options={{

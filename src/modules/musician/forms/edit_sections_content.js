@@ -116,7 +116,7 @@ const EditSectionsContent = ({
         }
       </EditSectionsContent.IconButton>
       <EditSectionsContent.SubHead>
-          { isOpenForm ? 'Close' : 'Add widget to this section' }
+        { isOpenForm ? 'Close' : 'Add widget to this section' }
       </EditSectionsContent.SubHead>
     </EditSectionsContent.CreateNewWrapper>
     {

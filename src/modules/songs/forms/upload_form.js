@@ -198,6 +198,7 @@ UploadForm.propTypes = {
   hideAlert         : PropTypes.func.isRequired,
   errorsList        : PropTypes.array.isRequired,
   hasError          : PropTypes.bool.isRequired,
+  disableClick      : PropTypes.bool,
 };
 
 const withRecompose = compose(
