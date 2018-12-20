@@ -41,61 +41,69 @@ const EditSectionsContent = ({
   toggleForm,
   isOpenForm,
 }) => (
-  <EditSectionsContent.Form>
-    <TextField
-      id="name"
-      name="name"
-      label="Section name"
-      type="text"
-      margin="normal"
-      value={name}
-      onChange={handleChange}
-      fullWidth
-    />
-    <EditSectionsContent.SelectWrapper>
-      <InputLabel
-        ref={ref => {
-          this.InputLabelRef = ref;
-        }}
-        htmlFor="type"
-      >
-        Type
-      </InputLabel>
-      <Select
-        value={type || ''}
+  <div>
+    <EditSectionsContent.Form>
+      <TextField
+        id="name"
+        name="name"
+        label="Section name"
+        type="text"
+        margin="normal"
+        value={name}
         onChange={handleChange}
-        input={
-          <Input
-            name="type"
-            id="type"
-          />
+        fullWidth
+      />
+      <EditSectionsContent.SelectWrapper>
+        <InputLabel
+          ref={ref => {
+            this.InputLabelRef = ref;
+          }}
+          htmlFor="type"
+        >
+          Type
+        </InputLabel>
+        <Select
+          value={type || ''}
+          onChange={handleChange}
+          input={
+            <Input
+              name="type"
+              id="type"
+            />
+          }
+        >
+          { SECTION_TYPES.map(type => <MenuItem key={type} value={type}>{type}</MenuItem>) }
+        </Select>
+      </EditSectionsContent.SelectWrapper>
+      <EditSectionsContent.ContentBlock>
+        {
+          type === 'text'?
+            <TextField
+              name="content"
+              value={content}
+              onChange={handleChange}
+              label="page content"
+              multiline={true}
+            />
+            :
+            <p>in this section will be displaying your {type}</p>
         }
+      </EditSectionsContent.ContentBlock>
+      <Button
+        variant="contained"
+        onClick={updateSection}
       >
-        { SECTION_TYPES.map(type => <MenuItem key={type} value={type}>{type}</MenuItem>) }
-      </Select>
-    </EditSectionsContent.SelectWrapper>
-    <EditSectionsContent.ContentBlock>
-      {
-        type === 'text'?
-          <TextField
-            name="content"
-            value={content}
-            onChange={handleChange}
-            label="page content"
-            multiline={true}
-          />
-          :
-          <p>in this section will be displaying your {type}</p>
-      }
-    </EditSectionsContent.ContentBlock>
-    <Button
-      variant="contained"
-      onClick={updateSection}
-    >
-      <DoneIcon />
-      Update this section
-    </Button>
-    <DeleteSectionButton id={id} />
+        <DoneIcon />
+        Update this section
+      </Button>
+      <DeleteSectionButton id={id} />
+      <Alert
+        action="updated"
+        hasError={hasError}
+        hideAlert={hideAlert}
+        errorsList={errorsList}
+      />
+    </EditSectionsContent.Form>
     <EditSectionsContent.CreateNewWrapper>
       <EditSectionsContent.IconButton
         onClick={toggleForm.bind(null, isOpenForm ? false : true)}
@@ -117,13 +125,7 @@ const EditSectionsContent = ({
         :
         null
     }
-    <Alert
-      action="updated"
-      hasError={hasError}
-      hideAlert={hideAlert}
-      errorsList={errorsList}
-    />
-  </EditSectionsContent.Form>
+  </div>
 );
 
 EditSectionsContent.Form = styled.form`
