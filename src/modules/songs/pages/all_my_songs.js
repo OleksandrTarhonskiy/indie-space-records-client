@@ -1,5 +1,6 @@
 import React               from 'react';
 import { graphql }         from 'react-apollo';
+import styled              from 'styled-components';
 
 import { allMySongsQuery } from '../graphql/queries';
 
@@ -9,7 +10,7 @@ const AllMySongs = ({
     allMySongs = []
   }
 }) => (
-  <div style={{padding: 20}}>
+  <AllMySongs.Wrapper>
   {
     allMySongs.map(s =>
       <audio controls key={s.id}>
@@ -17,7 +18,11 @@ const AllMySongs = ({
       </audio>
     )
   }
-  </div>
+  </AllMySongs.Wrapper>
 );
+
+AllMySongs.Wrapper = styled.div`
+  padding : 10%;
+`;
 
 export default graphql(allMySongsQuery)(AllMySongs);
