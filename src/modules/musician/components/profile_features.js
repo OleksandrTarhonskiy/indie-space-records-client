@@ -1,11 +1,9 @@
 import React          from 'react';
 import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
-import HomeIcon       from '@material-ui/icons/Home';
 import GradeIcon      from '@material-ui/icons/Grade';
 import BuildIcon      from '@material-ui/icons/Build';
 import Paper          from '@material-ui/core/Paper';
-import PersonIcon     from '@material-ui/icons/Person';
 import StyleIcon      from '@material-ui/icons/Style';
 import StarIcon       from '@material-ui/icons/Star';
 import DoneIcon       from '@material-ui/icons/Done';
@@ -18,12 +16,6 @@ const ProfileFeatures = ({ myProfile }) => (
     position="static"
     color="default"
   >
-    <ProfileFeatures.MenuItem to="/musician/home">
-      <ProfileFeatures.MenuItemText>
-        <HomeIcon />
-        Home
-      </ProfileFeatures.MenuItemText>
-    </ProfileFeatures.MenuItem>
     <ProfileFeatures.MenuItem to="/profile/events">
       <ProfileFeatures.MenuItemText>
         <GradeIcon />
@@ -58,12 +50,6 @@ const ProfileFeatures = ({ myProfile }) => (
       <ProfileFeatures.MenuItemText>
         <StyleIcon />
         Customize my profile
-      </ProfileFeatures.MenuItemText>
-    </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/">
-      <ProfileFeatures.MenuItemText>
-        <PersonIcon />
-        Members
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
     <ProfileFeatures.MenuItem to="/merch/all">
