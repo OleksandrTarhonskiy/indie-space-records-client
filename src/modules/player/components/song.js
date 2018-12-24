@@ -99,7 +99,6 @@ const withState = compose(
         } else {
           audio.pause();
         }
-        console.log(audio.volume)
         return ({ play });
       },
 
