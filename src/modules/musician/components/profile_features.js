@@ -22,7 +22,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Events
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to="/upload_song">
+    <ProfileFeatures.MenuItem to="/music">
       <ProfileFeatures.MenuItemText>
         <MusicNote />
         My music
