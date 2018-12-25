@@ -3,6 +3,7 @@ import { graphql }         from 'react-apollo';
 import styled              from 'styled-components';
 
 import { allMySongsQuery } from '../graphql/queries';
+import Playlist            from '../../player/components/playlist';
 
 const AllMySongs = ({
   data: {
@@ -11,13 +12,7 @@ const AllMySongs = ({
   }
 }) => (
   <AllMySongs.Wrapper>
-  {
-    allMySongs.map(s =>
-      <audio controls key={s.id}>
-        <source src={'http://localhost:8080/' + s.url} type={s.filetype} />
-      </audio>
-    )
-  }
+    <Playlist songs={allMySongs} />
   </AllMySongs.Wrapper>
 );
 
