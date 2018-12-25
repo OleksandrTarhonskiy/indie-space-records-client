@@ -8,6 +8,7 @@ import Input                     from '@material-ui/core/Input';
 import Select                    from '@material-ui/core/Select';
 import MenuItem                  from '@material-ui/core/MenuItem';
 import Paper                     from '@material-ui/core/Paper';
+import Dropzone                  from 'react-dropzone';
 import { graphql }               from 'react-apollo';
 import {
   compose,
@@ -33,6 +34,8 @@ const AddProductForm = ({
   hasError,
   hideAlert,
   errorsList,
+  handleFileUpload,
+  disableClick,
   create,
 }) => (
   <AddProductForm.FormWrapper>
@@ -80,9 +83,16 @@ const AddProductForm = ({
         fullWidth
       />
       <h3>Upload product image:</h3>
-      <GradientButton>
-        Choose the file
-      </GradientButton>
+      <Dropzone
+        className="ignore"
+        name="file"
+        onDrop={handleFileUpload.bind(null, 'file')}
+        disableClick={disableClick}
+      >
+        <GradientButton>
+          Choose the file
+        </GradientButton>
+      </Dropzone>
     </AddProductForm.Section>
     <AddProductForm.Section>
       <h2>Pricing:</h2>
@@ -155,12 +165,13 @@ AddProductForm.PriceDesc = styled.p`
 `;
 
 AddProductForm.propTypes = {
-  form         : PropTypes.object.isRequired,
-  create       : PropTypes.func.isRequired,
-  handleChange : PropTypes.func.isRequired,
-  hasError     : PropTypes.bool.isRequired,
-  errorsList   : PropTypes.array.isRequired,
-  hideAlert    : PropTypes.func.isRequired,
+  form             : PropTypes.object.isRequired,
+  create           : PropTypes.func.isRequired,
+  handleChange     : PropTypes.func.isRequired,
+  hasError         : PropTypes.bool.isRequired,
+  errorsList       : PropTypes.array.isRequired,
+  hideAlert        : PropTypes.func.isRequired,
+  handleFileUpload : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
@@ -173,6 +184,7 @@ const withRecompose = compose(
         desc         : '',
         price        : 0,
         deliveryType : '',
+        file         : null,
       },
       hasError   = false,
       errorsList = [],
@@ -180,6 +192,11 @@ const withRecompose = compose(
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
+        return ({ form });
+      },
+
+      handleFileUpload : state => (field, [value]) => {
+        const form = R.assoc(field, value, state.form);
         return ({ form });
       },
 
