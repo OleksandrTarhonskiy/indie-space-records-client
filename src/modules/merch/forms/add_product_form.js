@@ -172,6 +172,7 @@ AddProductForm.propTypes = {
   errorsList       : PropTypes.array.isRequired,
   hideAlert        : PropTypes.func.isRequired,
   handleFileUpload : PropTypes.func.isRequired,
+  disableClick     : PropTypes.bool,
 };
 
 const withRecompose = compose(

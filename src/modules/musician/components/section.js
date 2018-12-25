@@ -22,7 +22,7 @@ const Section = ({
         {
           products.map(p =>
             <Section.ListItem key={p.id}>
-              <Section.ImageWrapper background={'https://www.hypebot.com/.a/6a00d83451b36c69e201b8d13ade89970c-800wi'} />
+              <Section.ImageWrapper background={`http://localhost:8080/${p.url}`} />
               <Section.ProductName
                 elementFont={elementFont}
                 elementStyles={elementStyles}

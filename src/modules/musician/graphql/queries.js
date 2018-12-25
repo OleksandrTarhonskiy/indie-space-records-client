@@ -33,6 +33,7 @@ export const myProfileWithThemeQuery = gql`
         id
         title
         price
+        url
       }
       theme {
         style
@@ -93,6 +94,7 @@ export const fetchProfileQuery = gql`
         id
         title
         price
+        url
       }
       events {
         id

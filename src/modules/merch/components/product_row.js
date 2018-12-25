@@ -33,6 +33,7 @@ const ProductRow = ({
     title,
     price,
     inStock,
+    filetype,
   },
   toggleEdit,
   edit,
@@ -163,6 +164,7 @@ const ProductRow = ({
           {String(inStock)}
         </ProductRow.TableCell>
     }
+    <ProductRow.TableCell>{filetype}</ProductRow.TableCell>
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <Alert

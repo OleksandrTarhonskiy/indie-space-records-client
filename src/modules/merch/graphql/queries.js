@@ -8,6 +8,8 @@ export const allMyProductsQuery = gql`
       title
       price
       inStock
+      url
+      filetype
     }
   }
 `;
