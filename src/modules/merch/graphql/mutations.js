@@ -13,8 +13,8 @@ export const createProductMutation = gql`
 `;
 
 export const updateProductMutation = gql`
-  mutation($productId: Int!, $type: String, $title: String, $price: Float, $inStock: Boolean) {
-    updateProduct(productId: $productId, type: $type, title: $title, price: $price, inStock: $inStock){
+  mutation($productId: Int!, $type: String, $title: String, $price: Float, $inStock: Boolean, $file: File) {
+    updateProduct(productId: $productId, type: $type, title: $title, price: $price, inStock: $inStock, file: $file){
       ok
       errors {
         path
