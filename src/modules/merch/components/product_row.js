@@ -1,10 +1,13 @@
 import React                     from 'react';
 import PropTypes                 from 'prop-types';
 import styled                    from 'styled-components';
+import Dropzone                  from 'react-dropzone';
 import TableCell                 from '@material-ui/core/TableCell';
 import TableRow                  from '@material-ui/core/TableRow';
 import TextField                 from '@material-ui/core/TextField';
 import InputLabel                from '@material-ui/core/InputLabel';
+import Button                    from '@material-ui/core/Button';
+import CloudUploadIcon           from '@material-ui/icons/CloudUpload';
 import Radio                     from '@material-ui/core/Radio';
 import RadioGroup                from '@material-ui/core/RadioGroup';
 import FormControlLabel          from '@material-ui/core/FormControlLabel';
@@ -33,14 +36,18 @@ const ProductRow = ({
     title,
     price,
     inStock,
+    url,
+    filetype,
   },
   toggleEdit,
-  edit,
   handleChange,
-  create,
+  disableClick,
+  edit,
+  update,
   hasError,
   hideAlert,
   errorsList,
+  handleFileUpload,
 }) => (
   <TableRow>
     {
@@ -68,7 +75,7 @@ const ProductRow = ({
               { PRODUCTS_TYPES.map((t, index) => <MenuItem key={index} value={t}>{t}</MenuItem>) }
             </Select>
           </ProductRow.SelectWrapper>
-          <ProductRow.IconButton onClick={create}>
+          <ProductRow.IconButton onClick={update}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
@@ -91,7 +98,7 @@ const ProductRow = ({
             value={title}
             fullWidth
           />
-          <ProductRow.IconButton onClick={create}>
+          <ProductRow.IconButton onClick={update}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
@@ -118,7 +125,7 @@ const ProductRow = ({
             }}
             margin="normal"
           />
-          <ProductRow.IconButton onClick={create}>
+          <ProductRow.IconButton onClick={update}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
@@ -151,7 +158,7 @@ const ProductRow = ({
               />
             </RadioGroup>
           </FormControl>
-          <ProductRow.IconButton onClick={create}>
+          <ProductRow.IconButton onClick={update}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
@@ -161,6 +168,32 @@ const ProductRow = ({
         :
         <ProductRow.TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>
           {String(inStock)}
+        </ProductRow.TableCell>
+    }
+    {
+      edit.file ?
+        <ProductRow.TableCell>
+          <Dropzone
+            className="ignore"
+            name="file"
+            onDrop={handleFileUpload.bind(null, 'file')}
+            disableClick={disableClick}
+          >
+            <Button variant="contained">
+              <CloudUploadIcon />
+              choose the file
+            </Button>
+          </Dropzone>
+          <ProductRow.IconButton onClick={update}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'file', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'file', true)}>
+          {filetype}
         </ProductRow.TableCell>
     }
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
@@ -175,14 +208,16 @@ const ProductRow = ({
 );
 
 ProductRow.propTypes = {
-  product      : PropTypes.object.isRequired,
-  toggleEdit   : PropTypes.func.isRequired,
-  handleChange : PropTypes.func.isRequired,
-  hasError     : PropTypes.bool.isRequired,
-  errorsList   : PropTypes.array.isRequired,
-  hideAlert    : PropTypes.func.isRequired,
-  create       : PropTypes.func.isRequired,
-  edit         : PropTypes.object.isRequired,
+  product          : PropTypes.object.isRequired,
+  toggleEdit       : PropTypes.func.isRequired,
+  handleChange     : PropTypes.func.isRequired,
+  hasError         : PropTypes.bool.isRequired,
+  errorsList       : PropTypes.array.isRequired,
+  hideAlert        : PropTypes.func.isRequired,
+  update           : PropTypes.func.isRequired,
+  edit             : PropTypes.object.isRequired,
+  handleFileUpload : PropTypes.func.isRequired,
+  disableClick     : PropTypes.bool,
 };
 
 ProductRow.TableCell = styled(TableCell)`
@@ -215,12 +250,14 @@ const withRecompose = compose(
         title   : false,
         price   : false,
         inStock : false,
+        file    : false,
       },
       product   = {
         type    : '',
         title   : '',
         price   : 0,
         inStock : 'true',
+        file    : null,
       },
       hasError   = false,
       errorsList = [],
@@ -236,12 +273,17 @@ const withRecompose = compose(
         return ({ product });
       },
 
+      handleFileUpload : state => (field, [value]) => {
+        const product = R.assoc(field, value, state.product);
+        return ({ product });
+      },
+
       showAlert    : () => () => ({ hasError: true }),
       hideAlert    : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
-    create : ({
+    update : ({
       mutate,
       product,
       errorsList,
@@ -254,6 +296,7 @@ const withRecompose = compose(
           title     : product.title,
           price     : product.price,
           inStock   : product.inStock === 'true' ? true : false,
+          file      : product.file ? product.file : null,
         }
       });
 
