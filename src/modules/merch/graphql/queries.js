@@ -21,6 +21,7 @@ export const viewProductQuery = gql`
       type
       title
       price
+      desc
       inStock
       url
     }
