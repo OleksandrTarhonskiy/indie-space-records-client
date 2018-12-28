@@ -25,6 +25,7 @@ import EventPage                from '../modules/events/pages/event_page';
 import EditEventPage            from '../modules/events/pages/edit_event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import MerchMainPage            from '../modules/merch/pages/merch_main_page';
+import ProductPage              from '../modules/merch/pages/product_page';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
 import MainPage                 from '../modules/music/pages/main_page';
 import UploadSong               from '../modules/music/pages/upload_song';
@@ -61,6 +62,7 @@ export default (
         <PrivateRoute exact path="/upload_song" component={UploadSong} />
         <PrivateRoute exact path="/music/all" component={AllMySongs} />
         <PrivateRoute path="/merch"  component={MerchMainPage} />
+        <PrivateRoute exact path="/product/:id"  component={ProductPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
