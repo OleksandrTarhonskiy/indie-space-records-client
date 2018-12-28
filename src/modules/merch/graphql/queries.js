@@ -13,3 +13,16 @@ export const allMyProductsQuery = gql`
     }
   }
 `;
+
+export const viewProductQuery = gql`
+  query viewProduct($productId: Int!){
+    viewProduct(productId: $productId) {
+      id
+      type
+      title
+      price
+      inStock
+      url
+    }
+  }
+`;

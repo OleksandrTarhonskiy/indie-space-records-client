@@ -3,6 +3,7 @@ import styled          from 'styled-components';
 import breakpoint      from 'styled-components-breakpoint';
 import moment          from 'moment';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
+import { Link }        from 'react-router-dom';
 
 const Section = ({
   type,
@@ -38,13 +39,18 @@ const Section = ({
                 {p.price + ' ' + currency}
               </Section.ProductPrice>
               <Section.ButtonsWrapper>
-                <Section.Button
-                  elementFont={elementFont}
-                  elementStyles={elementStyles}
-                  className="apply-font-linksFont"
+                <Link
+                  component={Link}
+                  to={`/product/${p.id}`}
                 >
-                  Buy now
-                </Section.Button>
+                  <Section.Button
+                    elementFont={elementFont}
+                    elementStyles={elementStyles}
+                    className="apply-font-linksFont"
+                  >
+                    Buy now
+                  </Section.Button>
+                </Link>
                 <Section.Button
                   elementFont={elementFont}
                   elementStyles={elementStyles}
