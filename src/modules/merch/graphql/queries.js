@@ -8,6 +8,7 @@ export const allMyProductsQuery = gql`
       title
       price
       inStock
+      quantity
       url
       filetype
     }
@@ -22,6 +23,7 @@ export const viewProductQuery = gql`
       title
       price
       desc
+      quantity
       inStock
       url
     }

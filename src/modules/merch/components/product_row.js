@@ -8,9 +8,6 @@ import TextField                 from '@material-ui/core/TextField';
 import InputLabel                from '@material-ui/core/InputLabel';
 import Button                    from '@material-ui/core/Button';
 import CloudUploadIcon           from '@material-ui/icons/CloudUpload';
-import Radio                     from '@material-ui/core/Radio';
-import RadioGroup                from '@material-ui/core/RadioGroup';
-import FormControlLabel          from '@material-ui/core/FormControlLabel';
 import FormControl               from '@material-ui/core/FormControl';
 import Input                     from '@material-ui/core/Input';
 import Select                    from '@material-ui/core/Select';
@@ -35,9 +32,10 @@ const ProductRow = ({
     type,
     title,
     price,
-    inStock,
     url,
+    inStock,
     filetype,
+    quantity,
   },
   toggleEdit,
   handleChange,
@@ -137,39 +135,9 @@ const ProductRow = ({
           {price}
         </ProductRow.TableCell>
     }
-    {
-      edit.inStock ?
-        <ProductRow.TableCell>
-          <FormControl component="fieldset">
-            <RadioGroup
-              name="inStock"
-              value={String(inStock)}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="true"
-                control={<Radio color="primary" />}
-                label="yes"
-              />
-              <FormControlLabel
-                value="false"
-                control={<Radio color="primary" />}
-                label="no"
-              />
-            </RadioGroup>
-          </FormControl>
-          <ProductRow.IconButton onClick={update}>
-            <DoneIcon />
-          </ProductRow.IconButton>
-          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'inStock', false)}>
-            <CloseIcon />
-          </ProductRow.IconButton>
-        </ProductRow.TableCell>
-        :
-        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'inStock', true)}>
-          {String(inStock)}
-        </ProductRow.TableCell>
-    }
+    <ProductRow.TableCell>
+      {String(inStock)}
+    </ProductRow.TableCell>
     {
       edit.file ?
         <ProductRow.TableCell>
@@ -196,7 +164,33 @@ const ProductRow = ({
           {filetype}
         </ProductRow.TableCell>
     }
-    <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
+    {
+      edit.quantity ?
+        <ProductRow.TableCell numeric>
+          <ProductRow.TextField
+            label="Quantity"
+            value={quantity}
+            InputProps={{ inputProps : { min : 0 } }}
+            onChange={handleChange}
+            name="quantity"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+          <ProductRow.IconButton onClick={update}>
+            <DoneIcon />
+          </ProductRow.IconButton>
+          <ProductRow.IconButton onClick={toggleEdit.bind(null, 'quantity', false)}>
+            <CloseIcon />
+          </ProductRow.IconButton>
+        </ProductRow.TableCell>
+        :
+        <ProductRow.TableCell onClick={toggleEdit.bind(null, 'quantity', true)}>
+          {quantity}
+        </ProductRow.TableCell>
+    }
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
     <Alert
       action="updated"
@@ -246,18 +240,18 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       edit      = {
-        type    : false,
-        title   : false,
-        price   : false,
-        inStock : false,
-        file    : false,
+        type     : false,
+        title    : false,
+        price    : false,
+        quantity : false,
+        file     : false,
       },
       product   = {
-        type    : '',
-        title   : '',
-        price   : 0,
-        inStock : 'true',
-        file    : null,
+        type     : '',
+        title    : '',
+        price    : 0,
+        quantity : 0,
+        file     : null,
       },
       hasError   = false,
       errorsList = [],
@@ -295,7 +289,7 @@ const withRecompose = compose(
           type      : product.type,
           title     : product.title,
           price     : product.price,
-          inStock   : product.inStock === 'true' ? true : false,
+          quantity  : product.quantity,
           file      : product.file ? product.file : null,
         }
       });
