@@ -27,7 +27,7 @@ const ProductDetails = ({
       <h3>{viewProduct.type}</h3>
       <p>{viewProduct.desc}</p>
       <ProductDetails.AddToCart
-        disabled={!viewProduct.inStock}
+        disabled={!viewProduct.quantity}
       >
         <ShoppingCart />
         Add to cart

@@ -33,7 +33,6 @@ const ProductRow = ({
     title,
     price,
     url,
-    inStock,
     filetype,
     quantity,
   },
@@ -135,9 +134,6 @@ const ProductRow = ({
           {price}
         </ProductRow.TableCell>
     }
-    <ProductRow.TableCell>
-      {String(inStock)}
-    </ProductRow.TableCell>
     {
       edit.file ?
         <ProductRow.TableCell>
