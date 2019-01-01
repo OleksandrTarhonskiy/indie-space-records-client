@@ -28,6 +28,7 @@ const AddProductForm = ({
     title,
     desc,
     price,
+    quantity,
     deliveryType,
   },
   handleChange,
@@ -81,6 +82,18 @@ const AddProductForm = ({
         value={desc}
         multiline={true}
         fullWidth
+      />
+      <TextField
+        label="Quantity"
+        value={quantity}
+        InputProps={{ inputProps : { min : 0 } }}
+        onChange={handleChange}
+        name="quantity"
+        type="number"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        margin="normal"
       />
       <h3>Upload product image:</h3>
       <Dropzone
@@ -184,6 +197,7 @@ const withRecompose = compose(
         title        : '',
         desc         : '',
         price        : 0,
+        quantity     : 0,
         deliveryType : '',
         file         : null,
       },

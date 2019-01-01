@@ -18,7 +18,6 @@ const ProductsTable = ({ products }) => (
           <TableCell>Type</TableCell>
           <TableCell>Title</TableCell>
           <TableCell>Price</TableCell>
-          <TableCell>inStock</TableCell>
           <TableCell>Image</TableCell>
           <TableCell>Quantity</TableCell>
           <TableCell>Orders</TableCell>
