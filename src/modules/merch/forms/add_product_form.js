@@ -233,7 +233,6 @@ const withRecompose = compose(
 
       handleFileUpload : state => (field, [value]) => {
         const form = R.assoc(field, value, state.form);
-        console.log(value)
         return ({ form });
       },
 
