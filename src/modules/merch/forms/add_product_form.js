@@ -8,6 +8,7 @@ import Input                     from '@material-ui/core/Input';
 import Select                    from '@material-ui/core/Select';
 import MenuItem                  from '@material-ui/core/MenuItem';
 import Paper                     from '@material-ui/core/Paper';
+import Photo                     from '@material-ui/icons/Photo';
 import Dropzone                  from 'react-dropzone';
 import { graphql }               from 'react-apollo';
 import {
@@ -30,6 +31,7 @@ const AddProductForm = ({
     price,
     quantity,
     deliveryType,
+    file,
   },
   handleChange,
   hasError,
@@ -106,6 +108,15 @@ const AddProductForm = ({
           Choose the file
         </GradientButton>
       </Dropzone>
+      {
+        file ?
+        <AddProductForm.FileDesc>
+          <AddProductForm.PhotoIcon />
+          <p>{file.name}</p>
+         </AddProductForm.FileDesc>
+         :
+         null
+       }
     </AddProductForm.Section>
     <AddProductForm.Section>
       <h2>Pricing:</h2>
@@ -177,6 +188,16 @@ AddProductForm.PriceDesc = styled.p`
   margin : 3%;
 `;
 
+AddProductForm.FileDesc = styled.div`
+  display        : flex;
+  flex-direction : row;
+  padding        : 20px 0;
+`;
+
+AddProductForm.PhotoIcon = styled(Photo)`
+  padding : 15px;
+`;
+
 AddProductForm.propTypes = {
   form             : PropTypes.object.isRequired,
   create           : PropTypes.func.isRequired,
@@ -212,6 +233,7 @@ const withRecompose = compose(
 
       handleFileUpload : state => (field, [value]) => {
         const form = R.assoc(field, value, state.form);
+        console.log(value)
         return ({ form });
       },
 
