@@ -158,6 +158,11 @@ const ProductRow = ({
         :
         <ProductRow.TableCell onClick={toggleEdit.bind(null, 'file', true)}>
           {filetype}
+          <br />
+          <ProductRow.Image
+            src={`http://localhost:8080/${url}`}
+            alt=""
+          />
         </ProductRow.TableCell>
     }
     {
@@ -229,6 +234,11 @@ ProductRow.SelectWrapper = styled(FormControl)`
 
 ProductRow.TextField = styled(TextField)`
   width : 65% !important;
+`;
+
+ProductRow.Image = styled.img`
+  width  : 100px;
+  height : 100px;
 `;
 
 const withRecompose = compose(
