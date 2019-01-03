@@ -40,6 +40,7 @@ const AddProductForm = ({
   handleFileUpload,
   disableClick,
   create,
+  canSubmit,
 }) => (
   <AddProductForm.FormWrapper>
     <AddProductForm.Section>
@@ -152,6 +153,7 @@ const AddProductForm = ({
       />
       <GradientButton
         onClick={create}
+        disabled={!canSubmit}
       >
         Submit
       </GradientButton>
@@ -207,7 +209,17 @@ AddProductForm.propTypes = {
   hideAlert        : PropTypes.func.isRequired,
   handleFileUpload : PropTypes.func.isRequired,
   disableClick     : PropTypes.bool,
+  canSubmit        : PropTypes.bool.isRequired,
 };
+
+const canSubmitForm = ({ type, title, desc, price, quantity, deliveryType, file}) => R.all(R.equals(true))([
+  !R.isEmpty(type),
+  !R.isEmpty(title),
+  !R.isEmpty(desc),
+  !R.isEmpty(price),
+  !R.isEmpty(deliveryType),
+  !R.isEmpty(file),
+]);
 
 const withRecompose = compose(
   graphql(createProductMutation),
@@ -220,20 +232,27 @@ const withRecompose = compose(
         price        : 0,
         quantity     : 0,
         deliveryType : '',
-        file         : null,
+        file         : '',
       },
       hasError   = false,
       errorsList = [],
+      canSubmit  = false,
     }) => ({ form, hasError, errorsList}),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
 
       handleFileUpload : state => (field, [value]) => {
         const form = R.assoc(field, value, state.form);
-        return ({ form });
+        return ({
+          form,
+          canSubmit : canSubmitForm(form),
+        });
       },
 
       showAlert    : () => () => ({ hasError: true }),
