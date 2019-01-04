@@ -72,7 +72,7 @@ const ProductRow = ({
               { PRODUCTS_TYPES.map((t, index) => <MenuItem key={index} value={t}>{t}</MenuItem>) }
             </Select>
           </ProductRow.SelectWrapper>
-          <ProductRow.IconButton onClick={update}>
+          <ProductRow.IconButton onClick={update.bind(null, 'type')}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'type', false)}>
@@ -95,7 +95,7 @@ const ProductRow = ({
             value={title}
             fullWidth
           />
-          <ProductRow.IconButton onClick={update}>
+          <ProductRow.IconButton onClick={update.bind(null, 'title')}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'title', false)}>
@@ -122,7 +122,7 @@ const ProductRow = ({
             }}
             margin="normal"
           />
-          <ProductRow.IconButton onClick={update}>
+          <ProductRow.IconButton onClick={update.bind(null, 'price')}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'price', false)}>
@@ -148,7 +148,7 @@ const ProductRow = ({
               choose the file
             </Button>
           </Dropzone>
-          <ProductRow.IconButton onClick={update}>
+          <ProductRow.IconButton onClick={update.bind(null, 'file')}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'file', false)}>
@@ -180,7 +180,7 @@ const ProductRow = ({
             }}
             margin="normal"
           />
-          <ProductRow.IconButton onClick={update}>
+          <ProductRow.IconButton onClick={update.bind(null, 'quantity')}>
             <DoneIcon />
           </ProductRow.IconButton>
           <ProductRow.IconButton onClick={toggleEdit.bind(null, 'quantity', false)}>
@@ -288,7 +288,8 @@ const withRecompose = compose(
       product,
       errorsList,
       showAlert,
-    }) => async () => {
+      toggleEdit,
+    }) => async (cell) => {
       const response = await mutate({
         variables: {
           productId : product.id,
@@ -299,6 +300,8 @@ const withRecompose = compose(
           file      : product.file ? product.file : null,
         }
       });
+
+      toggleEdit(cell, false);
 
       const { ok, errors } = response.data.updateProduct;
 
