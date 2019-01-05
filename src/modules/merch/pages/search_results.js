@@ -39,7 +39,8 @@ const SearchResults = ({
 );
 
 SearchResults.propTypes = {
-  data : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  loadMore : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
