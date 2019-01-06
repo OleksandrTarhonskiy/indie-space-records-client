@@ -1,8 +1,13 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import { withRouter } from 'react-router';
+import React              from 'react';
+import PropTypes          from 'prop-types';
+import { withRouter }     from 'react-router';
+import { graphql }        from 'react-apollo';
+import { compose }        from 'recompose';
+import CircularProgress   from '@material-ui/core/CircularProgress';
+import styled             from 'styled-components';
 
-import EditEvent      from '../components/edit_event';
+import EditEventForm      from '../forms/edit_event_form';
+import { viewEventQuery } from '../graphql/queries';
 
 const EditEventPage = ({
   match: {
@@ -10,12 +15,41 @@ const EditEventPage = ({
       id
     }
   },
+  data: {
+    loading,
+    viewEvent = {}
+  },
 }) => (
-  <EditEvent id={id} />
+  <EditEventPage.PageWrapper>
+    {
+      loading ?
+        <CircularProgress />
+        :
+        <EditEventForm currentEvent={viewEvent} />
+    }
+  </EditEventPage.PageWrapper>
 );
+
+EditEventPage.PageWrapper = styled.div`
+  padding     : 5% 10%;
+  font-family : 'Roboto', sans-serif;
+  color       : #3c3c3e;
+`;
 
 EditEventPage.propTypes = {
   match : PropTypes.object.isRequired,
+  data  : PropTypes.object.isRequired,
 };
 
-export default withRouter(EditEventPage);
+const withRecompose = compose(
+  withRouter,
+  graphql(viewEventQuery, {
+    options: (props) => ({
+      variables: {
+        eventId: props.match.params.id,
+      }
+    })
+  })
+);
+
+export default withRecompose(EditEventPage);
