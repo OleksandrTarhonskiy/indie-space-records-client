@@ -137,3 +137,17 @@ export const allMySectionsQuery = gql`
     }
   }
 `;
+
+export const fetchProductsQuery = gql`
+  query fetchProducts($profileId: Int!){
+    fetchProducts(profileId: $profileId) {
+      id
+      type
+      title
+      price
+      desc
+      quantity
+      url
+    }
+  }
+`;

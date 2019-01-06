@@ -4,8 +4,10 @@ import breakpoint      from 'styled-components-breakpoint';
 import moment          from 'moment';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import { Link }        from 'react-router-dom';
+import Button          from '@material-ui/core/Button';
 
 const Section = ({
+  id,
   type,
   events,
   products,
@@ -19,51 +21,62 @@ const Section = ({
     return(<p>music here</p>);
   case 'merch':
     return(
-      <Section.List>
-        {
-          products.map(p =>
-            <Section.ListItem key={p.id}>
-              <Section.ImageWrapper background={`http://localhost:8080/${p.url}`} />
-              <Section.ProductName
-                elementFont={elementFont}
-                elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
-              >
-                {p.title}
-              </Section.ProductName>
-              <Section.ProductPrice
-                elementFont={elementFont}
-                elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
-              >
-                {p.price + ' ' + currency}
-              </Section.ProductPrice>
-              <Section.ButtonsWrapper>
-                <Link
-                  component={Link}
-                  to={`/product/${p.id}`}
+      <React.Fragment>
+        <Section.List>
+          {
+            products.map(p =>
+              <Section.ListItem key={p.id}>
+                <Section.ImageWrapper background={`http://localhost:8080/${p.url}`} />
+                <Section.ProductName
+                  elementFont={elementFont}
+                  elementStyles={elementStyles}
+                  className="apply-font-regularTextFont"
                 >
+                  {p.title}
+                </Section.ProductName>
+                <Section.ProductPrice
+                  elementFont={elementFont}
+                  elementStyles={elementStyles}
+                  className="apply-font-regularTextFont"
+                >
+                  {p.price + ' ' + currency}
+                </Section.ProductPrice>
+                <Section.ButtonsWrapper>
+                  <Link
+                    component={Link}
+                    to={`/product/${p.id}`}
+                  >
+                    <Section.Button
+                      elementFont={elementFont}
+                      elementStyles={elementStyles}
+                      className="apply-font-linksFont"
+                    >
+                      Buy now
+                    </Section.Button>
+                  </Link>
                   <Section.Button
                     elementFont={elementFont}
                     elementStyles={elementStyles}
                     className="apply-font-linksFont"
                   >
-                    Buy now
+                    <AddShoppingCart />
+                    Add
                   </Section.Button>
-                </Link>
-                <Section.Button
-                  elementFont={elementFont}
-                  elementStyles={elementStyles}
-                  className="apply-font-linksFont"
-                >
-                  <AddShoppingCart />
-                  Add
-                </Section.Button>
-              </Section.ButtonsWrapper>
-            </Section.ListItem>
-          )
-        }
-      </Section.List>
+                </Section.ButtonsWrapper>
+              </Section.ListItem>
+            )
+          }
+        </Section.List>
+        <Section.ViewMoreWrapper>
+          <Button
+            variant="contained"
+            component={Link}
+            to={`/musicians/${id}/merch`}
+          >
+            View all merch
+          </Button>
+        </Section.ViewMoreWrapper>
+      </React.Fragment>
     );
   case 'events':
     return(
@@ -187,6 +200,13 @@ Section.Cell = styled.div`
   font-size   : 20px;
   width       : 220px;
   margin      : 2%;
+`;
+
+Section.ViewMoreWrapper = styled.div`
+  display         : flex;
+  flex-direction  : row;
+  justify-content : center;
+  padding         : 5%;
 `;
 
 Section.TiketsButton = styled.button`

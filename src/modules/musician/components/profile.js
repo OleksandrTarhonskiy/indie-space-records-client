@@ -58,6 +58,7 @@ const Profile = ({ profile }) => (
               className="apply-font-regularTextFont"
             >
               <Section
+                id={profile.id}
                 type={section.type}
                 events={profile.events}
                 products={profile.products}
