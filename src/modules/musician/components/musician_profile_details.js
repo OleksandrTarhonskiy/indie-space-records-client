@@ -1,12 +1,12 @@
-import React                       from 'react';
-import PropTypes                   from 'prop-types';
-import styled                      from 'styled-components';
-import { graphql }                 from 'react-apollo';
-import CircularProgress            from '@material-ui/core/CircularProgress';
+import React               from 'react';
+import PropTypes           from 'prop-types';
+import styled              from 'styled-components';
+import { graphql }         from 'react-apollo';
+import CircularProgress    from '@material-ui/core/CircularProgress';
 
-import ProfileFeatures             from '../components/profile_features';
-import AboutProfile                from '../components/about_profile';
-import { myProfileWithThemeQuery } from '../graphql/queries';
+import ProfileFeatures     from '../components/profile_features';
+import AboutProfile        from '../components/about_profile';
+import { myProfilesQuery } from '../graphql/queries';
 
 const MusicianProfileDetails = ({ data: { loading, myProfile = {} } }) => (
   <div>
@@ -36,4 +36,4 @@ MusicianProfileDetails.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-export default graphql(myProfileWithThemeQuery)(MusicianProfileDetails);
+export default graphql(myProfilesQuery)(MusicianProfileDetails);

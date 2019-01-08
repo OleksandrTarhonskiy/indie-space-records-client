@@ -1,61 +1,29 @@
-import React                       from 'react';
-import PropTypes                   from 'prop-types';
-import { graphql }                 from 'react-apollo';
-import styled                      from 'styled-components';
-import Paper                       from '@material-ui/core/Paper';
-import CircularProgress            from '@material-ui/core/CircularProgress';
-import ExpansionPanel              from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary       from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails       from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon              from '@material-ui/icons/ExpandMore';
-import Typography                  from '@material-ui/core/Typography';
+import React               from 'react';
+import PropTypes           from 'prop-types';
+import { graphql }         from 'react-apollo';
+import styled              from 'styled-components';
+import Paper               from '@material-ui/core/Paper';
+import CircularProgress    from '@material-ui/core/CircularProgress';
 
-import ProfileThemeSettings        from '../forms/profile_theme_settings';
-import MyProfilePage               from './my_profile_page';
-import { myProfileWithThemeQuery } from '../graphql/queries';
-import EditSectionStyleForm        from '../forms/edit_section_style_form';
+import ProfilePage         from './profile_page';
+import { myProfilesQuery } from '../graphql/queries';
+import Sidebar             from '../components/sidebar';
 
 const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
   <ProfileThemeSettingsPage.Wrapper>
-    <ProfileThemeSettingsPage.SideBar>
-      {
-        loading?
-          <CircularProgress />
-          :
-          <ExpansionPanel defaultExpanded>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>Basic theme styles</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <ProfileThemeSettings
-                key={myProfile.id}
-                styles={JSON.parse(myProfile.theme.style)}
-                fonts={JSON.parse(myProfile.theme.fonts)}
-              />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-      }
-      {
-        loading?
-          <CircularProgress />
-          :
-          myProfile.theme.sections.map(section =>
-            <ExpansionPanel key={section.id}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{section.name} section styles</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <EditSectionStyleForm
-                  id={section.id}
-                  styles={JSON.parse(section.style)}
-                />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          )
-      }
-    </ProfileThemeSettingsPage.SideBar>
+    {
+      loading?
+      <CircularProgress />
+      :
+      <Sidebar id={myProfile.id} />
+    }
     <ProfileThemeSettingsPage.ProfileWrapper>
-      <MyProfilePage />
+    {
+        loading?
+        <CircularProgress />
+        :
+        <ProfilePage myId={myProfile.id} />
+      }
     </ProfileThemeSettingsPage.ProfileWrapper>
   </ProfileThemeSettingsPage.Wrapper>
 );
@@ -86,4 +54,4 @@ ProfileThemeSettingsPage.propTypes = {
   data : PropTypes.object.isRequired,
 };
 
-export default graphql(myProfileWithThemeQuery)(ProfileThemeSettingsPage);
+export default graphql(myProfilesQuery)(ProfileThemeSettingsPage);

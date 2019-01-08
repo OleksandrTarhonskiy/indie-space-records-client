@@ -18,6 +18,7 @@ const ProfilePage = ({
     loading,
     fetchProfile = {}
   },
+  myId,
 }) => (
   <React.Fragment>
     {
@@ -39,7 +40,7 @@ const withRecompose = compose(
   graphql(fetchProfileQuery, {
     options: (props) => ({
       variables: {
-        profileId: props.match.params.id
+        profileId: props.myId || props.match.params.id
       }
     })
   }),

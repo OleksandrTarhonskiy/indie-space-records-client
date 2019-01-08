@@ -17,10 +17,9 @@ import AllTagsPage              from '../modules/tags/pages/all_tags_page';
 import LoginPage                from '../modules/auth/pages/login_page';
 import LogoutPage               from '../modules/auth/pages/log_out_page';
 import ProfileHomeWrapper       from '../modules/musician/pages/profile_home_wrapper';
-import MyProfilePage            from '../modules/musician/pages/my_profile_page';
 import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_settings_page';
 import SettingsPage             from '../modules/musician/pages/settings_page';
-import MusicianMerchPage        from '../modules/musician/pages/musician_merch_page'
+import MusicianMerchPage        from '../modules/musician/pages/musician_merch_page';
 import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
 import EventPage                from '../modules/events/pages/event_page';
 import EditEventPage            from '../modules/events/pages/edit_event_page';
@@ -51,22 +50,19 @@ export default (
         <Route exact path="/events/:id"       component={EventPage} />
         <Route exact path="/events/edit/:id"       component={EditEventPage} />
         <PrivateRoute exact path="/musician/home" component={ProfileHomeWrapper} />
-        <PrivateRoute exact path="/musicians" component={AllProfilesPage} />
-
-        <Route exact path="/musicians/:id"           component={ProfilePage} />
-        <Route exact path="/musicians/:id/merch"     component={MusicianMerchPage} />
-        <Route exact path="/product/:id"  component={ProductPage} />
-
+        <Route exact path="/musicians" component={AllProfilesPage} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
-        <PrivateRoute exact path="/me" component={MyProfilePage} />
-        <PrivateRoute exact path="/profile/settings" component={ProfileThemeSettingsPage} />
+        <PrivateRoute path="/profile/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
         <PrivateRoute path="/profile"      component={SettingsPage} />
         <PrivateRoute exact path="/music" component={MainPage} />
         <PrivateRoute exact path="/upload_song" component={UploadSong} />
         <PrivateRoute exact path="/music/all" component={AllMySongs} />
         <PrivateRoute path="/merch"  component={MerchMainPage} />
+        <Route exact path="/musicians/:id"           component={ProfilePage} />
+        <Route exact path="/musicians/:id/merch"     component={MusicianMerchPage} />
+        <Route exact path="/musicians/merch/:id"  component={ProductPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

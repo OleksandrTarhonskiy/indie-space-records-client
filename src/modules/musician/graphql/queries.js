@@ -13,48 +13,6 @@ export const myProfilesQuery = gql`
   }
 `;
 
-export const myProfileWithThemeQuery = gql`
-  {
-    myProfile{
-      id
-      name
-      genres
-      country
-      region
-      currency
-      events {
-        id
-        title
-        address
-        date
-        price
-      }
-      products {
-        id
-        title
-        price
-        url
-      }
-      theme {
-        style
-        fonts
-        sections {
-          id
-          name
-          type
-          content
-          style
-          widgets {
-            id
-            link
-            sectionId
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const getCurrencyQuery = gql`
   {
     myProfile{
