@@ -23,7 +23,7 @@ const ProfileThemeSettingsPage = ({
         <React.Fragment>
           <Sidebar profile={myProfile} />
           <ProfileThemeSettingsPage.ProfileWrapper>
-            <Iframe url="http://localhost:3000/musicians/1"
+            <Iframe url={`http://localhost:3000/musicians/${myProfile.id}`}
               width="100%"
               height="100%"
               display="initial"
