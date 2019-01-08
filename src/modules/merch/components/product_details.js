@@ -76,8 +76,7 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  id   : PropTypes.number.isRequired,
-  data : PropTypes.object.isRequired,
+  product : PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

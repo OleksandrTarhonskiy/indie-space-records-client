@@ -26,6 +26,7 @@ const ProductPage = ({
 
 ProductPage.propTypes = {
   match : PropTypes.object.isRequired,
+  data  : PropTypes.object.isRequired,
 };
 
 const withRecompose = compose(

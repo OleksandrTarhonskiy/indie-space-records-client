@@ -5,7 +5,6 @@ import moment          from 'moment';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import { Link }        from 'react-router-dom';
 import Button          from '@material-ui/core/Button';
-import { withRouter }  from "react-router";
 
 const Section = ({
   id,
@@ -16,9 +15,6 @@ const Section = ({
   currency,
   elementFont,
   elementStyles,
-  match: {
-    path,
-  },
 }) => {
   switch (type) {
   case 'music':
@@ -222,4 +218,4 @@ Section.TiketsButton = styled.button`
   height      : 45px;
 `;
 
-export default withRouter(Section);
+export default Section;
