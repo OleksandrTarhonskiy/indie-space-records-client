@@ -6791,6 +6791,10 @@ react-icons@^2.2.7:
   dependencies:
     react-icon-base "2.1.0"
 
+react-iframe@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.3.3.tgz#553f9e44204486ecddd4027d8bb647e2a132ffcc"
+
 react-is@^16.3.1:
   version "16.4.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
