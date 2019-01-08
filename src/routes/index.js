@@ -53,7 +53,7 @@ export default (
         <Route exact path="/musicians" component={AllProfilesPage} />
         <PrivateRoute exact path="/musician/themes" component={AllThemesPage} />
         <PrivateRoute exact path="/demos/beautiful_play" component={BeautifulPlay} />
-        <PrivateRoute path="/profile/settings" component={ProfileThemeSettingsPage} />
+        <PrivateRoute path="/theme/settings" component={ProfileThemeSettingsPage} />
         <PrivateRoute exact path="/profile/events" component={MusicianEventsPage} />
         <PrivateRoute path="/profile"      component={SettingsPage} />
         <PrivateRoute exact path="/music" component={MainPage} />

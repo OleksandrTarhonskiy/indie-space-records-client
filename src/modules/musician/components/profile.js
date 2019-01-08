@@ -1,12 +1,24 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import styled         from 'styled-components';
-import { Helmet }     from 'react-helmet';
-import { SocialIcon } from 'react-social-icons';
+import React                    from 'react';
+import PropTypes                from 'prop-types';
+import styled                   from 'styled-components';
+import { Helmet }               from 'react-helmet';
+import { SocialIcon }           from 'react-social-icons';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+}                               from 'react-router-dom';
+import { withRouter }           from "react-router";
 
-import Section        from './section';
+import Sections                 from './sections';
+import MusicianMerchPage        from '../pages/musician_merch_page';
 
-const Profile = ({ profile }) => (
+const Profile = ({
+  profile,
+  match : {
+    path,
+  },
+}) => (
   <div>
     <Profile.Body
       key={profile.id}
@@ -36,46 +48,10 @@ const Profile = ({ profile }) => (
           }
         </Profile.NavItems>
       </Profile.Header>
-      {
-        profile.theme.sections.map(section =>
-          <Profile.Section
-            key={section.id}
-            elementStyles={JSON.parse(section.style)}
-          >
-            <Profile.SubHeadline
-              elementStyles={JSON.parse(profile.theme.style)}
-              elementFont={JSON.parse(profile.theme.fonts)}
-              display={JSON.parse(section.style).displayHeadline}
-              sectionStyle={JSON.parse(section.style)}
-              className="apply-font-subHead"
-            >
-              {section.name}
-            </Profile.SubHeadline>
-            <Profile.SectionContent
-              elementStyles={JSON.parse(profile.theme.style)}
-              elementFont={JSON.parse(profile.theme.fonts)}
-              sectionStyle={JSON.parse(section.style)}
-              className="apply-font-regularTextFont"
-            >
-              <Section
-                id={profile.id}
-                type={section.type}
-                events={profile.events}
-                products={profile.products}
-                content={section.content}
-                currency={profile.currency}
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              />
-              {
-                section.widgets.map(w =>
-                  section.id === w.sectionId? <Profile.SocialIcon url={w.link} /> : null
-                )
-              }
-            </Profile.SectionContent>
-          </Profile.Section>
-        )
-      }
+      <Switch>
+        <Route exact path={path} component={() => <Sections profile={profile} />} />
+        <Route exact path={`${path}/merch`} component={() => <MusicianMerchPage myId={profile.id} />} />
+      </Switch>
     </Profile.Body>
   </div>
 );
@@ -83,17 +59,6 @@ const Profile = ({ profile }) => (
 Profile.Body = styled.div`
   background-color : ${props => props.elementStyles.backgroundColor};
   position         : relative;
-`;
-
-Profile.Section = styled.div`
-  background-color : ${props => props.elementStyles.background};
-  display          : flex;
-  flex-direction   : column;
-  padding          : 5% 8%;
-`;
-
-Profile.SocialIcon = styled(SocialIcon)`
-  margin : 1%;
 `;
 
 Profile.NavItems = styled.ul`
@@ -125,21 +90,8 @@ Profile.Header = styled.div`
   text-align       : ${props => props.elementStyles.MenuLinksPosition};
 `;
 
-Profile.SubHeadline = styled.h2`
-  font-family : ${props => `${props.elementFont.subHead}`}, sans-serif;
-  font-size   : ${props => props.elementStyles.h2FontSize}px;
-  display     : ${props => props.display === 'false' ? 'none' : 'block'};
-  color       : ${props => props.sectionStyle.headlineColor};
-`;
-
-Profile.SectionContent = styled.p`
-  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
-  font-size   : ${props => props.elementStyles.RegularFontSize}px;
-  color       : ${props => props.sectionStyle.color};
-`;
-
 Profile.propTypes = {
   profile : PropTypes.object.isRequired,
 };
 
-export default Profile;
+export default withRouter(Profile);
