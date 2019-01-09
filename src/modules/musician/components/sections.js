@@ -1,4 +1,5 @@
 import React          from 'react';
+import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
 import { SocialIcon } from 'react-social-icons';
 
@@ -72,5 +73,9 @@ Sections.SectionContent = styled.p`
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
   color       : ${props => props.sectionStyle.color};
 `;
+
+Section.propTypes = {
+  profile : PropTypes.object.isRequired,
+};
 
 export default Sections;

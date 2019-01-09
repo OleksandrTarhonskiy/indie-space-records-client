@@ -23,9 +23,9 @@ const ProfilePage = ({
   <React.Fragment>
     {
       loading ?
-      <CircularProgress />
-      :
-      <Profile profile={fetchProfile} />
+        <CircularProgress />
+        :
+        <Profile profile={fetchProfile} />
     }
   </React.Fragment>
 );

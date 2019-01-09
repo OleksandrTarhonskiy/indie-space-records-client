@@ -111,13 +111,13 @@ const AddProductForm = ({
       </Dropzone>
       {
         file ?
-        <AddProductForm.FileDesc>
-          <AddProductForm.PhotoIcon />
-          <p>{file.name}</p>
-         </AddProductForm.FileDesc>
-         :
-         null
-       }
+          <AddProductForm.FileDesc>
+            <AddProductForm.PhotoIcon />
+            <p>{file.name}</p>
+          </AddProductForm.FileDesc>
+          :
+          null
+      }
     </AddProductForm.Section>
     <AddProductForm.Section>
       <h2>Pricing:</h2>

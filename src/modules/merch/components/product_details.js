@@ -1,11 +1,9 @@
-import React                from 'react';
-import PropTypes            from 'prop-types';
-import styled               from 'styled-components';
-import breakpoint           from 'styled-components-breakpoint';
-import Button               from '@material-ui/core/Button';
-import ShoppingCart         from '@material-ui/icons/ShoppingCart';
-
-import { viewProductQuery } from '../graphql/queries';
+import React        from 'react';
+import PropTypes    from 'prop-types';
+import styled       from 'styled-components';
+import breakpoint   from 'styled-components-breakpoint';
+import Button       from '@material-ui/core/Button';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 const ProductDetails = ({ product }) => (
   <ProductDetails.Wrapper>
@@ -78,8 +76,7 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  id   : PropTypes.number.isRequired,
-  data : PropTypes.object.isRequired,
+  product : PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

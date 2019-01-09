@@ -17,24 +17,25 @@ const ProductPage = ({
   data: {
     viewProduct = {}
   },
-  myId,
 }) => (
   <div>
+    {console.log(viewProduct)}
     <ProductDetails product={viewProduct} />
   </div>
 );
 
 ProductPage.propTypes = {
   match : PropTypes.object.isRequired,
+  data  : PropTypes.object.isRequired,
 };
 
 const withRecompose = compose(
   withRouter,
   graphql(viewProductQuery, {
-    options: (ownProps) => ({
+    options: props => ({
       variables: {
-        productId: ownProps.myId || ownProps.id
-      }
+        productId: props.match.params.id,
+      },
     })
   }),
 );

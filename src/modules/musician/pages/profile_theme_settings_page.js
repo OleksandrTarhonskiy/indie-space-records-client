@@ -4,8 +4,8 @@ import { graphql }                 from 'react-apollo';
 import styled                      from 'styled-components';
 import Paper                       from '@material-ui/core/Paper';
 import CircularProgress            from '@material-ui/core/CircularProgress';
+import Iframe                      from 'react-iframe';
 
-import Profile                     from '../components/profile';
 import { myProfileWithThemeQuery } from '../graphql/queries';
 import Sidebar                     from '../components/sidebar';
 
@@ -18,14 +18,20 @@ const ProfileThemeSettingsPage = ({
   <ProfileThemeSettingsPage.Wrapper>
     {
       loading ?
-      <CircularProgress />
-      :
-      <React.Fragment>
-        <Sidebar profile={myProfile} />
-        <ProfileThemeSettingsPage.ProfileWrapper>
-          <Profile profile={myProfile} />
-        </ProfileThemeSettingsPage.ProfileWrapper>
-      </React.Fragment>
+        <CircularProgress />
+        :
+        <React.Fragment>
+          <Sidebar profile={myProfile} />
+          <ProfileThemeSettingsPage.ProfileWrapper>
+            <Iframe url={`http://localhost:3000/musicians/${myProfile.id}`}
+              width="100%"
+              height="100%"
+              display="initial"
+              position="relative"
+              allowFullScreen
+            />
+          </ProfileThemeSettingsPage.ProfileWrapper>
+        </React.Fragment>
     }
   </ProfileThemeSettingsPage.Wrapper>
 );

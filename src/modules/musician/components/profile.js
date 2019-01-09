@@ -1,24 +1,11 @@
-import React                    from 'react';
-import PropTypes                from 'prop-types';
-import styled                   from 'styled-components';
-import { Helmet }               from 'react-helmet';
-import { SocialIcon }           from 'react-social-icons';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-}                               from 'react-router-dom';
-import { withRouter }           from "react-router";
+import React      from 'react';
+import PropTypes  from 'prop-types';
+import styled     from 'styled-components';
+import { Helmet } from 'react-helmet';
 
-import Sections                 from './sections';
-import MusicianMerchPage        from '../pages/musician_merch_page';
+import Sections   from './sections';
 
-const Profile = ({
-  profile,
-  match : {
-    path,
-  },
-}) => (
+const Profile = ({ profile }) => (
   <div>
     <Profile.Body
       key={profile.id}
@@ -48,10 +35,7 @@ const Profile = ({
           }
         </Profile.NavItems>
       </Profile.Header>
-      <Switch>
-        <Route exact path={path} component={() => <Sections profile={profile} />} />
-        <Route exact path={`${path}/merch`} component={() => <MusicianMerchPage myId={profile.id} />} />
-      </Switch>
+      <Sections profile={profile} />
     </Profile.Body>
   </div>
 );
@@ -94,4 +78,4 @@ Profile.propTypes = {
   profile : PropTypes.object.isRequired,
 };
 
-export default withRouter(Profile);
+export default Profile;

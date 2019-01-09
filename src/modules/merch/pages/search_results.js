@@ -78,7 +78,7 @@ const withRecompose = compose(
               allMyProducts: [...previousResult.allMyProducts, ...fetchMoreResult.allMyProducts],
             };
           },
-        })
+        });
       }
     },
   ),

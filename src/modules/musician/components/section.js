@@ -5,7 +5,6 @@ import moment          from 'moment';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
 import { Link }        from 'react-router-dom';
 import Button          from '@material-ui/core/Button';
-import { withRouter }  from "react-router";
 
 const Section = ({
   id,
@@ -16,9 +15,6 @@ const Section = ({
   currency,
   elementFont,
   elementStyles,
-  match: {
-    path,
-  },
 }) => {
   switch (type) {
   case 'music':
@@ -48,7 +44,7 @@ const Section = ({
                 <Section.ButtonsWrapper>
                   <Link
                     component={Link}
-                    to={path === '/theme/settings' ? `${path}/merch-item` : `/musicians/merch/${id}`}
+                    to={`/musicians/merch/${p.id}`}
                   >
                     <Section.Button
                       elementFont={elementFont}
@@ -75,7 +71,7 @@ const Section = ({
           <Button
             variant="contained"
             component={Link}
-            to={path === '/theme/settings' ? `${path}/merch` : `/musicians/${id}/merch`}
+            to={`/musicians/${id}/merch`}
           >
             View all merch
           </Button>
@@ -222,4 +218,4 @@ Section.TiketsButton = styled.button`
   height      : 45px;
 `;
 
-export default withRouter(Section);
+export default Section;

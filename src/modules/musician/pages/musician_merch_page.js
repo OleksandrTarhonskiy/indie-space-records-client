@@ -22,9 +22,9 @@ const MusicianMerchPage = ({
   <React.Fragment>
     {
       loading ?
-      <CircularProgress />
-      :
-      <FullMerchList merch={fetchProducts} />
+        <CircularProgress />
+        :
+        <FullMerchList merch={fetchProducts} />
     }
   </React.Fragment>
 );
