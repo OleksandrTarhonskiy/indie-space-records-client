@@ -90,7 +90,6 @@ const ProfileThemeSettings = ({
       Headings font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-headlineFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -98,17 +97,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={headlineFont}
       name="headlineFont"
-      options={{
-        name : 'headlineFont'
-      }}
       onChange={handleFontChange.bind(null, 'headlineFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       Regular text font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-regularTextFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -116,17 +110,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={regularTextFont}
       name="regularTextFont"
-      options={{
-        name : 'regularTextFont'
-      }}
       onChange={handleFontChange.bind(null, 'regularTextFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       SubHeadline font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-subHead"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -134,17 +123,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={subHead}
       name="subHead"
-      options={{
-        name : 'subHead'
-      }}
       onChange={handleFontChange.bind(null, 'subHead')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       links & Buttons Font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-linksFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -152,11 +136,7 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={linksFont}
       name="linksFont"
-      options={{
-        name : 'linksFont'
-      }}
       onChange={handleFontChange.bind(null, 'linksFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.SliderWrapper>
       <ProfileThemeSettings.Label>
