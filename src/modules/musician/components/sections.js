@@ -18,7 +18,6 @@ const Sections = ({ profile }) => (
             elementFont={JSON.parse(profile.theme.fonts)}
             display={JSON.parse(section.style).displayHeadline}
             sectionStyle={JSON.parse(section.style)}
-            className="apply-font-subHead"
           >
             {section.name}
           </Sections.SubHeadline>
@@ -26,7 +25,6 @@ const Sections = ({ profile }) => (
             elementStyles={JSON.parse(profile.theme.style)}
             elementFont={JSON.parse(profile.theme.fonts)}
             sectionStyle={JSON.parse(section.style)}
-            className="apply-font-regularTextFont"
           >
             <Section
               id={profile.id}

@@ -26,7 +26,6 @@ const Profile = ({ profile }) => (
                   href=""
                   elementStyles={JSON.parse(profile.theme.style)}
                   elementFont={JSON.parse(profile.theme.fonts)}
-                  className="apply-font-linksFont"
                 >
                   {section.name}
                 </Profile.Link>

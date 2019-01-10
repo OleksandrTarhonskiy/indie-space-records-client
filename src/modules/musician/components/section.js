@@ -30,14 +30,12 @@ const Section = ({
                 <Section.ProductName
                   elementFont={elementFont}
                   elementStyles={elementStyles}
-                  className="apply-font-regularTextFont"
                 >
                   {p.title}
                 </Section.ProductName>
                 <Section.ProductPrice
                   elementFont={elementFont}
                   elementStyles={elementStyles}
-                  className="apply-font-regularTextFont"
                 >
                   {p.price + ' ' + currency}
                 </Section.ProductPrice>
@@ -49,7 +47,6 @@ const Section = ({
                     <Section.Button
                       elementFont={elementFont}
                       elementStyles={elementStyles}
-                      className="apply-font-linksFont"
                     >
                       Buy now
                     </Section.Button>
@@ -57,7 +54,6 @@ const Section = ({
                   <Section.Button
                     elementFont={elementFont}
                     elementStyles={elementStyles}
-                    className="apply-font-linksFont"
                   >
                     <AddShoppingCart />
                     Add
@@ -87,35 +83,30 @@ const Section = ({
               <Section.Cell
                 elementFont={elementFont}
                 elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
               >
                 {moment(e.date).format('D MMM HH:mm')}
               </Section.Cell>
               <Section.Cell
                 elementFont={elementFont}
                 elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
               >
                 {e.title}
               </Section.Cell>
               <Section.Cell
                 elementFont={elementFont}
                 elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
               >
                 {e.address}
               </Section.Cell>
               <Section.Cell
                 elementFont={elementFont}
                 elementStyles={elementStyles}
-                className="apply-font-regularTextFont"
               >
                 {e.price}
               </Section.Cell>
               <Section.TiketsButton
                 elementFont={elementFont}
                 elementStyles={elementStyles}
-                className="apply-font-linksFont"
               >
               Tikets
               </Section.TiketsButton>
