@@ -263,14 +263,14 @@ const withRecompose = compose(
         return ({ styles });
       },
 
-      showAlert      : () => () => ({ hasError: true }),
-      hideAlert      : () => () => ({ hasError: false }),
+      showAlert     : () => () => ({ hasError: true }),
+      hideAlert     : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
     submit : ({ styles, mutate, errorsList, showAlert, fonts }) => async () => {
       const stringStyles = JSON.stringify(styles);
-      const stringFonts = JSON.stringify(fonts);
+      const stringFonts  = JSON.stringify(fonts);
       const response = await mutate({
         variables: { style : stringStyles, fonts : stringFonts },
       });
@@ -279,6 +279,7 @@ const withRecompose = compose(
 
       if (ok) {
         showAlert();
+        window.document.getElementById('frame_id').contentWindow.location.reload();
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);

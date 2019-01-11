@@ -153,6 +153,7 @@ const withRecompose = compose(
 
       if (ok) {
         showAlert();
+        window.document.getElementById('frame_id').contentWindow.location.reload();
       } else {
         let messageText = null;
         errors.map((msg) => messageText = msg.message);

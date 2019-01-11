@@ -66,7 +66,7 @@ Sections.SubHeadline = styled.h2`
   color       : ${props => props.sectionStyle.headlineColor};
 `;
 
-Sections.SectionContent = styled.p`
+Sections.SectionContent = styled.div`
   font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
   color       : ${props => props.sectionStyle.color};

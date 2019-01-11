@@ -28,6 +28,7 @@ const ProfileThemeSettingsPage = ({
               height="100%"
               display="initial"
               position="relative"
+              id="frame_id"
               allowFullScreen
             />
           </ProfileThemeSettingsPage.ProfileWrapper>
