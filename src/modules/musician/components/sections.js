@@ -38,7 +38,7 @@ const Sections = ({ profile }) => (
             />
             {
               section.widgets.map(w =>
-                section.id === w.sectionId? <Sections.SocialIcon url={w.link} /> : null
+                section.id === w.sectionId? <Sections.SocialIcon key={w.id} url={w.link} /> : null
               )
             }
           </Sections.SectionContent>
