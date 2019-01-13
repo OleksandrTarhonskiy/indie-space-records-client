@@ -1,12 +1,13 @@
-import React                  from 'react';
-import PropTypes              from 'prop-types';
-import { compose }            from 'recompose';
-import { withRouter }         from 'react-router';
-import { graphql }            from 'react-apollo';
-import CircularProgress       from '@material-ui/core/CircularProgress';
+import React                 from 'react';
+import PropTypes             from 'prop-types';
+import { compose }           from 'recompose';
+import { withRouter }        from 'react-router';
+import { graphql }           from 'react-apollo';
+import CircularProgress      from '@material-ui/core/CircularProgress';
+import { Helmet }            from 'react-helmet';
 
-import { fetchProductsQuery } from '../graphql/queries';
-import FullMerchList          from '../components/full_merch_list';
+import { fetchProfileQuery } from '../graphql/queries';
+import FullMerchList         from '../components/full_merch_list';
 
 const MusicianMerchPage = ({
   match: {
@@ -16,7 +17,7 @@ const MusicianMerchPage = ({
   },
   data: {
     loading,
-    fetchProducts = []
+    fetchProfile = {}
   },
 }) => (
   <React.Fragment>
@@ -24,7 +25,15 @@ const MusicianMerchPage = ({
       loading ?
         <CircularProgress />
         :
-        <FullMerchList merch={fetchProducts} />
+        <React.Fragment>
+          <Helmet>
+            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
+          </Helmet>
+          <FullMerchList
+            profile={fetchProfile}
+            id={id}
+          />
+        </React.Fragment>
     }
   </React.Fragment>
 );
@@ -36,7 +45,7 @@ MusicianMerchPage.propTypes = {
 
 const withRecompose = compose(
   withRouter,
-  graphql(fetchProductsQuery, {
+  graphql(fetchProfileQuery, {
     options: (props) => ({
       variables: {
         profileId: props.match.params.id

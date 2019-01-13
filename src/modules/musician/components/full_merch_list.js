@@ -1,24 +1,60 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
+import React                  from 'react';
+import PropTypes              from 'prop-types';
+import styled                 from 'styled-components';
+import breakpoint             from 'styled-components-breakpoint';
+import { graphql }            from 'react-apollo';
+import { compose }            from 'recompose';
+import CircularProgress       from '@material-ui/core/CircularProgress';
 
-const FullMerchList = ({ merch }) => (
-  <FullMerchList.List>
+import { fetchProductsQuery } from '../graphql/queries';
+
+const FullMerchList = ({
+  profile,
+  id,
+  data: {
+    loading,
+    fetchProducts = []
+  },
+}) => (
+  <React.Fragment>
     {
-      merch.map(product =>
-        <li key={product.id}>
-          <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
-          {product.title}
-        </li>
-      )
+      loading ?
+      <CircularProgress />
+      :
+      <FullMerchList.Wrapper
+        profileFonts={JSON.parse(profile.theme.fonts)}
+        profileStyles={JSON.parse(profile.theme.style)}
+        sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
+      >
+        <FullMerchList.List>
+          {
+            fetchProducts.map(product =>
+              <FullMerchList.ProductItem key={product.id}>
+                <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                <p>{product.title}</p>
+                <p>{product.price}</p>
+              </FullMerchList.ProductItem>
+            )
+          }
+        </FullMerchList.List>
+      </FullMerchList.Wrapper>
     }
-  </FullMerchList.List>
+  </React.Fragment>
 );
 
 FullMerchList.propTypes = {
-  merch : PropTypes.array.isRequired,
+  profile : PropTypes.object.isRequired,
+  data    : PropTypes.object.isRequired,
+  id      : PropTypes.number.isRequired,
 };
+
+FullMerchList.Wrapper = styled.div`
+  background-color : ${props => props.sectionStyles.background};
+  color            : ${props => props.sectionStyles.color};
+  padding          : 5% 8%;
+  font-family      : ${props => props.profileFonts.regularTextFont}, sans-serif;
+  font-size        : ${props => props.profileStyles.RegularFontSize}px;
+`;
 
 FullMerchList.List = styled.ul`
   && {
@@ -35,6 +71,10 @@ FullMerchList.List = styled.ul`
   }
 `;
 
+FullMerchList.ProductItem = styled.li`
+  margin : 5%;
+`;
+
 FullMerchList.ImageWrapper = styled.div`
   width             : 100%;
   height            : 462px;
@@ -43,5 +83,10 @@ FullMerchList.ImageWrapper = styled.div`
   background-repeat : no-repeat;
 `;
 
-
-export default FullMerchList;
+export default graphql(fetchProductsQuery, {
+    options: (props) => ({
+      variables: {
+        profileId: props.id
+      }
+    })
+  })(FullMerchList);
