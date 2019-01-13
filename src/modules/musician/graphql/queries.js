@@ -123,6 +123,37 @@ export const fetchProfileQuery = gql`
   }
 `;
 
+export const fetchProfileProductsAndThemeQuery = gql`
+  query fetchProfile($profileId: Int!){
+    fetchProfile(profileId: $profileId) {
+      id
+      currency
+      products {
+        id
+        title
+        price
+        url
+      }
+      theme {
+        style
+        fonts
+        sections {
+          id
+          name
+          type
+          content
+          style
+          widgets {
+            id
+            link
+            sectionId
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const allMySectionsQuery = gql`
   {
     allMySections{
