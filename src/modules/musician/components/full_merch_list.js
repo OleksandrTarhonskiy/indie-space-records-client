@@ -84,9 +84,9 @@ FullMerchList.ImageWrapper = styled.div`
 `;
 
 export default graphql(fetchProductsQuery, {
-    options: (props) => ({
-      variables: {
-        profileId: props.id
-      }
-    })
-  })(FullMerchList);
+  options: (props) => ({
+    variables: {
+      profileId: props.id
+    }
+  })
+})(FullMerchList);
