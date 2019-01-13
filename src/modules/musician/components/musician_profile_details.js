@@ -9,20 +9,22 @@ import AboutProfile                from '../components/about_profile';
 import { myProfileWithThemeQuery } from '../graphql/queries';
 
 const MusicianProfileDetails = ({ data: { loading, myProfile = {} } }) => (
-  <div>
+  <React.Fragment>
     <MusicianProfileDetails.ProfileWrapper>
-      <ProfileFeatures myProfile={myProfile} />
       {
-        loading?
+        loading ?
           <CircularProgress />
           :
-          <AboutProfile
-            key={myProfile.id}
-            profile={myProfile}
-          />
+          <React.Fragment>
+            <ProfileFeatures myProfile={myProfile} />
+            <AboutProfile
+              key={myProfile.id}
+              profile={myProfile}
+            />
+          </React.Fragment>
       }
     </MusicianProfileDetails.ProfileWrapper>
-  </div>
+  </React.Fragment>
 );
 
 MusicianProfileDetails.ProfileWrapper = styled.div`

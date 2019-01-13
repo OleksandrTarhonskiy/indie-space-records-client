@@ -1,33 +1,25 @@
-import React                from 'react';
-import PropTypes            from 'prop-types';
-import styled               from 'styled-components';
-import breakpoint           from 'styled-components-breakpoint';
-import { graphql }          from 'react-apollo';
-import { compose }          from 'recompose';
-import Button               from '@material-ui/core/Button';
-import ShoppingCart         from '@material-ui/icons/ShoppingCart';
+import React        from 'react';
+import PropTypes    from 'prop-types';
+import styled       from 'styled-components';
+import breakpoint   from 'styled-components-breakpoint';
+import Button       from '@material-ui/core/Button';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
-import { viewProductQuery } from '../graphql/queries';
-
-const ProductDetails = ({
-  data: {
-    viewProduct = {}
-  },
-}) => (
+const ProductDetails = ({ product }) => (
   <ProductDetails.Wrapper>
     <ProductDetails.ImageWrapper>
       <ProductDetails.Image
-        src={`http://localhost:8080/${viewProduct.url}`}
+        src={`http://localhost:8080/${product.url}`}
         alt=""
       />
     </ProductDetails.ImageWrapper>
     <ProductDetails.DetailsBlock>
-      <h1>{viewProduct.title}</h1>
-      <h2>{viewProduct.price} $</h2>
-      <h3>{viewProduct.type}</h3>
-      <p>{viewProduct.desc}</p>
+      <h1>{product.title}</h1>
+      <h2>{product.price} $</h2>
+      <h3>{product.type}</h3>
+      <p>{product.desc}</p>
       <ProductDetails.AddToCart
-        disabled={!viewProduct.quantity}
+        disabled={!product.quantity}
       >
         <ShoppingCart />
         Add to cart
@@ -84,18 +76,7 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  id   : PropTypes.number.isRequired,
-  data : PropTypes.object.isRequired,
+  product : PropTypes.number.isRequired,
 };
 
-const withRecompose = compose(
-  graphql(viewProductQuery, {
-    options: (ownProps) => ({
-      variables: {
-        productId: ownProps.id
-      }
-    })
-  }),
-);
-
-export default withRecompose(ProductDetails);
+export default ProductDetails;

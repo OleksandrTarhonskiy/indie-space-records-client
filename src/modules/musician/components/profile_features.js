@@ -28,7 +28,7 @@ const ProfileFeatures = ({ myProfile }) => (
         My music
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to={myProfile.theme? '/me' : '/musician/themes'}>
+    <ProfileFeatures.MenuItem to={myProfile.theme ? `/musicians/${myProfile.id}` : '/musician/themes'}>
       <ProfileFeatures.MenuItemText>
         <VisibilityIcon />
         My profile
@@ -46,7 +46,7 @@ const ProfileFeatures = ({ myProfile }) => (
         Profile settings
       </ProfileFeatures.MenuItemText>
     </ProfileFeatures.MenuItem>
-    <ProfileFeatures.MenuItem to={myProfile.theme? '/profile/settings' : '/musician/themes'}>
+    <ProfileFeatures.MenuItem to={myProfile.theme? '/theme/settings' : '/musician/themes'}>
       <ProfileFeatures.MenuItemText>
         <StyleIcon />
         Customize my profile

@@ -4,59 +4,36 @@ import { graphql }                 from 'react-apollo';
 import styled                      from 'styled-components';
 import Paper                       from '@material-ui/core/Paper';
 import CircularProgress            from '@material-ui/core/CircularProgress';
-import ExpansionPanel              from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary       from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails       from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon              from '@material-ui/icons/ExpandMore';
-import Typography                  from '@material-ui/core/Typography';
+import Iframe                      from 'react-iframe';
 
-import ProfileThemeSettings        from '../forms/profile_theme_settings';
-import MyProfilePage               from './my_profile_page';
 import { myProfileWithThemeQuery } from '../graphql/queries';
-import EditSectionStyleForm        from '../forms/edit_section_style_form';
+import Sidebar                     from '../components/sidebar';
 
-const ProfileThemeSettingsPage = ({ data: { loading, myProfile = {} } }) => (
+const ProfileThemeSettingsPage = ({
+  data: {
+    loading,
+    myProfile = {},
+  },
+}) => (
   <ProfileThemeSettingsPage.Wrapper>
-    <ProfileThemeSettingsPage.SideBar>
-      {
-        loading?
-          <CircularProgress />
-          :
-          <ExpansionPanel defaultExpanded>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>Basic theme styles</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <ProfileThemeSettings
-                key={myProfile.id}
-                styles={JSON.parse(myProfile.theme.style)}
-                fonts={JSON.parse(myProfile.theme.fonts)}
-              />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-      }
-      {
-        loading?
-          <CircularProgress />
-          :
-          myProfile.theme.sections.map(section =>
-            <ExpansionPanel key={section.id}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{section.name} section styles</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <EditSectionStyleForm
-                  id={section.id}
-                  styles={JSON.parse(section.style)}
-                />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          )
-      }
-    </ProfileThemeSettingsPage.SideBar>
-    <ProfileThemeSettingsPage.ProfileWrapper>
-      <MyProfilePage />
-    </ProfileThemeSettingsPage.ProfileWrapper>
+    {
+      loading ?
+        <CircularProgress />
+        :
+        <React.Fragment>
+          <Sidebar profile={myProfile} />
+          <ProfileThemeSettingsPage.ProfileWrapper>
+            <Iframe url={`http://localhost:3000/musicians/${myProfile.id}`}
+              width="100%"
+              height="100%"
+              display="initial"
+              position="relative"
+              id="frame_id"
+              allowFullScreen
+            />
+          </ProfileThemeSettingsPage.ProfileWrapper>
+        </React.Fragment>
+    }
   </ProfileThemeSettingsPage.Wrapper>
 );
 
@@ -64,16 +41,6 @@ ProfileThemeSettingsPage.Wrapper = styled.div`
   display        : flex;
   flex-direction : row;
   background     : #eaedf5;
-`;
-
-ProfileThemeSettingsPage.SideBar = styled(Paper)`
-  width            : 18%;
-  background-color : #f8f8f8;
-  display          : flex;
-  flex-direction   : column;
-  justify-content  : flex-start;
-  padding          : 0;
-  margin           : 1%;
 `;
 
 ProfileThemeSettingsPage.ProfileWrapper = styled(Paper)`

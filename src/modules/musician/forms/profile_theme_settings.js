@@ -13,12 +13,9 @@ import FontPicker              from 'font-picker-react';
 import {
   compose,
   withStateHandlers,
-  withHandlers
 }                              from 'recompose';
 import { graphql }             from 'react-apollo';
 
-import Alert                   from '../../../layouts/alert';
-import GradientButton          from '../../../layouts/gradient_button';
 import { updateThemeMutation } from '../graphql/mutations';
 
 const ProfileThemeSettings = ({
@@ -38,7 +35,6 @@ const ProfileThemeSettings = ({
     subHead,
   },
   handleChange,
-  submit,
   errorsList,
   hasError,
   hideAlert,
@@ -90,7 +86,6 @@ const ProfileThemeSettings = ({
       Headings font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-headlineFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -98,17 +93,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={headlineFont}
       name="headlineFont"
-      options={{
-        name : 'headlineFont'
-      }}
       onChange={handleFontChange.bind(null, 'headlineFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       Regular text font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-regularTextFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -116,17 +106,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={regularTextFont}
       name="regularTextFont"
-      options={{
-        name : 'regularTextFont'
-      }}
       onChange={handleFontChange.bind(null, 'regularTextFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       SubHeadline font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-subHead"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -134,17 +119,12 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={subHead}
       name="subHead"
-      options={{
-        name : 'subHead'
-      }}
       onChange={handleFontChange.bind(null, 'subHead')}
-      sort="popularity"
     />
     <ProfileThemeSettings.Label>
       links & Buttons Font
     </ProfileThemeSettings.Label>
     <FontPicker
-      id="font-picker-linksFont"
       /*jshint ignore:start*/
       /*eslint-disable*/
       apiKey={process.env.REACT_APP_GOOGLE_FONTS_API_KEY}
@@ -152,11 +132,7 @@ const ProfileThemeSettings = ({
       /*jshint ignore:end*/
       activeFont={linksFont}
       name="linksFont"
-      options={{
-        name : 'linksFont'
-      }}
       onChange={handleFontChange.bind(null, 'linksFont')}
-      sort="popularity"
     />
     <ProfileThemeSettings.SliderWrapper>
       <ProfileThemeSettings.Label>
@@ -201,15 +177,6 @@ const ProfileThemeSettings = ({
       />
     </ProfileThemeSettings.SliderWrapper>
     <br />
-    <GradientButton onClick={submit}>
-      Update this section
-    </GradientButton>
-    <Alert
-      action="updated"
-      hasError={hasError}
-      hideAlert={hideAlert}
-      errorsList={errorsList}
-    />
   </div>
 );
 
@@ -230,11 +197,7 @@ ProfileThemeSettings.SelectWrapper = styled(FormControl)`
 ProfileThemeSettings.propTypes = {
   styles             : PropTypes.object.isRequired,
   fonts              : PropTypes.object.isRequired,
-  submit             : PropTypes.func.isRequired,
   handleChange       : PropTypes.func.isRequired,
-  hideAlert          : PropTypes.func.isRequired,
-  hasError           : PropTypes.bool.isRequired,
-  errorsList         : PropTypes.array.isRequired,
   sliderChange       : PropTypes.func.isRequired,
   handleSelectChange : PropTypes.func.isRequired,
   handleFontChange   : PropTypes.func.isRequired,
@@ -244,7 +207,7 @@ const withRecompose = compose(
   graphql(updateThemeMutation),
   withStateHandlers(
     ({
-      styles     = {
+      styles = {
         h1FontSize        : '',
         h2FontSize        : '',
         RegularFontSize   : '',
@@ -253,64 +216,67 @@ const withRecompose = compose(
         MenuLinksPosition : '',
         headerBackground  : '',
       },
-      fonts      = {
+      fonts  = {
         headlineFont    : '',
         regularTextFont : '',
         linksFont       : '',
         subHead         : '',
       },
-      hasError   = false,
-      errorsList = [],
-    }) => ({ styles, errorsList, hasError, fonts }),
+    }) => ({ styles, fonts }),
     {
-      handleChange : state => (field, value) => {
+      handleChange : (state, { mutate }) => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
+        const stringStyles = JSON.stringify(styles);
+        const stringFonts  = JSON.stringify(state.fonts);
+        mutate({
+          variables: { style : stringStyles, fonts : stringFonts },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+        
         return ({ styles });
       },
 
-      handleSelectChange : state => ({target}) => {
+      handleSelectChange : (state, { mutate }) => ({ target }) => {
         const styles = R.assoc(target.name, target.value, state.styles);
+        const stringStyles = JSON.stringify(styles);
+        const stringFonts  = JSON.stringify(state.fonts);
+        mutate({
+          variables: { style : stringStyles, fonts : stringFonts },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+
         return ({ styles });
       },
 
-      handleFontChange : state => (field, value) => {
+      handleFontChange : (state, { mutate }) => (field, value) => {
         const fonts = R.assoc(field, value.family, state.fonts);
+        const stringStyles = JSON.stringify(state.styles);
+        const stringFonts  = JSON.stringify(fonts);
+        mutate({
+          variables: { style : stringStyles, fonts : stringFonts },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+
         return ({ fonts });
       },
 
-      sliderChange : state => (field, event, value) => {
+      sliderChange : (state, { mutate }) => (field, event, value) => {
         const styles = R.assoc(field, value, state.styles);
+        const stringStyles = JSON.stringify(styles);
+        const stringFonts  = JSON.stringify(state.fonts);
+        mutate({
+          variables: { style : stringStyles, fonts : stringFonts },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+
         return ({ styles });
       },
-
-      showAlert      : () => () => ({ hasError: true }),
-      hideAlert      : () => () => ({ hasError: false }),
     },
   ),
-  withHandlers({
-    submit : ({ styles, mutate, errorsList, showAlert, fonts }) => async () => {
-      const stringStyles = JSON.stringify(styles);
-      const stringFonts = JSON.stringify(fonts);
-      const response = await mutate({
-        variables: { style : stringStyles, fonts : stringFonts },
-      });
-
-      const { ok, errors } = response.data.updateTheme;
-
-      if (ok) {
-        showAlert();
-      } else {
-        let messageText = null;
-        errors.map((msg) => messageText = msg.message);
-
-        if (!errorsList.includes(messageText)) {
-          errorsList.push(messageText);
-        }
-        showAlert();
-        errorsList.pop();
-      }
-    },
-  })
 );
 
 export default withRecompose(ProfileThemeSettings);
