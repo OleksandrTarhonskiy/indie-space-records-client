@@ -32,7 +32,7 @@ const FullMerchList = ({
               <FullMerchList.ProductItem key={product.id}>
                 <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
                 <p>{product.title}</p>
-                <p>{product.price}</p>
+                <p>{product.price} {profile.currency}</p>
               </FullMerchList.ProductItem>
             )
           }
