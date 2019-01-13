@@ -11,12 +11,9 @@ import Typography                     from '@material-ui/core/Typography';
 import {
   compose,
   withStateHandlers,
-  withHandlers,
 }                                     from 'recompose';
 
-import GradientButton                 from '../../../layouts/gradient_button';
 import { updateSectionStyleMutation } from '../graphql/mutations';
-import Alert                          from '../../../layouts/alert';
 
 const EditSectionStyleForm = ({
   styles: {
@@ -27,10 +24,6 @@ const EditSectionStyleForm = ({
   },
   handleChange,
   handleColorChange,
-  submit,
-  hasError,
-  hideAlert,
-  errorsList,
 }) => (
   <div>
     <ColorPicker
@@ -82,15 +75,6 @@ const EditSectionStyleForm = ({
         />
       </RadioGroup>
     </FormControl>
-    <GradientButton onClick={submit}>
-      Update this section
-    </GradientButton>
-    <Alert
-      action="updated"
-      hasError={hasError}
-      hideAlert={hideAlert}
-      errorsList={errorsList}
-    />
   </div>
 );
 
@@ -99,10 +83,6 @@ EditSectionStyleForm.propTypes = {
   styles            : PropTypes.object.isRequired,
   handleColorChange : PropTypes.func.isRequired,
   handleChange      : PropTypes.func.isRequired,
-  submit            : PropTypes.func.isRequired,
-  hasError          : PropTypes.bool.isRequired,
-  errorsList        : PropTypes.array.isRequired,
-  hideAlert         : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
@@ -115,57 +95,39 @@ const withRecompose = compose(
         headlineColor   : '',
         displayHeadline : 'true',
       },
-      errorsList = [],
-      hasError   = false,
-    }) => ({ styles, errorsList, hasError }),
+    }) => ({ styles }),
     {
-      handleColorChange : state => (field, value) => {
+      handleColorChange : (state, { id, mutate }) => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
+        const stringStyle = JSON.stringify(styles);
+        mutate({
+          variables: {
+            sectionId : id,
+            style     : stringStyle,
+          },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+
         return ({ styles });
       },
 
-      handleChange : state => ({ target }) => {
+      handleChange : (state, { id, mutate }) => ({ target }) => {
         const styles = R.assoc(target.name, target.value, state.styles);
+        const stringStyle = JSON.stringify(styles);
+        mutate({
+          variables: {
+            sectionId : id,
+            style     : stringStyle,
+          },
+        }).then(() =>
+          window.document.getElementById('frame_id').contentWindow.location.reload()
+        );
+
         return ({ styles });
       },
-
-      showAlert          : () => () => ({ hasError: true }),
-      hideAlert          : () => () => ({ hasError: false }),
     },
   ),
-  withHandlers({
-    submit : ({
-      styles,
-      mutate,
-      id,
-      showAlert,
-      errorsList,
-    }) => async () => {
-      const stringStyle = JSON.stringify(styles);
-      const response = await mutate({
-        variables: {
-          sectionId : id,
-          style     : stringStyle,
-        },
-      });
-
-      const { ok, errors } = response.data.updateSectionStyle;
-
-      if (ok) {
-        showAlert();
-        window.document.getElementById('frame_id').contentWindow.location.reload();
-      } else {
-        let messageText = null;
-        errors.map((msg) => messageText = msg.message);
-
-        if (!errorsList.includes(messageText)) {
-          errorsList.push(messageText);
-        }
-        showAlert();
-        errorsList.pop();
-      }
-    },
-  })
 );
 
 export default withRecompose(EditSectionStyleForm);
