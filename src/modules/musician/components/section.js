@@ -153,7 +153,7 @@ Section.ButtonsWrapper = styled.div`
 `;
 
 Section.Button = styled.button`
-  font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
+  font-family : ${props => props.elementFont.linksFont}, sans-serif;
   background : transparent;
   height     : 62px;
   color      : ${props => props.elementStyles.LinksColor};
@@ -163,12 +163,12 @@ Section.Button = styled.button`
 `;
 
 Section.ProductName = styled.h2`
-  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
 Section.ProductPrice = styled.h3`
-  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
 `;
 
@@ -186,7 +186,7 @@ Section.EventsItem = styled.div`
 `;
 
 Section.Cell = styled.div`
-  font-family : ${props => `${props.elementFont.regularTextFont}`}, sans-serif;
+  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
   font-size   : ${props => props.elementStyles.RegularFontSize}px;
   font-size   : 20px;
   width       : 220px;
@@ -201,7 +201,7 @@ Section.ViewMoreWrapper = styled.div`
 `;
 
 Section.TiketsButton = styled.button`
-  font-family : ${props => `${props.elementFont.linksFont}`}, sans-serif;
+  font-family : ${props => props.elementFont.linksFont}, sans-serif;
   background  : transparent;
   color       : ${props => props.elementStyles.LinksColor};
   border      : solid;

@@ -15,7 +15,7 @@ import ProductsTable          from '../components/products_table';
 const SearchResults = ({
   data: {
     loading,
-    allMyProducts = [],
+    MyProducts = [],
     fetchMore,
   },
   loadMore,
@@ -26,7 +26,7 @@ const SearchResults = ({
         <CircularProgress />
         :
         <React.Fragment>
-          <ProductsTable products={allMyProducts} />
+          <ProductsTable products={MyProducts} />
           <Button
             variant="contained"
             onClick={loadMore}
@@ -61,7 +61,7 @@ const withRecompose = compose(
       loadMore : (state, { data }) => () => {
         data.fetchMore({
           variables : {
-            offset : data.allMyProducts.length,
+            offset : data.MyProducts.length,
           },
 
           updateQuery : (previousResult, { fetchMoreResult }) => {
@@ -69,13 +69,13 @@ const withRecompose = compose(
               return previousResult;
             }
 
-            if (fetchMoreResult.allMyProducts.length < 5) {
+            if (fetchMoreResult.MyProducts.length < 5) {
               state = R.assoc('hasMoreItems', false, state);
             }
 
             return {
               ...previousResult,
-              allMyProducts: [...previousResult.allMyProducts, ...fetchMoreResult.allMyProducts],
+              MyProducts: [...previousResult.MyProducts, ...fetchMoreResult.MyProducts],
             };
           },
         });
