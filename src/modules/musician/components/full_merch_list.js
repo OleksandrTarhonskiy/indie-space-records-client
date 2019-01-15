@@ -3,17 +3,16 @@ import PropTypes              from 'prop-types';
 import styled                 from 'styled-components';
 import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
-import { compose }            from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 
-import { fetchProductsQuery } from '../graphql/queries';
+import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const FullMerchList = ({
   profile,
   id,
   data: {
     loading,
-    fetchProducts = []
+    Products = []
   },
 }) => (
   <React.Fragment>
@@ -28,7 +27,7 @@ const FullMerchList = ({
       >
         <FullMerchList.List>
           {
-            fetchProducts.map(product =>
+            Products.map(product =>
               <FullMerchList.ProductItem key={product.id}>
                 <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
                 <p>{product.title}</p>

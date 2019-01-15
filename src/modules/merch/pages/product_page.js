@@ -11,15 +11,14 @@ import { viewProductQuery } from '../graphql/queries';
 const ProductPage = ({
   match: {
     params: {
-      id
-    }
+      id,
+    },
   },
   data: {
-    viewProduct = {}
+    viewProduct = {},
   },
 }) => (
   <div>
-    {console.log(viewProduct)}
     <ProductDetails product={viewProduct} />
   </div>
 );
