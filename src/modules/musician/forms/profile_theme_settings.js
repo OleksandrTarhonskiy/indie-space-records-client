@@ -6,6 +6,9 @@ import Slider                  from '@material-ui/lab/Slider';
 import InputLabel              from '@material-ui/core/InputLabel';
 import MenuItem                from '@material-ui/core/MenuItem';
 import Select                  from '@material-ui/core/Select';
+import Radio                   from '@material-ui/core/Radio';
+import RadioGroup              from '@material-ui/core/RadioGroup';
+import FormControlLabel        from '@material-ui/core/FormControlLabel';
 import FormControl             from '@material-ui/core/FormControl';
 import Typography              from '@material-ui/core/Typography';
 import styled                  from 'styled-components';
@@ -27,6 +30,9 @@ const ProfileThemeSettings = ({
     LinksHover,
     MenuLinksPosition,
     headerBackground,
+    buttonsBackground,
+    buttonsColor,
+    borderRadius,
   },
   fonts: {
     headlineFont,
@@ -41,6 +47,10 @@ const ProfileThemeSettings = ({
   sliderChange,
   handleSelectChange,
   handleFontChange,
+  backgroundType: {
+    transparent,
+  },
+  handleRadioChange,
 }) => (
   <div>
     <ColorPicker
@@ -177,6 +187,61 @@ const ProfileThemeSettings = ({
       />
     </ProfileThemeSettings.SliderWrapper>
     <br />
+    <p>Buttons settings</p>
+    <FormControl component="fieldset">
+      <Typography>Transparent?</Typography>
+      <RadioGroup
+        name="transparent"
+        onChange={handleRadioChange}
+        value={String(transparent)}
+      >
+        <FormControlLabel
+          value="true"
+          control={<Radio color="primary" />}
+          label="transparent"
+        />
+        <FormControlLabel
+          value="false"
+          control={<Radio color="primary" />}
+          label="colored"
+        />
+      </RadioGroup>
+    </FormControl>
+    {
+      JSON.parse(transparent) ?
+      null
+      :
+      <ColorPicker
+        defaultValue={buttonsBackground}
+        value={buttonsBackground}
+        name="buttonsBackground"
+        onChange={handleChange.bind(null, 'buttonsBackground')}
+        label="Buttons background"
+        margin="normal"
+      />
+    }
+    <ColorPicker
+      defaultValue={buttonsColor}
+      value={buttonsColor}
+      name="buttonsColor"
+      onChange={handleChange.bind(null, 'buttonsColor')}
+      label="Buttons text color"
+      margin="normal"
+    />
+    <ProfileThemeSettings.SliderWrapper>
+      <ProfileThemeSettings.Label>
+        Button border radius: {borderRadius}%
+      </ProfileThemeSettings.Label>
+      <Slider
+        value={borderRadius}
+        name="borderRadius"
+        min={0}
+        max={50}
+        step={1}
+        onChange={sliderChange.bind(null, 'borderRadius')}
+        aria-labelledby="label"
+      />
+    </ProfileThemeSettings.SliderWrapper>
   </div>
 );
 
@@ -197,17 +262,22 @@ ProfileThemeSettings.SelectWrapper = styled(FormControl)`
 ProfileThemeSettings.propTypes = {
   styles             : PropTypes.object.isRequired,
   fonts              : PropTypes.object.isRequired,
+  backgroundType     : PropTypes.object.isRequired,
   handleChange       : PropTypes.func.isRequired,
   sliderChange       : PropTypes.func.isRequired,
   handleSelectChange : PropTypes.func.isRequired,
   handleFontChange   : PropTypes.func.isRequired,
+  handleRadioChange  : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
   graphql(updateThemeMutation),
   withStateHandlers(
     ({
-      styles = {
+      backgroundType = {
+        transparent : 'true',
+      },
+      styles         = {
         h1FontSize        : '',
         h2FontSize        : '',
         RegularFontSize   : '',
@@ -215,14 +285,17 @@ const withRecompose = compose(
         LinksHover        : '',
         MenuLinksPosition : '',
         headerBackground  : '',
+        buttonsBackground : '',
+        buttonsColor      : '',
+        borderRadius      : '',
       },
-      fonts  = {
+      fonts          = {
         headlineFont    : '',
         regularTextFont : '',
         linksFont       : '',
         subHead         : '',
       },
-    }) => ({ styles, fonts }),
+    }) => ({ styles, fonts, backgroundType }),
     {
       handleChange : (state, { mutate }) => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
@@ -233,7 +306,7 @@ const withRecompose = compose(
         }).then(() =>
           window.document.getElementById('frame_id').contentWindow.location.reload()
         );
-        
+
         return ({ styles });
       },
 
@@ -275,6 +348,11 @@ const withRecompose = compose(
 
         return ({ styles });
       },
+
+      handleRadioChange : state => ({ target }) => {
+        const backgroundType = R.assoc(target.name, target.value, state.backgroundType);
+        return ({ backgroundType });
+      }
     },
   ),
 );
