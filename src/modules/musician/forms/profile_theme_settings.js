@@ -3,6 +3,7 @@ import PropTypes               from 'prop-types';
 import ColorPicker             from 'material-ui-color-picker';
 import * as R                  from 'ramda';
 import Slider                  from '@material-ui/lab/Slider';
+import TextField               from '@material-ui/core/TextField';
 import InputLabel              from '@material-ui/core/InputLabel';
 import MenuItem                from '@material-ui/core/MenuItem';
 import Select                  from '@material-ui/core/Select';
@@ -33,6 +34,7 @@ const ProfileThemeSettings = ({
     buttonsBackground,
     buttonsColor,
     borderRadius,
+    border,
   },
   fonts: {
     headlineFont,
@@ -187,7 +189,9 @@ const ProfileThemeSettings = ({
       />
     </ProfileThemeSettings.SliderWrapper>
     <br />
-    <p>Buttons settings</p>
+    <ProfileThemeSettings.SectionLabel>
+      Buttons settings
+    </ProfileThemeSettings.SectionLabel>
     <FormControl component="fieldset">
       <Typography>Transparent?</Typography>
       <RadioGroup
@@ -230,7 +234,7 @@ const ProfileThemeSettings = ({
     />
     <ProfileThemeSettings.SliderWrapper>
       <ProfileThemeSettings.Label>
-        Button border radius: {borderRadius}%
+        Button border radius: {borderRadius}px
       </ProfileThemeSettings.Label>
       <Slider
         value={borderRadius}
@@ -242,6 +246,19 @@ const ProfileThemeSettings = ({
         aria-labelledby="label"
       />
     </ProfileThemeSettings.SliderWrapper>
+    <TextField
+      label="border in px"
+      value={border}
+      InputProps={{ inputProps : { min : 0, max : 10 } }}
+      name="border"
+      onChange={handleSelectChange}
+      type="number"
+      InputLabelProps={{
+        shrink: true,
+      }}
+      margin="normal"
+    />
+    <br />
   </div>
 );
 
@@ -257,6 +274,12 @@ ProfileThemeSettings.Label = styled(Typography)`
 
 ProfileThemeSettings.SelectWrapper = styled(FormControl)`
   width : 88%;
+`;
+
+ProfileThemeSettings.SectionLabel = styled.p`
+  color       : #0d0228;
+  font-family : 'Roboto', sans-serif;
+  font-size   : 17px;
 `;
 
 ProfileThemeSettings.propTypes = {
@@ -288,6 +311,7 @@ const withRecompose = compose(
         buttonsBackground : '',
         buttonsColor      : '',
         borderRadius      : '',
+        border            : '',
       },
       fonts          = {
         headlineFont    : '',
