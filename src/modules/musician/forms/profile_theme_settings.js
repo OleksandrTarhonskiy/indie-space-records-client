@@ -43,9 +43,6 @@ const ProfileThemeSettings = ({
     subHead,
   },
   handleChange,
-  errorsList,
-  hasError,
-  hideAlert,
   sliderChange,
   handleSelectChange,
   handleFontChange,
@@ -213,16 +210,16 @@ const ProfileThemeSettings = ({
     </FormControl>
     {
       JSON.parse(transparent) ?
-      null
-      :
-      <ColorPicker
-        defaultValue={buttonsBackground}
-        value={buttonsBackground}
-        name="buttonsBackground"
-        onChange={handleChange.bind(null, 'buttonsBackground')}
-        label="Buttons background"
-        margin="normal"
-      />
+        null
+        :
+        <ColorPicker
+          defaultValue={buttonsBackground}
+          value={buttonsBackground}
+          name="buttonsBackground"
+          onChange={handleChange.bind(null, 'buttonsBackground')}
+          label="Buttons background"
+          margin="normal"
+        />
     }
     <ColorPicker
       defaultValue={buttonsColor}

@@ -9,16 +9,10 @@ import { fetchProfileQuery } from '../graphql/queries';
 import Profile               from '../components/profile';
 
 const ProfilePage = ({
-  match: {
-    params: {
-      id
-    }
-  },
   data: {
     loading,
     fetchProfile = {}
   },
-  myId,
 }) => (
   <React.Fragment>
     {

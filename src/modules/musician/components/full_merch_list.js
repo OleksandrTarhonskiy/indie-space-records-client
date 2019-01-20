@@ -9,7 +9,6 @@ import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const FullMerchList = ({
   profile,
-  id,
   data: {
     loading,
     Products = []
@@ -18,25 +17,25 @@ const FullMerchList = ({
   <React.Fragment>
     {
       loading ?
-      <CircularProgress />
-      :
-      <FullMerchList.Wrapper
-        profileFonts={JSON.parse(profile.theme.fonts)}
-        profileStyles={JSON.parse(profile.theme.style)}
-        sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
-      >
-        <FullMerchList.List>
-          {
-            Products.map(product =>
-              <FullMerchList.ProductItem key={product.id}>
-                <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
-                <p>{product.title}</p>
-                <p>{product.price} {profile.currency}</p>
-              </FullMerchList.ProductItem>
-            )
-          }
-        </FullMerchList.List>
-      </FullMerchList.Wrapper>
+        <CircularProgress />
+        :
+        <FullMerchList.Wrapper
+          profileFonts={JSON.parse(profile.theme.fonts)}
+          profileStyles={JSON.parse(profile.theme.style)}
+          sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
+        >
+          <FullMerchList.List>
+            {
+              Products.map(product =>
+                <FullMerchList.ProductItem key={product.id}>
+                  <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                  <p>{product.title}</p>
+                  <p>{product.price} {profile.currency}</p>
+                </FullMerchList.ProductItem>
+              )
+            }
+          </FullMerchList.List>
+        </FullMerchList.Wrapper>
     }
   </React.Fragment>
 );

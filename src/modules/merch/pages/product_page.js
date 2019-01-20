@@ -9,11 +9,6 @@ import { viewProductQuery } from '../graphql/queries';
 
 
 const ProductPage = ({
-  match: {
-    params: {
-      id,
-    },
-  },
   data: {
     viewProduct = {},
   },
