@@ -7,9 +7,6 @@ import TextField               from '@material-ui/core/TextField';
 import InputLabel              from '@material-ui/core/InputLabel';
 import MenuItem                from '@material-ui/core/MenuItem';
 import Select                  from '@material-ui/core/Select';
-import Radio                   from '@material-ui/core/Radio';
-import RadioGroup              from '@material-ui/core/RadioGroup';
-import FormControlLabel        from '@material-ui/core/FormControlLabel';
 import FormControl             from '@material-ui/core/FormControl';
 import Typography              from '@material-ui/core/Typography';
 import styled                  from 'styled-components';
@@ -46,10 +43,6 @@ const ProfileThemeSettings = ({
   sliderChange,
   handleSelectChange,
   handleFontChange,
-  backgroundType: {
-    transparent,
-  },
-  handleRadioChange,
 }) => (
   <div>
     <ColorPicker
@@ -189,38 +182,14 @@ const ProfileThemeSettings = ({
     <ProfileThemeSettings.SectionLabel>
       Buttons settings
     </ProfileThemeSettings.SectionLabel>
-    <FormControl component="fieldset">
-      <Typography>Transparent?</Typography>
-      <RadioGroup
-        name="transparent"
-        onChange={handleRadioChange}
-        value={String(transparent)}
-      >
-        <FormControlLabel
-          value="true"
-          control={<Radio color="primary" />}
-          label="transparent"
-        />
-        <FormControlLabel
-          value="false"
-          control={<Radio color="primary" />}
-          label="colored"
-        />
-      </RadioGroup>
-    </FormControl>
-    {
-      JSON.parse(transparent) ?
-        null
-        :
-        <ColorPicker
-          defaultValue={buttonsBackground}
-          value={buttonsBackground}
-          name="buttonsBackground"
-          onChange={handleChange.bind(null, 'buttonsBackground')}
-          label="Buttons background"
-          margin="normal"
-        />
-    }
+    <ColorPicker
+      defaultValue={buttonsBackground}
+      value={buttonsBackground}
+      name="buttonsBackground"
+      onChange={handleChange.bind(null, 'buttonsBackground')}
+      label="Buttons background"
+      margin="normal"
+    />
     <ColorPicker
       defaultValue={buttonsColor}
       value={buttonsColor}
@@ -282,21 +251,16 @@ ProfileThemeSettings.SectionLabel = styled.p`
 ProfileThemeSettings.propTypes = {
   styles             : PropTypes.object.isRequired,
   fonts              : PropTypes.object.isRequired,
-  backgroundType     : PropTypes.object.isRequired,
   handleChange       : PropTypes.func.isRequired,
   sliderChange       : PropTypes.func.isRequired,
   handleSelectChange : PropTypes.func.isRequired,
   handleFontChange   : PropTypes.func.isRequired,
-  handleRadioChange  : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
   graphql(updateThemeMutation),
   withStateHandlers(
     ({
-      backgroundType = {
-        transparent : 'true',
-      },
       styles         = {
         h1FontSize        : '',
         h2FontSize        : '',
@@ -316,7 +280,7 @@ const withRecompose = compose(
         linksFont       : '',
         subHead         : '',
       },
-    }) => ({ styles, fonts, backgroundType }),
+    }) => ({ styles, fonts }),
     {
       handleChange : (state, { mutate }) => (field, value) => {
         const styles = R.assoc(field, value, state.styles);
@@ -369,11 +333,6 @@ const withRecompose = compose(
 
         return ({ styles });
       },
-
-      handleRadioChange : state => ({ target }) => {
-        const backgroundType = R.assoc(target.name, target.value, state.backgroundType);
-        return ({ backgroundType });
-      }
     },
   ),
 );
