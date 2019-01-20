@@ -29,20 +29,20 @@ const ProductDetails = ({
       <h1>{product.title}</h1>
       {
         loading ?
-          <CircularProgress />
-          :
-          <React.Fragment>
-            <h2>{product.price} {fetchProfile.currency}</h2>
-            <h3>{product.type}</h3>
-            <p>{product.desc}</p>
-            <ProductDetails.AddToCart
-              basicStyles={JSON.parse(fetchProfile.theme.style)}
-              disabled={!product.quantity}
-            >
-              <ShoppingCart />
+        <CircularProgress />
+        :
+        <React.Fragment>
+          <h2>{product.price} {fetchProfile.currency}</h2>
+          <h3>{product.type}</h3>
+          <p>{product.desc}</p>
+          <ProductDetails.AddToCart
+            basicStyles={JSON.parse(fetchProfile.theme.style)}
+            disabled={!product.quantity}
+          >
+            <ShoppingCart />
             Add to cart
-            </ProductDetails.AddToCart>
-          </React.Fragment>
+          </ProductDetails.AddToCart>
+        </React.Fragment>
       }
     </ProductDetails.DetailsBlock>
   </ProductDetails.Wrapper>
@@ -81,7 +81,7 @@ ProductDetails.Image = styled.img`
 ProductDetails.AddToCart = styled(Button)`
   && {
     width         : 300px;
-    border        : 0;
+    border        : ${props => props.basicStyles.border}px solid;;
     background    : ${ props => props.disabled ? '#ffff' : props.basicStyles.buttonsBackground};
     color         : ${props => props.basicStyles.buttonsColor};
     padding       : 15px 30px;
