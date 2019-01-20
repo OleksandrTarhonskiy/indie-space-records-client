@@ -203,7 +203,7 @@ BeautifulPlay.ImageWrapper = styled.div`
 
 BeautifulPlay.ButtonsWrapper = styled.div`
   display               : grid;
-  grid-template-columns : 30% 30%;
+  grid-template-columns : 45% 45%;
 `;
 
 BeautifulPlay.Button = styled.button`
@@ -212,7 +212,9 @@ BeautifulPlay.Button = styled.button`
   color      : #ffff;
   font-size  : 20px;
   border     : solid;
-  margin     : 1%;
+  margin     : 0 5%;
+  cursor     : pointer;
+  padding    : 5px 35px;
 `;
 
 BeautifulPlay.EventsItem = styled.div`

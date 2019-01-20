@@ -42,7 +42,7 @@ const Section = ({
                 <Section.ButtonsWrapper>
                   <Link
                     component={Link}
-                    to={`/musicians/merch/${p.id}`}
+                    to={`/musicians/${id}/merch/${p.id}`}
                   >
                     <Section.Button
                       elementFont={elementFont}
@@ -104,12 +104,12 @@ const Section = ({
               >
                 {e.price}
               </Section.Cell>
-              <Section.TiketsButton
+              <Section.Button
                 elementFont={elementFont}
                 elementStyles={elementStyles}
               >
               Tikets
-              </Section.TiketsButton>
+              </Section.Button>
             </Section.EventsItem>
           )
         }
@@ -149,17 +149,20 @@ Section.ImageWrapper = styled.div`
 
 Section.ButtonsWrapper = styled.div`
   display               : grid;
-  grid-template-columns : 30% 30%;
+  grid-template-columns : 45% 45%;
 `;
 
 Section.Button = styled.button`
-  font-family : ${props => props.elementFont.linksFont}, sans-serif;
-  background : transparent;
-  height     : 62px;
-  color      : ${props => props.elementStyles.LinksColor};
-  font-size  : 20px;
-  border     : solid;
-  margin     : 1%;
+  font-family      : ${props => props.elementFont.linksFont}, sans-serif;
+  background-color : ${props => props.elementStyles.buttonsBackground} !important;
+  height           : 62px;
+  color            : ${props => props.elementStyles.buttonsColor};
+  font-size        : 20px;
+  border           : ${props => props.elementStyles.border}px solid;
+  border-radius    : ${props => props.elementStyles.borderRadius}px;
+  margin           : 0 5%;
+  cursor           : pointer;
+  padding          : 5px 35px;
 `;
 
 Section.ProductName = styled.h2`
@@ -198,15 +201,6 @@ Section.ViewMoreWrapper = styled.div`
   flex-direction  : row;
   justify-content : center;
   padding         : 5%;
-`;
-
-Section.TiketsButton = styled.button`
-  font-family : ${props => props.elementFont.linksFont}, sans-serif;
-  background  : transparent;
-  color       : ${props => props.elementStyles.LinksColor};
-  border      : solid;
-  width       : 100px;
-  height      : 45px;
 `;
 
 export default Section;

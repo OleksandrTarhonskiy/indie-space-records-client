@@ -72,7 +72,7 @@ Sections.SectionContent = styled.div`
   color       : ${props => props.sectionStyle.color};
 `;
 
-Section.propTypes = {
+Sections.propTypes = {
   profile : PropTypes.object.isRequired,
 };
 

@@ -55,6 +55,19 @@ export const myProfileWithThemeQuery = gql`
   }
 `;
 
+export const profileThemeQuery = gql`
+  query fetchProfile($profileId: Int!){
+    fetchProfile(profileId: $profileId) {
+      id
+      currency
+      theme {
+        style
+        fonts
+      }
+    }
+  }
+`;
+
 export const getCurrencyQuery = gql`
   {
     myProfile{
