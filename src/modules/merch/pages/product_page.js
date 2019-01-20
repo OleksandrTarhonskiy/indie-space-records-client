@@ -1,8 +1,9 @@
 import React                from 'react';
-import { withRouter }       from 'react-router';
 import PropTypes            from 'prop-types';
+import { withRouter }       from 'react-router';
 import { graphql }          from 'react-apollo';
 import { compose }          from 'recompose';
+import CircularProgress     from '@material-ui/core/CircularProgress';
 
 import ProductDetails       from '../components/product_details';
 import { viewProductQuery } from '../graphql/queries';
@@ -11,10 +12,16 @@ import { viewProductQuery } from '../graphql/queries';
 const ProductPage = ({
   data: {
     viewProduct = {},
+    loading,
   },
 }) => (
   <div>
-    <ProductDetails product={viewProduct} />
+    {
+      loading ?
+        <CircularProgress />
+        :
+        <ProductDetails product={viewProduct} />
+    }
   </div>
 );
 
@@ -28,7 +35,7 @@ const withRecompose = compose(
   graphql(viewProductQuery, {
     options: props => ({
       variables: {
-        productId: props.match.params.id,
+        productId: props.match.params.productId,
       },
     })
   }),

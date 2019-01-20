@@ -42,7 +42,7 @@ const Section = ({
                 <Section.ButtonsWrapper>
                   <Link
                     component={Link}
-                    to={`/musicians/merch/${p.id}`}
+                    to={`/musicians/${id}/merch/${p.id}`}
                   >
                     <Section.Button
                       elementFont={elementFont}
