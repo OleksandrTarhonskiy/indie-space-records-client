@@ -14,7 +14,7 @@ const allProfilesPage = ({ data: { loading, allProfiles = [] } }) => (
         <CircularProgress />
         :
         allProfiles.map(profile =>
-          profile.theme?
+          profile.theme &&
             <allProfilesPage.Card key={profile.id}>
               <allProfilesPage.PhotoWrapper>
                 <img
@@ -30,8 +30,6 @@ const allProfilesPage = ({ data: { loading, allProfiles = [] } }) => (
                 <p>{profile.genres}</p>
               </allProfilesPage.DescWrapper>
             </allProfilesPage.Card>
-            :
-            null
         )
     }
   </allProfilesPage.Wrapper>
