@@ -40,17 +40,14 @@ const Section = ({
                   {p.price + ' ' + currency}
                 </Section.ProductPrice>
                 <Section.ButtonsWrapper>
-                  <Link
+                  <Section.Button
                     component={Link}
                     to={`/musicians/${id}/merch/${p.id}`}
+                    elementFont={elementFont}
+                    elementStyles={elementStyles}
                   >
-                    <Section.Button
-                      elementFont={elementFont}
-                      elementStyles={elementStyles}
-                    >
-                      Buy now
-                    </Section.Button>
-                  </Link>
+                    Buy now
+                  </Section.Button>
                   <Section.Button
                     elementFont={elementFont}
                     elementStyles={elementStyles}
@@ -152,17 +149,22 @@ Section.ButtonsWrapper = styled.div`
   grid-template-columns : 45% 45%;
 `;
 
-Section.Button = styled.button`
-  font-family      : ${props => props.elementFont.linksFont}, sans-serif;
-  background-color : ${props => props.elementStyles.buttonsBackground} !important;
-  height           : 62px;
-  color            : ${props => props.elementStyles.buttonsColor};
-  font-size        : 20px;
-  border           : ${props => props.elementStyles.border}px solid;
-  border-radius    : ${props => props.elementStyles.borderRadius}px;
-  margin           : 0 5%;
-  cursor           : pointer;
-  padding          : 5px 35px;
+Section.Button = styled(Button)`
+  && {
+    font-family      : ${props => props.elementFont.linksFont}, sans-serif;
+    background-color : ${props => props.elementStyles.buttonsBackground};
+    height           : 62px;
+    color            : ${props => props.elementStyles.buttonsColor};
+    border           : ${props => props.elementStyles.border}px solid;
+    border-radius    : ${props => props.elementStyles.borderRadius}px;
+    margin           : 0 5%;
+    padding          : 1% 5%;
+
+    &:hover {
+      color      : ${props => props.elementStyles.LinksHover};
+      background : "transparent";
+    }
+  }
 `;
 
 Section.ProductName = styled.h2`
