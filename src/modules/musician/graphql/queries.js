@@ -90,6 +90,9 @@ export const allProfilesQuery = gql`
       id
       name
       genres
+      theme {
+        name
+      }
     }
   }
 `;

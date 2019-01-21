@@ -14,21 +14,24 @@ const allProfilesPage = ({ data: { loading, allProfiles = [] } }) => (
         <CircularProgress />
         :
         allProfiles.map(profile =>
-          <allProfilesPage.Card key={profile.id}>
-            <allProfilesPage.PhotoWrapper>
-              <img
-                src="https://newmusicshelf.com/wp-content/uploads/blank-profile-picture.png"
-                heigh="255px"
-                width="255px"
-                alt={profile.name}
-              />
-            </allProfilesPage.PhotoWrapper>
-            <br />
-            <allProfilesPage.DescWrapper>
-              <Link to={`/musicians/${profile.id}`}>{profile.name}</Link>
-              <p>{profile.genres}</p>
-            </allProfilesPage.DescWrapper>
-          </allProfilesPage.Card>
+          profile.theme?
+            <allProfilesPage.Card key={profile.id}>
+              <allProfilesPage.PhotoWrapper>
+                <img
+                  src="https://newmusicshelf.com/wp-content/uploads/blank-profile-picture.png"
+                  heigh="255px"
+                  width="255px"
+                  alt={profile.name}
+                />
+              </allProfilesPage.PhotoWrapper>
+              <br />
+              <allProfilesPage.DescWrapper>
+                <Link to={`/musicians/${profile.id}`}>{profile.name}</Link>
+                <p>{profile.genres}</p>
+              </allProfilesPage.DescWrapper>
+            </allProfilesPage.Card>
+            :
+            null
         )
     }
   </allProfilesPage.Wrapper>
