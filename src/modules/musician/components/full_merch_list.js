@@ -3,7 +3,13 @@ import PropTypes              from 'prop-types';
 import styled                 from 'styled-components';
 import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
+import {
+  compose,
+  withStateHandlers,
+}                             from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
+import Button                 from '@material-ui/core/Button';
+import * as R                 from 'ramda';
 
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 
@@ -11,8 +17,10 @@ const FullMerchList = ({
   profile,
   data: {
     loading,
-    Products = []
+    Products = [],
+    fetchMore,
   },
+  loadMore,
 }) => (
   <React.Fragment>
     {
@@ -35,6 +43,12 @@ const FullMerchList = ({
               )
             }
           </FullMerchList.List>
+          <Button
+            variant="contained"
+            onClick={loadMore}
+          >
+            Load More
+          </Button>
         </FullMerchList.Wrapper>
     }
   </React.Fragment>
@@ -81,10 +95,46 @@ FullMerchList.ImageWrapper = styled.div`
   background-repeat : no-repeat;
 `;
 
-export default graphql(fetchProductsQuery, {
-  options: (props) => ({
-    variables: {
-      profileId: props.id
-    }
-  })
-})(FullMerchList);
+const withRecompose = compose(
+  graphql(fetchProductsQuery, {
+    options: props => ({
+      fetchPolicy: 'network-only',
+      variables: {
+        profileId : props.id,
+        offset    : 0,
+      },
+    }),
+  }),
+  withStateHandlers(
+    ({
+      hasMoreItems = true,
+    }) => ({ hasMoreItems }),
+    {
+      loadMore : (state, { data }) => () => {
+        data.fetchMore({
+          variables : {
+            offset : data.Products.length,
+          },
+
+          updateQuery : (previousResult, { fetchMoreResult }) => {
+            if (!fetchMoreResult) {
+              return previousResult;
+            }
+
+            if (fetchMoreResult.Products.length < 5) {
+              state = R.assoc('hasMoreItems', false, state);
+            }
+
+            return {
+              ...previousResult,
+              Products: [...previousResult.Products, ...fetchMoreResult.Products],
+            };
+          },
+        });
+      }
+    },
+  ),
+);
+
+
+export default withRecompose(FullMerchList);
