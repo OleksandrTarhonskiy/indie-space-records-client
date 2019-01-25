@@ -90,7 +90,7 @@ ProductDetails.AddToCart = styled(Button)`
 
     &:hover {
       color      : ${props => props.basicStyles.LinksHover};
-      background : #ffff;
+      background : transparent;
     }
   }
 `;
