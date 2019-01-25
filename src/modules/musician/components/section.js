@@ -162,7 +162,7 @@ Section.Button = styled(Button)`
 
     &:hover {
       color      : ${props => props.elementStyles.LinksHover};
-      background : "transparent";
+      background : transparent;
     }
   }
 `;
