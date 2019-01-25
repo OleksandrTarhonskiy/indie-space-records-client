@@ -136,5 +136,4 @@ const withRecompose = compose(
   ),
 );
 
-
 export default withRecompose(FullMerchList);
