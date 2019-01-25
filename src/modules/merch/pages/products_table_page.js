@@ -8,7 +8,7 @@ import {
   withStateHandlers,
 }                    from 'recompose';
 
-import SearchResults from './search_results';
+import SearchResults from '../components/search_results';
 
 const ProductsTablePage = ({
   tableOptions: {

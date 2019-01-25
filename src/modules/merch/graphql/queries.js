@@ -29,8 +29,8 @@ export const viewProductQuery = gql`
 `;
 
 export const fetchProductsQuery = gql`
-  query Products($profileId: Int!){
-    Products(profileId: $profileId) {
+  query Products($offset: Int!, $profileId: Int!){
+    Products(offset: $offset, profileId: $profileId) {
       id
       type
       title
