@@ -1,16 +1,17 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
 import { graphql }            from 'react-apollo';
-import * as R                 from 'ramda';
 import {
   compose,
-  withStateHandlers,
+  withHandlers,
+  withState,
 }                             from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
-import Button                 from '@material-ui/core/Button';
+import InfiniteScroll         from 'react-infinite-scroller';
 
 import { allMyProductsQuery } from '../graphql/queries';
 import ProductsTable          from '../components/products_table';
+import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const SearchResults = ({
   data: {
@@ -19,6 +20,7 @@ const SearchResults = ({
     fetchMore,
   },
   loadMore,
+  hasMore,
 }) => (
   <div>
     {
@@ -26,13 +28,15 @@ const SearchResults = ({
         <CircularProgress />
         :
         <React.Fragment>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loader={<CircularProgress key={0} />}
+          useWindow={true}
+        >
           <ProductsTable products={MyProducts} />
-          <Button
-            variant="contained"
-            onClick={loadMore}
-          >
-            Load More
-          </Button>
+        </InfiniteScroll>
         </React.Fragment>
     }
   </div>
@@ -53,12 +57,10 @@ const withRecompose = compose(
       },
     }),
   }),
-  withStateHandlers(
-    ({
-      hasMoreItems = true,
-    }) => ({ hasMoreItems }),
+  withState('hasMore', 'setHasMore', true),
+  withHandlers(
     {
-      loadMore : (state, { data }) => () => {
+      loadMore : ({ data, setHasMore }) => () => {
         data.fetchMore({
           variables : {
             offset : data.MyProducts.length,
@@ -70,7 +72,7 @@ const withRecompose = compose(
             }
 
             if (fetchMoreResult.MyProducts.length < 5) {
-              state = R.assoc('hasMoreItems', false, state);
+              setHasMore(false);
             }
 
             return {

@@ -22,7 +22,6 @@ const FullMerchList = ({
   },
   loadMore,
   hasMore,
-  id
 }) => (
   <React.Fragment>
     {
@@ -59,9 +58,11 @@ const FullMerchList = ({
 );
 
 FullMerchList.propTypes = {
-  profile : PropTypes.object.isRequired,
-  data    : PropTypes.object.isRequired,
-  id      : PropTypes.number.isRequired,
+  profile  : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  id       : PropTypes.number.isRequired,
+  loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 FullMerchList.Wrapper = styled.div`
@@ -124,7 +125,7 @@ const withRecompose = compose(
             }
 
             if (fetchMoreResult.Products.length < 5) {
-              setHasMore(false)
+              setHasMore(false);
             }
 
             return {
