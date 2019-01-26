@@ -5,11 +5,11 @@ import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
 import {
   compose,
-  withStateHandlers,
+  withHandlers,
+  withState,
 }                             from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
-import Button                 from '@material-ui/core/Button';
-import * as R                 from 'ramda';
+import InfiniteScroll         from 'react-infinite-scroller';
 
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 
@@ -21,6 +21,8 @@ const FullMerchList = ({
     fetchMore,
   },
   loadMore,
+  hasMore,
+  id
 }) => (
   <React.Fragment>
     {
@@ -32,23 +34,26 @@ const FullMerchList = ({
           profileStyles={JSON.parse(profile.theme.style)}
           sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
         >
-          <FullMerchList.List>
-            {
-              Products.map(product =>
-                <FullMerchList.ProductItem key={product.id}>
-                  <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
-                  <p>{product.title}</p>
-                  <p>{product.price} {profile.currency}</p>
-                </FullMerchList.ProductItem>
-              )
-            }
-          </FullMerchList.List>
-          <Button
-            variant="contained"
-            onClick={loadMore}
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={hasMore ? loadMore : null}
+            hasMore={hasMore}
+            loader={<CircularProgress />}
+            useWindow={true}
           >
-            Load More
-          </Button>
+            <FullMerchList.List>
+              {
+                Products.map(product =>
+                  <FullMerchList.ProductItem key={product.id}>
+                    {console.log(product.id)}
+                    <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                    <p>{product.title}</p>
+                    <p>{product.price} {profile.currency}</p>
+                  </FullMerchList.ProductItem>
+                )
+              }
+            </FullMerchList.List>
+          </InfiniteScroll>
         </FullMerchList.Wrapper>
     }
   </React.Fragment>
@@ -105,12 +110,10 @@ const withRecompose = compose(
       },
     }),
   }),
-  withStateHandlers(
-    ({
-      hasMoreItems = true,
-    }) => ({ hasMoreItems }),
+  withState('hasMore', 'setHasMore', true),
+  withHandlers(
     {
-      loadMore : (state, { data }) => () => {
+      loadMore : ({ data, setHasMore }) => () => {
         data.fetchMore({
           variables : {
             offset : data.Products.length,
@@ -122,7 +125,7 @@ const withRecompose = compose(
             }
 
             if (fetchMoreResult.Products.length < 5) {
-              state = R.assoc('hasMoreItems', false, state);
+              setHasMore(false)
             }
 
             return {

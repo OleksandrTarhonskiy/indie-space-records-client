@@ -31,7 +31,7 @@ const MusicianMerchPage = ({
           </Helmet>
           <FullMerchList
             profile={fetchProfile}
-            id={id}
+            id={Number(id)}
           />
         </React.Fragment>
     }
