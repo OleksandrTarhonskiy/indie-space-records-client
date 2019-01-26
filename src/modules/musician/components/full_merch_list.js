@@ -36,7 +36,7 @@ const FullMerchList = ({
         >
           <InfiniteScroll
             pageStart={0}
-            loadMore={hasMore ? loadMore : null}
+            loadMore={loadMore}
             hasMore={hasMore}
             loader={<CircularProgress />}
             useWindow={true}
