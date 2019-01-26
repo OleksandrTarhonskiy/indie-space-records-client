@@ -38,14 +38,13 @@ const FullMerchList = ({
             pageStart={0}
             loadMore={loadMore}
             hasMore={hasMore}
-            loader={<CircularProgress />}
+            loader={<CircularProgress key={0} />}
             useWindow={true}
           >
             <FullMerchList.List>
               {
                 Products.map(product =>
                   <FullMerchList.ProductItem key={product.id}>
-                    {console.log(product.id)}
                     <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
                     <p>{product.title}</p>
                     <p>{product.price} {profile.currency}</p>
