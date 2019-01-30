@@ -21,34 +21,34 @@ const ProductDetails = ({
   <React.Fragment>
     {
       loading ?
-      <CircularProgress />
-      :
-      <ProductDetails.Wrapper
-        sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'merch').style)}
-      >
-        <ProductDetails.ImageWrapper>
-          <ProductDetails.Image
-            src={`http://localhost:8080/${product.url}`}
-            alt=""
-          />
-        </ProductDetails.ImageWrapper>
-        <ProductDetails.DetailsBlock>
-          <h1>{product.title}</h1>
-              <React.Fragment>
-                <h2>{product.price} {fetchProfile.currency}</h2>
-                <h3>{product.type}</h3>
-                <p>{product.desc}</p>
-                <ProductDetails.AddToCart
-                  basicStyles={JSON.parse(fetchProfile.theme.style)}
-                  disabled={!product.quantity}
-                >
-                  <ShoppingCart />
+        <CircularProgress />
+        :
+        <ProductDetails.Wrapper
+          sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'merch').style)}
+        >
+          <ProductDetails.ImageWrapper>
+            <ProductDetails.Image
+              src={`http://localhost:8080/${product.url}`}
+              alt=""
+            />
+          </ProductDetails.ImageWrapper>
+          <ProductDetails.DetailsBlock>
+            <h1>{product.title}</h1>
+            <React.Fragment>
+              <h2>{product.price} {fetchProfile.currency}</h2>
+              <h3>{product.type}</h3>
+              <p>{product.desc}</p>
+              <ProductDetails.AddToCart
+                basicStyles={JSON.parse(fetchProfile.theme.style)}
+                disabled={!product.quantity}
+              >
+                <ShoppingCart />
                 Add to cart
-                </ProductDetails.AddToCart>
-              </React.Fragment>
+              </ProductDetails.AddToCart>
+            </React.Fragment>
 
-        </ProductDetails.DetailsBlock>
-      </ProductDetails.Wrapper>
+          </ProductDetails.DetailsBlock>
+        </ProductDetails.Wrapper>
     }
   </React.Fragment>
 );
