@@ -11,7 +11,6 @@ import InfiniteScroll         from 'react-infinite-scroller';
 
 import { allMyProductsQuery } from '../graphql/queries';
 import ProductsTable          from '../components/products_table';
-import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const SearchResults = ({
   data: {
