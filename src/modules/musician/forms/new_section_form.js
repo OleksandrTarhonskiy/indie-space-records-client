@@ -130,7 +130,7 @@ const withRecompose = compose(
         content : '',
         type    : '',
       },
-      canSubmit  = true,
+      canSubmit  = false,
       errorsList = [],
       hasError   = false,
     }) => ({ section, errorsList, hasError, canSubmit }),
@@ -143,8 +143,8 @@ const withRecompose = compose(
         });
       },
 
-      showAlert          : () => () => ({ hasError: true }),
-      hideAlert          : () => () => ({ hasError: false }),
+      showAlert    : () => () => ({ hasError: true }),
+      hideAlert    : () => () => ({ hasError: false }),
     },
   ),
   withHandlers({
