@@ -18,7 +18,6 @@ const FullMerchList = ({
   data: {
     loading,
     Products = [],
-    fetchMore,
   },
   loadMore,
   hasMore,
