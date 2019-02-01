@@ -28,15 +28,15 @@ const SearchResults = ({
         <CircularProgress />
         :
         <React.Fragment>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={loadMore}
-          hasMore={hasMore}
-          loader={<CircularProgress key={0} />}
-          useWindow={true}
-        >
-          <ProductsTable products={MyProducts} />
-        </InfiniteScroll>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={loadMore}
+            hasMore={hasMore}
+            loader={<CircularProgress key={0} />}
+            useWindow={true}
+          >
+            <ProductsTable products={MyProducts} />
+          </InfiniteScroll>
         </React.Fragment>
     }
   </div>
