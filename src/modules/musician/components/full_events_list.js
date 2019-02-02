@@ -87,6 +87,7 @@ FullEventsList.PageWrapper = styled.div`
   padding          : 5% 8%;
   font-family      : ${props => props.profileFonts.regularTextFont}, sans-serif;
   font-size        : ${props => props.profileStyles.RegularFontSize}px;
+  height           : 100vh;
 `;
 
 FullEventsList.EventsItem = styled.div`
