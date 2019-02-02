@@ -22,38 +22,36 @@ const FullMerchList = ({
   loadMore,
   hasMore,
 }) => (
-  <React.Fragment>
+  <FullMerchList.Wrapper
+    profileFonts={JSON.parse(profile.theme.fonts)}
+    profileStyles={JSON.parse(profile.theme.style)}
+    sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
+  >
     {
       loading ?
         <CircularProgress />
         :
-        <FullMerchList.Wrapper
-          profileFonts={JSON.parse(profile.theme.fonts)}
-          profileStyles={JSON.parse(profile.theme.style)}
-          sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={loadMore}
+          hasMore={hasMore}
+          loader={<CircularProgress key={0} />}
+          useWindow={true}
         >
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={loadMore}
-            hasMore={hasMore}
-            loader={<CircularProgress key={0} />}
-            useWindow={true}
-          >
-            <FullMerchList.List>
-              {
-                Products.map(product =>
-                  <FullMerchList.ProductItem key={product.id}>
-                    <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
-                    <p>{product.title}</p>
-                    <p>{product.price} {profile.currency}</p>
-                  </FullMerchList.ProductItem>
-                )
-              }
-            </FullMerchList.List>
-          </InfiniteScroll>
-        </FullMerchList.Wrapper>
+          <FullMerchList.List>
+            {
+              Products.map(product =>
+                <FullMerchList.ProductItem key={product.id}>
+                  <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                  <p>{product.title}</p>
+                  <p>{product.price} {profile.currency}</p>
+                </FullMerchList.ProductItem>
+              )
+            }
+          </FullMerchList.List>
+        </InfiniteScroll>
     }
-  </React.Fragment>
+  </FullMerchList.Wrapper>
 );
 
 FullMerchList.propTypes = {
@@ -104,7 +102,7 @@ const withRecompose = compose(
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.id,
+        profileId : props.profile.id,
         offset    : 0,
       },
     }),

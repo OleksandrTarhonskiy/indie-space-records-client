@@ -29,10 +29,7 @@ const MusicianMerchPage = ({
           <Helmet>
             <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
           </Helmet>
-          <FullMerchList
-            profile={fetchProfile}
-            id={Number(id)}
-          />
+          <FullMerchList profile={fetchProfile} />
         </React.Fragment>
     }
   </React.Fragment>
