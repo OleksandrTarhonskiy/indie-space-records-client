@@ -68,6 +68,24 @@ export const profileThemeQuery = gql`
   }
 `;
 
+export const profileThemeWithSectionsQuery = gql`
+  query fetchProfile($profileId: Int!){
+    fetchProfile(profileId: $profileId) {
+      id
+      currency
+      theme {
+        style
+        fonts
+        sections {
+          id
+          type
+          style
+        }
+      }
+    }
+  }
+`;
+
 export const getCurrencyQuery = gql`
   {
     myProfile{
@@ -118,37 +136,6 @@ export const fetchProfileQuery = gql`
         address
         date
         price
-      }
-      theme {
-        style
-        fonts
-        sections {
-          id
-          name
-          type
-          content
-          style
-          widgets {
-            id
-            link
-            sectionId
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const fetchProfileProductsAndThemeQuery = gql`
-  query fetchProfile($profileId: Int!){
-    fetchProfile(profileId: $profileId) {
-      id
-      currency
-      products {
-        id
-        title
-        price
-        url
       }
       theme {
         style

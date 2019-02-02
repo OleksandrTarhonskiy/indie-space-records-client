@@ -1,13 +1,13 @@
-import React                                 from 'react';
-import PropTypes                             from 'prop-types';
-import { compose }                           from 'recompose';
-import { withRouter }                        from 'react-router';
-import { graphql }                           from 'react-apollo';
-import CircularProgress                      from '@material-ui/core/CircularProgress';
-import { Helmet }                            from 'react-helmet';
+import React                             from 'react';
+import PropTypes                         from 'prop-types';
+import { compose }                       from 'recompose';
+import { withRouter }                    from 'react-router';
+import { graphql }                       from 'react-apollo';
+import CircularProgress                  from '@material-ui/core/CircularProgress';
+import { Helmet }                        from 'react-helmet';
 
-import { fetchProfileProductsAndThemeQuery } from '../graphql/queries';
-import FullMerchList                         from '../components/full_merch_list';
+import { profileThemeWithSectionsQuery } from '../graphql/queries';
+import FullMerchList                     from '../components/full_merch_list';
 
 const MusicianMerchPage = ({
   match: {
@@ -42,7 +42,7 @@ MusicianMerchPage.propTypes = {
 
 const withRecompose = compose(
   withRouter,
-  graphql(fetchProfileProductsAndThemeQuery, {
+  graphql(profileThemeWithSectionsQuery, {
     options: (props) => ({
       variables: {
         profileId: props.match.params.id
