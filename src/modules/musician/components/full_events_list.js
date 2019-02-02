@@ -35,7 +35,7 @@ const FullEventsList = ({
         :
         <InfiniteScroll
           pageStart={0}
-          loadMore={setTimeout(loadMore, 2000)}
+          loadMore={loadMore}
           hasMore={hasMore}
           loader={<CircularProgress key={0} />}
           useWindow={true}
