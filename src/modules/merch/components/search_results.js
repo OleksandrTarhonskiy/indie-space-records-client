@@ -16,7 +16,6 @@ const SearchResults = ({
   data: {
     loading,
     MyProducts = [],
-    fetchMore,
   },
   loadMore,
   hasMore,
@@ -44,6 +43,7 @@ const SearchResults = ({
 SearchResults.propTypes = {
   data     : PropTypes.object.isRequired,
   loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(

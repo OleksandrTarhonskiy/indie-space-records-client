@@ -10,11 +10,6 @@ import { profileThemeWithSectionsQuery } from '../graphql/queries';
 import FullEventsList                    from '../components/full_events_list';
 
 const ProfileEventsPage = ({
-  match: {
-    params: {
-      id
-    }
-  },
   data: {
     loading,
     fetchProfile = {}
@@ -29,10 +24,7 @@ const ProfileEventsPage = ({
           <Helmet>
             <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
           </Helmet>
-          <FullEventsList
-            profile={fetchProfile}
-            id={id}
-          />
+          <FullEventsList profile={fetchProfile} />
         </React.Fragment>
     }
   </React.Fragment>

@@ -57,7 +57,6 @@ const FullMerchList = ({
 FullMerchList.propTypes = {
   profile  : PropTypes.object.isRequired,
   data     : PropTypes.object.isRequired,
-  id       : PropTypes.number.isRequired,
   loadMore : PropTypes.func.isRequired,
   hasMore  : PropTypes.bool.isRequired,
 };

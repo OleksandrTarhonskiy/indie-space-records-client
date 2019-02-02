@@ -40,43 +40,43 @@ const FullEventsList = ({
           loader={<CircularProgress key={0} />}
           useWindow={true}
         >
-        {
-          events.map(e =>
-            <FullEventsList.EventsItem key={e.id}>
-              <FullEventsList.Cell
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              >
-                {moment(e.date).format('D MMM HH:mm')}
-              </FullEventsList.Cell>
-              <FullEventsList.Cell
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              >
-                {e.title}
-              </FullEventsList.Cell>
-              <FullEventsList.Cell
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              >
-                {e.address}
-              </FullEventsList.Cell>
-              <FullEventsList.Cell
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              >
-                {e.price}
-              </FullEventsList.Cell>
-              <FullEventsList.Button
-                elementFont={JSON.parse(profile.theme.fonts)}
-                elementStyles={JSON.parse(profile.theme.style)}
-              >
+          {
+            events.map(e =>
+              <FullEventsList.EventsItem key={e.id}>
+                <FullEventsList.Cell
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                >
+                  {moment(e.date).format('D MMM HH:mm')}
+                </FullEventsList.Cell>
+                <FullEventsList.Cell
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                >
+                  {e.title}
+                </FullEventsList.Cell>
+                <FullEventsList.Cell
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                >
+                  {e.address}
+                </FullEventsList.Cell>
+                <FullEventsList.Cell
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                >
+                  {e.price}
+                </FullEventsList.Cell>
+                <FullEventsList.Button
+                  elementFont={JSON.parse(profile.theme.fonts)}
+                  elementStyles={JSON.parse(profile.theme.style)}
+                >
               Tikets
-              </FullEventsList.Button>
-            </FullEventsList.EventsItem>
-          )
-        }
-      </InfiniteScroll>
+                </FullEventsList.Button>
+              </FullEventsList.EventsItem>
+            )
+          }
+        </InfiniteScroll>
     }
   </FullEventsList.PageWrapper>
 );
@@ -129,7 +129,10 @@ FullEventsList.Button = styled(Button)`
 `;
 
 FullEventsList.propTypes = {
-  profile : PropTypes.object.isRequired,
+  profile  : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(

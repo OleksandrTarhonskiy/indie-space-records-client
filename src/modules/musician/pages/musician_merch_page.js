@@ -10,11 +10,6 @@ import { profileThemeWithSectionsQuery } from '../graphql/queries';
 import FullMerchList                     from '../components/full_merch_list';
 
 const MusicianMerchPage = ({
-  match: {
-    params: {
-      id
-    }
-  },
   data: {
     loading,
     fetchProfile = {}
