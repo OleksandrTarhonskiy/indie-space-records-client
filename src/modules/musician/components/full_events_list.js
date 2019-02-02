@@ -44,32 +44,32 @@ const FullEventsList = ({
             events.map(e =>
               <FullEventsList.EventsItem key={e.id}>
                 <FullEventsList.Cell
-                  elementFont={JSON.parse(profile.theme.fonts)}
-                  elementStyles={JSON.parse(profile.theme.style)}
+                  font={JSON.parse(profile.theme.fonts)}
+                  styles={JSON.parse(profile.theme.style)}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  elementFont={JSON.parse(profile.theme.fonts)}
-                  elementStyles={JSON.parse(profile.theme.style)}
+                  font={JSON.parse(profile.theme.fonts)}
+                  styles={JSON.parse(profile.theme.style)}
                 >
                   {e.title}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  elementFont={JSON.parse(profile.theme.fonts)}
-                  elementStyles={JSON.parse(profile.theme.style)}
+                  font={JSON.parse(profile.theme.fonts)}
+                  styles={JSON.parse(profile.theme.style)}
                 >
                   {e.address}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  elementFont={JSON.parse(profile.theme.fonts)}
-                  elementStyles={JSON.parse(profile.theme.style)}
+                  font={JSON.parse(profile.theme.fonts)}
+                  styles={JSON.parse(profile.theme.style)}
                 >
                   {e.price}
                 </FullEventsList.Cell>
                 <FullEventsList.Button
-                  elementFont={JSON.parse(profile.theme.fonts)}
-                  elementStyles={JSON.parse(profile.theme.style)}
+                  font={JSON.parse(profile.theme.fonts)}
+                  styles={JSON.parse(profile.theme.style)}
                 >
               Tikets
                 </FullEventsList.Button>
@@ -87,7 +87,6 @@ FullEventsList.PageWrapper = styled.div`
   padding          : 5% 8%;
   font-family      : ${props => props.profileFonts.regularTextFont}, sans-serif;
   font-size        : ${props => props.profileStyles.RegularFontSize}px;
-  height           : 100vh;
 `;
 
 FullEventsList.EventsItem = styled.div`
@@ -104,8 +103,8 @@ FullEventsList.EventsItem = styled.div`
 `;
 
 FullEventsList.Cell = styled.div`
-  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
-  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  font-family : ${props => props.font.regularTextFont}, sans-serif;
+  font-size   : ${props => props.styles.RegularFontSize}px;
   font-size   : 20px;
   width       : 220px;
   margin      : 2%;
@@ -113,17 +112,17 @@ FullEventsList.Cell = styled.div`
 
 FullEventsList.Button = styled(Button)`
   && {
-    font-family      : ${props => props.elementFont.linksFont}, sans-serif;
-    background-color : ${props => props.elementStyles.buttonsBackground};
+    font-family      : ${props => props.font.linksFont}, sans-serif;
+    background-color : ${props => props.styles.buttonsBackground};
     height           : 62px;
-    color            : ${props => props.elementStyles.buttonsColor};
-    border           : ${props => props.elementStyles.border}px solid;
-    border-radius    : ${props => props.elementStyles.borderRadius}px;
+    color            : ${props => props.styles.buttonsColor};
+    border           : ${props => props.styles.border}px solid;
+    border-radius    : ${props => props.styles.borderRadius}px;
     margin           : 0 5%;
     padding          : 1% 5%;
 
     &:hover {
-      color      : ${props => props.elementStyles.LinksHover};
+      color      : ${props => props.styles.LinksHover};
       background : transparent;
     }
   }
@@ -160,7 +159,7 @@ const withRecompose = compose(
               return previousResult;
             }
 
-            if (fetchMoreResult.events.length < 5) {
+            if (fetchMoreResult.events.length < 10) {
               setHasMore(false);
             }
 
