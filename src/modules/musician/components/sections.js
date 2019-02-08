@@ -5,36 +5,44 @@ import { SocialIcon } from 'react-social-icons';
 
 import Section        from './section';
 
-const Sections = ({ profile }) => (
+const Sections = ({
+  profileThemeSections,
+  profileThemeStyles,
+  profileThemeFonts,
+  profileId,
+  events,
+  products,
+  currency,
+}) => (
   <React.Fragment>
     {
-      profile.theme.sections.map(section =>
+      profileThemeSections.map(section =>
         <Sections.Section
           key={section.id}
           elementStyles={JSON.parse(section.style)}
         >
           <Sections.SubHeadline
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={profileThemeStyles}
+            elementFont={profileThemeFonts}
             display={JSON.parse(section.style).displayHeadline}
             sectionStyle={JSON.parse(section.style)}
           >
             {section.name}
           </Sections.SubHeadline>
           <Sections.SectionContent
-            elementStyles={JSON.parse(profile.theme.style)}
-            elementFont={JSON.parse(profile.theme.fonts)}
+            elementStyles={profileThemeStyles}
+            elementFont={profileThemeFonts}
             sectionStyle={JSON.parse(section.style)}
           >
             <Section
-              id={profile.id}
+              id={profileId}
               type={section.type}
-              events={profile.events}
-              products={profile.products}
+              events={events}
+              products={products}
               content={section.content}
-              currency={profile.currency}
-              elementFont={JSON.parse(profile.theme.fonts)}
-              elementStyles={JSON.parse(profile.theme.style)}
+              currency={currency}
+              elementFont={profileThemeFonts}
+              elementStyles={profileThemeStyles}
             />
             {
               section.widgets.map(w =>

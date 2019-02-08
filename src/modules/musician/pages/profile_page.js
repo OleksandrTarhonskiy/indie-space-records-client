@@ -15,7 +15,6 @@ const ProfilePage = ({
     loading,
     fetchProfile = {}
   },
-  children,
 }) => (
   <React.Fragment>
     {
@@ -48,7 +47,15 @@ const ProfilePage = ({
               }
             </ProfilePage.NavItems>
           </ProfilePage.Header>
-          <Sections profile={fetchProfile} />
+          <Sections
+            profileThemeSections={fetchProfile.theme.sections}
+            profileThemeStyles={JSON.parse(fetchProfile.theme.style)}
+            profileThemeFonts={JSON.parse(fetchProfile.theme.fonts)}
+            profileId={fetchProfile.id}
+            events={fetchProfile.events}
+            products={fetchProfile.products}
+            currency={fetchProfile.currency}
+          />
         </ProfilePage.Body>
     }
   </React.Fragment>
