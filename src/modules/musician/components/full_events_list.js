@@ -1,9 +1,9 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import styled     from 'styled-components';
-import breakpoint from 'styled-components-breakpoint';
-import moment     from 'moment';
-import Button     from '@material-ui/core/Button';
+import React                  from 'react';
+import PropTypes              from 'prop-types';
+import styled                 from 'styled-components';
+import breakpoint             from 'styled-components-breakpoint';
+import moment                 from 'moment';
+import Button                 from '@material-ui/core/Button';
 import { graphql }            from 'react-apollo';
 import {
   compose,
@@ -13,7 +13,7 @@ import {
 import InfiniteScroll         from 'react-infinite-scroller';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 
-import { viewEventsQuery } from '../../events/graphql/queries';
+import { viewEventsQuery }    from '../../events/graphql/queries';
 
 const FullEventsList = ({
   fonts,
