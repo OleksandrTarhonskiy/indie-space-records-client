@@ -24,7 +24,12 @@ const ProfileEventsPage = ({
           <Helmet>
             <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
           </Helmet>
-          <FullEventsList profile={fetchProfile} />
+          <FullEventsList
+            profileId={fetchProfile.id}
+            fonts={JSON.parse(fetchProfile.theme.fonts)}
+            styles={JSON.parse(fetchProfile.theme.style)}
+            sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'events').style)}
+          />
         </React.Fragment>
     }
   </React.Fragment>

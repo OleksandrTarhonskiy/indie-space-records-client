@@ -16,7 +16,9 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import { viewEventsQuery } from '../../events/graphql/queries';
 
 const FullEventsList = ({
-  profile,
+  fonts,
+  styles,
+  sectionStyles,
   data: {
     loading,
     events = [],
@@ -25,9 +27,9 @@ const FullEventsList = ({
   hasMore,
 }) => (
   <FullEventsList.PageWrapper
-    profileFonts={JSON.parse(profile.theme.fonts)}
-    profileStyles={JSON.parse(profile.theme.style)}
-    sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'events').style)}
+    profileFonts={fonts}
+    profileStyles={styles}
+    sectionStyles={sectionStyles}
   >
     {
       loading ?
@@ -44,32 +46,32 @@ const FullEventsList = ({
             events.map(e =>
               <FullEventsList.EventsItem key={e.id}>
                 <FullEventsList.Cell
-                  font={JSON.parse(profile.theme.fonts)}
-                  styles={JSON.parse(profile.theme.style)}
+                  font={fonts}
+                  styles={styles}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={JSON.parse(profile.theme.fonts)}
-                  styles={JSON.parse(profile.theme.style)}
+                  font={fonts}
+                  styles={styles}
                 >
                   {e.title}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={JSON.parse(profile.theme.fonts)}
-                  styles={JSON.parse(profile.theme.style)}
+                  font={fonts}
+                  styles={styles}
                 >
                   {e.address}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={JSON.parse(profile.theme.fonts)}
-                  styles={JSON.parse(profile.theme.style)}
+                  font={fonts}
+                  styles={styles}
                 >
                   {e.price}
                 </FullEventsList.Cell>
                 <FullEventsList.Button
-                  font={JSON.parse(profile.theme.fonts)}
-                  styles={JSON.parse(profile.theme.style)}
+                  font={fonts}
+                  styles={styles}
                 >
               Tikets
                 </FullEventsList.Button>
@@ -129,10 +131,13 @@ FullEventsList.Button = styled(Button)`
 `;
 
 FullEventsList.propTypes = {
-  profile  : PropTypes.object.isRequired,
-  data     : PropTypes.object.isRequired,
-  loadMore : PropTypes.func.isRequired,
-  hasMore  : PropTypes.bool.isRequired,
+  styles        : PropTypes.object.isRequired,
+  fonts         : PropTypes.object.isRequired,
+  sectionStyles : PropTypes.object.isRequired,
+  profileId     : PropTypes.object.isRequired,
+  data          : PropTypes.object.isRequired,
+  loadMore      : PropTypes.func.isRequired,
+  hasMore       : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(
@@ -140,7 +145,7 @@ const withRecompose = compose(
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.profile.id,
+        profileId : props.profileId,
         offset    : 0,
       },
     }),
@@ -159,7 +164,7 @@ const withRecompose = compose(
               return previousResult;
             }
 
-            if (fetchMoreResult.events.length < 10) {
+            if (fetchMoreResult.events.length < 12) {
               setHasMore(false);
             }
 
