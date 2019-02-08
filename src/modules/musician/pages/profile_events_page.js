@@ -1,20 +1,15 @@
-import React                               from 'react';
-import PropTypes                           from 'prop-types';
-import { compose }                         from 'recompose';
-import { withRouter }                      from 'react-router';
-import { graphql }                         from 'react-apollo';
-import CircularProgress                    from '@material-ui/core/CircularProgress';
-import { Helmet }                          from 'react-helmet';
+import React                             from 'react';
+import PropTypes                         from 'prop-types';
+import { compose }                       from 'recompose';
+import { withRouter }                    from 'react-router';
+import { graphql }                       from 'react-apollo';
+import CircularProgress                  from '@material-ui/core/CircularProgress';
+import { Helmet }                        from 'react-helmet';
 
-import { fetchProfileEventsAndThemeQuery } from '../graphql/queries';
-import FullEventsList                      from '../components/full_events_list';
+import { profileThemeWithSectionsQuery } from '../graphql/queries';
+import FullEventsList                    from '../components/full_events_list';
 
 const ProfileEventsPage = ({
-  match: {
-    params: {
-      id
-    }
-  },
   data: {
     loading,
     fetchProfile = {}
@@ -30,8 +25,10 @@ const ProfileEventsPage = ({
             <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
           </Helmet>
           <FullEventsList
-            profile={fetchProfile}
-            id={id}
+            profileId={fetchProfile.id}
+            fonts={JSON.parse(fetchProfile.theme.fonts)}
+            styles={JSON.parse(fetchProfile.theme.style)}
+            sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'events').style)}
           />
         </React.Fragment>
     }
@@ -45,7 +42,7 @@ ProfileEventsPage.propTypes = {
 
 const withRecompose = compose(
   withRouter,
-  graphql(fetchProfileEventsAndThemeQuery, {
+  graphql(profileThemeWithSectionsQuery, {
     options: (props) => ({
       variables: {
         profileId: props.match.params.id

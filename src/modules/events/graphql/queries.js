@@ -28,3 +28,18 @@ export const viewEventQuery = gql`
     }
   }
 `;
+
+export const viewEventsQuery = gql`
+  query events($offset: Int!, $profileId: Int!){
+    events(offset: $offset, profileId: $profileId) {
+      id
+      title
+      details
+      country
+      region
+      address
+      date
+      price
+    }
+  }
+`;

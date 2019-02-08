@@ -1,15 +1,15 @@
-import React                                 from 'react';
-import PropTypes                             from 'prop-types';
-import styled                                from 'styled-components';
-import breakpoint                            from 'styled-components-breakpoint';
-import { graphql }                           from 'react-apollo';
-import Button                                from '@material-ui/core/Button';
-import ShoppingCart                          from '@material-ui/icons/ShoppingCart';
-import { compose }                           from 'recompose';
-import { withRouter }                        from 'react-router';
-import CircularProgress                      from '@material-ui/core/CircularProgress';
+import React                             from 'react';
+import PropTypes                         from 'prop-types';
+import styled                            from 'styled-components';
+import breakpoint                        from 'styled-components-breakpoint';
+import { graphql }                       from 'react-apollo';
+import Button                            from '@material-ui/core/Button';
+import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
+import { compose }                       from 'recompose';
+import { withRouter }                    from 'react-router';
+import CircularProgress                  from '@material-ui/core/CircularProgress';
 
-import { fetchProfileProductsAndThemeQuery } from '../../musician/graphql/queries';
+import { profileThemeWithSectionsQuery } from '../../musician/graphql/queries';
 
 const ProductDetails = ({
   product,
@@ -109,7 +109,7 @@ ProductDetails.propTypes = {
 
 const withRecompose = compose(
   withRouter,
-  graphql(fetchProfileProductsAndThemeQuery, {
+  graphql(profileThemeWithSectionsQuery, {
     options: (props) => ({
       variables: {
         profileId: props.match.params.musicianId,
