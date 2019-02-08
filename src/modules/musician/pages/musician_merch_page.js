@@ -24,7 +24,13 @@ const MusicianMerchPage = ({
           <Helmet>
             <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
           </Helmet>
-          <FullMerchList profile={fetchProfile} />
+          <FullMerchList
+            profileId={fetchProfile.id}
+            currency={fetchProfile.currency}
+            fonts={JSON.parse(fetchProfile.theme.fonts)}
+            styles={JSON.parse(fetchProfile.theme.style)}
+            sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'merch').style)}
+          />
         </React.Fragment>
     }
   </React.Fragment>

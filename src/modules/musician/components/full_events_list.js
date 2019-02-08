@@ -134,7 +134,7 @@ FullEventsList.propTypes = {
   styles        : PropTypes.object.isRequired,
   fonts         : PropTypes.object.isRequired,
   sectionStyles : PropTypes.object.isRequired,
-  profileId     : PropTypes.object.isRequired,
+  profileId     : PropTypes.number.isRequired,
   data          : PropTypes.object.isRequired,
   loadMore      : PropTypes.func.isRequired,
   hasMore       : PropTypes.bool.isRequired,

@@ -14,7 +14,10 @@ import InfiniteScroll         from 'react-infinite-scroller';
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const FullMerchList = ({
-  profile,
+  fonts,
+  styles,
+  sectionStyles,
+  currency,
   data: {
     loading,
     Products = [],
@@ -23,9 +26,9 @@ const FullMerchList = ({
   hasMore,
 }) => (
   <FullMerchList.Wrapper
-    profileFonts={JSON.parse(profile.theme.fonts)}
-    profileStyles={JSON.parse(profile.theme.style)}
-    sectionStyles={JSON.parse(profile.theme.sections.find((element) => element.type === 'merch').style)}
+    profileFonts={fonts}
+    profileStyles={styles}
+    sectionStyles={sectionStyles}
   >
     {
       loading ?
@@ -44,7 +47,7 @@ const FullMerchList = ({
                 <FullMerchList.ProductItem key={product.id}>
                   <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
                   <p>{product.title}</p>
-                  <p>{product.price} {profile.currency}</p>
+                  <p>{product.price} {currency}</p>
                 </FullMerchList.ProductItem>
               )
             }
@@ -55,10 +58,14 @@ const FullMerchList = ({
 );
 
 FullMerchList.propTypes = {
-  profile  : PropTypes.object.isRequired,
-  data     : PropTypes.object.isRequired,
-  loadMore : PropTypes.func.isRequired,
-  hasMore  : PropTypes.bool.isRequired,
+  styles        : PropTypes.object.isRequired,
+  currency      : PropTypes.string.isRequired,
+  fonts         : PropTypes.object.isRequired,
+  sectionStyles : PropTypes.object.isRequired,
+  profileId     : PropTypes.number.isRequired,
+  data          : PropTypes.object.isRequired,
+  loadMore      : PropTypes.func.isRequired,
+  hasMore       : PropTypes.bool.isRequired,
 };
 
 FullMerchList.Wrapper = styled.div`
@@ -101,7 +108,7 @@ const withRecompose = compose(
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.profile.id,
+        profileId : props.profileId,
         offset    : 0,
       },
     }),
