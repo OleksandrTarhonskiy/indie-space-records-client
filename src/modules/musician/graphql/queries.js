@@ -55,37 +55,6 @@ export const myProfileWithThemeQuery = gql`
   }
 `;
 
-export const profileThemeQuery = gql`
-  query fetchProfile($profileId: Int!){
-    fetchProfile(profileId: $profileId) {
-      id
-      currency
-      theme {
-        style
-        fonts
-      }
-    }
-  }
-`;
-
-export const profileThemeWithSectionsQuery = gql`
-  query fetchProfile($profileId: Int!){
-    fetchProfile(profileId: $profileId) {
-      id
-      currency
-      theme {
-        style
-        fonts
-        sections {
-          id
-          type
-          style
-        }
-      }
-    }
-  }
-`;
-
 export const getCurrencyQuery = gql`
   {
     myProfile{
@@ -130,38 +99,6 @@ export const fetchProfileQuery = gql`
         price
         url
       }
-      events {
-        id
-        title
-        address
-        date
-        price
-      }
-      theme {
-        style
-        fonts
-        sections {
-          id
-          name
-          type
-          content
-          style
-          widgets {
-            id
-            link
-            sectionId
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const fetchProfileEventsAndThemeQuery = gql`
-  query fetchProfile($profileId: Int!){
-    fetchProfile(profileId: $profileId) {
-      id
-      currency
       events {
         id
         title
