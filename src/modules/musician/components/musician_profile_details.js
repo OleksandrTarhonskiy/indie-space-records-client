@@ -4,11 +4,15 @@ import styled                      from 'styled-components';
 import { graphql }                 from 'react-apollo';
 import CircularProgress            from '@material-ui/core/CircularProgress';
 
-import ProfileFeatures             from '../components/profile_features';
 import AboutProfile                from '../components/about_profile';
 import { myProfileWithThemeQuery } from '../graphql/queries';
 
-const MusicianProfileDetails = ({ data: { loading, myProfile = {} } }) => (
+const MusicianProfileDetails = ({
+  data: {
+    loading,
+    myProfile = {},
+  }, 
+}) => (
   <React.Fragment>
     <MusicianProfileDetails.ProfileWrapper>
       {
@@ -16,7 +20,6 @@ const MusicianProfileDetails = ({ data: { loading, myProfile = {} } }) => (
           <CircularProgress />
           :
           <React.Fragment>
-            <ProfileFeatures myProfile={myProfile} />
             <AboutProfile
               key={myProfile.id}
               profile={myProfile}
