@@ -16,9 +16,9 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import { viewEventsQuery }    from '../../events/graphql/queries';
 
 const FullEventsList = ({
-  fonts,
-  styles,
-  sectionStyles,
+  profileThemeFonts,
+  profileThemeStyles,
+  profileThemeSections,
   data: {
     loading,
     events = [],
@@ -27,9 +27,9 @@ const FullEventsList = ({
   hasMore,
 }) => (
   <FullEventsList.PageWrapper
-    profileFonts={fonts}
-    profileStyles={styles}
-    sectionStyles={sectionStyles}
+    profileFonts={profileThemeFonts}
+    profileStyles={profileThemeStyles}
+    sectionStyles={JSON.parse(profileThemeSections.find((element) => element.type === 'events').style)}
   >
     {
       loading ?
@@ -46,32 +46,32 @@ const FullEventsList = ({
             events.map(e =>
               <FullEventsList.EventsItem key={e.id}>
                 <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                  font={profileThemeFonts}
+                  styles={profileThemeStyles}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                  font={profileThemeFonts}
+                  styles={profileThemeStyles}
                 >
                   {e.title}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                  font={profileThemeFonts}
+                  styles={profileThemeStyles}
                 >
                   {e.address}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                  font={profileThemeFonts}
+                  styles={profileThemeStyles}
                 >
                   {e.price}
                 </FullEventsList.Cell>
                 <FullEventsList.Button
-                  font={fonts}
-                  styles={styles}
+                  font={profileThemeFonts}
+                  styles={profileThemeStyles}
                 >
               Tikets
                 </FullEventsList.Button>
@@ -131,13 +131,13 @@ FullEventsList.Button = styled(Button)`
 `;
 
 FullEventsList.propTypes = {
-  styles        : PropTypes.object.isRequired,
-  fonts         : PropTypes.object.isRequired,
-  sectionStyles : PropTypes.object.isRequired,
-  profileId     : PropTypes.number.isRequired,
-  data          : PropTypes.object.isRequired,
-  loadMore      : PropTypes.func.isRequired,
-  hasMore       : PropTypes.bool.isRequired,
+  profileThemeStyles   : PropTypes.object.isRequired,
+  profileThemeFonts    : PropTypes.object.isRequired,
+  profileThemeSections : PropTypes.object.isRequired,
+  profileId            : PropTypes.number.isRequired,
+  data                 : PropTypes.object.isRequired,
+  loadMore             : PropTypes.func.isRequired,
+  hasMore              : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(

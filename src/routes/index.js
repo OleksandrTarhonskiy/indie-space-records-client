@@ -64,7 +64,7 @@ export default (
         <Route exact path="/musicians/:id"                           component={ProfilePage} />
         <Route exact path="/musicians/:id/merch"                     component={MusicianMerchPage} />
         <Route exact path="/musicians/:id/events"                    component={ProfileEventsPage} />
-        <Route exact path="/musicians/:musicianId/merch/:productId"  component={ProductPage} />
+        <Route exact path="/musicians/:id/merch/:productId"          component={ProductPage} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

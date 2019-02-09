@@ -7,6 +7,7 @@ import CircularProgress     from '@material-ui/core/CircularProgress';
 
 import ProductDetails       from '../components/product_details';
 import { viewProductQuery } from '../graphql/queries';
+import WithHeaderWrapper    from '../../musician/components/with_header_wrapper';
 
 
 const ProductPage = ({
@@ -20,7 +21,9 @@ const ProductPage = ({
       loading ?
         <CircularProgress />
         :
-        <ProductDetails product={viewProduct} />
+        <WithHeaderWrapper>
+          <ProductDetails product={viewProduct} />
+        </WithHeaderWrapper>
     }
   </div>
 );

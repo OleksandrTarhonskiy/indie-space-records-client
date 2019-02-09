@@ -1,55 +1,12 @@
 import React                             from 'react';
-import PropTypes                         from 'prop-types';
-import { compose }                       from 'recompose';
-import { withRouter }                    from 'react-router';
-import { graphql }                       from 'react-apollo';
-import CircularProgress                  from '@material-ui/core/CircularProgress';
-import { Helmet }                        from 'react-helmet';
 
-import { profileThemeWithSectionsQuery } from '../graphql/queries';
 import FullMerchList                     from '../components/full_merch_list';
+import WithHeaderWrapper                 from '../components/with_header_wrapper';
 
-const MusicianMerchPage = ({
-  data: {
-    loading,
-    fetchProfile = {}
-  },
-}) => (
-  <React.Fragment>
-    {
-      loading ?
-        <CircularProgress />
-        :
-        <React.Fragment>
-          <Helmet>
-            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-          </Helmet>
-          <FullMerchList
-            profileId={fetchProfile.id}
-            currency={fetchProfile.currency}
-            fonts={JSON.parse(fetchProfile.theme.fonts)}
-            styles={JSON.parse(fetchProfile.theme.style)}
-            sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'merch').style)}
-          />
-        </React.Fragment>
-    }
-  </React.Fragment>
+const MusicianMerchPage = () => (
+  <WithHeaderWrapper>
+    <FullMerchList />
+  </WithHeaderWrapper>
 );
 
-MusicianMerchPage.propTypes = {
-  data  : PropTypes.object.isRequired,
-  match : PropTypes.object.isRequired,
-};
-
-const withRecompose = compose(
-  withRouter,
-  graphql(profileThemeWithSectionsQuery, {
-    options: (props) => ({
-      variables: {
-        profileId: props.match.params.id
-      }
-    })
-  }),
-);
-
-export default withRecompose(MusicianMerchPage);
+export default MusicianMerchPage;

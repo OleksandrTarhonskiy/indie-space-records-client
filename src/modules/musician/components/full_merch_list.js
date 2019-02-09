@@ -14,9 +14,9 @@ import InfiniteScroll         from 'react-infinite-scroller';
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 
 const FullMerchList = ({
-  fonts,
-  styles,
-  sectionStyles,
+  profileThemeFonts,
+  profileThemeStyles,
+  profileThemeSections,
   currency,
   data: {
     loading,
@@ -26,9 +26,9 @@ const FullMerchList = ({
   hasMore,
 }) => (
   <FullMerchList.Wrapper
-    profileFonts={fonts}
-    profileStyles={styles}
-    sectionStyles={sectionStyles}
+    profileFonts={profileThemeFonts}
+    profileStyles={profileThemeStyles}
+    sectionStyles={JSON.parse(profileThemeSections.find((element) => element.type === 'merch').style)}
   >
     {
       loading ?
