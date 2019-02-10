@@ -1,4 +1,4 @@
-import React  from 'react';
+import React              from 'react';
 
 import { ProfileContext } from '../models/profile_context';
 
