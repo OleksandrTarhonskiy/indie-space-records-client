@@ -5,11 +5,11 @@ import { Helmet }            from 'react-helmet';
 
 import withTheme             from '../HOCs/with_theme';
 
-const WithHeaderWrapper = ({
+const ProfileHeader = ({
   theme,
 }) => (
   <React.Fragment>
-    <WithHeaderWrapper.Body
+    <ProfileHeader.Body
       elementStyles={JSON.parse(theme.style)}
     >
       <Helmet>
@@ -18,43 +18,43 @@ const WithHeaderWrapper = ({
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).linksFont}`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
-      <WithHeaderWrapper.Header elementStyles={JSON.parse(theme.style)}>
-        <WithHeaderWrapper.NavItems>
+      <ProfileHeader.Header elementStyles={JSON.parse(theme.style)}>
+        <ProfileHeader.NavItems>
           {
             theme.sections.map(section =>
-              <WithHeaderWrapper.NavItem key={section.id}>
-                <WithHeaderWrapper.Link
+              <ProfileHeader.NavItem key={section.id}>
+                <ProfileHeader.Link
                   href=""
                   elementStyles={JSON.parse(theme.style)}
                   elementFont={JSON.parse(theme.fonts)}
                 >
                   {section.name}
-                </WithHeaderWrapper.Link>
-              </WithHeaderWrapper.NavItem>
+                </ProfileHeader.Link>
+              </ProfileHeader.NavItem>
             )
           }
-        </WithHeaderWrapper.NavItems>
-      </WithHeaderWrapper.Header>
-    </WithHeaderWrapper.Body>
+        </ProfileHeader.NavItems>
+      </ProfileHeader.Header>
+    </ProfileHeader.Body>
   </React.Fragment>
 );
 
-WithHeaderWrapper.Body = styled.div`
+ProfileHeader.Body = styled.div`
   background-color : ${props => props.elementStyles.backgroundColor};
   position         : relative;
 `;
 
-WithHeaderWrapper.Header = styled.div`
+ProfileHeader.Header = styled.div`
   background-color : ${props => props.elementStyles.headerBackground};
   text-align       : ${props => props.elementStyles.MenuLinksPosition};
 `;
 
-WithHeaderWrapper.NavItems = styled.ul`
+ProfileHeader.NavItems = styled.ul`
   margin  : 0;
   padding : 0;
 `;
 
-WithHeaderWrapper.Link = styled.a`
+ProfileHeader.Link = styled.a`
   && {
     color           : ${props => props.elementStyles.LinksColor};
     text-decoration : none;
@@ -68,14 +68,14 @@ WithHeaderWrapper.Link = styled.a`
   }
 `;
 
-WithHeaderWrapper.NavItem = styled.li`
+ProfileHeader.NavItem = styled.li`
   display : inline-block;
   padding : 2%;
 `;
 
-WithHeaderWrapper.propTypes = {
+ProfileHeader.propTypes = {
   match : PropTypes.object.isRequired,
   data  : PropTypes.object.isRequired,
 };
 
-export default withTheme(WithHeaderWrapper);
+export default withTheme(ProfileHeader);

@@ -1,12 +1,12 @@
-import React             from 'react';
+import React         from 'react';
 
-import profileRoutes     from '../../../routes/profile_routes';
-import WithHeaderWrapper from '../components/with_header_wrapper';
-import ThemeProvider     from '../HOCs/theme_provider';
+import profileRoutes from '../../../routes/profile_routes';
+import ProfileHeader from '../components/profile_header';
+import ThemeProvider from '../HOCs/theme_provider';
 
 const ProfileWrapper = () => (
   <ThemeProvider>
-    <WithHeaderWrapper />
+    <ProfileHeader />
     {profileRoutes}
   </ThemeProvider>
 );
