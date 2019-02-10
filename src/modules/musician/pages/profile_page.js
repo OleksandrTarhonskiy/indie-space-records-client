@@ -1,14 +1,12 @@
-import React                 from 'react';
+import React     from 'react';
 
-import Sections              from '../components/sections';
-import WithHeaderWrapper     from '../components/with_header_wrapper';
+import Sections  from '../components/sections';
+import withTheme from '../HOCs/with_theme';
 
-const ProfilePage = () => (
+const ProfilePage = props => (
   <React.Fragment>
-    <WithHeaderWrapper>
-      <Sections />
-    </WithHeaderWrapper>
+    <Sections />
   </React.Fragment>
 );
 
-export default ProfilePage;
+export default withTheme(ProfilePage);

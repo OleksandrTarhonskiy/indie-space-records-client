@@ -7,10 +7,14 @@ import CircularProgress     from '@material-ui/core/CircularProgress';
 
 import ProductDetails       from '../components/product_details';
 import { viewProductQuery } from '../graphql/queries';
-import WithHeaderWrapper    from '../../musician/components/with_header_wrapper';
-
+import withTheme            from '../../musician/HOCs/with_theme';
 
 const ProductPage = ({
+  theme: {
+    style,
+    fonts,
+    sections,
+  },
   data: {
     viewProduct = {},
     loading,
@@ -21,9 +25,12 @@ const ProductPage = ({
       loading ?
         <CircularProgress />
         :
-        <WithHeaderWrapper>
-          <ProductDetails product={viewProduct} />
-        </WithHeaderWrapper>
+        <ProductDetails
+          product={viewProduct}
+          style={JSON.parse(fonts)}
+          fonts={JSON.parse(style)}
+          sections={sections}
+        />
     }
   </div>
 );
@@ -34,6 +41,7 @@ ProductPage.propTypes = {
 };
 
 const withRecompose = compose(
+  withTheme,
   withRouter,
   graphql(viewProductQuery, {
     options: props => ({

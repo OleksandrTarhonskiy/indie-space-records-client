@@ -4,45 +4,48 @@ import styled         from 'styled-components';
 import { SocialIcon } from 'react-social-icons';
 
 import Section        from './section';
+import withTheme             from '../HOCs/with_theme';
 
 const Sections = ({
-  profileThemeSections,
-  profileThemeStyles,
-  profileThemeFonts,
-  profileId,
+  theme: {
+    fonts,
+    style,
+    sections,
+  },
+  id,
   events,
   products,
   currency,
 }) => (
   <React.Fragment>
     {
-      profileThemeSections.map(section =>
+      sections.map(section =>
         <Sections.Section
           key={section.id}
           elementStyles={JSON.parse(section.style)}
         >
           <Sections.SubHeadline
-            elementStyles={profileThemeStyles}
-            elementFont={profileThemeFonts}
+            elementStyles={JSON.parse(style)}
+            elementFont={JSON.parse(fonts)}
             display={JSON.parse(section.style).displayHeadline}
             sectionStyle={JSON.parse(section.style)}
           >
             {section.name}
           </Sections.SubHeadline>
           <Sections.SectionContent
-            elementStyles={profileThemeStyles}
-            elementFont={profileThemeFonts}
+            elementStyles={JSON.parse(style)}
+            elementFont={JSON.parse(fonts)}
             sectionStyle={JSON.parse(section.style)}
           >
             <Section
-              id={profileId}
+              id={id}
               type={section.type}
               events={events}
               products={products}
               content={section.content}
               currency={currency}
-              elementFont={profileThemeFonts}
-              elementStyles={profileThemeStyles}
+              fonts={JSON.parse(fonts)}
+              styles={JSON.parse(style)}
             />
             {
               section.widgets.map(w =>
@@ -84,4 +87,4 @@ Sections.propTypes = {
   profile : PropTypes.object.isRequired,
 };
 
-export default Sections;
+export default withTheme(Sections);

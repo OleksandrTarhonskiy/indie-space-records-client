@@ -12,11 +12,14 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import InfiniteScroll         from 'react-infinite-scroller';
 
 import { fetchProductsQuery } from '../../merch/graphql/queries';
+import withTheme              from '../HOCs/with_theme';
 
 const FullMerchList = ({
-  profileThemeFonts,
-  profileThemeStyles,
-  profileThemeSections,
+  theme: {
+    style,
+    fonts,
+    sections,
+  },
   currency,
   data: {
     loading,
@@ -26,9 +29,9 @@ const FullMerchList = ({
   hasMore,
 }) => (
   <FullMerchList.Wrapper
-    profileFonts={profileThemeFonts}
-    profileStyles={profileThemeStyles}
-    sectionStyles={JSON.parse(profileThemeSections.find((element) => element.type === 'merch').style)}
+    profileFonts={JSON.parse(fonts)}
+    profileStyles={JSON.parse(style)}
+    sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
   >
     {
       loading ?
@@ -104,11 +107,12 @@ FullMerchList.ImageWrapper = styled.div`
 `;
 
 const withRecompose = compose(
+  withTheme,
   graphql(fetchProductsQuery, {
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.profileId,
+        profileId : props.id,
         offset    : 0,
       },
     }),

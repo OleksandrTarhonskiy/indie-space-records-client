@@ -14,11 +14,14 @@ import InfiniteScroll         from 'react-infinite-scroller';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 
 import { viewEventsQuery }    from '../../events/graphql/queries';
+import withTheme              from '../HOCs/with_theme';
 
 const FullEventsList = ({
-  profileThemeFonts,
-  profileThemeStyles,
-  profileThemeSections,
+  theme: {
+    style,
+    fonts,
+    sections,
+  },
   data: {
     loading,
     events = [],
@@ -27,9 +30,9 @@ const FullEventsList = ({
   hasMore,
 }) => (
   <FullEventsList.PageWrapper
-    profileFonts={profileThemeFonts}
-    profileStyles={profileThemeStyles}
-    sectionStyles={JSON.parse(profileThemeSections.find((element) => element.type === 'events').style)}
+    profileFonts={JSON.parse(fonts)}
+    profileStyles={JSON.parse(style)}
+    sectionStyles={JSON.parse(sections.find((element) => element.type === 'events').style)}
   >
     {
       loading ?
@@ -46,32 +49,32 @@ const FullEventsList = ({
             events.map(e =>
               <FullEventsList.EventsItem key={e.id}>
                 <FullEventsList.Cell
-                  font={profileThemeFonts}
-                  styles={profileThemeStyles}
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={profileThemeFonts}
-                  styles={profileThemeStyles}
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.title}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={profileThemeFonts}
-                  styles={profileThemeStyles}
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.address}
                 </FullEventsList.Cell>
                 <FullEventsList.Cell
-                  font={profileThemeFonts}
-                  styles={profileThemeStyles}
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.price}
                 </FullEventsList.Cell>
                 <FullEventsList.Button
-                  font={profileThemeFonts}
-                  styles={profileThemeStyles}
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
               Tikets
                 </FullEventsList.Button>
@@ -141,11 +144,12 @@ FullEventsList.propTypes = {
 };
 
 const withRecompose = compose(
+  withTheme,
   graphql(viewEventsQuery, {
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.profileId,
+        profileId : props.id,
         offset    : 0,
       },
     }),

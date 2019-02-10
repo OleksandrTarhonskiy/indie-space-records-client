@@ -7,13 +7,13 @@ import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
 
 const ProductDetails = ({
   product,
-  profileThemeFonts,
-  profileThemeStyles,
-  profileThemeSections,
+  fonts,
+  styles,
+  sections,
   currency,
 }) => (
   <ProductDetails.Wrapper
-    sectionStyles={JSON.parse(profileThemeSections.find((element) => element.type === 'merch').style)}
+    sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
   >
     <ProductDetails.ImageWrapper>
       <ProductDetails.Image
@@ -28,7 +28,7 @@ const ProductDetails = ({
         <h3>{product.type}</h3>
         <p>{product.desc}</p>
         <ProductDetails.AddToCart
-          basicStyles={profileThemeStyles}
+          basicStyles={fonts}
           disabled={!product.quantity}
         >
           <ShoppingCart />

@@ -1,65 +1,41 @@
 import React                 from 'react';
 import PropTypes             from 'prop-types';
-import { withRouter }        from 'react-router';
-import { graphql }           from 'react-apollo';
-import { compose }           from 'recompose';
-import CircularProgress      from '@material-ui/core/CircularProgress';
 import styled                from 'styled-components';
 import { Helmet }            from 'react-helmet';
 
-import { fetchProfileQuery } from '../graphql/queries';
+import withTheme             from '../HOCs/with_theme';
 
 const WithHeaderWrapper = ({
-  data: {
-    loading,
-    fetchProfile = {}
-  },
-  children,
+  theme,
 }) => (
   <React.Fragment>
-    {
-      loading ?
-        <CircularProgress />
-        :
-        <WithHeaderWrapper.Body
-          elementStyles={JSON.parse(fetchProfile.theme.style)}
-        >
-          <Helmet>
-            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).headlineFont}`} rel="stylesheet" />
-            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).regularTextFont}`} rel="stylesheet" />
-            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).linksFont}`} rel="stylesheet" />
-            <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(fetchProfile.theme.fonts).subHead}`} rel="stylesheet" />
-          </Helmet>
-          <WithHeaderWrapper.Header elementStyles={JSON.parse(fetchProfile.theme.style)}>
-            <WithHeaderWrapper.NavItems>
-              {
-                fetchProfile.theme.sections.map(section =>
-                  <WithHeaderWrapper.NavItem key={section.id}>
-                    <WithHeaderWrapper.Link
-                      href=""
-                      elementStyles={JSON.parse(fetchProfile.theme.style)}
-                      elementFont={JSON.parse(fetchProfile.theme.fonts)}
-                    >
-                      {section.name}
-                    </WithHeaderWrapper.Link>
-                  </WithHeaderWrapper.NavItem>
-                )
-              }
-            </WithHeaderWrapper.NavItems>
-          </WithHeaderWrapper.Header>
-          {React.Children.map(children, child =>
-            React.cloneElement(child, {
-              profileThemeSections : fetchProfile.theme.sections,
-              profileThemeStyles   : JSON.parse(fetchProfile.theme.style),
-              profileThemeFonts    : JSON.parse(fetchProfile.theme.fonts),
-              profileId            : fetchProfile.id,
-              events               : fetchProfile.events,
-              products             : fetchProfile.products,
-              currency             : fetchProfile.currency,
-            })
-          )}
-      </WithHeaderWrapper.Body>
-    }
+    <WithHeaderWrapper.Body
+      elementStyles={JSON.parse(theme.style)}
+    >
+      <Helmet>
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).headlineFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).regularTextFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).linksFont}`} rel="stylesheet" />
+        <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).subHead}`} rel="stylesheet" />
+      </Helmet>
+      <WithHeaderWrapper.Header elementStyles={JSON.parse(theme.style)}>
+        <WithHeaderWrapper.NavItems>
+          {
+            theme.sections.map(section =>
+              <WithHeaderWrapper.NavItem key={section.id}>
+                <WithHeaderWrapper.Link
+                  href=""
+                  elementStyles={JSON.parse(theme.style)}
+                  elementFont={JSON.parse(theme.fonts)}
+                >
+                  {section.name}
+                </WithHeaderWrapper.Link>
+              </WithHeaderWrapper.NavItem>
+            )
+          }
+        </WithHeaderWrapper.NavItems>
+      </WithHeaderWrapper.Header>
+    </WithHeaderWrapper.Body>
   </React.Fragment>
 );
 
@@ -102,15 +78,4 @@ WithHeaderWrapper.propTypes = {
   data  : PropTypes.object.isRequired,
 };
 
-const withRecompose = compose(
-  withRouter,
-  graphql(fetchProfileQuery, {
-    options: (props) => ({
-      variables: {
-        profileId: props.myId || props.match.params.id
-      }
-    })
-  }),
-);
-
-export default withRecompose(WithHeaderWrapper);
+export default withTheme(WithHeaderWrapper);
