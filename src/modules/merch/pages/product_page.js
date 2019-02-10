@@ -15,6 +15,7 @@ const ProductPage = ({
     fonts,
     sections,
   },
+  currency,
   data: {
     viewProduct = {},
     loading,
@@ -29,6 +30,7 @@ const ProductPage = ({
           product={viewProduct}
           style={JSON.parse(fonts)}
           fonts={JSON.parse(style)}
+          currency={currency}
           sections={sections}
         />
     }
