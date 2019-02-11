@@ -16,7 +16,7 @@ import CircularProgress       from '@material-ui/core/CircularProgress';
 import { viewEventsQuery }    from '../../events/graphql/queries';
 import withTheme              from '../HOCs/with_theme';
 
-const FullEventsList = ({
+const AllEventsPage = ({
   theme: {
     style,
     fonts,
@@ -29,7 +29,7 @@ const FullEventsList = ({
   loadMore,
   hasMore,
 }) => (
-  <FullEventsList.PageWrapper
+  <AllEventsPage.PageWrapper
     profileFonts={JSON.parse(fonts)}
     profileStyles={JSON.parse(style)}
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'events').style)}
@@ -47,46 +47,46 @@ const FullEventsList = ({
         >
           {
             events.map(e =>
-              <FullEventsList.EventsItem key={e.id}>
-                <FullEventsList.Cell
+              <AllEventsPage.EventsItem key={e.id}>
+                <AllEventsPage.Cell
                   font={JSON.parse(fonts)}
                   styles={JSON.parse(style)}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
                   font={JSON.parse(fonts)}
                   styles={JSON.parse(style)}
                 >
                   {e.title}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
                   font={JSON.parse(fonts)}
                   styles={JSON.parse(style)}
                 >
                   {e.address}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
                   font={JSON.parse(fonts)}
                   styles={JSON.parse(style)}
                 >
                   {e.price}
-                </FullEventsList.Cell>
-                <FullEventsList.Button
+                </AllEventsPage.Cell>
+                <AllEventsPage.Button
                   font={JSON.parse(fonts)}
                   styles={JSON.parse(style)}
                 >
               Tikets
-                </FullEventsList.Button>
-              </FullEventsList.EventsItem>
+                </AllEventsPage.Button>
+              </AllEventsPage.EventsItem>
             )
           }
         </InfiniteScroll>
     }
-  </FullEventsList.PageWrapper>
+  </AllEventsPage.PageWrapper>
 );
 
-FullEventsList.PageWrapper = styled.div`
+AllEventsPage.PageWrapper = styled.div`
   background-color : ${props => props.sectionStyles.background};
   color            : ${props => props.sectionStyles.color};
   padding          : 5% 8%;
@@ -94,7 +94,7 @@ FullEventsList.PageWrapper = styled.div`
   font-size        : ${props => props.profileStyles.RegularFontSize}px;
 `;
 
-FullEventsList.EventsItem = styled.div`
+AllEventsPage.EventsItem = styled.div`
   && {
     display        : flex;
     flex-direction : column;
@@ -107,7 +107,7 @@ FullEventsList.EventsItem = styled.div`
   }
 `;
 
-FullEventsList.Cell = styled.div`
+AllEventsPage.Cell = styled.div`
   font-family : ${props => props.font.regularTextFont}, sans-serif;
   font-size   : ${props => props.styles.RegularFontSize}px;
   font-size   : 20px;
@@ -115,7 +115,7 @@ FullEventsList.Cell = styled.div`
   margin      : 2%;
 `;
 
-FullEventsList.Button = styled(Button)`
+AllEventsPage.Button = styled(Button)`
   && {
     font-family      : ${props => props.font.linksFont}, sans-serif;
     background-color : ${props => props.styles.buttonsBackground};
@@ -133,7 +133,7 @@ FullEventsList.Button = styled(Button)`
   }
 `;
 
-FullEventsList.propTypes = {
+AllEventsPage.propTypes = {
   theme    : PropTypes.object.isRequired,
   data     : PropTypes.object.isRequired,
   loadMore : PropTypes.func.isRequired,
@@ -180,4 +180,4 @@ const withRecompose = compose(
   ),
 );
 
-export default withRecompose(FullEventsList);
+export default withRecompose(AllEventsPage);
