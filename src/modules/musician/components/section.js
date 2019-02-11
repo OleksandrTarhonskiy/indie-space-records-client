@@ -13,8 +13,8 @@ const Section = ({
   products,
   content,
   currency,
-  elementFont,
-  elementStyles,
+  fonts,
+  styles,
 }) => {
   switch (type) {
   case 'music':
@@ -28,14 +28,14 @@ const Section = ({
               <Section.ListItem key={p.id}>
                 <Section.ImageWrapper background={`http://localhost:8080/${p.url}`} />
                 <Section.ProductName
-                  elementFont={elementFont}
-                  elementStyles={elementStyles}
+                  elementFont={fonts}
+                  elementStyles={styles}
                 >
                   {p.title}
                 </Section.ProductName>
                 <Section.ProductPrice
-                  elementFont={elementFont}
-                  elementStyles={elementStyles}
+                  elementFont={fonts}
+                  elementStyles={styles}
                 >
                   {p.price + ' ' + currency}
                 </Section.ProductPrice>
@@ -43,14 +43,14 @@ const Section = ({
                   <Section.Button
                     component={Link}
                     to={`/musicians/${id}/merch/${p.id}`}
-                    elementFont={elementFont}
-                    elementStyles={elementStyles}
+                    elementFont={fonts}
+                    elementStyles={styles}
                   >
                     Buy now
                   </Section.Button>
                   <Section.Button
-                    elementFont={elementFont}
-                    elementStyles={elementStyles}
+                    elementFont={fonts}
+                    elementStyles={styles}
                   >
                     <AddShoppingCart />
                     Add
@@ -78,32 +78,32 @@ const Section = ({
           events.map(e =>
             <Section.EventsItem key={e.id}>
               <Section.Cell
-                elementFont={elementFont}
-                elementStyles={elementStyles}
+                elementFont={fonts}
+                elementStyles={styles}
               >
                 {moment(e.date).format('D MMM HH:mm')}
               </Section.Cell>
               <Section.Cell
-                elementFont={elementFont}
-                elementStyles={elementStyles}
+                elementFont={fonts}
+                elementStyles={styles}
               >
                 {e.title}
               </Section.Cell>
               <Section.Cell
-                elementFont={elementFont}
-                elementStyles={elementStyles}
+                elementFont={fonts}
+                elementStyles={styles}
               >
                 {e.address}
               </Section.Cell>
               <Section.Cell
-                elementFont={elementFont}
-                elementStyles={elementStyles}
+                elementFont={fonts}
+                elementStyles={styles}
               >
                 {e.price}
               </Section.Cell>
               <Section.Button
-                elementFont={elementFont}
-                elementStyles={elementStyles}
+                elementFont={fonts}
+                elementStyles={styles}
               >
               Tikets
               </Section.Button>

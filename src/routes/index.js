@@ -19,19 +19,16 @@ import LogoutPage               from '../modules/auth/pages/log_out_page';
 import ProfileHomeWrapper       from '../modules/musician/pages/profile_home_wrapper';
 import ProfileThemeSettingsPage from '../modules/musician/pages/profile_theme_settings_page';
 import SettingsPage             from '../modules/musician/pages/settings_page';
-import MusicianMerchPage        from '../modules/musician/pages/musician_merch_page';
-import ProfileEventsPage        from '../modules/musician/pages/profile_events_page';
 import MusicianEventsPage       from '../modules/events/pages/musician_events_page';
 import EventPage                from '../modules/events/pages/event_page';
 import EditEventPage            from '../modules/events/pages/edit_event_page';
 import AllThemesPage            from '../modules/themes/pages/all_themes_page';
 import MerchMainPage            from '../modules/merch/pages/merch_main_page';
-import ProductPage              from '../modules/merch/pages/product_page';
 import BeautifulPlay            from '../modules/themes/components/beautiful_play';
 import MainPage                 from '../modules/music/pages/main_page';
 import UploadSong               from '../modules/music/pages/upload_song';
 import AllMySongs               from '../modules/music/pages/all_my_songs';
-import ProfilePage              from '../modules/musician/pages/profile_page';
+import ProfileWrapper           from '../modules/musician/pages/profile_wrapper';
 import AllProfilesPage          from '../modules/musician/pages/all_profiles_page';
 import PrivateRoute             from './private_route';
 
@@ -61,10 +58,7 @@ export default (
         <PrivateRoute exact path="/upload_song"                      component={UploadSong} />
         <PrivateRoute exact path="/music/all"                        component={AllMySongs} />
         <PrivateRoute path="/merch"                                  component={MerchMainPage} />
-        <Route exact path="/musicians/:id"                           component={ProfilePage} />
-        <Route exact path="/musicians/:id/merch"                     component={MusicianMerchPage} />
-        <Route exact path="/musicians/:id/events"                    component={ProfileEventsPage} />
-        <Route exact path="/musicians/:musicianId/merch/:productId"  component={ProductPage} />
+        <Route path="/musicians/:id"                           component={ProfileWrapper} />
         <Route component={NotFound} />
       </Switch>
       <Footer />

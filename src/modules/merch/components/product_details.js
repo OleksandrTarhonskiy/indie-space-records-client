@@ -2,55 +2,41 @@ import React                             from 'react';
 import PropTypes                         from 'prop-types';
 import styled                            from 'styled-components';
 import breakpoint                        from 'styled-components-breakpoint';
-import { graphql }                       from 'react-apollo';
 import Button                            from '@material-ui/core/Button';
 import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
-import { compose }                       from 'recompose';
-import { withRouter }                    from 'react-router';
-import CircularProgress                  from '@material-ui/core/CircularProgress';
-
-import { profileThemeWithSectionsQuery } from '../../musician/graphql/queries';
 
 const ProductDetails = ({
   product,
-  data: {
-    fetchProfile = {},
-    loading,
-  },
+  fonts,
+  sections,
+  currency,
 }) => (
-  <React.Fragment>
-    {
-      loading ?
-        <CircularProgress />
-        :
-        <ProductDetails.Wrapper
-          sectionStyles={JSON.parse(fetchProfile.theme.sections.find((element) => element.type === 'merch').style)}
+  <ProductDetails.Wrapper
+    sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
+  >
+    <ProductDetails.ImageWrapper>
+      <ProductDetails.Image
+        src={`http://localhost:8080/${product.url}`}
+        alt=""
+      />
+    </ProductDetails.ImageWrapper>
+    <ProductDetails.DetailsBlock>
+      <h1>{product.title}</h1>
+      <React.Fragment>
+        <h2>{product.price} {currency}</h2>
+        <h3>{product.type}</h3>
+        <p>{product.desc}</p>
+        <ProductDetails.AddToCart
+          basicStyles={fonts}
+          disabled={!product.quantity}
         >
-          <ProductDetails.ImageWrapper>
-            <ProductDetails.Image
-              src={`http://localhost:8080/${product.url}`}
-              alt=""
-            />
-          </ProductDetails.ImageWrapper>
-          <ProductDetails.DetailsBlock>
-            <h1>{product.title}</h1>
-            <React.Fragment>
-              <h2>{product.price} {fetchProfile.currency}</h2>
-              <h3>{product.type}</h3>
-              <p>{product.desc}</p>
-              <ProductDetails.AddToCart
-                basicStyles={JSON.parse(fetchProfile.theme.style)}
-                disabled={!product.quantity}
-              >
-                <ShoppingCart />
-                Add to cart
-              </ProductDetails.AddToCart>
-            </React.Fragment>
+          <ShoppingCart />
+          Add to cart
+        </ProductDetails.AddToCart>
+      </React.Fragment>
 
-          </ProductDetails.DetailsBlock>
-        </ProductDetails.Wrapper>
-    }
-  </React.Fragment>
+    </ProductDetails.DetailsBlock>
+  </ProductDetails.Wrapper>
 );
 
 ProductDetails.Wrapper = styled.div`
@@ -102,20 +88,10 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product : PropTypes.number.isRequired,
-  data    : PropTypes.object.isRequired,
-  match   : PropTypes.object.isRequired,
+  product  : PropTypes.number.isRequired,
+  fonts    : PropTypes.object.isRequired,
+  sections : PropTypes.array.isRequired,
+  currency : PropTypes.string.isRequired,
 };
 
-const withRecompose = compose(
-  withRouter,
-  graphql(profileThemeWithSectionsQuery, {
-    options: (props) => ({
-      variables: {
-        profileId: props.match.params.musicianId,
-      }
-    })
-  }),
-);
-
-export default withRecompose(ProductDetails);
+export default ProductDetails;

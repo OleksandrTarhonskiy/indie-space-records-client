@@ -1,33 +1,31 @@
 import React                 from 'react';
 import PropTypes             from 'prop-types';
-import { withRouter }        from 'react-router';
 import { graphql }           from 'react-apollo';
 import { compose }           from 'recompose';
+import { withRouter }        from 'react-router';
 import CircularProgress      from '@material-ui/core/CircularProgress';
 
+import { ProfileContext }    from '../models/profile_context';
 import { fetchProfileQuery } from '../graphql/queries';
-import Profile               from '../components/profile';
 
-const ProfilePage = ({
+const ThemeProvider = ({
   data: {
     loading,
-    fetchProfile = {}
+    fetchProfile = {},
   },
+  children,
 }) => (
   <React.Fragment>
     {
       loading ?
         <CircularProgress />
         :
-        <Profile profile={fetchProfile} />
+        <ProfileContext.Provider value={fetchProfile}>
+          {children}
+        </ProfileContext.Provider>
     }
   </React.Fragment>
 );
-
-ProfilePage.propTypes = {
-  match : PropTypes.object.isRequired,
-  data  : PropTypes.object.isRequired,
-};
 
 const withRecompose = compose(
   withRouter,
@@ -40,4 +38,9 @@ const withRecompose = compose(
   }),
 );
 
-export default withRecompose(ProfilePage);
+ThemeProvider.propTypes = {
+  data     : PropTypes.object.isRequired,
+  children : PropTypes.node,
+};
+
+export default withRecompose(ThemeProvider);

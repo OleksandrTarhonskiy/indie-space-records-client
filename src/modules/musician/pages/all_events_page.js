@@ -14,11 +14,14 @@ import InfiniteScroll         from 'react-infinite-scroller';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 
 import { viewEventsQuery }    from '../../events/graphql/queries';
+import withTheme              from '../HOCs/with_theme';
 
-const FullEventsList = ({
-  fonts,
-  styles,
-  sectionStyles,
+const AllEventsPage = ({
+  theme: {
+    style,
+    fonts,
+    sections,
+  },
   data: {
     loading,
     events = [],
@@ -26,10 +29,10 @@ const FullEventsList = ({
   loadMore,
   hasMore,
 }) => (
-  <FullEventsList.PageWrapper
-    profileFonts={fonts}
-    profileStyles={styles}
-    sectionStyles={sectionStyles}
+  <AllEventsPage.PageWrapper
+    profileFonts={JSON.parse(fonts)}
+    profileStyles={JSON.parse(style)}
+    sectionStyles={JSON.parse(sections.find((element) => element.type === 'events').style)}
   >
     {
       loading ?
@@ -44,46 +47,46 @@ const FullEventsList = ({
         >
           {
             events.map(e =>
-              <FullEventsList.EventsItem key={e.id}>
-                <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+              <AllEventsPage.EventsItem key={e.id}>
+                <AllEventsPage.Cell
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {moment(e.date).format('D MMM HH:mm')}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.title}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.address}
-                </FullEventsList.Cell>
-                <FullEventsList.Cell
-                  font={fonts}
-                  styles={styles}
+                </AllEventsPage.Cell>
+                <AllEventsPage.Cell
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
                   {e.price}
-                </FullEventsList.Cell>
-                <FullEventsList.Button
-                  font={fonts}
-                  styles={styles}
+                </AllEventsPage.Cell>
+                <AllEventsPage.Button
+                  font={JSON.parse(fonts)}
+                  styles={JSON.parse(style)}
                 >
               Tikets
-                </FullEventsList.Button>
-              </FullEventsList.EventsItem>
+                </AllEventsPage.Button>
+              </AllEventsPage.EventsItem>
             )
           }
         </InfiniteScroll>
     }
-  </FullEventsList.PageWrapper>
+  </AllEventsPage.PageWrapper>
 );
 
-FullEventsList.PageWrapper = styled.div`
+AllEventsPage.PageWrapper = styled.div`
   background-color : ${props => props.sectionStyles.background};
   color            : ${props => props.sectionStyles.color};
   padding          : 5% 8%;
@@ -91,7 +94,7 @@ FullEventsList.PageWrapper = styled.div`
   font-size        : ${props => props.profileStyles.RegularFontSize}px;
 `;
 
-FullEventsList.EventsItem = styled.div`
+AllEventsPage.EventsItem = styled.div`
   && {
     display        : flex;
     flex-direction : column;
@@ -104,7 +107,7 @@ FullEventsList.EventsItem = styled.div`
   }
 `;
 
-FullEventsList.Cell = styled.div`
+AllEventsPage.Cell = styled.div`
   font-family : ${props => props.font.regularTextFont}, sans-serif;
   font-size   : ${props => props.styles.RegularFontSize}px;
   font-size   : 20px;
@@ -112,7 +115,7 @@ FullEventsList.Cell = styled.div`
   margin      : 2%;
 `;
 
-FullEventsList.Button = styled(Button)`
+AllEventsPage.Button = styled(Button)`
   && {
     font-family      : ${props => props.font.linksFont}, sans-serif;
     background-color : ${props => props.styles.buttonsBackground};
@@ -130,22 +133,20 @@ FullEventsList.Button = styled(Button)`
   }
 `;
 
-FullEventsList.propTypes = {
-  styles        : PropTypes.object.isRequired,
-  fonts         : PropTypes.object.isRequired,
-  sectionStyles : PropTypes.object.isRequired,
-  profileId     : PropTypes.number.isRequired,
-  data          : PropTypes.object.isRequired,
-  loadMore      : PropTypes.func.isRequired,
-  hasMore       : PropTypes.bool.isRequired,
+AllEventsPage.propTypes = {
+  theme    : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(
+  withTheme,
   graphql(viewEventsQuery, {
     options: props => ({
       fetchPolicy: 'network-only',
       variables: {
-        profileId : props.profileId,
+        profileId : props.id,
         offset    : 0,
       },
     }),
@@ -179,4 +180,4 @@ const withRecompose = compose(
   ),
 );
 
-export default withRecompose(FullEventsList);
+export default withRecompose(AllEventsPage);
