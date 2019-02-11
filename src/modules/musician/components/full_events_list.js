@@ -134,13 +134,10 @@ FullEventsList.Button = styled(Button)`
 `;
 
 FullEventsList.propTypes = {
-  profileThemeStyles   : PropTypes.object.isRequired,
-  profileThemeFonts    : PropTypes.object.isRequired,
-  profileThemeSections : PropTypes.object.isRequired,
-  profileId            : PropTypes.number.isRequired,
-  data                 : PropTypes.object.isRequired,
-  loadMore             : PropTypes.func.isRequired,
-  hasMore              : PropTypes.bool.isRequired,
+  theme    : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 const withRecompose = compose(

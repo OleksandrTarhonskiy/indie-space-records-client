@@ -8,7 +8,6 @@ import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
 const ProductDetails = ({
   product,
   fonts,
-  styles,
   sections,
   currency,
 }) => (
@@ -89,9 +88,10 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product : PropTypes.number.isRequired,
-  data    : PropTypes.object.isRequired,
-  match   : PropTypes.object.isRequired,
+  product  : PropTypes.number.isRequired,
+  fonts    : PropTypes.object.isRequired,
+  sections : PropTypes.array.isRequired,
+  currency : PropTypes.string.isRequired,
 };
 
 export default ProductDetails;

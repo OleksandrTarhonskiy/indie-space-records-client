@@ -61,14 +61,11 @@ const FullMerchList = ({
 );
 
 FullMerchList.propTypes = {
-  styles        : PropTypes.object.isRequired,
-  currency      : PropTypes.string.isRequired,
-  fonts         : PropTypes.object.isRequired,
-  sectionStyles : PropTypes.object.isRequired,
-  profileId     : PropTypes.number.isRequired,
-  data          : PropTypes.object.isRequired,
-  loadMore      : PropTypes.func.isRequired,
-  hasMore       : PropTypes.bool.isRequired,
+  theme    : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  currency : PropTypes.string.isRequired,
+  loadMore : PropTypes.func.isRequired,
+  hasMore  : PropTypes.bool.isRequired,
 };
 
 FullMerchList.Wrapper = styled.div`

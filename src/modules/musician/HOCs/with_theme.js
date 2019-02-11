@@ -6,9 +6,9 @@ const withTheme = Component => props => (
   <ProfileContext.Consumer>
     {
       value =>
-      <Component {...props} {...value} />
+        <Component {...props} {...value} />
     }
   </ProfileContext.Consumer>
-)
+);
 
-export default withTheme
+export default withTheme;

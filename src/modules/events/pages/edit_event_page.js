@@ -10,11 +10,6 @@ import EditEventForm      from '../forms/edit_event_form';
 import { viewEventQuery } from '../graphql/queries';
 
 const EditEventPage = ({
-  match: {
-    params: {
-      id
-    }
-  },
   data: {
     loading,
     viewEvent = {}

@@ -1,4 +1,5 @@
-import React  from 'react';
+import React                 from 'react';
+import PropTypes             from 'prop-types';
 import { graphql }           from 'react-apollo';
 import { compose }           from 'recompose';
 import { withRouter }        from 'react-router';
@@ -17,14 +18,14 @@ const ThemeProvider = ({
   <React.Fragment>
     {
       loading ?
-      <CircularProgress />
-      :
-      <ProfileContext.Provider value={fetchProfile}>
-        {children}
-      </ProfileContext.Provider>
+        <CircularProgress />
+        :
+        <ProfileContext.Provider value={fetchProfile}>
+          {children}
+        </ProfileContext.Provider>
     }
   </React.Fragment>
-)
+);
 
 const withRecompose = compose(
   withRouter,
@@ -36,5 +37,10 @@ const withRecompose = compose(
     })
   }),
 );
+
+ThemeProvider.propTypes = {
+  data     : PropTypes.object.isRequired,
+  children : PropTypes.node,
+};
 
 export default withRecompose(ThemeProvider);

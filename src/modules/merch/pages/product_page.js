@@ -38,8 +38,10 @@ const ProductPage = ({
 );
 
 ProductPage.propTypes = {
-  match : PropTypes.object.isRequired,
-  data  : PropTypes.object.isRequired,
+  match    : PropTypes.object.isRequired,
+  data     : PropTypes.object.isRequired,
+  theme    : PropTypes.object.isRequired,
+  currency : PropTypes.string.isRequired,
 };
 
 const withRecompose = compose(

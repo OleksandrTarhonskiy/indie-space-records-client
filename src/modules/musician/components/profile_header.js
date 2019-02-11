@@ -74,8 +74,7 @@ ProfileHeader.NavItem = styled.li`
 `;
 
 ProfileHeader.propTypes = {
-  match : PropTypes.object.isRequired,
-  data  : PropTypes.object.isRequired,
+  theme : PropTypes.object.isRequired,
 };
 
 export default withTheme(ProfileHeader);
