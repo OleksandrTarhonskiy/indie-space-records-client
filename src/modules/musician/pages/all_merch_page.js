@@ -14,7 +14,7 @@ import InfiniteScroll         from 'react-infinite-scroller';
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 import withTheme              from '../HOCs/with_theme';
 
-const FullMerchList = ({
+const AllMerchPage = ({
   theme: {
     style,
     fonts,
@@ -28,7 +28,7 @@ const FullMerchList = ({
   loadMore,
   hasMore,
 }) => (
-  <FullMerchList.Wrapper
+  <AllMerchPage.Wrapper
     profileFonts={JSON.parse(fonts)}
     profileStyles={JSON.parse(style)}
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
@@ -44,23 +44,23 @@ const FullMerchList = ({
           loader={<CircularProgress key={0} />}
           useWindow={true}
         >
-          <FullMerchList.List>
+          <AllMerchPage.List>
             {
               Products.map(product =>
-                <FullMerchList.ProductItem key={product.id}>
-                  <FullMerchList.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                <AllMerchPage.ProductItem key={product.id}>
+                  <AllMerchPage.ImageWrapper background={`http://localhost:8080/${product.url}`} />
                   <p>{product.title}</p>
                   <p>{product.price} {currency}</p>
-                </FullMerchList.ProductItem>
+                </AllMerchPage.ProductItem>
               )
             }
-          </FullMerchList.List>
+          </AllMerchPage.List>
         </InfiniteScroll>
     }
-  </FullMerchList.Wrapper>
+  </AllMerchPage.Wrapper>
 );
 
-FullMerchList.propTypes = {
+AllMerchPage.propTypes = {
   theme    : PropTypes.object.isRequired,
   data     : PropTypes.object.isRequired,
   currency : PropTypes.string.isRequired,
@@ -68,7 +68,7 @@ FullMerchList.propTypes = {
   hasMore  : PropTypes.bool.isRequired,
 };
 
-FullMerchList.Wrapper = styled.div`
+AllMerchPage.Wrapper = styled.div`
   background-color : ${props => props.sectionStyles.background};
   color            : ${props => props.sectionStyles.color};
   padding          : 5% 8%;
@@ -76,7 +76,7 @@ FullMerchList.Wrapper = styled.div`
   font-size        : ${props => props.profileStyles.RegularFontSize}px;
 `;
 
-FullMerchList.List = styled.ul`
+AllMerchPage.List = styled.ul`
   && {
     display        : flex;
     flex-direction : column;
@@ -91,11 +91,11 @@ FullMerchList.List = styled.ul`
   }
 `;
 
-FullMerchList.ProductItem = styled.li`
+AllMerchPage.ProductItem = styled.li`
   margin : 5%;
 `;
 
-FullMerchList.ImageWrapper = styled.div`
+AllMerchPage.ImageWrapper = styled.div`
   width             : 100%;
   height            : 462px;
   background        : url(${props => props.background});
@@ -143,4 +143,4 @@ const withRecompose = compose(
   ),
 );
 
-export default withRecompose(FullMerchList);
+export default withRecompose(AllMerchPage);
