@@ -11,7 +11,7 @@ const Footer = ({ location }) => (
   <Footer.Wrapper location={location}>
     <Footer.Container>
       <Footer.Copyright>
-        <p>© 2018 Indie space records</p>
+        <p>&copy; {new Date().getFullYear()} Indie space records</p>
       </Footer.Copyright>
       <Footer.SocialIcons>
         <IconButton>
