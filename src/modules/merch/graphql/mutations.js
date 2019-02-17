@@ -23,3 +23,15 @@ export const updateProductMutation = gql`
     }
   }
 `;
+
+export const deleteProductMutation = gql`
+  mutation($productId: Int!) {
+    deleteProduct(productId: $productId) {
+      ok
+      errors {
+        path
+        message
+      }
+    }
+  }
+`;

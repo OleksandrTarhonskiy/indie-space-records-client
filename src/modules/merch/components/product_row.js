@@ -26,9 +26,11 @@ import {
 import { PRODUCTS_TYPES }        from '../models/types';
 import { updateProductMutation } from '../graphql/mutations';
 import Alert                     from '../../../layouts/alert';
+import DeleteProductButton       from './delete_product_button';
 
 const ProductRow = ({
   product: {
+    id,
     type,
     title,
     price,
@@ -193,6 +195,9 @@ const ProductRow = ({
         </ProductRow.TableCell>
     }
     <ProductRow.TableCell numeric>{0}</ProductRow.TableCell>
+    <ProductRow.TableCell>
+      <DeleteProductButton id={id} />
+    </ProductRow.TableCell>
     <Alert
       action="updated"
       hasError={hasError}

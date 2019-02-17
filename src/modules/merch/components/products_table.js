@@ -21,6 +21,7 @@ const ProductsTable = ({ products }) => (
           <TableCell>Image</TableCell>
           <TableCell>Quantity</TableCell>
           <TableCell>Orders</TableCell>
+          <TableCell>Delete</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
