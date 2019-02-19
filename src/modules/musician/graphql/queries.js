@@ -126,16 +126,28 @@ export const fetchProfileQuery = gql`
   }
 `;
 
-export const allMySectionsQuery = gql`
+export const myProfileWithSectionsQuery = gql`
   {
-    allMySections{
+    myProfile{
       id
-      type
       name
-      content
-      widgets {
-        id
-        link
+      genres
+      country
+      region
+      currency
+      theme {
+        sections {
+          id
+          name
+          type
+          content
+          style
+          widgets {
+            id
+            link
+            sectionId
+          }
+        }
       }
     }
   }

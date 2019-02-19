@@ -1,24 +1,21 @@
-import React               from 'react';
-import PropTypes           from 'prop-types';
-import { graphql }         from 'react-apollo';
-import * as R              from 'ramda';
-import styled              from 'styled-components';
-import CircularProgress    from '@material-ui/core/CircularProgress';
+import React           from 'react';
+import PropTypes       from 'prop-types';
+import * as R          from 'ramda';
+import styled          from 'styled-components';
 
-import EditProfileForm     from '../forms/edit_profile_form';
-import { myProfilesQuery } from '../graphql/queries';
+import EditProfileForm from '../forms/edit_profile_form';
+import withProfileData from '../HOCs/with_profile_data';
 
-const EditProfilePage = ({ data: { loading, myProfile = {} } }) => (
+const EditProfilePage = ({
+  profile : {
+    myProfile,
+  },
+}) => (
   <EditProfilePage.FormWrapper>
-    {
-      loading?
-        <CircularProgress />
-        :
-        <EditProfileForm
-          key={myProfile.id}
-          form={R.assoc('genres', myProfile.genres.split(','), myProfile)}
-        />
-    }
+    <EditProfileForm
+      key={myProfile.id}
+      form={R.assoc('genres', myProfile.genres.split(','), myProfile)}
+    />
   </EditProfilePage.FormWrapper>
 );
 
@@ -27,7 +24,7 @@ EditProfilePage.FormWrapper = styled.div`
 `;
 
 EditProfilePage.propTypes = {
-  data : PropTypes.object.isRequired,
+  profile : PropTypes.object.isRequired,
 };
 
-export default graphql(myProfilesQuery)(EditProfilePage);
+export default withProfileData(EditProfilePage);

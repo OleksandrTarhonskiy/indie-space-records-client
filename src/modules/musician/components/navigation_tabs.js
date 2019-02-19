@@ -1,18 +1,27 @@
-import React          from 'react';
-import PropTypes      from 'prop-types';
-import Tab            from '@material-ui/core/Tab';
-import Tabs           from '@material-ui/core/Tabs';
-import { withRouter } from 'react-router';
-import { Link }       from 'react-router-dom';
+import React            from 'react';
+import PropTypes        from 'prop-types';
+import Tab              from '@material-ui/core/Tab';
+import Tabs             from '@material-ui/core/Tabs';
+import { withRouter }   from 'react-router';
+import { Link }         from 'react-router-dom';
+import { compose }      from 'recompose';
 
 import {
   SETTINGS_PATH,
   SETTINGS_PATHS,
-}                     from '../models/settings_routing';
+}                       from '../models/settings_routing';
+import withProfileData  from '../HOCs/with_profile_data';
 
 const mapLocationToTab = ({ pathname }) => SETTINGS_PATHS.indexOf(pathname);
 
-const NavigationTabs = ({ location }) => (
+const NavigationTabs = ({
+  location,
+  profile: {
+    myProfile: {
+      theme,
+    },
+  },
+}) => (
   <Tabs
     value={mapLocationToTab(location)}
     indicatorColor="primary"
@@ -29,12 +38,19 @@ const NavigationTabs = ({ location }) => (
       label="Section content settings"
       component={Link}
       to={SETTINGS_PATH.CONTENT}
+      disabled={!theme}
     />
   </Tabs>
 );
 
 NavigationTabs.propTypes = {
   location : PropTypes.object.isRequired,
+  profile  : PropTypes.object.isRequired,
 };
 
-export default withRouter(NavigationTabs);
+const withRecompose = compose(
+  withRouter,
+  withProfileData,
+);
+
+export default withRecompose(NavigationTabs);
