@@ -1,11 +1,9 @@
 import React                  from 'react';
 import PropTypes              from 'prop-types';
-import { graphql }            from 'react-apollo';
 import ExpansionPanel         from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary  from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails  from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon         from '@material-ui/icons/ExpandMore';
-import CircularProgress       from '@material-ui/core/CircularProgress';
 import Typography             from '@material-ui/core/Typography';
 import IconButton             from '@material-ui/core/IconButton';
 import Add                    from '@material-ui/icons/Add';
@@ -16,35 +14,35 @@ import {
   withStateHandlers,
 }                             from 'recompose';
 
-import { allMySectionsQuery } from '../graphql/queries';
 import EditSectionsContent    from '../forms/edit_sections_content';
 import NewSectionForm         from '../forms/new_section_form';
 import WidgetsPanel           from '../../widgets/components/widgets_panel';
+import withProfileData        from '../HOCs/with_profile_data';
 
 const ProfileContentSettings = ({
-  data: {
-    loading,
-    allMySections = []
+  profile: {
+    myProfile: {
+      theme: {
+        sections,
+      },
+    },
   },
   toggleForm,
   isOpenForm,
 }) => (
-  <div>
+  <React.Fragment>
     {
-      loading?
-        <CircularProgress />
-        :
-        allMySections.map(section =>
-          <ExpansionPanel key={section.id}>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>{section.name} settings</Typography>
-            </ExpansionPanelSummary>
-            <ProfileContentSettings.ExpansionPanelDetails>
-              <EditSectionsContent section={section} />
-              <WidgetsPanel widgets={section.widgets} />
-            </ProfileContentSettings.ExpansionPanelDetails>
-          </ExpansionPanel>
-        )
+      sections.map(section =>
+        <ExpansionPanel key={section.id}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>{section.name} settings</Typography>
+          </ExpansionPanelSummary>
+          <ProfileContentSettings.ExpansionPanelDetails>
+            <EditSectionsContent section={section} />
+            <WidgetsPanel widgets={section.widgets} />
+          </ProfileContentSettings.ExpansionPanelDetails>
+        </ExpansionPanel>
+      )
     }
     <ProfileContentSettings.CreateNewWrapper>
       <ProfileContentSettings.IconButton
@@ -69,7 +67,7 @@ const ProfileContentSettings = ({
         :
         null
     }
-  </div>
+  </React.Fragment>
 );
 
 ProfileContentSettings.CreateNewWrapper = styled.div`
@@ -98,13 +96,13 @@ ProfileContentSettings.IconButton = styled(IconButton)`
 `;
 
 ProfileContentSettings.propTypes = {
-  data       : PropTypes.object.isRequired,
+  profile    : PropTypes.object.isRequired,
   isOpenForm : PropTypes.bool.isRequired,
   toggleForm : PropTypes.func.isRequired,
 };
 
 const withRecompose = compose(
-  graphql(allMySectionsQuery),
+  withProfileData,
   withStateHandlers(
     ({
       isOpenForm = false

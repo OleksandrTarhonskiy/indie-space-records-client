@@ -9,19 +9,22 @@ import NavigationTabs         from '../components/navigation_tabs';
 import { SETTINGS_PATH }      from '../models/settings_routing';
 import EditProfilePage        from './edit_profile_page';
 import ProfileContentSettings from './profile_content_settings';
+import ProfileDataProvider    from '../HOCs/profile_data_provider';
 
 const SettingsPage = () => (
-  <SettingsPage.PageWrapper>
-    <SettingsPage.Header>
-      <NavigationTabs />
-    </SettingsPage.Header>
-    <SettingsPage.FormWrapper>
-      <Switch>
-        <PrivateRoute exact path={SETTINGS_PATH.GENERAL} component={EditProfilePage} />
-        <PrivateRoute exact path={SETTINGS_PATH.CONTENT} component={ProfileContentSettings} />
-      </Switch>
-    </SettingsPage.FormWrapper>
-  </SettingsPage.PageWrapper>
+  <ProfileDataProvider>
+    <SettingsPage.PageWrapper>
+      <SettingsPage.Header>
+        <NavigationTabs />
+      </SettingsPage.Header>
+      <SettingsPage.FormWrapper>
+        <Switch>
+          <PrivateRoute exact path={SETTINGS_PATH.GENERAL} component={EditProfilePage} />
+          <PrivateRoute exact path={SETTINGS_PATH.CONTENT} component={ProfileContentSettings} />
+        </Switch>
+      </SettingsPage.FormWrapper>
+    </SettingsPage.PageWrapper>
+  </ProfileDataProvider>
 );
 
 SettingsPage.FormWrapper = styled(Paper)`
