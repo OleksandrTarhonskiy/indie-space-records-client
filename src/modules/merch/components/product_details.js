@@ -41,7 +41,6 @@ const ProductDetails = ({
           Add to cart
         </ProductDetails.AddToCart>
       </React.Fragment>
-
     </ProductDetails.DetailsBlock>
   </ProductDetails.Wrapper>
 );
