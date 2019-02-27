@@ -1,15 +1,21 @@
-import React                             from 'react';
-import PropTypes                         from 'prop-types';
-import styled                            from 'styled-components';
-import breakpoint                        from 'styled-components-breakpoint';
-import Button                            from '@material-ui/core/Button';
-import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
+import React        from 'react';
+import PropTypes    from 'prop-types';
+import styled       from 'styled-components';
+import breakpoint   from 'styled-components-breakpoint';
+import Button       from '@material-ui/core/Button';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import {
+  compose,
+  withHandlers,
+}                   from 'recompose';
 
 const ProductDetails = ({
+  profileId,
   product,
   fonts,
   sections,
   currency,
+  addToCart,
 }) => (
   <ProductDetails.Wrapper
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
@@ -28,6 +34,7 @@ const ProductDetails = ({
         <p>{product.desc}</p>
         <ProductDetails.AddToCart
           basicStyles={fonts}
+          onClick={addToCart}
           disabled={!product.quantity}
         >
           <ShoppingCart />
@@ -88,10 +95,37 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product  : PropTypes.number.isRequired,
-  fonts    : PropTypes.object.isRequired,
-  sections : PropTypes.array.isRequired,
-  currency : PropTypes.string.isRequired,
+  product   : PropTypes.number.isRequired,
+  fonts     : PropTypes.object.isRequired,
+  sections  : PropTypes.array.isRequired,
+  currency  : PropTypes.string.isRequired,
+  profileId : PropTypes.number.isRequired,
 };
 
-export default ProductDetails;
+const withRecompose = compose(
+  withHandlers({
+    addToCart : ({
+      product: {
+        id,
+        title,
+        type,
+        price,
+      },
+      profileId,
+    }) => {
+      const shoppingCart = JSON.parse(localStorage.getItem('Cart')) || [];
+      const productData = {
+        id,
+        title,
+        type,
+        price,
+        storeId : profileId,
+      };
+
+      shoppingCart.push(productData)
+      localStorage.setItem('Cart', JSON.stringify(shoppingCart));
+    },
+  })
+);
+
+export default withRecompose(ProductDetails);

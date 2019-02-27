@@ -10,6 +10,7 @@ import { viewProductQuery } from '../graphql/queries';
 import withTheme            from '../../musician/HOCs/with_theme';
 
 const ProductPage = ({
+  id,
   theme: {
     style,
     fonts,
@@ -27,6 +28,7 @@ const ProductPage = ({
         <CircularProgress />
         :
         <ProductDetails
+          profileId={id}
           product={viewProduct}
           style={JSON.parse(fonts)}
           fonts={JSON.parse(style)}
