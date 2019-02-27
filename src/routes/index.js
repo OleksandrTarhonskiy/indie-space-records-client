@@ -13,7 +13,6 @@ import HelpContactPage          from '../modules/help-contact/pages/help_contact
 import MusicianSignUp           from '../modules/musician/pages/sign_up';
 import FanSignUp                from '../modules/fan/pages/sign_up';
 import InfoForMusicians         from '../modules/musician/pages/information';
-import AllTagsPage              from '../modules/tags/pages/all_tags_page';
 import LoginPage                from '../modules/auth/pages/login_page';
 import LogoutPage               from '../modules/auth/pages/log_out_page';
 import ProfileHomeWrapper       from '../modules/musician/pages/profile_home_wrapper';
@@ -42,7 +41,6 @@ export default (
         <Route exact path="/musician"                                component={InfoForMusicians} />
         <Route exact path="/musician/sign_up"                        component={MusicianSignUp} />
         <Route exact path="/fan/sign_up"                             component={FanSignUp} />
-        <Route exact path="/tags"                                    component={AllTagsPage} />
         <Route exact path="/login"                                   component={LoginPage} />
         <Route exact path="/logout"                                  component={LogoutPage} />
         <Route exact path="/events/:id"                              component={EventPage} />
