@@ -4,10 +4,8 @@ import styled       from 'styled-components';
 import breakpoint   from 'styled-components-breakpoint';
 import Button       from '@material-ui/core/Button';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import {
-  compose,
-  withHandlers,
-}                   from 'recompose';
+
+import withCart     from '../../../with_cart';
 
 const ProductDetails = ({
   profileId,
@@ -15,7 +13,7 @@ const ProductDetails = ({
   fonts,
   sections,
   currency,
-  addToCart,
+  setProduct,
 }) => (
   <ProductDetails.Wrapper
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
@@ -34,7 +32,7 @@ const ProductDetails = ({
         <p>{product.desc}</p>
         <ProductDetails.AddToCart
           basicStyles={fonts}
-          onClick={addToCart}
+          onClick={setProduct.bind(null, product, profileId)}
           disabled={!product.quantity}
         >
           <ShoppingCart />
@@ -94,37 +92,12 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product   : PropTypes.number.isRequired,
-  fonts     : PropTypes.object.isRequired,
-  sections  : PropTypes.array.isRequired,
-  currency  : PropTypes.string.isRequired,
-  profileId : PropTypes.number.isRequired,
+  product    : PropTypes.number.isRequired,
+  fonts      : PropTypes.object.isRequired,
+  sections   : PropTypes.array.isRequired,
+  currency   : PropTypes.string.isRequired,
+  profileId  : PropTypes.number.isRequired,
+  setProduct : PropTypes.func.isRequired,
 };
 
-const withRecompose = compose(
-  withHandlers({
-    addToCart : ({
-      product: {
-        id,
-        title,
-        type,
-        price,
-      },
-      profileId,
-    }) => {
-      const shoppingCart = JSON.parse(localStorage.getItem('Cart')) || [];
-      const productData = {
-        id,
-        title,
-        type,
-        price,
-        storeId : profileId,
-      };
-
-      shoppingCart.push(productData)
-      localStorage.setItem('Cart', JSON.stringify(shoppingCart));
-    },
-  })
-);
-
-export default withRecompose(ProductDetails);
+export default withCart(ProductDetails);

@@ -12,26 +12,61 @@ import IconButton           from '@material-ui/core/IconButton';
 
 import client               from './graphql/client';
 import CartButton           from './modules/merch/portals/cart_button';
+import CartProvider         from './cart_provider';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products : [],
+    };
+
+    this.setProduct = this.setProduct.bind(this);
+  }
+
+  componentDidMount() {
+    const products = JSON.parse(localStorage.getItem('Cart')) || [];
+    this.setState({products});
+  }
+
+  setProduct(product, profileId) {
+    const productsList = [...this.state.products];
+    productsList.push(product);
+    this.setState({ products : productsList });
+
+    const shoppingCart = JSON.parse(localStorage.getItem('Cart')) || [];
+    const productData = {
+      id      : product.id,
+      title   : product.title,
+      type    : product.type,
+      price   : product.price,
+      storeId : profileId,
+    };
+
+    shoppingCart.push(productData);
+    localStorage.setItem('Cart', JSON.stringify(shoppingCart));
+  }
+
   render() {
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
           <MuiThemeProvider theme={muiTheme}>
-            <div>
-              {routes}
-            </div>
-            {
-              JSON.parse(localStorage.getItem('Cart'))&&
-              <CartButton>
-                <CartButtonBadge badgeContent={JSON.parse(localStorage.getItem('Cart')).length} color="primary">
-                  <ShoppingCartButton>
-                    <ShoppingCart />
-                  </ShoppingCartButton>
-                </CartButtonBadge>
-              </CartButton>
-            }
+            <CartProvider value={{setProduct : this.setProduct}}>
+              <div>
+                {routes}
+              </div>
+              {
+                this.state.products.length > 0 &&
+                <CartButton>
+                  <CartButtonBadge badgeContent={this.state.products.length} color="primary">
+                    <ShoppingCartButton>
+                      <ShoppingCart />
+                    </ShoppingCartButton>
+                  </CartButtonBadge>
+                </CartButton>
+              }
+            </CartProvider>
           </MuiThemeProvider>
         </ThemeProvider>
       </ApolloProvider>
