@@ -5,7 +5,7 @@ import breakpoint   from 'styled-components-breakpoint';
 import Button       from '@material-ui/core/Button';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
-import withCart     from '../../../with_cart';
+import withCart     from '../../cart/with_cart';
 
 const ProductDetails = ({
   profileId,

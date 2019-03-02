@@ -11,8 +11,8 @@ import Badge                from '@material-ui/core/Badge';
 import IconButton           from '@material-ui/core/IconButton';
 
 import client               from './graphql/client';
-import CartButton           from './modules/merch/portals/cart_button';
-import CartProvider         from './cart_provider';
+import CartButton           from './modules/cart/portals/cart_button';
+import CartProvider         from './modules/cart/cart_provider';
 
 class App extends Component {
   constructor(props) {
