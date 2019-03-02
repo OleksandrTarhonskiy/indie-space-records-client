@@ -9,6 +9,8 @@ import { ApolloProvider }   from 'react-apollo';
 import ShoppingCart         from '@material-ui/icons/ShoppingCart';
 import Badge                from '@material-ui/core/Badge';
 import IconButton           from '@material-ui/core/IconButton';
+import Modal                from '@material-ui/core/Modal';
+import Typography           from '@material-ui/core/Typography';
 
 import client               from './graphql/client';
 import CartButton           from './modules/cart/portals/cart_button';
@@ -19,6 +21,7 @@ class App extends Component {
     super(props);
     this.state = {
       products : [],
+      open     : false,
     };
 
     this.setProduct = this.setProduct.bind(this);
@@ -47,6 +50,14 @@ class App extends Component {
     localStorage.setItem('Cart', JSON.stringify(shoppingCart));
   }
 
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     return (
       <ApolloProvider client={client}>
@@ -60,12 +71,35 @@ class App extends Component {
                 this.state.products.length > 0 &&
                 <CartButton>
                   <CartButtonBadge badgeContent={this.state.products.length} color="primary">
-                    <ShoppingCartButton>
+                    <ShoppingCartButton onClick={this.handleOpen}>
                       <ShoppingCart />
                     </ShoppingCartButton>
                   </CartButtonBadge>
                 </CartButton>
               }
+              <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.state.open}
+                onClose={this.handleClose}
+              >
+                <ModalContent>
+                  <Typography variant="h6" id="modal-title">
+                    Text in a modal
+                  </Typography>
+                    <ul>
+                    {
+                      this.state.products.map(p =>
+                        <li key={p.id}>
+                          <div>
+                            {p.title}
+                          </div>
+                        </li>
+                      )
+                    }
+                  </ul>
+                </ModalContent>
+              </Modal>
             </CartProvider>
           </MuiThemeProvider>
         </ThemeProvider>
@@ -97,6 +131,12 @@ const ShoppingCartButton = styled(IconButton)`
   height     : 80px;
   width      : 80px;
   box-shadow : 3px 10px 5px -8px rgba(0,0,0,0.75);
+`;
+
+const ModalContent = styled.div`
+  background : #ffff;
+  margin     : 5%;
+  padding    : 1%;
 `;
 
 injectGlobal`
