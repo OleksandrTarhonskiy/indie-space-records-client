@@ -8,9 +8,10 @@ const ModalContent = ({ products }) => (
       {
         products.map(p =>
           <li key={p.id}>
-            <div>
+            <ModalContent.CartItem>
               {p.title}
-            </div>
+              {p.price}
+            </ModalContent.CartItem>
           </li>
         )
       }
@@ -26,6 +27,10 @@ ModalContent.ContentWrapper = styled.div`
   background : #ffff;
   margin     : 5%;
   padding    : 1%;
+`;
+
+ModalContent.CartItem = styled.div`
+  display : flex;
 `;
 
 export default ModalContent;
