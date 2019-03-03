@@ -32,6 +32,8 @@ ModalContent.ContentWrapper = styled.div`
   background : #ffff;
   margin     : 5%;
   padding    : 1%;
+  overflow   : scroll;
+  height     : 500px;
 `;
 
 ModalContent.CartItem = styled.div`
