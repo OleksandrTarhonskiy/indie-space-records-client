@@ -43,6 +43,7 @@ class App extends Component {
       title   : product.title,
       type    : product.type,
       price   : product.price,
+      url     : product.url,
       storeId : profileId,
     };
 
