@@ -7,12 +7,17 @@ const ModalContent = ({ products }) => (
     <ul>
       {
         products.map(p =>
-          <li key={p.id}>
+          <ModalContent.MerchItem key={p.id}>
             <ModalContent.CartItem>
+              <img
+                src={`http://localhost:8080/${p.url}`}
+                style={{ width : '260px' }}
+                alt=""
+              />
               {p.title}
               {p.price}
             </ModalContent.CartItem>
-          </li>
+          </ModalContent.MerchItem>
         )
       }
     </ul>
@@ -31,6 +36,11 @@ ModalContent.ContentWrapper = styled.div`
 
 ModalContent.CartItem = styled.div`
   display : flex;
+`;
+
+ModalContent.MerchItem = styled.li`
+  list-style : none;
+  padding    : 30px;
 `;
 
 export default ModalContent;
