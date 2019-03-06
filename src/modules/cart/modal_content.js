@@ -1,6 +1,9 @@
-import React      from 'react';
-import PropTypes  from 'prop-types';
-import styled     from 'styled-components';
+import React          from 'react';
+import PropTypes      from 'prop-types';
+import styled         from 'styled-components';
+import DeleteIcon     from '@material-ui/icons/Delete';
+
+import GradientButton from '../../layouts/gradient_button';
 
 const ModalContent = ({ products }) => (
   <ModalContent.ContentWrapper>
@@ -14,8 +17,17 @@ const ModalContent = ({ products }) => (
                 style={{ width : '260px' }}
                 alt=""
               />
-              {p.title}
-              {p.price}
+              <ModalContent.DetailsWrapper>
+                <h2>{p.title}</h2>
+                <h2>{p.price}</h2>
+                <GradientButton>
+                  Checkout
+                </GradientButton>
+                <GradientButton>
+                  <DeleteIcon />
+                  Remove
+                </GradientButton>
+              </ModalContent.DetailsWrapper>
             </ModalContent.CartItem>
           </ModalContent.MerchItem>
         )
@@ -43,6 +55,19 @@ ModalContent.CartItem = styled.div`
 ModalContent.MerchItem = styled.li`
   list-style : none;
   padding    : 30px;
+`;
+
+ModalContent.DetailsWrapper = styled.div`
+  display        : flex;
+  flex-direction : column;
+  color          : #565656;
+  font-family    : 'Roboto', sans-serif;
+  margin         : 30px;
+`;
+
+ModalContent.ButtonsWrapper = styled.div`
+  display        : flex;
+  flex-direction : row;
 `;
 
 export default ModalContent;
