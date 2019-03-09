@@ -5,7 +5,9 @@ import { setContext }     from 'apollo-link-context';
 import { ApolloLink }     from 'apollo-link';
 import createFileLink     from './create_file_link';
 
-const httpLink = createFileLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = createFileLink({ uri: `${process.env.REACT_APP_API_URL}graphql` });
+
+console.log(`${process.env.REACT_APP_API_URL}graphql`)
 
 const middlewareLink = setContext(() => ({
   headers: {

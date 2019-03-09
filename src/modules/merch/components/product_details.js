@@ -16,7 +16,7 @@ const ProductDetails = ({
   >
     <ProductDetails.ImageWrapper>
       <ProductDetails.Image
-        src={`http://localhost:8080/${product.url}`}
+        src={process.env.REACT_APP_API_URL + product.url}
         alt=""
       />
     </ProductDetails.ImageWrapper>

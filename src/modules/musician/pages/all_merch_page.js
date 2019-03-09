@@ -48,7 +48,7 @@ const AllMerchPage = ({
             {
               Products.map(product =>
                 <AllMerchPage.ProductItem key={product.id}>
-                  <AllMerchPage.ImageWrapper background={`http://localhost:8080/${product.url}`} />
+                  <AllMerchPage.ImageWrapper background={process.env.REACT_APP_API_URL + product.url} />
                   <p>{product.title}</p>
                   <p>{product.price} {currency}</p>
                 </AllMerchPage.ProductItem>

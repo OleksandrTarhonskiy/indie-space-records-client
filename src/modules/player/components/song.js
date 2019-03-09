@@ -46,7 +46,7 @@ const Song = ({
       />
     </Song.Volume>
     <audio id={id} loop={repeat}>
-      <source src={'http://localhost:8080/' + url} type={filetype} />
+      <source src={process.env.REACT_APP_API_URL + url} type={filetype} />
     </audio>
   </Song.SongWrapper>
 );
