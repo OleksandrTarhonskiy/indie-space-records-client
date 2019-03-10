@@ -7,8 +7,6 @@ import createFileLink     from './create_file_link';
 
 const httpLink = createFileLink({ uri: `${process.env.REACT_APP_API_URL}graphql` });
 
-console.log(`${process.env.REACT_APP_API_URL}graphql`)
-
 const middlewareLink = setContext(() => ({
   headers: {
     'x-token': localStorage.getItem('token'),
