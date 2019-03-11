@@ -26,7 +26,7 @@ const Section = ({
           {
             products.map(p =>
               <Section.ListItem key={p.id}>
-                <Section.ImageWrapper background={`http://localhost:8080/${p.url}`} />
+                <Section.ImageWrapper background={process.env.REACT_APP_API_URL + p.url} />
                 <Section.ProductName
                   elementFont={fonts}
                   elementStyles={styles}

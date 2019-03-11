@@ -162,7 +162,7 @@ const ProductRow = ({
           {filetype}
           <br />
           <ProductRow.Image
-            src={`http://localhost:8080/${url}`}
+            src={process.env.REACT_APP_API_URL + url}
             alt=""
           />
         </ProductRow.TableCell>
