@@ -212,7 +212,7 @@ AddProductForm.propTypes = {
   canSubmit        : PropTypes.bool.isRequired,
 };
 
-const canSubmitForm = ({ type, title, desc, price, quantity, deliveryType, file}) => R.all(R.equals(true))([
+const canSubmitForm = ({ type, title, desc, price, deliveryType, file}) => R.all(R.equals(true))([
   !R.isEmpty(type),
   !R.isEmpty(title),
   !R.isEmpty(desc),
@@ -237,7 +237,7 @@ const withRecompose = compose(
       hasError   = false,
       errorsList = [],
       canSubmit  = false,
-    }) => ({ form, hasError, errorsList}),
+    }) => ({ form, hasError, errorsList, canSubmit}),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
