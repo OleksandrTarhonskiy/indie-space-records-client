@@ -4,8 +4,12 @@ import styled         from 'styled-components';
 import DeleteIcon     from '@material-ui/icons/Delete';
 
 import GradientButton from '../../layouts/gradient_button';
+import withCart       from './with_cart';
 
-const ModalContent = ({ products }) => (
+const ModalContent = ({
+  products,
+  removeProduct,
+}) => (
   <ModalContent.ContentWrapper>
     <ul>
       {
@@ -13,7 +17,7 @@ const ModalContent = ({ products }) => (
           <ModalContent.MerchItem key={p.id}>
             <ModalContent.CartItem>
               <img
-                src={`http://localhost:8080/${p.url}`}
+                src={process.env.REACT_APP_API_URL + p.url}
                 style={{ width : '260px' }}
                 alt=""
               />
@@ -23,7 +27,7 @@ const ModalContent = ({ products }) => (
                 <GradientButton>
                   Checkout
                 </GradientButton>
-                <GradientButton>
+                <GradientButton onClick={removeProduct.bind(null, p.id)}>
                   <DeleteIcon />
                   Remove
                 </GradientButton>
@@ -70,4 +74,4 @@ ModalContent.ButtonsWrapper = styled.div`
   flex-direction : row;
 `;
 
-export default ModalContent;
+export default withCart(ModalContent);

@@ -25,11 +25,12 @@ class App extends Component {
     };
 
     this.setProduct = this.setProduct.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
   }
 
   componentDidMount() {
     const products = JSON.parse(localStorage.getItem('Cart')) || [];
-    this.setState({products});
+    this.setState({ products });
   }
 
   setProduct(product, profileId) {
@@ -51,6 +52,13 @@ class App extends Component {
     localStorage.setItem('Cart', JSON.stringify(shoppingCart));
   }
 
+  removeProduct(id) {
+    const productsList = [...this.state.products];
+    const filteredList = productsList.filter(p => p.id !== id);
+    this.setState({ products : filteredList });
+    localStorage.setItem('Cart', JSON.stringify(filteredList));
+  }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -60,11 +68,15 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
           <MuiThemeProvider theme={muiTheme}>
-            <CartProvider value={{setProduct : this.setProduct}}>
+            <CartProvider value={{
+              setProduct : this.setProduct,
+              removeProduct : this.removeProduct,
+            }}>
               <div>
                 {routes}
               </div>
