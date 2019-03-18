@@ -1,15 +1,19 @@
-import React                             from 'react';
-import PropTypes                         from 'prop-types';
-import styled                            from 'styled-components';
-import breakpoint                        from 'styled-components-breakpoint';
-import Button                            from '@material-ui/core/Button';
-import ShoppingCart                      from '@material-ui/icons/ShoppingCart';
+import React        from 'react';
+import PropTypes    from 'prop-types';
+import styled       from 'styled-components';
+import breakpoint   from 'styled-components-breakpoint';
+import Button       from '@material-ui/core/Button';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+
+import withCart     from '../../cart/with_cart';
 
 const ProductDetails = ({
+  profileId,
   product,
   fonts,
   sections,
   currency,
+  setProduct,
 }) => (
   <ProductDetails.Wrapper
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
@@ -28,13 +32,13 @@ const ProductDetails = ({
         <p>{product.desc}</p>
         <ProductDetails.AddToCart
           basicStyles={fonts}
+          onClick={setProduct.bind(null, product, profileId)}
           disabled={!product.quantity}
         >
           <ShoppingCart />
           Add to cart
         </ProductDetails.AddToCart>
       </React.Fragment>
-
     </ProductDetails.DetailsBlock>
   </ProductDetails.Wrapper>
 );
@@ -88,10 +92,12 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product  : PropTypes.number.isRequired,
-  fonts    : PropTypes.object.isRequired,
-  sections : PropTypes.array.isRequired,
-  currency : PropTypes.string.isRequired,
+  product    : PropTypes.number.isRequired,
+  fonts      : PropTypes.object.isRequired,
+  sections   : PropTypes.array.isRequired,
+  currency   : PropTypes.string.isRequired,
+  profileId  : PropTypes.number.isRequired,
+  setProduct : PropTypes.func.isRequired,
 };
 
-export default ProductDetails;
+export default withCart(ProductDetails);
