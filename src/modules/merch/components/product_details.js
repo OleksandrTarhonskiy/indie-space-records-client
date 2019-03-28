@@ -92,7 +92,7 @@ ProductDetails.AddToCart = styled(Button)`
 `;
 
 ProductDetails.propTypes = {
-  product    : PropTypes.number.isRequired,
+  product    : PropTypes.object.isRequired,
   fonts      : PropTypes.object.isRequired,
   sections   : PropTypes.array.isRequired,
   currency   : PropTypes.string.isRequired,
