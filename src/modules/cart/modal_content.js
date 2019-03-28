@@ -3,6 +3,7 @@ import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
 import DeleteIcon     from '@material-ui/icons/Delete';
 import breakpoint     from 'styled-components-breakpoint';
+import Typography     from '@material-ui/core/Typography';
 
 import GradientButton from '../../layouts/gradient_button';
 import withCart       from './with_cart';
@@ -12,6 +13,8 @@ const ModalContent = ({
   removeProduct,
 }) => (
   <ModalContent.ContentWrapper>
+  {
+    products.length?
     <ul>
       {
         products.map(p =>
@@ -38,6 +41,13 @@ const ModalContent = ({
         )
       }
     </ul>
+    :
+    <ModalContent.EmptyWrapper>
+      <Typography variant="h2" gutterBottom>
+        Shopping Cart Is Empty
+      </Typography>
+    </ModalContent.EmptyWrapper>
+  }
   </ModalContent.ContentWrapper>
 );
 
@@ -87,6 +97,12 @@ ModalContent.DetailsWrapper = styled.div`
 ModalContent.ButtonsWrapper = styled.div`
   display        : flex;
   flex-direction : row;
+`;
+
+ModalContent.EmptyWrapper = styled.div`
+  display         : flex;
+  margin          : 15% 0;
+  justify-content : center;
 `;
 
 export default withCart(ModalContent);
