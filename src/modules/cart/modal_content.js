@@ -13,46 +13,47 @@ const ModalContent = ({
   removeProduct,
 }) => (
   <ModalContent.ContentWrapper>
-  {
-    products.length?
-    <ul>
-      {
-        products.map(p =>
-          <ModalContent.MerchItem key={p.id}>
-            <ModalContent.CartItem>
-              <ModalContent.ProductImage
-                src={process.env.REACT_APP_API_URL + p.url}
-                alt=""
-              />
-              <ModalContent.DetailsWrapper>
-                <h2>Product title : {p.title}</h2>
-                <h2>Product title : {p.price}</h2>
-                <p>Product quantity : {p.quantity}</p>
-                <GradientButton>
+    {
+      products.length?
+        <ul>
+          {
+            products.map(p =>
+              <ModalContent.MerchItem key={p.id}>
+                <ModalContent.CartItem>
+                  <ModalContent.ProductImage
+                    src={process.env.REACT_APP_API_URL + p.url}
+                    alt=""
+                  />
+                  <ModalContent.DetailsWrapper>
+                    <h2>Product title : {p.title}</h2>
+                    <h2>Product title : {p.price}</h2>
+                    <p>Product quantity : {p.quantity}</p>
+                    <GradientButton>
                   Checkout
-                </GradientButton>
-                <GradientButton onClick={removeProduct.bind(null, p.id)}>
-                  <DeleteIcon />
+                    </GradientButton>
+                    <GradientButton onClick={removeProduct.bind(null, p.id)}>
+                      <DeleteIcon />
                   Remove
-                </GradientButton>
-              </ModalContent.DetailsWrapper>
-            </ModalContent.CartItem>
-          </ModalContent.MerchItem>
-        )
-      }
-    </ul>
-    :
-    <ModalContent.EmptyWrapper>
-      <Typography variant="h2" gutterBottom>
+                    </GradientButton>
+                  </ModalContent.DetailsWrapper>
+                </ModalContent.CartItem>
+              </ModalContent.MerchItem>
+            )
+          }
+        </ul>
+        :
+        <ModalContent.EmptyWrapper>
+          <Typography variant="h2" gutterBottom>
         Shopping Cart Is Empty
-      </Typography>
-    </ModalContent.EmptyWrapper>
-  }
+          </Typography>
+        </ModalContent.EmptyWrapper>
+    }
   </ModalContent.ContentWrapper>
 );
 
 ModalContent.propTypes = {
-  products : PropTypes.array.isRequired,
+  products      : PropTypes.array.isRequired,
+  removeProduct : PropTypes.func.isRequired,
 };
 
 ModalContent.ContentWrapper = styled.div`
