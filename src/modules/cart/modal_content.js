@@ -3,6 +3,7 @@ import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
 import DeleteIcon     from '@material-ui/icons/Delete';
 import breakpoint     from 'styled-components-breakpoint';
+import Typography     from '@material-ui/core/Typography';
 
 import GradientButton from '../../layouts/gradient_button';
 import withCart       from './with_cart';
@@ -12,37 +13,47 @@ const ModalContent = ({
   removeProduct,
 }) => (
   <ModalContent.ContentWrapper>
-    <ul>
-      {
-        products.map(p =>
-          <ModalContent.MerchItem key={p.id}>
-            <ModalContent.CartItem>
-              <ModalContent.ProductImage
-                src={process.env.REACT_APP_API_URL + p.url}
-                alt=""
-              />
-              <ModalContent.DetailsWrapper>
-                <h2>Product title : {p.title}</h2>
-                <h2>Product title : {p.price}</h2>
-                <p>Product quantity : {p.quantity}</p>
-                <GradientButton>
+    {
+      products.length?
+        <ul>
+          {
+            products.map(p =>
+              <ModalContent.MerchItem key={p.id}>
+                <ModalContent.CartItem>
+                  <ModalContent.ProductImage
+                    src={process.env.REACT_APP_API_URL + p.url}
+                    alt=""
+                  />
+                  <ModalContent.DetailsWrapper>
+                    <h2>Product title : {p.title}</h2>
+                    <h2>Product title : {p.price}</h2>
+                    <p>Product quantity : {p.quantity}</p>
+                    <GradientButton>
                   Checkout
-                </GradientButton>
-                <GradientButton onClick={removeProduct.bind(null, p.id)}>
-                  <DeleteIcon />
+                    </GradientButton>
+                    <GradientButton onClick={removeProduct.bind(null, p.id)}>
+                      <DeleteIcon />
                   Remove
-                </GradientButton>
-              </ModalContent.DetailsWrapper>
-            </ModalContent.CartItem>
-          </ModalContent.MerchItem>
-        )
-      }
-    </ul>
+                    </GradientButton>
+                  </ModalContent.DetailsWrapper>
+                </ModalContent.CartItem>
+              </ModalContent.MerchItem>
+            )
+          }
+        </ul>
+        :
+        <ModalContent.EmptyWrapper>
+          <Typography variant="h2" gutterBottom>
+        Shopping Cart Is Empty
+          </Typography>
+        </ModalContent.EmptyWrapper>
+    }
   </ModalContent.ContentWrapper>
 );
 
 ModalContent.propTypes = {
-  products : PropTypes.array.isRequired,
+  products      : PropTypes.array.isRequired,
+  removeProduct : PropTypes.func.isRequired,
 };
 
 ModalContent.ContentWrapper = styled.div`
@@ -87,6 +98,12 @@ ModalContent.DetailsWrapper = styled.div`
 ModalContent.ButtonsWrapper = styled.div`
   display        : flex;
   flex-direction : row;
+`;
+
+ModalContent.EmptyWrapper = styled.div`
+  display         : flex;
+  margin          : 15% 0;
+  justify-content : center;
 `;
 
 export default withCart(ModalContent);

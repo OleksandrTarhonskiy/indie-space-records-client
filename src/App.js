@@ -18,23 +18,17 @@ import CartProvider         from './modules/cart/cart_provider';
 import ModalContent         from './modules/cart/modal_content';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products : [],
-      open     : false,
-    };
-
-    this.setProduct = this.setProduct.bind(this);
-    this.removeProduct = this.removeProduct.bind(this);
+  state = {
+    products : [],
+    open     : false,
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const products = JSON.parse(localStorage.getItem('Cart')) || [];
     this.setState({ products });
   }
 
-  setProduct(product, profileId) {
+  setProduct = (product, profileId) => {
     const productData = {
       id       : product.id,
       title    : product.title,
@@ -66,7 +60,7 @@ class App extends Component {
     }
   }
 
-  removeProduct(id) {
+  removeProduct = id => {
     const productsList = [...this.state.products];
     const filteredList = productsList.filter(p => p.id !== id);
     this.setState({ products : filteredList });
@@ -87,7 +81,7 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <MuiThemeProvider theme={muiTheme}>
             <CartProvider value={{
-              setProduct : this.setProduct,
+              setProduct    : this.setProduct,
               removeProduct : this.removeProduct,
             }}>
               <div>

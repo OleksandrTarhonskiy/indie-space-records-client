@@ -40,6 +40,7 @@ const ProductPage = ({
 );
 
 ProductPage.propTypes = {
+  id       : PropTypes.number.isRequired,
   match    : PropTypes.object.isRequired,
   data     : PropTypes.object.isRequired,
   theme    : PropTypes.object.isRequired,
