@@ -10,6 +10,7 @@ import ShoppingCart         from '@material-ui/icons/ShoppingCart';
 import Badge                from '@material-ui/core/Badge';
 import IconButton           from '@material-ui/core/IconButton';
 import Modal                from '@material-ui/core/Modal';
+import * as R               from 'ramda';
 
 import client               from './graphql/client';
 import CartButton           from './modules/cart/portals/cart_button';
@@ -34,22 +35,35 @@ class App extends Component {
   }
 
   setProduct(product, profileId) {
-    const productsList = [...this.state.products];
-    productsList.push(product);
-    this.setState({ products : productsList });
-
-    const shoppingCart = JSON.parse(localStorage.getItem('Cart')) || [];
     const productData = {
-      id      : product.id,
-      title   : product.title,
-      type    : product.type,
-      price   : product.price,
-      url     : product.url,
-      storeId : profileId,
+      id       : product.id,
+      title    : product.title,
+      type     : product.type,
+      price    : product.price,
+      url      : product.url,
+      storeId  : profileId,
+      quantity : 1,
     };
 
-    shoppingCart.push(productData);
-    localStorage.setItem('Cart', JSON.stringify(shoppingCart));
+    let productsList = [...this.state.products];
+
+    const shoppingCart = JSON.parse(localStorage.getItem('Cart')) || [];
+    const selectedItem = R.find(R.propEq('id', product.id))(this.state.products)
+
+    if (selectedItem) {
+      const indexInState = productsList.indexOf(selectedItem);
+      selectedItem.quantity++
+      productsList[indexInState] = selectedItem;
+      this.setState({ products : productsList });
+
+      localStorage.setItem('Cart', JSON.stringify(this.state.products));
+    } else {
+      productsList.push(productData);
+      this.setState({ products : productsList });
+
+      shoppingCart.push(productData);
+      localStorage.setItem('Cart', JSON.stringify(shoppingCart));
+    }
   }
 
   removeProduct(id) {
@@ -68,7 +82,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>

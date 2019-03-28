@@ -2,6 +2,7 @@ import React          from 'react';
 import PropTypes      from 'prop-types';
 import styled         from 'styled-components';
 import DeleteIcon     from '@material-ui/icons/Delete';
+import breakpoint     from 'styled-components-breakpoint';
 
 import GradientButton from '../../layouts/gradient_button';
 import withCart       from './with_cart';
@@ -16,14 +17,14 @@ const ModalContent = ({
         products.map(p =>
           <ModalContent.MerchItem key={p.id}>
             <ModalContent.CartItem>
-              <img
+              <ModalContent.ProductImage
                 src={process.env.REACT_APP_API_URL + p.url}
-                style={{ width : '260px' }}
                 alt=""
               />
               <ModalContent.DetailsWrapper>
-                <h2>{p.title}</h2>
-                <h2>{p.price}</h2>
+                <h2>Product title : {p.title}</h2>
+                <h2>Product title : {p.price}</h2>
+                <p>Product quantity : {p.quantity}</p>
                 <GradientButton>
                   Checkout
                 </GradientButton>
@@ -53,20 +54,34 @@ ModalContent.ContentWrapper = styled.div`
 `;
 
 ModalContent.CartItem = styled.div`
-  display : flex;
+  display        : flex;
+  flex-direction : column;
+
+  ${breakpoint('md')`
+    flex-direction : row;
+  `}
+`;
+
+ModalContent.ProductImage = styled.img`
+  width : 30%;
+
+  ${breakpoint('md')`
+    width : 100%;
+  `}
 `;
 
 ModalContent.MerchItem = styled.li`
   list-style : none;
-  padding    : 30px;
+  padding    : 1%;
 `;
 
 ModalContent.DetailsWrapper = styled.div`
   display        : flex;
+  width          : 100%
   flex-direction : column;
   color          : #565656;
   font-family    : 'Roboto', sans-serif;
-  margin         : 30px;
+  margin         : 1%;
 `;
 
 ModalContent.ButtonsWrapper = styled.div`
