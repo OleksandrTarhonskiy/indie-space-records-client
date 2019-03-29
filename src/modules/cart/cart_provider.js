@@ -12,7 +12,7 @@ const CartProvider = ({ value, children }) => (
 );
 
 CartProvider.propTypes = {
-  value    : PropTypes.function,
+  value    : PropTypes.object,
   children : PropTypes.array,
 };
 
