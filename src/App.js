@@ -83,6 +83,7 @@ class App extends Component {
             <CartProvider value={{
               setProduct    : this.setProduct,
               removeProduct : this.removeProduct,
+              products      : this.state.products,
             }}>
               <div>
                 {routes}

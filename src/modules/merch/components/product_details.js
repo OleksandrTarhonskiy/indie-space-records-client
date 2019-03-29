@@ -4,6 +4,7 @@ import styled       from 'styled-components';
 import breakpoint   from 'styled-components-breakpoint';
 import Button       from '@material-ui/core/Button';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import DoneIcon     from '@material-ui/icons/Done';
 
 import withCart     from '../../cart/with_cart';
 
@@ -14,10 +15,12 @@ const ProductDetails = ({
   sections,
   currency,
   setProduct,
+  products,
 }) => (
   <ProductDetails.Wrapper
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
   >
+  {console.log(products.find(p => p.id === product.id && product.quantity === p.quantity))}
     <ProductDetails.ImageWrapper>
       <ProductDetails.Image
         src={process.env.REACT_APP_API_URL + product.url}
@@ -30,14 +33,25 @@ const ProductDetails = ({
         <h2>{product.price} {currency}</h2>
         <h3>{product.type}</h3>
         <p>{product.desc}</p>
-        <ProductDetails.AddToCart
-          basicStyles={fonts}
-          onClick={setProduct.bind(null, product, profileId)}
-          disabled={!product.quantity}
-        >
-          <ShoppingCart />
-          Add to cart
-        </ProductDetails.AddToCart>
+        {
+          products.find(p => p.id === product.id && product.quantity === p.quantity)?
+          <ProductDetails.AddToCart
+            disabled={true}
+            basicStyles={fonts}
+          >
+            <DoneIcon />
+            In cart
+          </ProductDetails.AddToCart>
+          :
+          <ProductDetails.AddToCart
+            basicStyles={fonts}
+            onClick={setProduct.bind(null, product, profileId)}
+            disabled={!product.quantity}
+          >
+            <ShoppingCart />
+            Add to cart
+          </ProductDetails.AddToCart>
+        }
       </React.Fragment>
     </ProductDetails.DetailsBlock>
   </ProductDetails.Wrapper>
