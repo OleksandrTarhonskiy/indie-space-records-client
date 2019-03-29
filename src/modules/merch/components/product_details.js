@@ -20,7 +20,6 @@ const ProductDetails = ({
   <ProductDetails.Wrapper
     sectionStyles={JSON.parse(sections.find((element) => element.type === 'merch').style)}
   >
-    {console.log(products.find(p => p.id === product.id && product.quantity === p.quantity))}
     <ProductDetails.ImageWrapper>
       <ProductDetails.Image
         src={process.env.REACT_APP_API_URL + product.url}
