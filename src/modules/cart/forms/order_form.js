@@ -1,12 +1,19 @@
-import React             from 'react';
-import PropTypes         from 'prop-types';
-import TextField         from '@material-ui/core/TextField';
-import styled            from 'styled-components';
-import * as R            from 'ramda';
+import React                   from 'react';
+import PropTypes               from 'prop-types';
+import TextField               from '@material-ui/core/TextField';
+import styled                  from 'styled-components';
+import * as R                  from 'ramda';
+import { graphql }             from 'react-apollo';
 import {
   compose,
   withStateHandlers,
-}                        from 'recompose';
+  withHandlers,
+}                              from 'recompose';
+
+import { createOrderMutation } from '../graphql/mutations';
+import Alert                   from '../../../layouts/alert';
+import GradientButton          from '../../../layouts/gradient_button';
+import withCart                from '../with_cart';
 
 const OrderForm = ({
   form: {
@@ -17,8 +24,15 @@ const OrderForm = ({
     deliveryType,
   },
   handleChange,
+  hasError,
+  hideAlert,
+  errorsList,
+  handleFileUpload,
+  create,
+  products,
 }) => (
   <OrderForm.FormWrapper>
+  {console.log(JSON.stringify(products), "****************************")}
     <form>
       <TextField
         name="firstName"
@@ -55,7 +69,18 @@ const OrderForm = ({
         onChange={handleChange}
         fullWidth
       />
+      <GradientButton
+        onClick={create}
+      >
+        Submit
+      </GradientButton>
     </form>
+    <Alert
+      action="created"
+      hasError={hasError}
+      hideAlert={hideAlert}
+      errorsList={errorsList}
+    />
   </OrderForm.FormWrapper>
 );
 
@@ -69,6 +94,8 @@ OrderForm.propTypes = {
 };
 
 const withRecompose = compose(
+  graphql(createOrderMutation),
+  withCart,
   withStateHandlers(
     ({
       form       = {
@@ -78,14 +105,62 @@ const withRecompose = compose(
         email        : '',
         deliveryType : '',
       },
-    }) => ({ form }),
+      hasError   = false,
+      errorsList = [],
+      canSubmit  = false,
+    }) => ({ form, hasError, errorsList, canSubmit }),
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
         return ({ form });
       },
+
+      showAlert    : () => () => ({ hasError: true }),
+      hideAlert    : () => () => ({ hasError: false }),
     },
   ),
+  withHandlers({
+    create : ({
+      mutate,
+      form: {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        deliveryType,
+      },
+      errorsList,
+      showAlert,
+      products,
+    }) => async () => {
+      const response = await mutate({
+        variables: {
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          deliveryType,
+          products : JSON.stringify(products),
+        }
+      });
+
+      const { ok, errors } = response.data.createOrder;
+
+      if (ok) {
+        showAlert();
+      } else {
+        let messageText = null;
+        errors.map((msg) => messageText = msg.message);
+
+        if (!errorsList.includes(messageText)) {
+          errorsList.push(messageText);
+        }
+
+        showAlert();
+        errorsList.pop();
+      }
+    },
+  })
 );
 
 export default withRecompose(OrderForm);
