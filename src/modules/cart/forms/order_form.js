@@ -32,7 +32,6 @@ const OrderForm = ({
   products,
 }) => (
   <OrderForm.FormWrapper>
-  {console.log(JSON.stringify(products), "****************************")}
     <form>
       <TextField
         name="firstName"
