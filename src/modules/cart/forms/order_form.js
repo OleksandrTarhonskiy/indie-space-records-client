@@ -4,6 +4,7 @@ import TextField               from '@material-ui/core/TextField';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
 import { graphql }             from 'react-apollo';
+import { CountryDropdown }     from 'react-country-region-selector';
 import {
   compose,
   withStateHandlers,
@@ -21,7 +22,11 @@ const OrderForm = ({
     lastName,
     phoneNumber,
     email,
+    city,
+    deliveryAddress,
     deliveryType,
+    country,
+    zipCode,
   },
   handleChange,
   hasError,
@@ -30,6 +35,7 @@ const OrderForm = ({
   handleFileUpload,
   create,
   products,
+  handleRegionChange,
 }) => (
   <OrderForm.FormWrapper>
     <form>
@@ -68,6 +74,38 @@ const OrderForm = ({
         onChange={handleChange}
         fullWidth
       />
+      <TextField
+        name="deliveryAddress"
+        label="Delivery Address"
+        type="text"
+        margin="normal"
+        value={deliveryAddress}
+        onChange={handleChange}
+        fullWidth
+      />
+      <TextField
+        name="city"
+        label="Town/City"
+        type="text"
+        margin="normal"
+        value={city}
+        onChange={handleChange}
+        fullWidth
+      />
+      <CountryDropdown
+        country={country}
+        value={country}
+        onChange={handleRegionChange.bind(null, 'country')}
+      />
+      <TextField
+        name="zipCode"
+        label="Zip Code"
+        type="text"
+        margin="normal"
+        value={zipCode}
+        onChange={handleChange}
+        fullWidth
+      />
       <GradientButton
         onClick={create}
       >
@@ -98,11 +136,15 @@ const withRecompose = compose(
   withStateHandlers(
     ({
       form       = {
-        firstName    : '',
-        lastName     : '',
-        phoneNumber  : '',
-        email        : '',
-        deliveryType : '',
+        firstName       : '',
+        lastName        : '',
+        phoneNumber     : '',
+        email           : '',
+        deliveryType    : '',
+        city            : '',
+        deliveryAddress : '',
+        country         : '',
+        zipCode         : '',
       },
       hasError   = false,
       errorsList = [],
@@ -111,6 +153,11 @@ const withRecompose = compose(
     {
       handleChange : state => ({ target }) => {
         const form = R.assoc(target.name, target.value, state.form);
+        return ({ form });
+      },
+
+      handleRegionChange : state => (field, value) => {
+        const form = R.assoc(field, value, state.form);
         return ({ form });
       },
 
