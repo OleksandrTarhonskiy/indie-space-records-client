@@ -29,6 +29,7 @@ import UploadSong               from '../modules/music/pages/upload_song';
 import AllMySongs               from '../modules/music/pages/all_my_songs';
 import ProfileWrapper           from '../modules/musician/pages/profile_wrapper';
 import AllProfilesPage          from '../modules/musician/pages/all_profiles_page';
+import OrderForm                from '../modules/cart/forms/order_form';
 import PrivateRoute             from './private_route';
 
 export default (
@@ -56,7 +57,8 @@ export default (
         <PrivateRoute exact path="/upload_song"                      component={UploadSong} />
         <PrivateRoute exact path="/music/all"                        component={AllMySongs} />
         <PrivateRoute path="/merch"                                  component={MerchMainPage} />
-        <Route path="/musicians/:id"                           component={ProfileWrapper} />
+        <Route path="/musicians/:id"                                 component={ProfileWrapper} />
+        <Route path="/checkout"                                      component={OrderForm} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
