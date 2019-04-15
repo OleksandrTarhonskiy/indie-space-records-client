@@ -219,7 +219,11 @@ const withRecompose = compose(
         lastName,
         phoneNumber,
         email,
+        city,
+        deliveryAddress,
         deliveryType,
+        country,
+        zipCode,
       },
       errorsList,
       showAlert,
@@ -231,7 +235,11 @@ const withRecompose = compose(
           lastName,
           phoneNumber,
           email,
+          city,
+          deliveryAddress,
           deliveryType,
+          country,
+          zipCode,
           products : JSON.stringify(products),
         }
       });
