@@ -18,7 +18,7 @@ import { createOrderMutation } from '../graphql/mutations';
 import Alert                   from '../../../layouts/alert';
 import GradientButton          from '../../../layouts/gradient_button';
 import withCart                from '../with_cart';
-import 'react-phone-input-2/dist/style.css'
+import                         'react-phone-input-2/dist/style.css'
 
 const OrderForm = ({
   form: {
@@ -41,6 +41,7 @@ const OrderForm = ({
   products,
   handleOnChange,
   canSubmit,
+  clearCart,
 }) => (
   <OrderForm.FormWrapper>
     <form>
@@ -226,6 +227,7 @@ const withRecompose = compose(
       errorsList,
       showAlert,
       products,
+      clearCart,
     }) => async () => {
       const response = await mutate({
         variables: {
@@ -245,6 +247,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.createOrder;
 
       if (ok) {
+        clearCart();
         showAlert();
       } else {
         let messageText = null;
