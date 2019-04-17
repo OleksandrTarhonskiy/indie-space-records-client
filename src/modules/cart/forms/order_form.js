@@ -12,11 +12,13 @@ import {
   withStateHandlers,
   withHandlers,
 }                              from 'recompose';
+import ReactPhoneInput         from 'react-phone-input-2'
 
 import { createOrderMutation } from '../graphql/mutations';
 import Alert                   from '../../../layouts/alert';
 import GradientButton          from '../../../layouts/gradient_button';
 import withCart                from '../with_cart';
+import                         'react-phone-input-2/dist/style.css'
 
 const OrderForm = ({
   form: {
@@ -37,8 +39,9 @@ const OrderForm = ({
   handleFileUpload,
   create,
   products,
-  handleRegionChange,
+  handleOnChange,
   canSubmit,
+  clearCart,
 }) => (
   <OrderForm.FormWrapper>
     <form>
@@ -64,14 +67,10 @@ const OrderForm = ({
           onChange={handleChange}
           fullWidth
         />
-        <TextField
+        <ReactPhoneInput
           name="phoneNumber"
-          label="Phone Number"
-          type="text"
-          margin="normal"
           value={phoneNumber}
-          onChange={handleChange}
-          fullWidth
+          onChange={handleOnChange.bind(null, 'phoneNumber')}
         />
         <TextField
           name="email"
@@ -107,7 +106,7 @@ const OrderForm = ({
         <CountryDropdown
           country={country}
           value={country}
-          onChange={handleRegionChange.bind(null, 'country')}
+          onChange={handleOnChange.bind(null, 'country')}
         />
         <TextField
           name="zipCode"
@@ -199,7 +198,7 @@ const withRecompose = compose(
         });
       },
 
-      handleRegionChange : state => (field, value) => {
+      handleOnChange : state => (field, value) => {
         const form = R.assoc(field, value, state.form);
         return ({
           form,
@@ -228,6 +227,7 @@ const withRecompose = compose(
       errorsList,
       showAlert,
       products,
+      clearCart,
     }) => async () => {
       const response = await mutate({
         variables: {
@@ -247,6 +247,7 @@ const withRecompose = compose(
       const { ok, errors } = response.data.createOrder;
 
       if (ok) {
+        clearCart();
         showAlert();
       } else {
         let messageText = null;

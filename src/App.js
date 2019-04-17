@@ -67,6 +67,11 @@ class App extends Component {
     localStorage.setItem('Cart', JSON.stringify(filteredList));
   }
 
+  clearCart = () => {
+    this.setState({ products : [] });
+    localStorage.removeItem('Cart');
+  }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -83,6 +88,7 @@ class App extends Component {
             <CartProvider value={{
               setProduct    : this.setProduct,
               removeProduct : this.removeProduct,
+              clearCart     : this.clearCart,
               products      : this.state.products,
             }}>
               <div>
