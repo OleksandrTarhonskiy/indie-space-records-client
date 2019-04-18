@@ -18,12 +18,12 @@ class ProfileWrapper extends Component {
   state = {
     products : [],
     open     : false,
-  }
+  };
 
   componentDidMount = () => {
     const products = JSON.parse(localStorage.getItem(`Cart${this.props.match.params.id}`)) || [];
     this.setState({ products });
-  }
+  };
 
   setProduct = (product, profileId) => {
     const productData = {
@@ -55,19 +55,19 @@ class ProfileWrapper extends Component {
       shoppingCart.push(productData);
       localStorage.setItem(`Cart${this.props.match.params.id}`, JSON.stringify(shoppingCart));
     }
-  }
+  };
 
   removeProduct = id => {
     const productsList = [...this.state.products];
     const filteredList = productsList.filter(p => p.id !== id);
     this.setState({ products : filteredList });
     localStorage.setItem(`Cart${this.props.match.params.id}`, JSON.stringify(filteredList));
-  }
+  };
 
   clearCart = () => {
     this.setState({ products : [] });
     localStorage.removeItem(`Cart${this.props.match.params.id}`);
-  }
+  };
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -109,8 +109,8 @@ class ProfileWrapper extends Component {
         </ThemeProvider>
       </CartProvider>
     );
-  }
-}
+  };
+};
 
 const CartButtonBadge = styled(Badge)`
   position   : fixed !important;
