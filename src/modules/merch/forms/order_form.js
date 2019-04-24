@@ -17,7 +17,7 @@ import ReactPhoneInput         from 'react-phone-input-2'
 import { createOrderMutation } from '../graphql/mutations';
 import Alert                   from '../../../layouts/alert';
 import GradientButton          from '../../../layouts/gradient_button';
-import withCart                from '../with_cart';
+import withCart                from '../../cart/with_cart';
 import                         'react-phone-input-2/dist/style.css'
 
 const OrderForm = ({
