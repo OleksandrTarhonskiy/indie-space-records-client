@@ -1,7 +1,6 @@
 import React                   from 'react';
 import PropTypes               from 'prop-types';
 import TextField               from '@material-ui/core/TextField';
-import Typography              from '@material-ui/core/Typography';
 import styled                  from 'styled-components';
 import * as R                  from 'ramda';
 import { graphql }             from 'react-apollo';
@@ -12,13 +11,14 @@ import {
   withStateHandlers,
   withHandlers,
 }                              from 'recompose';
-import ReactPhoneInput         from 'react-phone-input-2'
+import ReactPhoneInput         from 'react-phone-input-2';
+import Button                  from '@material-ui/core/Button';
 
 import { createOrderMutation } from '../graphql/mutations';
 import Alert                   from '../../../layouts/alert';
-import GradientButton          from '../../../layouts/gradient_button';
 import withCart                from '../../cart/with_cart';
-import                         'react-phone-input-2/dist/style.css'
+import withTheme               from '../../musician/HOCs/with_theme';
+import                         'react-phone-input-2/dist/style.css';
 
 const OrderForm = ({
   form: {
@@ -28,7 +28,6 @@ const OrderForm = ({
     email,
     city,
     deliveryAddress,
-    deliveryType,
     country,
     zipCode,
   },
@@ -36,19 +35,23 @@ const OrderForm = ({
   hasError,
   hideAlert,
   errorsList,
-  handleFileUpload,
   create,
-  products,
   handleOnChange,
   canSubmit,
-  clearCart,
+  theme: {
+    style,
+    fonts,
+  },
 }) => (
-  <OrderForm.FormWrapper>
+  <OrderForm.FormWrapper
+    profileFonts={JSON.parse(fonts)}
+    profileStyles={JSON.parse(style)}
+  >
     <form>
       <OrderForm.FormContainer>
-        <Typography component="h2" variant="display1" gutterBottom>
+        <h2>
           Customer Details
-        </Typography>
+        </h2>
         <TextField
           name="firstName"
           label="First Name"
@@ -82,9 +85,9 @@ const OrderForm = ({
         />
       </OrderForm.FormContainer>
       <OrderForm.FormContainer>
-        <Typography component="h2" variant="display1" gutterBottom>
+        <h2>
           Delivery details
-        </Typography>
+        </h2>
         <TextField
           name="deliveryAddress"
           label="Delivery Address"
@@ -118,12 +121,14 @@ const OrderForm = ({
           fullWidth
         />
       </OrderForm.FormContainer>
-      <GradientButton
+      <OrderForm.SubmitButton
         onClick={create}
         disabled={!canSubmit}
+        font={JSON.parse(fonts)}
+        styles={JSON.parse(style)}
       >
         Submit
-      </GradientButton>
+      </OrderForm.SubmitButton>
     </form>
     <Alert
       action="created"
@@ -135,7 +140,9 @@ const OrderForm = ({
 );
 
 OrderForm.FormWrapper = styled.div`
-  padding : 5%;
+  font-family      : ${props => props.profileFonts.regularTextFont}, sans-serif;
+  font-size        : ${props => props.profileStyles.RegularFontSize}px;
+  padding          : 5%;
 `;
 
 OrderForm.FormContainer = styled.div`
@@ -143,9 +150,34 @@ OrderForm.FormContainer = styled.div`
   padding : 8px;
 `;
 
+OrderForm.SubmitButton = styled(Button)`
+&& {
+  font-family      : ${props => props.font.linksFont}, sans-serif;
+  background-color : ${props => props.styles.buttonsBackground};
+  height           : 62px;
+  color            : ${props => props.styles.buttonsColor};
+  border           : ${props => props.styles.border}px solid;
+  border-radius    : ${props => props.styles.borderRadius}px;
+  margin           : 0;
+  padding          : 1% 5%;
+
+  &:hover {
+    color      : ${props => props.styles.LinksHover};
+    background : transparent;
+  }
+}
+`;
+
 OrderForm.propTypes = {
-  form         : PropTypes.object.isRequired,
-  handleChange : PropTypes.func.isRequired,
+  form           : PropTypes.object.isRequired,
+  handleChange   : PropTypes.func.isRequired,
+  theme          : PropTypes.object.isRequired,
+  hasError       : PropTypes.bool.isRequired,
+  errorsList     : PropTypes.array.isRequired,
+  hideAlert      : PropTypes.func.isRequired,
+  handleOnChange : PropTypes.func.isRequired,
+  canSubmit      : PropTypes.bool.isRequired,
+  create         : PropTypes.func.isRequired,
 };
 
 const canSubmitForm = ({
@@ -170,6 +202,7 @@ const canSubmitForm = ({
 ]);
 
 const withRecompose = compose(
+  withTheme,
   graphql(createOrderMutation),
   withCart,
   withStateHandlers(
