@@ -6,6 +6,8 @@ import Modal                from '@material-ui/core/Modal';
 import * as R               from 'ramda';
 import styled               from 'styled-components';
 import { withRouter }       from 'react-router-dom';
+import { Link }             from 'react-router-dom';
+import Button               from '@material-ui/core/Button';
 
 import profileRoutes        from '../../../routes/profile_routes';
 import ProfileHeader        from '../components/profile_header';
@@ -104,7 +106,16 @@ class ProfileWrapper extends Component {
             open={this.state.open}
             onClose={this.handleClose}
           >
-            <ModalContent products={this.state.products} />
+            <ModalContent products={this.state.products}>
+              <Button
+                variant="contained"
+                component={Link}
+                to={`/musicians/${this.props.match.params.id}/checkout`}
+                onClick={this.handleClose}
+              >
+                View all merch
+              </Button>
+            </ModalContent>
           </Modal>
         </ThemeProvider>
       </CartProvider>
