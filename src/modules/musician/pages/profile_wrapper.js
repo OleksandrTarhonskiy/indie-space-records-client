@@ -6,6 +6,8 @@ import Modal                from '@material-ui/core/Modal';
 import * as R               from 'ramda';
 import styled               from 'styled-components';
 import { withRouter }       from 'react-router-dom';
+import { Link }             from 'react-router-dom';
+import Button               from '@material-ui/core/Button';
 
 import profileRoutes        from '../../../routes/profile_routes';
 import ProfileHeader        from '../components/profile_header';
@@ -18,11 +20,14 @@ class ProfileWrapper extends Component {
   state = {
     products : [],
     open     : false,
+    total    : 0,
   };
 
   componentDidMount = () => {
     const products = JSON.parse(localStorage.getItem(`Cart${this.props.match.params.id}`)) || [];
+    const total = JSON.parse(localStorage.getItem(`Cart${this.props.match.params.id}TotalPrice`)) || 0;
     this.setState({ products });
+    this.setState({ total });
   };
 
   setProduct = (product, profileId) => {
@@ -37,6 +42,7 @@ class ProfileWrapper extends Component {
     };
 
     let productsList = [...this.state.products];
+    let totalPrice = this.state.total +  productData.price;
 
     const shoppingCart = JSON.parse(localStorage.getItem(`Cart${this.props.match.params.id}`)) || [];
     const selectedItem = R.find(R.propEq('id', product.id))(this.state.products)
@@ -46,27 +52,38 @@ class ProfileWrapper extends Component {
       selectedItem.quantity++
       productsList[indexInState] = selectedItem;
       this.setState({ products : productsList });
+      this.setState({ total : totalPrice });
 
       localStorage.setItem(`Cart${this.props.match.params.id}`, JSON.stringify(this.state.products));
     } else {
       productsList.push(productData);
       this.setState({ products : productsList });
-
+      this.setState({ total : totalPrice });
       shoppingCart.push(productData);
       localStorage.setItem(`Cart${this.props.match.params.id}`, JSON.stringify(shoppingCart));
     }
+      console.log(totalPrice)
+      localStorage.setItem(`Cart${this.props.match.params.id}TotalPrice`, JSON.stringify(totalPrice));
   };
 
   removeProduct = id => {
+    const shoppingCart = JSON.parse(localStorage.getItem(`Cart${this.props.match.params.id}`)) || [];
+
     const productsList = [...this.state.products];
+    const deletedProduct = shoppingCart.find(p => p.id === id);
+    const totalPrice = this.state.total - (deletedProduct.price * deletedProduct.quantity);
     const filteredList = productsList.filter(p => p.id !== id);
     this.setState({ products : filteredList });
+    this.setState({ total : totalPrice })
     localStorage.setItem(`Cart${this.props.match.params.id}`, JSON.stringify(filteredList));
+    localStorage.setItem(`Cart${this.props.match.params.id}TotalPrice`, JSON.stringify(totalPrice));
   };
 
   clearCart = () => {
     this.setState({ products : [] });
+    this.setState({ total : 0 });
     localStorage.removeItem(`Cart${this.props.match.params.id}`);
+    localStorage.removeItem(`Cart${this.props.match.params.id}TotalPrice`);
   };
 
   handleOpen = () => {
@@ -104,7 +121,19 @@ class ProfileWrapper extends Component {
             open={this.state.open}
             onClose={this.handleClose}
           >
-            <ModalContent products={this.state.products} />
+            <ModalContent products={this.state.products}>
+              <React.Fragment>
+                <h2>{this.state.total}</h2>
+                <Button
+                  variant="contained"
+                  component={Link}
+                  to={`/musicians/${this.props.match.params.id}/checkout`}
+                  onClick={this.handleClose}
+                >
+                  View all merch
+                </Button>
+              </React.Fragment>
+            </ModalContent>
           </Modal>
         </ThemeProvider>
       </CartProvider>
