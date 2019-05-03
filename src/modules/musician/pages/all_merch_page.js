@@ -3,6 +3,8 @@ import PropTypes              from 'prop-types';
 import styled                 from 'styled-components';
 import breakpoint             from 'styled-components-breakpoint';
 import { graphql }            from 'react-apollo';
+import AddShoppingCart        from '@material-ui/icons/AddShoppingCart';
+import { Link }               from 'react-router-dom';
 import {
   compose,
   withHandlers,
@@ -10,6 +12,8 @@ import {
 }                             from 'recompose';
 import CircularProgress       from '@material-ui/core/CircularProgress';
 import InfiniteScroll         from 'react-infinite-scroller';
+import { withRouter }         from 'react-router-dom';
+import Button                 from '@material-ui/core/Button';
 
 import { fetchProductsQuery } from '../../merch/graphql/queries';
 import withTheme              from '../HOCs/with_theme';
@@ -24,6 +28,11 @@ const AllMerchPage = ({
   data: {
     loading,
     Products = [],
+  },
+  match: {
+    params: {
+      id
+    }
   },
   loadMore,
   hasMore,
@@ -51,6 +60,23 @@ const AllMerchPage = ({
                   <AllMerchPage.ImageWrapper background={process.env.REACT_APP_API_URL + product.url} />
                   <p>{product.title}</p>
                   <p>{product.price} {currency}</p>
+                  <AllMerchPage.ButtonsWrapper>
+                    <AllMerchPage.Button
+                      component={Link}
+                      to={`/musicians/${id}/merch/${product.id}`}
+                      elementFont={JSON.parse(fonts)}
+                      elementStyles={JSON.parse(style)}
+                    >
+                      Buy now
+                    </AllMerchPage.Button>
+                    <AllMerchPage.Button
+                      elementFont={JSON.parse(fonts)}
+                      elementStyles={JSON.parse(style)}
+                    >
+                      <AddShoppingCart />
+                      Add
+                    </AllMerchPage.Button>
+                  </AllMerchPage.ButtonsWrapper>
                 </AllMerchPage.ProductItem>
               )
             }
@@ -103,7 +129,31 @@ AllMerchPage.ImageWrapper = styled.div`
   background-repeat : no-repeat;
 `;
 
+AllMerchPage.Button = styled(Button)`
+  && {
+    font-family      : ${props => props.elementFont.linksFont}, sans-serif;
+    background-color : ${props => props.elementStyles.buttonsBackground};
+    height           : 62px;
+    color            : ${props => props.elementStyles.buttonsColor};
+    border           : ${props => props.elementStyles.border}px solid;
+    border-radius    : ${props => props.elementStyles.borderRadius}px;
+    margin           : 0 5%;
+    padding          : 1% 5%;
+
+    &:hover {
+      color      : ${props => props.elementStyles.LinksHover};
+      background : transparent;
+    }
+  }
+`;
+
+AllMerchPage.ButtonsWrapper = styled.div`
+  display               : grid;
+  grid-template-columns : 45% 45%;
+`;
+
 const withRecompose = compose(
+  withRouter,
   withTheme,
   graphql(fetchProductsQuery, {
     options: props => ({
