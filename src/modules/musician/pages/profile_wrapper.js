@@ -130,7 +130,7 @@ class ProfileWrapper extends Component {
                   to={`/musicians/${this.props.match.params.id}/checkout`}
                   onClick={this.handleClose}
                 >
-                  View all merch
+                  Checkout
                 </Button>
               </React.Fragment>
             </ModalContent>
