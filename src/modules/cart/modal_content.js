@@ -60,10 +60,10 @@ ModalContent.propTypes = {
 
 ModalContent.ContentWrapper = styled.div`
   background : #ffff;
-  margin     : 5%;
+  margin     : 3%;
   padding    : 1%;
   overflow   : scroll;
-  height     : 500px;
+  height     : 570px;
 `;
 
 ModalContent.CartItem = styled.div`
