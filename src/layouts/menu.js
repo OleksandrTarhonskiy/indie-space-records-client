@@ -59,9 +59,6 @@ const Menu = ({
         <ListItem button component={Link} to="/login" onClick={toggleMenu.bind(null, false)}>
           <Menu.Item>Login</Menu.Item>
         </ListItem>
-        <ListItem button  component={Link} to="/help_contact" onClick={toggleMenu.bind(null, false)}>
-          <Menu.Item>Help</Menu.Item>
-        </ListItem>
       </List>
     </Menu.MenuWindow>
     <div>
