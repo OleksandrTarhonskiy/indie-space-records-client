@@ -13,7 +13,6 @@
     "apollo-link-http": "^1.5.5",
     "apollo-link-state": "^0.4.2",
     "date-fns": "2.0.0-alpha.16",
-    "draft-js": "^0.10.5",
     "font-picker-react": "^2.0.5",
     "graphql": "^14.0.0",
     "graphql-tag": "^2.9.2",
