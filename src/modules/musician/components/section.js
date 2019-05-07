@@ -28,14 +28,14 @@ const Section = ({
               <Section.ListItem key={p.id}>
                 <Section.ImageWrapper background={process.env.REACT_APP_API_URL + p.url} />
                 <Section.ProductName
-                  elementFont={fonts}
-                  elementStyles={styles}
+                  elementfont={fonts}
+                  elementstyles={styles}
                 >
                   {p.title}
                 </Section.ProductName>
                 <Section.ProductPrice
-                  elementFont={fonts}
-                  elementStyles={styles}
+                  elementfont={fonts}
+                  elementstyles={styles}
                 >
                   {p.price + ' ' + currency}
                 </Section.ProductPrice>
@@ -43,14 +43,14 @@ const Section = ({
                   <Section.Button
                     component={Link}
                     to={`/musicians/${id}/merch/${p.id}`}
-                    elementFont={fonts}
-                    elementStyles={styles}
+                    elementfont={fonts}
+                    elementstyles={styles}
                   >
                     Buy now
                   </Section.Button>
                   <Section.Button
-                    elementFont={fonts}
-                    elementStyles={styles}
+                    elementfont={fonts}
+                    elementstyles={styles}
                   >
                     <AddShoppingCart />
                     Add
@@ -78,32 +78,32 @@ const Section = ({
           events.map(e =>
             <Section.EventsItem key={e.id}>
               <Section.Cell
-                elementFont={fonts}
-                elementStyles={styles}
+                elementfont={fonts}
+                elementstyles={styles}
               >
                 {moment(e.date).format('D MMM HH:mm')}
               </Section.Cell>
               <Section.Cell
-                elementFont={fonts}
-                elementStyles={styles}
+                elementfont={fonts}
+                elementstyles={styles}
               >
                 {e.title}
               </Section.Cell>
               <Section.Cell
-                elementFont={fonts}
-                elementStyles={styles}
+                elementfont={fonts}
+                elementstyles={styles}
               >
                 {e.address}
               </Section.Cell>
               <Section.Cell
-                elementFont={fonts}
-                elementStyles={styles}
+                elementfont={fonts}
+                elementstyles={styles}
               >
                 {e.price}
               </Section.Cell>
               <Section.Button
-                elementFont={fonts}
-                elementStyles={styles}
+                elementfont={fonts}
+                elementstyles={styles}
               >
               Tikets
               </Section.Button>
@@ -151,30 +151,30 @@ Section.ButtonsWrapper = styled.div`
 
 Section.Button = styled(Button)`
   && {
-    font-family      : ${props => props.elementFont.linksFont}, sans-serif;
-    background-color : ${props => props.elementStyles.buttonsBackground};
+    font-family      : ${props => props.elementfont.linksFont}, sans-serif;
+    background-color : ${props => props.elementstyles.buttonsBackground};
     height           : 62px;
-    color            : ${props => props.elementStyles.buttonsColor};
-    border           : ${props => props.elementStyles.border}px solid;
-    border-radius    : ${props => props.elementStyles.borderRadius}px;
+    color            : ${props => props.elementstyles.buttonsColor};
+    border           : ${props => props.elementstyles.border}px solid;
+    border-radius    : ${props => props.elementstyles.borderRadius}px;
     margin           : 0 5%;
     padding          : 1% 5%;
 
     &:hover {
-      color      : ${props => props.elementStyles.LinksHover};
+      color      : ${props => props.elementstyles.LinksHover};
       background : transparent;
     }
   }
 `;
 
 Section.ProductName = styled.h2`
-  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
-  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  font-family : ${props => props.elementfont.regularTextFont}, sans-serif;
+  font-size   : ${props => props.elementstyles.RegularFontSize}px;
 `;
 
 Section.ProductPrice = styled.h3`
-  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
-  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  font-family : ${props => props.elementfont.regularTextFont}, sans-serif;
+  font-size   : ${props => props.elementstyles.RegularFontSize}px;
 `;
 
 Section.EventsItem = styled.div`
@@ -191,8 +191,8 @@ Section.EventsItem = styled.div`
 `;
 
 Section.Cell = styled.div`
-  font-family : ${props => props.elementFont.regularTextFont}, sans-serif;
-  font-size   : ${props => props.elementStyles.RegularFontSize}px;
+  font-family : ${props => props.elementfont.regularTextFont}, sans-serif;
+  font-size   : ${props => props.elementstyles.RegularFontSize}px;
   font-size   : 20px;
   width       : 220px;
   margin      : 2%;

@@ -10,7 +10,7 @@ const ProfileHeader = ({
 }) => (
   <React.Fragment>
     <ProfileHeader.Body
-      elementStyles={JSON.parse(theme.style)}
+      elementstyles={JSON.parse(theme.style)}
     >
       <Helmet>
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).headlineFont}`} rel="stylesheet" />
@@ -18,15 +18,15 @@ const ProfileHeader = ({
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).linksFont}`} rel="stylesheet" />
         <link href={`https://fonts.googleapis.com/css?family=${JSON.parse(theme.fonts).subHead}`} rel="stylesheet" />
       </Helmet>
-      <ProfileHeader.Header elementStyles={JSON.parse(theme.style)}>
+      <ProfileHeader.Header elementstyles={JSON.parse(theme.style)}>
         <ProfileHeader.NavItems>
           {
             theme.sections.map(section =>
               <ProfileHeader.NavItem key={section.id}>
                 <ProfileHeader.Link
                   href=""
-                  elementStyles={JSON.parse(theme.style)}
-                  elementFont={JSON.parse(theme.fonts)}
+                  elementstyles={JSON.parse(theme.style)}
+                  elementfont={JSON.parse(theme.fonts)}
                 >
                   {section.name}
                 </ProfileHeader.Link>
@@ -40,13 +40,13 @@ const ProfileHeader = ({
 );
 
 ProfileHeader.Body = styled.div`
-  background-color : ${props => props.elementStyles.backgroundColor};
+  background-color : ${props => props.elementstyles.backgroundColor};
   position         : relative;
 `;
 
 ProfileHeader.Header = styled.div`
-  background-color : ${props => props.elementStyles.headerBackground};
-  text-align       : ${props => props.elementStyles.MenuLinksPosition};
+  background-color : ${props => props.elementstyles.headerBackground};
+  text-align       : ${props => props.elementstyles.MenuLinksPosition};
 `;
 
 ProfileHeader.NavItems = styled.ul`
@@ -56,14 +56,14 @@ ProfileHeader.NavItems = styled.ul`
 
 ProfileHeader.Link = styled.a`
   && {
-    color           : ${props => props.elementStyles.LinksColor};
+    color           : ${props => props.elementstyles.LinksColor};
     text-decoration : none;
-    font-family     : ${props => `${props.elementFont.linksFont}`}, sans-serif;
+    font-family     : ${props => `${props.elementfont.linksFont}`}, sans-serif;
     font-weight     : 600;
     outline         : none;
 
     &:hover {
-      color : ${props => props.elementStyles.LinksHover};
+      color : ${props => props.elementstyles.LinksHover};
     }
   }
 `;
