@@ -64,14 +64,14 @@ const AllMerchPage = ({
                     <AllMerchPage.Button
                       component={Link}
                       to={`/musicians/${id}/merch/${product.id}`}
-                      elementFont={JSON.parse(fonts)}
-                      elementStyles={JSON.parse(style)}
+                      elementfont={JSON.parse(fonts)}
+                      elementstyles={JSON.parse(style)}
                     >
                       Buy now
                     </AllMerchPage.Button>
                     <AllMerchPage.Button
-                      elementFont={JSON.parse(fonts)}
-                      elementStyles={JSON.parse(style)}
+                      elementfont={JSON.parse(fonts)}
+                      elementstyles={JSON.parse(style)}
                     >
                       <AddShoppingCart />
                       Add
@@ -131,17 +131,17 @@ AllMerchPage.ImageWrapper = styled.div`
 
 AllMerchPage.Button = styled(Button)`
   && {
-    font-family      : ${props => props.elementFont.linksFont}, sans-serif;
-    background-color : ${props => props.elementStyles.buttonsBackground};
+    font-family      : ${props => props.elementfont.linksFont}, sans-serif;
+    background-color : ${props => props.elementstyles.buttonsBackground};
     height           : 62px;
-    color            : ${props => props.elementStyles.buttonsColor};
-    border           : ${props => props.elementStyles.border}px solid;
-    border-radius    : ${props => props.elementStyles.borderRadius}px;
+    color            : ${props => props.elementstyles.buttonsColor};
+    border           : ${props => props.elementstyles.border}px solid;
+    border-radius    : ${props => props.elementstyles.borderRadius}px;
     margin           : 0 5%;
     padding          : 1% 5%;
 
     &:hover {
-      color      : ${props => props.elementStyles.LinksHover};
+      color      : ${props => props.elementstyles.LinksHover};
       background : transparent;
     }
   }

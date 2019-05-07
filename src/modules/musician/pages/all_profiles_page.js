@@ -62,7 +62,7 @@ allProfilesPage.DescWrapper = styled.div`
 `;
 
 allProfilesPage.propTypes = {
-  data : PropTypes.array.isRequired,
+  data : PropTypes.object.isRequired,
 };
 
 export default graphql(allProfilesQuery)(allProfilesPage);
